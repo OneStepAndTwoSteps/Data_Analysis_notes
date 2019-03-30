@@ -62,13 +62,14 @@
     
 运行结果：
   
-  Matplotlib:
+  Matplotlib:   
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%95%A3%E7%82%B9%E5%9B%BE.png)
   
   
-  seaborn:
-    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
+  seaborn:    
+  
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
   
   
   
@@ -135,11 +136,13 @@
 
   运行结果：
   
-  M:
+  M:  
+  
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%96%B9%E5%BD%A2%E5%9B%BE.png)
   
   
-  S:
+  S:   
+  
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE.png)
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE2.png)
@@ -172,11 +175,13 @@
   
   运行结果：
   
-   M：
-     ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
+   M：   
+   
+ ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
   
-   S:
-    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
+   S:  
+   
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
   
   
 ## 箱型图：
@@ -204,9 +209,11 @@
 
   运行结果：
   
-  M
+  M:   
+  
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E7%AE%B1%E5%9E%8B%E5%9B%BE.png)
-  S
+  S:    
+  
    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%AE%B1%E5%9E%8B%E5%9B%BE.png)
   
 ##  饼图
@@ -230,8 +237,9 @@
 
   运行结果：
   
-   S:
-    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E9%A5%BC%E5%9B%BE.png) 
+   S:    
+   
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E9%A5%BC%E5%9B%BE.png) 
     
     
  ## 热力图：
@@ -260,8 +268,9 @@
     
     通过 seaborn 的 heatmap 函数，我们可以观察到不同年份，不同月份的乘客数量变化情况，其中颜色越浅的代表乘客数量越多，如下图所示：
   
-  S:
-    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE.png)
+  S:    
+  
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE.png)
  
  
  ## 蜘蛛图：
@@ -307,8 +316,9 @@
 
 运行结果：
      
-  M：
-    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E8%9C%98%E8%9B%9B%E5%9B%BE.png)
+  M：     
+  
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E8%9C%98%E8%9B%9B%E5%9B%BE.png)
       
   
   
