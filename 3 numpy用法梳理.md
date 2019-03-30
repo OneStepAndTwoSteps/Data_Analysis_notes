@@ -96,8 +96,12 @@
   NumPy 可以很方便地创建连续数组，比如我使用 arange 或 linspace 函数进行创建：
   
     x1 = np.arange(1,11,2)
+  
+    numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
     x2 = np.linspace(1,9,5)
     
+    endpoint是一个bool类型的值，如果为"Ture",“stop"是最后一个值，如果为"False”,生成的数组不会包含"stop"值
+    retstep是一个bool类型的值，如果为"Ture"，会返回样本之间的间隙。
   np.arange 和 np.linspace 起到的作用是一样的，都是创建等差数组。这两个数组的结果 x1,x2 都是 [1 3 5 7 9]。结果相同，但是你能看出来创建的方式是不同的。   
   >
   arange() 类似内置函数 range()，通过指定 __初始值、终值、步长__ 来创建等差数列的一维数组，默认是不包括终值的。
