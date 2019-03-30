@@ -103,7 +103,19 @@
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
   
+  S:
   
+  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
+  
+  S:如果要修改X和Y轴的参数需要这样写代码
+    df中的参数名字和lineplot中的参数的一一对应的，同时lineplot中的year就是x轴的名字，money就是y轴的名字
+    
+    df = pd.DataFrame({'year': x, 'money': y})
+    sns.lineplot(x="year", y="money", data=df)
+    plt.show()
+         
+         
+  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%8A%98%E7%BA%BF%E5%9B%BE2.png)
   
   
   
@@ -358,7 +370,37 @@
  
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83hexbin%E5%9B%BE.png)
   
+ ## 成对关系：
+ 
+    如果想要探索数据集中的多个成对双变量的分布，可以直接采用 sns.pairplot() 函数。它会同时展示出 DataFrame 中每对变量的关系，另外在对角线上，你能看到每个变量自身作为单变量的分布情况。它可以说是探索性分析中的常用函数，可以很快帮我们理解变量对之间的关系。
+ 
+ pairplot 函数的使用，就像在 DataFrame 中使用 describe() 函数一样方便，是数据探索中的常用函数。
+ 
+ 这里我们使用 Seaborn 中自带的 iris 数据集，这个数据集也叫鸢尾花数据集。鸢尾花可以分成 Setosa、Versicolour 和 Virginica 三个品种，在这个数据集中，针对每一个品种，都有 50 个数据，每个数据中包括了 4 个属性，分别是花萼长度、花萼宽度、花瓣长度和花瓣宽度。通过这些数据，需要你来预测鸢尾花卉属于三个品种中的哪一种。
+ 
+ 例子：
+    
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    # 数据准备
+    iris = sns.load_dataset('iris')
+    # 用 Seaborn 画成对关系
+    sns.pairplot(iris)
+    plt.show()
   
+  
+这里我们用 Seaborn 中的 pairplot 函数来对数据集中的多个双变量的关系进行探索，如下图所示。从图上你能看出，一共有 sepal_length、sepal_width、petal_length 和 petal_width4 个变量，它们分别是花萼长度、花萼宽度、花瓣长度和花瓣宽度。
+  
+  
+下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中的第一张图代表的就是花萼长度自身的分布图，它右侧的这张图代表的是花萼长度与花萼宽度这两个变量之间的关系。    
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB.png)
+ 
+ 解释图：(条形图是自身，其他的分别是和其他参数组合起来的比较图)
+    
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB2.png)
+ 
+ 
   
  ## 可视化导图总结：
     
