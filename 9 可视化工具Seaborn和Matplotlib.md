@@ -99,9 +99,9 @@
 
   运行结果：
   
+  M:  
   
-  
-  
+  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
   
   
   
@@ -345,10 +345,18 @@
 
 运行结果：
 
-    代码中我用 kind 分别显示了他们的散点图、核密度图和 Hexbin 图，如下图所示。
+ 代码中我用 kind 分别显示了他们的散点图、核密度图和 Hexbin 图，如下图所示。
   
+  散点图：  
   
+  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
+  核图：  
   
+  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%A0%B8%E5%9B%BE.png)
+ 
+ Hexbin图：    
+ 
+ ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83hexbin%E5%9B%BE.png)
   
   
   
