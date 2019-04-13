@@ -383,6 +383,20 @@ __查找空值：__
      print(train_content.loc[83,"Age"])
      print(train_content.loc[82:83,"Name":"Age"])   #还可以跟范围
 
+## 将Pandas中的DataFrame类型转换成Numpy中array类型的三种方法
+  dataframe 转列表
+1、使用DataFrame中的values方法
+
+    df.values
+  
+2、使用DataFrame中的as_matrix()方法
+
+    df.as_matrix()
+
+3、使用Numpy中的array方法
+
+    np.array(df)
+    
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
