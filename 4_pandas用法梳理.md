@@ -384,7 +384,9 @@ __查找空值：__
      print(train_content.loc[82:83,"Name":"Age"])   #还可以跟范围
 
 ## 将Pandas中的DataFrame类型转换成Numpy中array类型的三种方法
-  dataframe 转列表
+  dataframe 转列表  
+      
+      
 1、使用DataFrame中的values方法
 
     df.values
