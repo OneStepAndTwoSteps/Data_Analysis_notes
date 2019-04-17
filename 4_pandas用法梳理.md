@@ -218,7 +218,7 @@ __查找空值：__
 
     其中 axis=1 代表按照列为轴进行操作，axis=0 代表按照行为轴进行操作，args 是传递的两个参数，即 n=2, m=3，在 plus 函数中使用到了 n 和 m，从而生成新的 df。
   
-    自定义函数apply
+__自定义函数apply__
  
       def search_hundredth(train_content):
           hundredth=train_content.loc[99]
