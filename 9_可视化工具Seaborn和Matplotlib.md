@@ -415,7 +415,7 @@
 
         style：string或dict   
 
-        轴样式参数，请参阅 axes_style()           这会影响轴的颜色
+        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化 
 
         palette：字符串或序列
 
