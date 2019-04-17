@@ -406,7 +406,7 @@
  
  ## 设置seaborn的画图风格：
     
-    sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )
+ sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )
         
         context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
         相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
