@@ -402,7 +402,44 @@
     
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB2.png)
   
-  
+ 
+ 
+ ## 设置seaborn的画图风格：
+    
+    sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )
+        
+        context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
+        相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
+        
+        绘制上下文参数，请参阅 plotting_context() 
+
+        style：string或dict   
+
+        轴样式参数，请参阅 axes_style()           这会影响轴的颜色
+
+        palette：字符串或序列
+
+        调色板，请参阅 color_palette() 返回定义调色板的颜色列表。可用的seaborn调色板名称：深沉，柔和，  明亮，  柔和，  黑暗，   色盲
+                                                                                    deep, muted, bright, pastel, dark, colorblind
+
+        字体：字符串
+
+        字体系列，请参阅matplotlib字体管理器。
+
+        font_scale：float，optional
+
+        单独的缩放因子可以独立缩放字体元素的大小。
+
+        color_codes：bool
+
+        如果True并且palette是seaborn调色板，则将速记颜色代码（例如“b”，“g”，“r”等）重新映射到此调色板中的颜色。
+
+        rc：dict或None
+
+        rc参数映射字典覆盖上面的。
+ 
+ 
+ 
   
  ## 可视化导图总结：
     
