@@ -465,6 +465,74 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     1   3.0 4.0 NaN 1
     2   NaN 1.0 NaN 5
     3   NaN 3.0 NaN 4
+    
+    
+  ## pandas.DataFrame.groupby   groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。
+
+  
+  __例子：指定以什么为组执行操作__
+   
+        >>> df = pd.DataFrame({'Animal' : ['Falcon', 'Falcon',
+    ...                                'Parrot', 'Parrot'],
+    ...                    'Max Speed' : [380., 370., 24., 26.]})
+        >>> df
+           Animal  Max Speed
+        0  Falcon      380.0
+        1  Falcon      370.0
+        2  Parrot       24.0
+        3  Parrot       26.0
+        >>> df.groupby(['Animal']).mean()
+                Max Speed
+        Animal
+        Falcon      375.0
+        Parrot       25.0
+
+
+  __例子2： 可以指定显示的内容__
+  
+    print(train_data.groupby(['Pclass'])['Pclass','Survived'].mean())
+    
+              Pclass    Survived
+    Pclass                  
+    1          1.0      0.629630
+    2          2.0      0.472826
+    3          3.0      0.242363
+    
+    print(train_data.groupby(['Pclass'])['Pclass'，'Survived','Age'].mean())
+
+              Pclass    Survived        Age
+    Pclass                             
+    1          1.0      0.629630      37.048118
+    2          2.0      0.472826      29.866958
+    3          3.0      0.242363      26.403259
+
+  __分层索引__
+
+    我们可以使用level参数对不同级别的层次索引进行分组：
+
+    >>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
+    ...           ['Capitve', 'Wild', 'Capitve', 'Wild']]
+    >>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
+    >>> df = pd.DataFrame({'Max Speed' : [390., 350., 30., 20.]},
+    ...                    index=index)
+    >>> df
+                    Max Speed
+    Animal Type
+    Falcon Capitve      390.0
+           Wild         350.0
+    Parrot Capitve       30.0
+           Wild          20.0
+    >>> df.groupby(level=0).mean()
+            Max Speed
+    Animal
+    Falcon      370.0
+    Parrot       25.0
+    >>> df.groupby(level=1).mean()
+             Max Speed
+    Type
+    Capitve      210.0
+    Wild         185.0
+
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
