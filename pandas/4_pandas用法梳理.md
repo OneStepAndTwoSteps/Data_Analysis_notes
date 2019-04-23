@@ -407,6 +407,61 @@ __自定义函数apply__
 
     np.array(df)
     
+## pandas.DataFrame.fillna 用指定的方法填充NA/NaN
+
+__DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）__
+  value ： 标量，字典，系列或DataFrame用于填充孔的值（例如0），或者用于指定每个索引（对于Series）或列（对于DataFrame）使用哪个值的Dict /Series / DataFrame。（不会填写dict / Series / DataFrame中的值）。该值不能是列表。
+  method :  {'backfill'，'bfill'，'pad'，'ffill'，None}，默认无   用于填充重新索引的填充孔的方法系列填充/填充
+  axis : {0或'索引'，1或'列'}
+  
+  例子：
+  
+      >>> df = pd.DataFrame([[np.nan, 2, np.nan, 0],
+      ...                    [3, 4, np.nan, 1],
+      ...                    [np.nan, np.nan, np.nan, 5],
+      ...                    [np.nan, 3, np.nan, 4]],
+      ...                    columns=list('ABCD'))
+      >>> df
+           A    B   C  D
+      0  NaN  2.0 NaN  0
+      1  3.0  4.0 NaN  1
+      2  NaN  NaN NaN  5
+      3  NaN  3.0 NaN  4
+
+   __用0替换所有NaN元素__
+   
+      >>> df.fillna(0)
+          A   B   C   D
+      0   0.0 2.0 0.0 0
+      1   3.0 4.0 0.0 1
+      2   0.0 0.0 0.0 5
+      3   0.0 3.0 0.0 4
+
+   __我们还可以向前或向后传播非空值。__
+
+    >>> df.fillna(method='ffill')
+        A   B   C   D
+    0   NaN 2.0 NaN 0
+    1   3.0 4.0 NaN 1
+    2   3.0 4.0 NaN 5
+    3   3.0 3.0 NaN 4
+   __将“A”，“B”，“C”和“D”列中的所有NaN元素分别替换为0,1,2和3。__
+
+    >>> values = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
+    >>> df.fillna(value=values)
+        A   B   C   D
+    0   0.0 2.0 2.0 0
+    1   3.0 4.0 2.0 1
+    2   0.0 1.0 2.0 5
+    3   0.0 3.0 2.0 4
+  __只替换第一个NaN元素。__
+
+    >>> df.fillna(value=values, limit=1)
+        A   B   C   D
+    0   0.0 2.0 2.0 0
+    1   3.0 4.0 NaN 1
+    2   NaN 1.0 NaN 5
+    3   NaN 3.0 NaN 4
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
