@@ -469,7 +469,9 @@ __数据集传进来sns.FacetGrid(data,col=””)col表示我们按照什么进
 alpha=.7透明程度
     
 __bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bins指明40时，我们两条年龄的柱状图会进行合并显示，bins指定80则每条柱状图表示一个年龄)__
-    
+
+此时纵坐标表示满足条件的数据的数量
+
     g = sns.FacetGrid(train_data, col='Survived',height=5)
     g.map(plt.hist,'Age',bins=80，alpha=.7)
     plt.show()
