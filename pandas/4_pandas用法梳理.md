@@ -533,6 +533,12 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     Capitve      210.0
     Wild         185.0
 
+
+  ## pandas按若干个列的组合条件筛选数据
+    #取年龄等于26，并且存活的数据的数量
+    print(train_data[(train_data['Age']==29) & (train_data['Survived']==1)].count())
+
+
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
