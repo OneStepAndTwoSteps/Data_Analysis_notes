@@ -410,8 +410,11 @@ __自定义函数apply__
 ## pandas.DataFrame.fillna 用指定的方法填充NA/NaN
 
 __DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）__
+        
   value ： 标量，字典，系列或DataFrame用于填充孔的值（例如0），或者用于指定每个索引（对于Series）或列（对于DataFrame）使用哪个值的Dict /Series / DataFrame。（不会填写dict / Series / DataFrame中的值）。该值不能是列表。
+                 
   method :  {'backfill'，'bfill'，'pad'，'ffill'，None}，默认无   用于填充重新索引的填充孔的方法系列填充/填充
+              
   axis : {0或'索引'，1或'列'}
   
   例子：
