@@ -438,9 +438,25 @@
 
         rc参数映射字典覆盖上面的。
  
- 
- 
-  
+ ## plt.subplot方法：
+   __subplot(nrows, ncols, index, **kwargs)__
+   
+   一个3位整数或三个独立的整数，用于描述子图的位置。其中第一个数字是行数(nrows)，第二个是列数(ncols)，第三个是子图的索引(index)。
+   代码示例：
+    
+    import matplotlib.pyplot as plt
+    plt.figure(1) # 创建第一个画板（figure）
+    plt.subplot(211) # 第一个画板的第一个子图
+    plt.plot([1, 2, 3])
+    plt.subplot(212) # 第二个画板的第二个子图
+    plt.plot([4, 5, 6])
+    plt.figure(2) #创建第二个画板
+    plt.plot([4, 5, 6]) # 默认子图命令是subplot(111)
+    plt.figure(1) # 调取画板1; subplot(212)仍然被调用中
+    plt.subplot(211) #调用subplot(211)
+    plt.title('Easy as 1, 2, 3') # 做出211的标题
+
+
  ## 可视化导图总结：
     
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/python%E5%8F%AF%E8%A7%86%E5%8C%96.png)
