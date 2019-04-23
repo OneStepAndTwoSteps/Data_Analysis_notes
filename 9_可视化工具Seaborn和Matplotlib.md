@@ -456,6 +456,26 @@
     plt.subplot(211) #调用subplot(211)
     plt.title('Easy as 1, 2, 3') # 做出211的标题
 
+ ## FacetGrid
+    
+  __当您想要在数据集的子集内可视化变量的分布或多个变量之间的关系时，FacetGrid类很有用。 FacetGrid可以绘制最多三个维度：row，col和hue。前两者与所得轴数有明显的对应关系;将hue变量视为沿着深度轴的第三维，其中不同的级别用不同的颜色绘制。__
+    
+第一个参数可以是plt.hist, plt.scatter, sns.regplot, sns.barplot, sns.distplot, sns.pointplot等。
+    
+__数据集传进来sns.FacetGrid(data,col=””)col表示我们按照什么进行分图__
+    
+通过map, g.map(plt.hist,””)—plt.hist表示画条形图
+    
+alpha=.7透明程度
+    
+__bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bins指明40时，我们两条年龄的柱状图会进行合并显示，bins指定80则每条柱状图表示一个年龄)__
+    
+    g = sns.FacetGrid(train_data, col='Survived',height=5)
+    g.map(plt.hist,'Age',bins=80，alpha=.7)
+    plt.show()
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png)
+
 
  ## 可视化导图总结：
     
