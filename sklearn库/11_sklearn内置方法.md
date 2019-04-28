@@ -72,6 +72,7 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
     print(dtm)
     
   Out:
+  
       (0, 2)	1
       (0, 3)	1
       (0, 4)	3
@@ -121,7 +122,10 @@ __小结：__
 
 __所以我们只能让fit方法操作于训练集，构建基于过去或已知数据的特征集。__
 
-
+                  
+                            
+                             
+                             
 
 ## CountVectorizer和TfidfVectorizer方法的不同
 
@@ -132,7 +136,8 @@ __CountVectorizer__ 和 __TfidfVectorizer__ 是 __文本特征提取__ 的两种
 
 
 
-
+          
+             
 
 
 
