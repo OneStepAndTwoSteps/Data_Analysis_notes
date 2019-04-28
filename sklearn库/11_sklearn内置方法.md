@@ -1,4 +1,5 @@
 # sklearn模块
+         
 ## GridSearchCV
 from sklearn.grid_search import GridSearchCV 
 
@@ -32,3 +33,130 @@ GridSearchCV中的cv：表示将训练集划分为几份，用于交叉验证。
   
   ### 最后：
   对于 max_depth = 2,3,4,5 时，分别进行和 max_depth=1 相同的交叉验证过程，得到它们的最终验证分数。然后我们就可以对这5个最大深度的决策树的最终验证分数进行比较，分数最高的那一个就是最优最大深度，对应的模型就是最优模型。
+
+
+## 从文本中提取特征信息    CountVectorizer类和TfidfVectorizer类 
+  
+同时说明 __sklearn中的fit，transform，fit_transform 在文本提取特征中各自的作用。__  这里注意是对于 __文本__ 。
+
+首先，计算机是不能从文本字符串中发现规律。只有将字符串编码为计算机可以理解的数字，计算机才有可能发现文本中的规律。
+
+对文本编码，就是让词语与数字对应起来，建立基于给定文本的词典。（fit方法 ）
+
+再根据词典对所有的文本数据进行转码。（transform方法）
+
+scikit库的CountVectorize类就是这种思路。
+
+     from sklearn.feature_extraction.text import CountVectorizer
+
+     vectorize = CountVectorizer()
+
+使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有词语，进而构建出text词典。
+
+    text=["Hey hey hey lets go get lunch today :)",
+           "Did you go home?",
+           "Hey!!! I need a favor"]
+    
+    text相当于三篇文章
+
+    #fit学会语料中的所有词语，构建词典
+    vectorize.fit(text)
+    CountVectorizer(analyzer='word', binary=False, decode_error='strict',
+            dtype=<class 'numpy.int64'>, encoding='utf-8', input='content',
+            lowercase=True, max_df=1.0, max_features=None, min_df=1,
+            ngram_range=(1, 1), preprocessor=None, stop_words=None,
+            strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
+            tokenizer=None, vocabulary=None)
+            
+    #这里我们查看下“词典”，也就是特征集(11个特征词)
+    vectorize.get_feature_names()
+    
+    Out:
+      ['did',
+       'favor',
+       'get',
+       'go',
+       'hey',
+       'home',
+       'lets',
+       'lunch',
+       'need',
+       'today',
+       'you']
+    # 文档-词频矩阵（document-term matrix），英文简写为dtm
+    dtm=cv.transform(texts)
+    print(dtm)
+    
+    Out:
+      (0, 2)	1
+      (0, 3)	1
+      (0, 4)	3
+      (0, 6)	1
+      (0, 7)	1
+      (0, 9)	1
+      (1, 0)	1
+      (1, 3)	1
+      (1, 5)	1
+      (1, 10)	1
+      (2, 1)	1
+      (2, 4)	1
+      (2, 8)	1
+    
+    使用pandas库以行列形式展示-  在 jupyer notebook中展示的没有加print：
+    pd.DataFrame(cv_fit.toarray(),columns=cv.get_feature_names())
+  
+    对应输出的
+    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/sklearn%E6%96%87%E6%9C%AC%E6%8F%90%E5%8F%96%E7%89%B9%E5%BE%81%E5%80%BC/1.jpg)
+
+注意feature_name的返回结果，我们可以发现这几条规律：
+    
+    一、所有的单词都是小写
+
+    二、单词长度小于两个字母的，会被剔除掉
+
+    三、标点符号会剔除掉
+
+    四、不重复
+
+    五、这个特征集是有顺序的
+
+
+
+
+
+
+
+## CountVectorizer和TfidfVectorizer方法的不同
+
+__CountVectorizer__ 和 __TfidfVectorizer__ 是 __文本特征提取__ 的两种方法。两者的主要区别在于，CountVectorizer仅仅通过计算词语词频，没有考虑该词语是否有代表性。而TfidfVectorizer可以更加精准的表征一个词语对某个话题的代表性。
+
+
+
+
+
+
+日后补充
+-----------------------------------
+
+__Fit():__ Method calculates the parameters μ and σ and saves them as internal objects.
+解释：简单来说，就是求得训练集X的均值啊，方差啊，最大值啊，最小值啊这些训练集X固有的属性。可以理解为一个训练过程 
+
+fit方法用于构建特征空间（也就是构建词典）
+ 
+__Transform():__ Method using these calculated parameters apply the transformation to a particular dataset.
+解释：在Fit的基础上，进行标准化，降维，归一化等操作（看具体用的是哪个工具，如PCA，StandardScaler等）。
+
+训练集其实主要是学会数据中的特征空间（构建词典），之后我们需要用学到的特征空间去处理测试集。所以我们只需要用到transform方法，从而将测试集数据从文本数据转化为特征矩阵。
+
+transform方法使用该空间将文本数据转化为特征矩阵
+
+__Fit_transform():__ joins the fit() and transform() method for transformation of dataset.
+解释：fit_transform是fit和transform的组合，既包括了训练又包含了转换。
+
+
+
+
+
+
+
+
