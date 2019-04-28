@@ -20,16 +20,16 @@ GridSearchCV中的cv：表示将训练集划分为几份，用于交叉验证。
     
   如上面代码为例，我们设置测试集数据为10%，所以训练集数据为90%。
     
-    训练集用来训练我们的模型，它的作用就像我们平时做的练习题；测试集用来评估我们训练好的模型表现如何，它的作用像我们做的高考题，这是要绝对保密不能提前被模型看到的。
+训练集用来训练我们的模型，它的作用就像我们平时做的练习题；测试集用来评估我们训练好的模型表现如何，它的作用像我们做的高考题，这是要绝对保密不能提前被模型看到的。
     
-    因此，__交叉验证中，我们用到的数据是训练集中的所有数据。__我们将训练集的所有数据平均划分成K份（通常选择K=10），取第K份作为验证集，它的作用就像我们用来估计高考分数的模拟题，
-    余下的K-1份作为交叉验证的训练集。
+因此，__交叉验证中，我们用到的数据是训练集中的所有数据。__我们将训练集的所有数据平均划分成K份（通常选择K=10），取第K份作为验证集，它的作用就像我们用来估计高考分数的模拟题，
+余下的K-1份作为交叉验证的训练集。
     
-    对于我们最开始选择的决策树的5个最大深度 ，以 max_depth=1 为例，我们先用第2-10份数据作为训练集训练模型，用第1份数据作为验证集对这次训练的模型进行评分，
-    得到第一个分数；然后重新构建一个 max_depth=1 的决策树，用第1和3-10份数据作为训练集训练模型，用第2份数据作为验证集对这次训练的模型进行评分，
-    得到第二个分数……以此类推，最后构建一个 max_depth=1 的决策树用第1-9份数据作为训练集训练模型，用第10份数据作为验证集对这次训练的模型进行评分，
-    得到第十个分数。于是对于 max_depth=1 的决策树模型，我们训练了10次，验证了10次，得到了10个验证分数，然后计算这10个验证分数的平均分数，
-    就是 max_depth=1 的决策树模型的最终验证分数。
+对于我们最开始选择的决策树的5个最大深度 ，以 max_depth=1 为例，我们先用第2-10份数据作为训练集训练模型，用第1份数据作为验证集对这次训练的模型进行评分，
+得到第一个分数；然后重新构建一个 max_depth=1 的决策树，用第1和3-10份数据作为训练集训练模型，用第2份数据作为验证集对这次训练的模型进行评分，
+得到第二个分数……以此类推，最后构建一个 max_depth=1 的决策树用第1-9份数据作为训练集训练模型，用第10份数据作为验证集对这次训练的模型进行评分，
+得到第十个分数。于是对于 max_depth=1 的决策树模型，我们训练了10次，验证了10次，得到了10个验证分数，然后计算这10个验证分数的平均分数，
+就是 max_depth=1 的决策树模型的最终验证分数。
   
   ### 最后：
   对于 max_depth = 2,3,4,5 时，分别进行和 max_depth=1 相同的交叉验证过程，得到它们的最终验证分数。然后我们就可以对这5个最大深度的决策树的最终验证分数进行比较，分数最高的那一个就是最优最大深度，对应的模型就是最优模型。
@@ -51,7 +51,7 @@ scikit库的CountVectorize类就是这种思路。
 
      vectorize = CountVectorizer()
 
-使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有词语，进而构建出text词典。
+__使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有词语，进而构建出text词典。__
 
     text=["Hey hey hey lets go get lunch today :)",
            "Did you go home?",
@@ -59,7 +59,8 @@ scikit库的CountVectorize类就是这种思路。
     
     text相当于三篇文章
 
-    #fit学会语料中的所有词语，构建词典
+ __fit学会语料中的所有词语，构建词典__
+ 
     vectorize.fit(text)
     CountVectorizer(analyzer='word', binary=False, decode_error='strict',
             dtype=<class 'numpy.int64'>, encoding='utf-8', input='content',
@@ -68,10 +69,12 @@ scikit库的CountVectorize类就是这种思路。
             strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
             tokenizer=None, vocabulary=None)
             
-    #这里我们查看下“词典”，也就是特征集(11个特征词)
+  __这里我们查看下“词典”，也就是特征集(11个特征词)__
+  
     vectorize.get_feature_names()
     
-    Out:
+   Out:
+   
       ['did',
        'favor',
        'get',
@@ -83,11 +86,12 @@ scikit库的CountVectorize类就是这种思路。
        'need',
        'today',
        'you']
-    # 文档-词频矩阵（document-term matrix），英文简写为dtm
+  文档-词频矩阵（document-term matrix），英文简写为dtm
+   
     dtm=cv.transform(texts)
     print(dtm)
     
-    Out:
+  Out:
       (0, 2)	1
       (0, 3)	1
       (0, 4)	3
@@ -102,13 +106,15 @@ scikit库的CountVectorize类就是这种思路。
       (2, 4)	1
       (2, 8)	1
     
-    使用pandas库以行列形式展示-  在 jupyer notebook中展示的没有加print：
+  用pandas库以行列形式展示-  在 jupyer notebook中展示的没有加print：
+  
     pd.DataFrame(cv_fit.toarray(),columns=cv.get_feature_names())
   
-    对应输出的
-    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/sklearn%E6%96%87%E6%9C%AC%E6%8F%90%E5%8F%96%E7%89%B9%E5%BE%81%E5%80%BC/1.jpg)
+对应输出的pandas图片，和上面的out(输出)结合来看，就是第0行第3个数为1次，第0行第4个数为1次......
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/sklearn%E6%96%87%E6%9C%AC%E6%8F%90%E5%8F%96%E7%89%B9%E5%BE%81%E5%80%BC/1.jpg)
 
-注意feature_name的返回结果，我们可以发现这几条规律：
+
+__注意feature_name的返回结果，我们可以发现这几条规律：__
     
     一、所有的单词都是小写
 
