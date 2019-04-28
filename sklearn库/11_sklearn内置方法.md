@@ -97,16 +97,16 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
 
 
 ## 注意: 
-   此时我们已经构建完成了我们的词频矩阵，如果我们还想加入新的文档此时我们需要注意了。
+   此时我们已经构建完成了我们的词频矩阵， __如果我们还想加入新的文档此时我们需要注意了。__
    
-   举个例子：
+   __举个例子：__
          
          new_document = ['Hello girl lets go get a drink tonight']
          new_dtm = cv.transform(new_document)
          print(new_dtm.toarray())
          pd.DataFrame(new_dtm.toarray(), columns=cv.get_feature_names())
          
-   Out: new_dtm.toarray()的输出
+   __Out:__ new_dtm.toarray()的输出
    
          [[0 0 1 1 0 0 1 0 0 0 0]]
          
@@ -115,7 +115,7 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
 
 __小结：__
 
-即使new_document含有8个单词，但是在上面的dataframe表中只有3个特征词被有效编码，Hello,girl,drink和tonight词未被表征。这是因为我们初识的text语料所构建的词典并未含有这些词。但是对文本进行特征表征时，使用的确实text所生产的词典。
+即使new_document含有8个单词，但是在上面的dataframe表中只有3个特征词被有效编码，Hello,girl,drink和tonight词未被表征。 __这是因为我们初识的text语料所构建的词典并未含有这些词。但是对文本进行特征表征时，使用的确实text所生产的词典。__
 
 我们机器学习所用的数据，一般被分成训练集和测试集。训练集是为了让机器学习数据的规律（拟合模型），测试集是为了验证规律的有效性。训练集本质上代表的是过去及现在已知的数据，测试集本质上代表的是未来的未知数据（现在不存在的数据），我们是用已知的数据预测未来。
 
