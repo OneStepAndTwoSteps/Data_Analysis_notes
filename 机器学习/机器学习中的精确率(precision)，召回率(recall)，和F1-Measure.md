@@ -22,11 +22,12 @@ __由准确率，我们的确可以在一些场合，从某种意义上得到一
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87.jpg)
 
 代入这张表, 我们可以很容易得到这几个值:
-                               __相关(Relevant),正类	    无关(NonRelevant), 负类__
+
+                                   相关(Relevant),正类	    无关(NonRelevant), 负类
                                            
-__被检索到(Retrieved)__	                __TP__=20	     __FP__=30
-                
-__未被检索到(Not Retrieved)__	         __FN__=0	      __TN__=50
+    被检索到(Retrieved)	                 TP=20	                    FP=30
+
+    未被检索到(Not Retrieved)	          FN=0	                     TN=50
 
 __精确率(precision)的公式是P = TP/(TP+FP)__, 它计算的是所有"正确被检索的结果(TP)"占所有"实际被检索到的(TP+FP)"的比例.
 
