@@ -14,7 +14,9 @@ __现在我先假定一个具体场景作为例子.__
 
 这样说听起来有点抽象，简单说就是，前面的场景中，实际情况是那个班级有男的和女的两类，某人(也就是定义中所说的分类器)他又把班级中的人分为男女两类. accuracy 需要得到的是此君分正确的人占总人数的比例. 很容易，我们可以得到:他把其中70(20女+50男)人判定正确了, 而总人数是100人，所以它的 accuracy 就是70 %(70 / 100).
 
-__由准确率，我们的确可以在一些场合，从某种意义上得到一个分类器是否有效，但它并不总是能有效的评价一个分类器的工作.__ 举个例子, google 抓取了 100个特殊页面，而它索引中共有10,000,000个页面, 随机抽一个页面，分类下, 这是不是特殊页面呢?如果以 accuracy 来判断我的工作，那我会把所有的页面都判断为"不是 特殊页面", 因为我这样效率非常高(return false, 一句话), 而 accuracy 已经到了99.999%(9,999,900/10,000,000), 完爆其它很多分类器辛辛苦苦算的值, 而我这个算法显然不是需求期待的, 那怎么解决呢?
+__由准确率，我们的确可以在一些场合，从某种意义上得到一个分类器是否有效，但它并不总是能有效的评价一个分类器的工作.__ 
+               
+__举个例子,__ google 抓取了 100个特殊页面，而它索引中共有10,000,000个页面, 随机抽一个页面，分类下, 这是不是特殊页面呢?如果以 accuracy 来判断我的工作，那我会把所有的页面都判断为"不是 特殊页面", 因为我这样效率非常高(return false, 一句话), 而 accuracy 已经到了99.999%(9,999,900/10,000,000), 完爆其它很多分类器辛辛苦苦算的值, 而我这个算法显然不是需求期待的, 那怎么解决呢?
                  
 这就是 precision, recall 和 f1-measure 出场的时间了.
 
@@ -24,14 +26,18 @@ __由准确率，我们的确可以在一些场合，从某种意义上得到一
 
                                      相关(Relevant), 正类	    无关(NonRelevant), 负类
         被检索到(Retrieved)	            true positives               false positives              
-        未被检索到(Not Retrieved)       false negatives 	        true negatives 
+        未被检索到(Not Retrieved)        false negatives 	         true negatives 
         
         true positive:  (TP 正类判定为正类, 例子中就是正确的判定"这位是女生")
         false positives:(FP 负类判定为正类,"存伪", 例子中就是分明是男生却判断为女生, 当下伪娘横行, 这个错常有人犯)
         false negatives:(FN 正类判定为负类,"去真", 例子中就是, 分明是女生, 这哥们却判断为男生--梁山伯同学犯的错就是这个)
         true negatives: (TN 负类判定为负类, 也就是一个男生被判断为男生, 像我这样的纯爷们一准儿就会在此处)
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87.jpg)
+<div style="text-align: center">
+<img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87.jpg" width="600px" height="300px"/>
+</div>
+
+
 
 代入这张表, 我们可以很容易得到这几个值:
 
@@ -39,7 +45,7 @@ __由准确率，我们的确可以在一些场合，从某种意义上得到一
                                            
     被检索到(Retrieved)	                 TP=20	                    FP=30
 
-    未被检索到(Not Retrieved)	        FN=0	                   TN=50
+    未被检索到(Not Retrieved)	         FN=0	                    TN=50
 
 __精确率(precision)的公式是P = TP/(TP+FP)__。
 
