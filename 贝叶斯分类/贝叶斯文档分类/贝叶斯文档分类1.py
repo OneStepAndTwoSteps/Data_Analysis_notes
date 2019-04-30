@@ -70,10 +70,12 @@ if __name__ == '__main__':
 
     # max_df表示单词在文档中出现的最高频率，此处max_df设置为0.5表示一个单词如果在50%的文本中都出现过，则不作为分词统计，因为它只携带了很少的信息
     # 一般不设置min_df因为这样的词很多、
+    # tokenizer: 定义一个函数，接受文本，返回分词的list
     tf=TfidfVectorizer(tokenizer=jieba.cut,stop_words=stop_words,max_df=0.5)
     train_features=tf.fit_transform(X_train)
     print(train_features.shape) # 测试集特征矩阵的列数与训练集特征矩阵的列数是一致的
 
+    # vocabulary 特征词的字典，键为特征词，值为特征词在词袋子列表中的下标，可以通过 vectorizer.vocabulary_ 访问
     # test_tf=TfidfVectorizer(tokenizer=jieba.cut,stop_words=stop_words,max_df=0.5,vocabulary=tf.vocabulary_)
     # test_features = test_tf.fit_transform(X_test)
     test_features = tf.transform(X_test)
