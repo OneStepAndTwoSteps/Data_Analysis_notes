@@ -127,9 +127,6 @@ SVM 代价函数：
 
 SVM 的代价函数和逻辑回归的较为相似，但是其中有一些不同：
 
-因为和逻辑回归的较为相似，我们先仿照着逻辑回归话一下SVM的代价函数图：
-
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/9.png)
 
    __首先，我们要除去1/𝑚这一项:__
              
@@ -150,7 +147,19 @@ __最后 逻辑回归输出的是概率，SVM输出的是直接值：__
 
 ## 补充
 
+因为和逻辑回归的较为相似，我们先仿照着逻辑回归话一下SVM的代价函数图：
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/9.png)
+
+------------------>
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/14.png)
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/13.png)
+
 __为什么SVM总能求得分类间隔中最大的那个值对应的超平面？__
+
+
 
 涉及到向量内积：
     
