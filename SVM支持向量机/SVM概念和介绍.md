@@ -151,7 +151,7 @@ __最后 逻辑回归输出的是概率，SVM输出的是直接值：__
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/9.png)
 
-曲线是逻辑回归的代价函数图，紫色的线是SVM的代价函数图。
+曲线是逻辑回归的代价函数图，紫色的线是SVM的代价函数图。同时 用 𝑧 表示𝜃𝑇𝑥，即： 𝑧 = 𝜃𝑇𝑥。如果画出关于𝑧 的函数，你会看到图的这条曲线，我们同样可以看到，当𝑧 增大时，也就是相当于𝜃𝑇𝑥增大时，𝑧 对应的值会变的非常小。对整个代价函数而言，影响也非常小。这也就解释了，为什么逻辑回归在观察到正样本𝑦 = 1时，试图将𝜃𝑇𝑥设置得非常大。因为，在代价函数中的这一项会变的非常小。 
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/14.png)
 
