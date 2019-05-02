@@ -225,6 +225,86 @@ __回顾 𝐶 = 1/𝜆，因此:__
 
 
     
+## 核函数
+
+__四种常见的核函数：__
+
+在sklearn中创建一个SVM分类器：
+    
+    model = svm.SVC(kernel=‘rbf’, C=1.0, gamma=‘auto’)，这里有三个重要的参数 kernel、C 和 gamma。
+    
+    kernel 代表核函数的选择，它有四种选择，只不过默认是 rbf，即高斯核函数。
+    
+    linear：线性核函数
+    poly：多项式核函数
+    rbf：高斯核函数（默认）
+    sigmoid：sigmoid 核函数
+
+这四种函数代表不同的映射方式，那如何选择这 4 种核函数呢？
+
+    线性核函数，是在数据线性可分的情况下使用的，运算速度快，效果好。不足在于它不能处理线性不可分的数据。
+    多项式核函数可以将数据从低维空间映射到高维空间，但参数比较多，计算量大。
+    高斯核函数同样可以将样本映射到高维空间，但相比于多项式核函数来说所需的参数比较少，通常性能不错，所以是默认使用的核函数。
+    sigmoid 经常用在神经网络的映射中。因此当选用 sigmoid 核函数时，SVM 实现的是多层神经网络。
+    
+上面介绍的 4 种核函数，除了第一种线性核函数外，其余 3 种都可以处理线性不可分的数据。
+
+
+__高斯核函数:__
+
+如下图所示的分类，我们知道使用高级数的多项式模型来解决无法用直线进行分隔的分类问题： 
+
+[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/20.png)
+  
+如：为了获得上图所示的判定边界，我们的模型可能是𝜃0 + 𝜃1𝑥1 + 𝜃2𝑥2 + 𝜃3𝑥1𝑥2 + 𝜃4𝑥1 2 +𝜃5𝑥2^2 + ⋯的形式。 
+
+同时我们可以用一系列的新的特征 f 来替换模型中的每一项。例如令： 𝑓1 = 𝑥1,𝑓2 = 𝑥2,𝑓3 =𝑥1𝑥2,𝑓4 = 𝑥1^2,𝑓5 = 𝑥2^2。得到ℎ𝜃(𝑥) = 𝜃1𝑓1 +𝜃2𝑓2+...+𝜃𝑛𝑓𝑛。
+
+__然而多项式的计算是非常巨大的，__ 除了对原有的特征进行组合以外，有没有更好的方法来构造𝑓1,𝑓2,𝑓3？ __我们可以利用核函数来计算出新的特征。__
+
+给定一个训练实例𝑥 ，我们利用𝑥 的各个特征与我们预先选定的 __地标(landmarks)__(新的特征) 𝑙(1),𝑙(2),𝑙(3)的近似程度来选取新的特征𝑓1,𝑓2,𝑓3。
+
+[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/17.png)
+
+例如：[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/21.png)
+
+其中[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/22.png)，为实例𝑥中所有特征与地标𝑙(1)之间的距离的和。
+
+[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/23.png)
+
+__上例中的𝑠𝑖𝑚𝑖𝑙𝑎𝑟𝑖𝑡𝑦(𝑥,𝑙(1))就是(相似度函数)其是核函数， 具体而言，这里是一个高斯核函数(Gaussian Kernel)。__ 但是通常写成k(𝑥,𝑙(1))。
+ 
+__注：__ 这个函数与正态分布没什么实际上的关系，只是看上去像而已。 
+
+__这些地标的作用：__
+
+如果一个训练实例𝑥与地标𝐿之间的距离近似于 0，则新特征 𝑓近似于𝑒−0(e的-0次方) = 1，如果训练实例𝑥与地标𝐿之间距离较远，则𝑓近似于𝑒−( 一个较大的数 ) = 0。 
+𝑒−( 一个较大的数 )就是e的-(一个较大的数次方)。
+
+[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/24.png)
+
+__我们可以看到当x和l距离很近的时候，我们的f接近于1，如果x和l距离很远f接近于0。__
+
+为了更好的理解上面的这幅图，假设我们的训练实例含有两个特征[𝑥1 𝑥2]，给定地标𝑙(1)与不同的𝜎值，见下图：
+
+[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/18.png)
+
+上图中水平面的坐标为 𝑥1，𝑥2而垂直坐标轴代表𝑓。 __可以看出，只有当𝑥与𝑙(1)重合时𝑓才具有最大值。__ 
+
+__𝜎2是高斯核函数的参数，如上图所示我们可以看到，随着𝑥的改变𝑓值改变的速率受到𝜎2的控制。__ 
+
+在下图中，假设我们已经得到了一个学习算法，和参数对应的值，当实例处于洋红色的点位置处，因为其离𝑙(1)更近，但是离𝑙(2)和𝑙(3)较远，因此𝑓1接近 1，而𝑓2,𝑓3接近 0 (因为如果x和l距离很远f接近于0)。因此ℎ𝜃(𝑥) = 𝜃0 + 𝜃1𝑓1 + 𝜃2𝑓2 + 𝜃1𝑓3 > 0，因此预测𝑦 = 1。同理可以求出，对于离𝑙(2)较近的绿色点，也预测𝑦 = 1，但是对于蓝绿色的点，因为其离三个地标都较远，预测𝑦 = 0。 
+
+[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/19.png)
+
+这样，图中红色的封闭曲线所表示的范围，便是我们依据一个单一的训练实例和我们选取的地标所得出的判定边界， __在预测时，我们采用的特征不是训练实例本身的特征，而是通过核函数计算出的新特征𝑓1,𝑓2,𝑓3。__
+
+__如何选取地标?__
+
+我们通常是根据训练集的数量选择地标的数量，即如果训练集中有𝑚个实例，则我们选取𝑚个地标，并且令:𝑙(1) = 𝑥(1),𝑙(2) = 𝑥(2),.....,𝑙(𝑚) = 𝑥(𝑚)。即在各个特征(𝑥)所在位置建立地标。这样做的好处在于：现在我们得到的新特征是建立在原有特征与训练集中所有其他特征之间距离的基础之上的，
+
+
+
 
 
 
