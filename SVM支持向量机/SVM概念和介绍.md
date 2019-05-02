@@ -236,7 +236,7 @@ __高斯核函数:__
 
 如下图所示的分类，我们知道使用高级数的多项式模型来解决无法用直线进行分隔的分类问题： 
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/20.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/20.png)
   
 如：为了获得上图所示的判定边界，我们的模型可能是𝜃0 + 𝜃1𝑥1 + 𝜃2𝑥2 + 𝜃3𝑥1𝑥2 + 𝜃4𝑥1 2 +𝜃5𝑥2^2 + ⋯的形式。 
 
@@ -246,13 +246,13 @@ __然而多项式的计算是非常巨大的，__ 除了对原有的特征进行
 
 给定一个训练实例𝑥 ，我们利用𝑥 的各个特征与我们预先选定的 __地标(landmarks)__(新的特征) 𝑙(1),𝑙(2),𝑙(3)的近似程度来选取新的特征𝑓1,𝑓2,𝑓3。
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/17.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/17.png)
 
-例如：[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/21.png)
+例如：![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/21.png)
 
-其中[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/22.png)，为实例𝑥中所有特征与地标𝑙(1)之间的距离的和。
+其中![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/22.png)，为实例𝑥中所有特征与地标𝑙(1)之间的距离的和。
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/23.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/23.png)
 
 __上例中的𝑠𝑖𝑚𝑖𝑙𝑎𝑟𝑖𝑡𝑦(𝑥,𝑙(1))就是(相似度函数)其是核函数， 具体而言，这里是一个高斯核函数(Gaussian Kernel)。__ 但是通常写成k(𝑥,𝑙(1))。
  
@@ -263,13 +263,13 @@ __这些地标的作用：__
 如果一个训练实例𝑥与地标𝐿之间的距离近似于 0，则新特征 𝑓近似于𝑒−0(e的-0次方) = 1，如果训练实例𝑥与地标𝐿之间距离较远，则𝑓近似于𝑒−( 一个较大的数 ) = 0。 
 𝑒−( 一个较大的数 )就是e的-(一个较大的数次方)。
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/24.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/24.png)
 
 __我们可以看到当x和l距离很近的时候，我们的f接近于1，如果x和l距离很远f接近于0。__
 
 为了更好的理解上面的这幅图，假设我们的训练实例含有两个特征[𝑥1 𝑥2]，给定地标𝑙(1)与不同的𝜎值，见下图：
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/18.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/18.png)
 
 上图中水平面的坐标为 𝑥1，𝑥2而垂直坐标轴代表𝑓。 __可以看出，只有当𝑥与𝑙(1)重合时𝑓才具有最大值。__ 
 
@@ -277,7 +277,7 @@ __𝜎2是高斯核函数的参数，如上图所示我们可以看到，随着�
 
 在下图中，假设我们已经得到了一个学习算法，和参数对应的值，当实例处于洋红色的点位置处，因为其离𝑙(1)更近，但是离𝑙(2)和𝑙(3)较远，因此𝑓1接近 1，而𝑓2,𝑓3接近 0 (因为如果x和l距离很远f接近于0)。因此ℎ𝜃(𝑥) = 𝜃0 + 𝜃1𝑓1 + 𝜃2𝑓2 + 𝜃1𝑓3 > 0，因此预测𝑦 = 1。同理可以求出，对于离𝑙(2)较近的绿色点，也预测𝑦 = 1，但是对于蓝绿色的点，因为其离三个地标都较远，预测𝑦 = 0。 
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/19.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/19.png)
 
 这样，图中红色的封闭曲线所表示的范围，便是我们依据一个单一的训练实例和我们选取的地标所得出的判定边界， __在预测时，我们采用的特征不是训练实例本身的特征，而是通过核函数计算出的新特征𝑓1,𝑓2,𝑓3。我们可以通过标记点和相似性函数来定义新的特征变量，从而训练复杂的非线性边界。__ 
 
@@ -296,7 +296,7 @@ __注意：__
 
 ## 下面是支持向量机的两个参数𝐶和𝜎的影响： ：
 
-[Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/15.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/15.png)
 
 在这里，如果我们加了这个样本(图中左下角的X)，为了将样本用最大间距分开，也许我最终会得到一条类似这样的决策界，对么？就是这条粉色的线，仅仅基于一个异常值，仅仅基于一个样本，就将我的决策界从这条黑线变到这条粉线，这实在是不明智的。而如果正则化参数𝐶，设置的非常大，这事实上正是支持向量机将会做的。它将决策界，从黑线变到了粉线，但是如果𝐶 设置的小一点，如果你将 C 设置的不要太大，则你最终会得到这条黑线，当然数据如果不是线性可分的，如果你在这里有一些正本或者你在这里有一些负样本，则支持向量机也会将它们恰当分开。因此，大间距分类器的描述，仅仅是从直观上给出了正则化参数𝐶非常大的情形，同时，要提醒你𝐶的作用类似于1/𝜆，𝜆是我们之前使用过的正则化参数。这只是𝐶非常大的情形，或者等价地 𝜆 非常小的情形。你最终会得到类似粉线这样的决策界，但是实际上应用支持向量机的时候，当𝐶不是非常非常大的时候，它可以忽略掉一些异常点的影响，得到更好的决策界。甚至当你的数据不是线性可分的时候，支持向量机也可以给出好的结果。
               
