@@ -584,8 +584,14 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     3  I am a rabbit
     dtype: object
 
-
-
+  ### pandas.set_option
+   可以设置pandas的属性，比如打印出来数据时显示多少列，显示多宽等等，可以一次性设置多个格式如下
+   
+   例子：
+      
+      # print(pd.set_option('display.max_columns',None,'display.width',10))
+    
+  
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
