@@ -479,6 +479,47 @@ __bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bin
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png)
 
 
+ ## matplotlib.pyplot.figure
+    
+    num ： 整数或字符串，可选，默认值：无
+    如果未提供，将创建新图形，图形编号将递增。图形对象将此数字保存在number 属性中。如果提供了num，并且已存在具有此id的数字，请将其设置为活动状态，
+    并返回对它的引用。如果此图不存在，请创建它并返回它。如果num是一个字符串，则窗口标题将设置为此图 num。
+    
+    figsize :( float，float），可选，默认值：无
+    宽度，高度（英寸）。如果未提供，则默认为 rcParams["figure.figsize"]= [6.4, 4.8]
+
+    dpi ： 整数，可选，默认值：无
+    这个数字的分辨率。如果未提供，则默认为 rcParams["figure.dpi"]= 100。
+
+    facecolor：
+    背景颜色。如果未提供，则默认为 rcParams["figure.facecolor"]= 'w'。
+
+    edgecolor：
+    边框颜色。如果未提供，则默认为 rcParams["figure.edgecolor"]= 'w'。
+
+    frameon ： bool，optional，默认值：True
+    如果为False，则禁止绘制图框。
+
+    FigureClass ：的 子类Figure
+    （可选）使用自定义Figure实例。
+
+    clear ： bool，可选，默认值：False
+    如果为True并且该图已经存在，那么它将被清除。
+
+例子：
+
+    # 热力图可视化特征之间的关系 corr函数建立content[features_mean]特征中的关系值
+    corr=content[features_mean].corr()
+    # 图像的宽度和高度指定为14
+    plt.figure(figsize=(14,14))
+    # print(corr)
+    # 建立热力图
+    sns.heatmap(corr,annot=True)
+    plt.show()
+
+    
+    
+    
  ## 可视化导图总结：
     
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/python%E5%8F%AF%E8%A7%86%E5%8C%96.png)
