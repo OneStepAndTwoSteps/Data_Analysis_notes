@@ -1,5 +1,7 @@
-
-## GridSearchCV 交叉熵
+### GridSearchCV
+  GridSearchCV 它存在的意义就是自动调参，只要把参数输进去，就能给出最优化的结果和参数。但是这个方法适合于小数据集。
+  可以参照决策树demo 
+### GridSearchCV 中的 交叉熵
 from sklearn.grid_search import GridSearchCV 
 
 GridSearchCV中的cv：表示将训练集划分为几份，用于交叉验证。
