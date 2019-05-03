@@ -4,7 +4,19 @@ Z-score标准化，也称为标准化分数，这种方法根据原始数据的�
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/sklearn%E5%BA%93/static/Z-score.png)
 
+对应的类是
+from sklearn.preprocessing import StandardScaler
 
+__例子：__
+
+    # 准备训练集和测试集
+    x_train,x_test,y_train,y_test=train_test_split(content[features_mean],content['diagnosis'],test_size=0.3)
+
+    # 数据规范化
+    # 采用 Z-Score 规范化数据，保证每个特征维度的数据均值为 0，方差为 1
+    ss=StandardScaler()
+    train_x=ss.fit_transform(x_train)
+    test_x=ss.transform(x_test)
 
 
 
