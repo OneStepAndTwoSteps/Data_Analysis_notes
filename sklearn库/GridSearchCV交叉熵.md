@@ -1,6 +1,3 @@
-# sklearn模块
-        
-
 
 ## GridSearchCV 交叉熵
 from sklearn.grid_search import GridSearchCV 
@@ -31,29 +28,6 @@ GridSearchCV中的cv：表示将训练集划分为几份，用于交叉验证。
   
   ### 最后：
   对于 max_depth = 2,3,4,5 时，分别进行和 max_depth=1 相同的交叉验证过程，得到它们的最终验证分数。然后我们就可以对这5个最大深度的决策树的最终验证分数进行比较，分数最高的那一个就是最优最大深度，对应的模型就是最优模型。
-
-
-
-
-
-
-日后补充
------------------------------------
-
-__Fit():__ Method calculates the parameters μ and σ and saves them as internal objects.
-解释：简单来说，就是求得训练集X的均值啊，方差啊，最大值啊，最小值啊这些训练集X固有的属性。可以理解为一个训练过程 
-
-fit方法用于构建特征空间（也就是构建词典）
- 
-__Transform():__ Method using these calculated parameters apply the transformation to a particular dataset.
-解释：在Fit的基础上，进行标准化，降维，归一化等操作（看具体用的是哪个工具，如PCA，StandardScaler等）。
-
-训练集其实主要是学会数据中的特征空间（构建词典），之后我们需要用学到的特征空间去处理测试集。所以我们只需要用到transform方法，从而将测试集数据从文本数据转化为特征矩阵。
-
-transform方法使用该空间将文本数据转化为特征矩阵
-
-__Fit_transform():__ joins the fit() and transform() method for transformation of dataset.
-解释：fit_transform是fit和transform的组合，既包括了训练又包含了转换。
 
 
 
