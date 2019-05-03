@@ -7,7 +7,7 @@ __CountVectorizer__ 和 __TfidfVectorizer__ 是 __文本特征提取__ 的两种
 
  
         
-### __sklearn中的fit，transform，fit_transform 在文本提取特征中各自的作用。__  这里注意是对于 __文本__ 。
+### sklearn中的fit，transform，fit_transform 在文本提取特征中各自的作用。  
 
 首先，计算机是不能从文本字符串中发现规律。只有将字符串编码为计算机可以理解的数字，计算机才有可能发现文本中的规律。
 
