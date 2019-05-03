@@ -1,21 +1,5 @@
 # sklearn模块
-         
-
-                             
-                             
-
-## CountVectorizer和TfidfVectorizer方法的不同
-
-__CountVectorizer__ 和 __TfidfVectorizer__ 是 __文本特征提取__ 的两种方法。两者的主要区别在于，CountVectorizer仅仅通过计算词语词频，没有考虑该词语是否有代表性。而TfidfVectorizer可以更加精准的表征一个词语对某个话题的代表性。
-
-
-
-
-
-
-          
-             
-
+        
 
 
 ## GridSearchCV 交叉熵
