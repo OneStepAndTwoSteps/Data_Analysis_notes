@@ -1,6 +1,12 @@
 
 ## 从文本中提取特征信息    CountVectorizer类和TfidfVectorizer类 
-  
+ 
+__CountVectorizer和TfidfVectorizer方法的不同:__
+
+__CountVectorizer__ 和 __TfidfVectorizer__ 是 __文本特征提取__ 的两种方法。两者的主要区别在于，CountVectorizer仅仅通过计算词语词频，没有考虑该词语是否有代表性。而TfidfVectorizer可以更加精准的表征一个词语对某个话题的代表性。
+
+ 
+        
 同时说明 __sklearn中的fit，transform，fit_transform 在文本提取特征中各自的作用。__  这里注意是对于 __文本__ 。
 
 首先，计算机是不能从文本字符串中发现规律。只有将字符串编码为计算机可以理解的数字，计算机才有可能发现文本中的规律。
