@@ -131,6 +131,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
       df2['Chinese'].astype('str') 
       df2['Chinese'].astype(np.int64) 
 
+
 ### 数据间的空格
 
   有时候我们先把格式转成了 str 类型，是为了方便对数据进行操作，这时想要删除数据间的空格，我们就可以使用 strip 函数：
@@ -391,7 +392,7 @@ __自定义函数apply__
      print(train_content.loc[83,"Age"])
      print(train_content.loc[82:83,"Name":"Age"])   #还可以跟范围
 
-## 将Pandas中的DataFrame类型转换成Numpy中array类型的三种方法
+### 将Pandas中的DataFrame类型转换成Numpy中array类型的三种方法
   dataframe 转列表  
       
       
@@ -407,7 +408,7 @@ __自定义函数apply__
 
     np.array(df)
     
-## pandas.DataFrame.fillna 用指定的方法填充NA/NaN
+### pandas.DataFrame.fillna 用指定的方法填充NA/NaN
 
 __DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）__
         
@@ -467,7 +468,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     3   NaN 3.0 NaN 4
     
     
-  ## pandas.DataFrame.groupby   groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。
+  ### pandas.DataFrame.groupby   groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。
 
   
   __例子：指定以什么为组执行操作__
@@ -534,9 +535,55 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     Wild         185.0
 
 
-  ## pandas按若干个列的组合条件筛选数据
+  ### pandas按若干个列的组合条件筛选数据
     #取年龄等于26，并且存活的数据的数量
     print(train_data[(train_data['Age']==29) & (train_data['Survived']==1)].count())
+
+
+
+  ### pandas.Series.map
+    
+    根据输入的对应关系映射系列的值。
+
+    用于将系列中的每个值替换为另一个值，该值可以从函数，a dict或a 派生Series。
+  
+  例子：
+  
+      >>> s = pd.Series(['cat', 'dog', np.nan, 'rabbit'])
+      >>> s
+      0      cat
+      1      dog
+      2      NaN
+      3   rabbit
+      dtype: object
+  
+  map接受a dict或a Series。除非dict具有默认值（例如），否则将dict转换为未找到的NaN值defaultdict：
+  
+    >>> s.map({'cat': 'kitten', 'dog': 'puppy'})
+    0   kitten
+    1    puppy
+    2      NaN
+    3      NaN
+    dtype: object
+    
+  它还接受一个功能：
+
+    >>> s.map('I am a {}'.format)
+    0       I am a cat
+    1       I am a dog
+    2       I am a nan
+    3    I am a rabbit
+    dtype: object
+  
+  为避免将函数应用于缺失值（并将其保留为 NaN），na_action='ignore'可以使用：
+
+    >>> s.map('I am a {}'.format, na_action='ignore')
+    0     I am a cat
+    1     I am a dog
+    2            NaN
+    3  I am a rabbit
+    dtype: object
+
 
 
   ## 总结：
