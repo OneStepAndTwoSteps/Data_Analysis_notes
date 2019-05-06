@@ -9,4 +9,7 @@
              
 另外，如果我们没有fit，直接进行transform会报错，因为需要先fit拟合，才可以进行transform。
 
+__补充:__
+             
+其他地方也是同理，如果我们的模型已经fit_transform了，后面我们只用transform即可
 
