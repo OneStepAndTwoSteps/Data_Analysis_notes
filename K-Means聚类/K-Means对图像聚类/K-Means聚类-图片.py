@@ -27,7 +27,7 @@ KM.fit(data)
 # 图像聚类的结果
 label=KM.predict(data)
 # print("label1: ",label.shape)
-# 将图像聚类的结果转化成图像尺寸的矩阵。
+# 将图像聚类的结果转化成图像尺寸的矩阵。里面的就是被聚类过的类别0和1
 label=label.reshape([width,height])
 # print('label2: ',label)
 # print("label2: ",label.shape)
