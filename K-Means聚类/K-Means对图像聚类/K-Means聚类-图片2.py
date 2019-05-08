@@ -20,6 +20,7 @@ def load_image(file_path):
 
 data,width,height=load_image('weixin.jpg')
 # print(data)
+# 表示我们不省略数组，让其全部显示出来
 np.set_printoptions(threshold=np.inf)
 # 开始使用K-Means聚类
 KM=KMeans(n_clusters=16)
