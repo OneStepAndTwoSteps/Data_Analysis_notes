@@ -27,13 +27,13 @@ KM.fit(data)
 # 图像聚类的结果
 label=KM.predict(data)
 # print("label1: ",label.shape)
-# 将图像聚类的结果转化成图像尺寸的矩阵。
+# 将图像聚类的结果转化成图像尺寸的矩阵。里面其实就是我们聚类之后的聚类结果，就是label=KM.predict(data)的出来的。
 label=label.reshape([width,height])
 print('label2: ',label)
 # print("label2: ",label.shape)
 
 # 创建一个图像用于保存聚类的结果，并设置灰度值
-# 创建一个新的图片，PIL.Image.new(mode, size, color=0) L表示mode为8位像素，黑白
+# 创建一个新的图片，PIL.Image.new(mode, size, color=0) RGB表示mode为3x8位像素，真彩色
 pic_new=image.new('RGB',(width,height))
 for x in range(width):
     for y in range(height):
