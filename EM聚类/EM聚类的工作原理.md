@@ -70,5 +70,26 @@ __常见的EM聚类：__
     
 GMM 是通过概率密度来进行聚类，聚成的类符合高斯分布（正态分布）。而 HMM 用到了马尔可夫过程，在这个过程中，我们通过状态转移矩阵来计算状态转移的概率。HMM 在自然语言处理和语音识别领域中有广泛的应用。
    
-   
+### 在sklearn中初始化聚类模型：
+
+    from sklearn.mixture import GaussianMixture
+
+    #创建GMM(高斯混合模型)聚类
+    gmm== GaussianMixture(n_components=1, covariance_type=‘full’, max_iter=100) \
+    
+__参数讲解:__
+
+    1.n_components：即高斯混合模型的个数，也就是我们要聚类的个数，默认值为 1。如果不指定 n_components，最终的聚类结果都会为同一个值。
+    2.covariance_type：代表协方差类型。一个高斯混合模型的分布是由均值向量和协方差矩阵决定的，所以协方差的类型也代表了不同的高斯混合模型的特征。
+    协方差类型有 4 种取值：
+    
+        covariance_type=full，代表完全协方差，也就是元素都不为 0；
+        covariance_type=tied，代表相同的完全协方差；
+        covariance_type=diag，代表对角协方差，也就是对角不为 0，其余为 0；
+        covariance_type=spherical，代表球面协方差，非对角为 0，对角完全相同，呈现球面的特性。
+
+    3.max_iter：代表最大迭代次数，EM 算法是由 E 步和 M 步迭代求得最终的模型参数，这里可以指定最大迭代次数，默认值为 100。
+
+
+
    
