@@ -593,8 +593,9 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     
   ### python dataframe 获得 列名columns 和行名称 index
    
-    dfname._stat_axis.values.tolist() # 行名称
-
+    dfname._stat_axis.values.tolist()   ==  dfname.index.values.tolist()      # 行名称
+     
+    
     dfname.columns.values.tolist()    # 列名称
 
   
