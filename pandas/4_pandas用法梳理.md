@@ -591,6 +591,12 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       
       # print(pd.set_option('display.max_columns',None,'display.width',10))
     
+  ### python dataframe 获得 列名columns 和行名称 index
+   
+    dfname._stat_axis.values.tolist() # 行名称
+
+    dfname.columns.values.tolist()    # 列名称
+
   
   ## 总结：
   
