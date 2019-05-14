@@ -513,7 +513,7 @@ __bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bin
     # 图像的宽度和高度指定为14
     plt.figure(figsize=(14,14))
     # print(corr)
-    # 建立热力图
+    # 建立热力图 指定数据为corr  annot : 如果为True，则将数据值写入每个单元格中
     sns.heatmap(corr,annot=True)
     plt.show()
 
