@@ -14,13 +14,13 @@ __1. 创建项头表（item header table）__
 创建项头表的作用是为 FP 构建及频繁项集挖掘提供索引。
 这一步的流程是先扫描一遍数据集，对于满足最小支持度的单个项（K=1 项集） __按照支持度从高到低进行排序，这个过程中删除了不满足最小支持度的项__。
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Apriori/9.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Apriori/9-1.png)
 
 __2. 构造 FP 树__
 FP 树的根节点记为 NULL 节点。
 整个流程是需要再次扫描数据集，对于每一条数据，按照支持度从高到低的顺序进行创建节点（也就是第一步中项头表中的排序结果），节点如果存在就将计数 count+1，如果不存在就进行创建(什么意思呢？ __看下面的补充介绍__)。同时在创建的过程中，需要更新项头表的链表。
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Apriori/10.png)
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Apriori/10-1.png)
 
 我们可以在图中观察到，第一个节点的支持度为5，我们右侧的树状结构图的第一个节点也是5，接下来的节点层数(比如说第二层)他的总的支持度相加也是5，第三层同理，因为我们所有的物品组合中都包含尿布，所以他的支持度最高。我们把它放在最上面。
 
