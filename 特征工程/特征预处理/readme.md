@@ -7,20 +7,20 @@ __z-score标准化：__ 这是最常见的特征预处理方式，基本所有�
 __max-min标准化：__ 也称为离差标准化，预处理后使特征值映射到[0,1]之间。具体的方法是求出样本特征x的最大值max和最小值min，然后用(x-min)/(max-min)来代替原特征。如果我们希望将数据映射到任意一个区间[a,b]，而不是[0,1]，那么也很简单。用(x-min)(b-a)/(max-min)+a来代替原特征即可。在sklearn中，我们可以用MinMaxScaler来做max-min标准化。这种方法的问题就是如果测试集或者预测数据里的特征有小于min，或者大于max的数据，会导致max和min发生变化，需要重新计算。所以实际算法中， 除非你对特征的取值区间有需求，否则max-min标准化没有 z-score标准化好用。
 
 ### Sklearn的数据预处理模块：
-      类              功能       说明
-    StandardScaler  无量纲化  标准化，基于特征矩阵的列，将特征值转换至服从标准正态分布
+      类                  功能                                   说明
+    StandardScaler      无量纲化              标准化，基于特征矩阵的列，将特征值转换至服从标准正态分布
 
-    MinMaxScaler  无量纲化  区间缩放，基于最大最小值，将特征值转换到[0, 1]区间上
+    MinMaxScaler        无量纲化              区间缩放，基于最大最小值，将特征值转换到[0, 1]区间上
 
-    Normalizer  归一化 基于特征矩阵的行，将样本向量转换为“单位向量”
+    Normalizer          归一化                基于特征矩阵的行，将样本向量转换为“单位向量”
 
-    Binarizer 二值化 基于给定阈值，将定量特征按阈值划分
+    Binarizer           二值化                基于给定阈值，将定量特征按阈值划分
 
-    OneHotEncoder 哑编码 将定性数据编码为定量数据
+    OneHotEncoder       哑编码                将定性数据编码为定量数据
 
-    Imputer 缺失值计算 计算缺失值，缺失值可填充为均值等
+    Imputer             缺失值计算             计算缺失值，缺失值可填充为均值等
 
-    PolynomialFeatures  多项式数据转换 多项式数据转换
+    PolynomialFeatures  多项式数据转换         多项式数据转换
 
-    FunctionTransformer 自定义单元数据转换 使用单变元的函数来转换数据函数来转换数据
+    FunctionTransformer 自定义单元数据转换      使用单变元的函数来转换数据函数来转换数据
 
