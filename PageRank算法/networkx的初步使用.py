@@ -21,7 +21,7 @@ for edge in edges:
     G.add_edge(edge[0],edge[1])
 
 
-# alpha为阻尼因子，默认值：0.85
+# alpha为阻尼因子，默认值：0.85 此时也可以理解为用户有15%的随机跳转率
 pagerank_list=nx.pagerank(G,alpha=1)
 
 # 将 pagerank 数值作为节点的属性
