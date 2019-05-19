@@ -21,8 +21,10 @@ for edge in edges:
     G.add_edge(edge[0],edge[1])
 
 
-# alpha为阻尼因子，默认值：0.85 此时也可以理解为用户有15%的随机跳转率
-pagerank_list=nx.pagerank(G,alpha=1)
+# alpha为阻尼因子，默认值：0.85
+# pagerank_list=nx.pagerank(G,alpha=1)
+
+pagerank_list=nx.pagerank(G)
 
 # 将 pagerank 数值作为节点的属性
 nx.set_node_attributes(G, name = 'pagerank', values=pagerank_list)
@@ -36,7 +38,8 @@ for  v,x in G.nodes(data=True):
 
 print("pagerank value equal: %s "%pagerank_list)
 # 输出结果:
-# pagerank value equal: {'A': 0.33333396911621094, 'B': 0.22222201029459634, 'C': 0.22222201029459634, 'D': 0.22222201029459634}
+# 当 alpha=1时 pagerank value equal: {'A': 0.33333396911621094, 'B': 0.22222201029459634, 'C': 0.22222201029459634, 'D': 0.22222201029459634}
+# 当 alpha=0.85时 pagerank value equal: {'A': 0.3245609358176831, 'B': 0.22514635472743894, 'C': 0.22514635472743894, 'D': 0.22514635472743894} 
 
 # data=True 如果为True，则将整个节点属性dict返回为（n，ddict）。如果为False，则仅返回节点n。
 print(G.nodes(data=True))
