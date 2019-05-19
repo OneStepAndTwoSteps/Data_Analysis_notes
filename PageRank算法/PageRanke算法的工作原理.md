@@ -39,7 +39,7 @@ __所以我们会发现，我们出链链接如果增多，会降低我们该页
 
 B 有两个出链，链接到了 A 和 D 上，跳转概率为 1/2。
 
-这样我们就可以得到A,B,C,D四个网页之间的转移矩阵，一共4个网页也就形成了这样一个4 * 4维矩阵，N为就是N * N维矩阵
+这样我们就可以得到A,B,C,D四个网页之间的 __转移矩阵__ ，一共4个网页也就形成了这样一个4 * 4维矩阵，N为就是N * N维矩阵
 
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/PageRank%E7%AE%97%E6%B3%95/4.png)
 
