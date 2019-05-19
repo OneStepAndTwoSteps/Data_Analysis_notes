@@ -79,6 +79,6 @@ __我们需要一种方法，可以同时解决等级泄露和等级沉没这两
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/PageRank%E7%AE%97%E6%B3%95/7.png)
 
 
-其中 N 为网页总数，这样我们又可以重新迭代网页的权重计算了，因为加入了阻尼因子 d，一定程度上解决了等级泄露和等级沉没的问题。
+其中 N 为网页总数，这样我们又可以重新迭代网页的权重计算了， __因为加入了阻尼因子 d，一定程度上解决了等级泄露和等级沉没的问题。__
 
 通过数学定理（这里不进行讲解）也可以证明，最终 PageRank 随机浏览模型是可以收敛的，也就是可以得到一个稳定正常的 PR 值。
