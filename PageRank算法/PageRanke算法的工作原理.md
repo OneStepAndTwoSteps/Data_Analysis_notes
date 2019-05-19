@@ -27,7 +27,7 @@ PageRank的作用是评价网页的重要性，以此作为搜索结果的排序
   
   图中的每一个网页表示一个节点，每一条有向边，表示网页之间的入链和出链，入链表示指向自己，出链表示指向别的网页。
   
-  PageRank的算法公式：
+  __PageRank的算法公式：__
     
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/PageRank%E7%AE%97%E6%B3%95/3.png)
   
@@ -51,7 +51,7 @@ B 有两个出链，链接到了 A 和 D 上，跳转概率为 1/2。
 
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/PageRank%E7%AE%97%E6%B3%95/6.png)
 
-然后用M再乘以这个新的rank向量，又会产生一个更新的rank向量。迭代这个过程，可以证明v最终会收敛，即v约等于Mv，此时计算停止。最终的v就是各个页面的pagerank值。例如上面的向量经过几步迭代后，大约收敛在（0.3333，0.2222，0.2222，0.2222），这就是A、B、C、D最后的pagerank，也就是对应着 A、B、C、D 四个页面最终平衡状态下的影响力。
+然后用M再乘以这个新的rank向量，又会产生一个更新的rank向量。迭代这个过程，可以证明v最终会收敛，即v约等于Mv，此时计算停止。最终的v就是各个页面的pagerank值。 __例如上面的向量经过几步迭代后，大约收敛在（0.3333，0.2222，0.2222，0.2222），这就是A、B、C、D最后的pagerank，也就是对应着 A、B、C、D 四个页面最终平衡状态下的影响力。__
 
 __通过矩阵相乘验证判断最后影响力确实几乎不发生变化：__
 
@@ -60,13 +60,13 @@ https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/PageRank%
 
 ### 但是这样简单的PageRank会带来两个问题：
   
-  1. 等级泄露（Rank Leak）：如果一个网页没有出链，就像是一个黑洞一样，吸收了其他网页的影响力而不释放，最终会导致其他网页的 PR 值为 0。 __上面的算法之所以能成功收敛到非零值，很大程度依赖转移矩阵这样一个性质：每列的加和为1。__ 而在这个图中，M第四列将全为0。在没有等级泄露的情况下，每次迭代后向量v各项的和始终保持为1，而有了等级泄露，迭代结果将最终归零(矩阵论的知识,此处略）。
+  __1. 等级泄露（Rank Leak）：__ 如果一个网页没有出链，就像是一个黑洞一样，吸收了其他网页的影响力而不释放，最终会导致其他网页的 PR 值为 0。 __上面的算法之所以能成功收敛到非零值，很大程度依赖转移矩阵这样一个性质：每列的加和为1。__ 而在这个图中，M第四列将全为0。在没有等级泄露的情况下，每次迭代后向量v各项的和始终保持为1，而有了等级泄露，迭代结果将最终归零(矩阵论的知识,此处略）。
 
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/PageRank%E7%AE%97%E6%B3%95/2.png)
 
 
 
-  2. 等级沉没（Rank Sink）：如果一个网页只有出链，没有入链，计算的过程迭代下来，会导致这个网页的 PR 值为 0（也就是不存在公式中的 V）。
+  __2. 等级沉没（Rank Sink）：__ 如果一个网页只有出链，没有入链，计算的过程迭代下来，会导致这个网页的 PR 值为 0（也就是不存在公式中的 V）。
 
 __我们需要一种方法，可以同时解决等级泄露和等级沉没这两个问题。__
 
