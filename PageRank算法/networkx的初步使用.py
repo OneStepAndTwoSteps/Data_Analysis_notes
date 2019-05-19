@@ -20,13 +20,28 @@ for edge in edges:
     # 查询边个数：G.number_of_edges()
     G.add_edge(edge[0],edge[1])
 
+
 # alpha为阻尼因子，默认值：0.85
 pagerank_list=nx.pagerank(G,alpha=1)
-# pagerank_list=nx.pagerank(G)
+
+# 将 pagerank 数值作为节点的属性
+nx.set_node_attributes(G, name = 'pagerank', values=pagerank_list)
+for  v,x in G.nodes(data=True):
+    print(v,x)
+# 输出结果
+# A {'pagerank': 0.33333396911621094}
+# B {'pagerank': 0.22222201029459634}
+# C {'pagerank': 0.22222201029459634}
+# D {'pagerank': 0.22222201029459634}
+
 print("pagerank value equal: %s "%pagerank_list)
-
-
-
 # 输出结果:
 # pagerank value equal: {'A': 0.33333396911621094, 'B': 0.22222201029459634, 'C': 0.22222201029459634, 'D': 0.22222201029459634}
+
+# data=True 如果为True，则将整个节点属性dict返回为（n，ddict）。如果为False，则仅返回节点n。
+print(G.nodes(data=True))
+print(G.nodes())
+# 输出结果：
+# [('A', {'pagerank': 0.33333396911621094}), ('B', {'pagerank': 0.22222201029459634}), ('C', {'pagerank': 0.22222201029459634}), ('D', {'pagerank': 0.22222201029459634})]
+# ['A', 'B', 'C', 'D']
 
