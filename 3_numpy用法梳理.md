@@ -339,7 +339,8 @@ axis=0 的排序结果，axis=0 代表的是跨行（跨行就是按照列），
     
     np.set_printoptions(threshold=np.inf)
 
-### 矩阵相乘：np.dot np.multiplay
+### 矩阵相乘：np.dot 和 np.multiplay
+  __np.dot会将矩阵相乘之后的结果相加，但是multiplay不会__
   
   __例子:__
     
