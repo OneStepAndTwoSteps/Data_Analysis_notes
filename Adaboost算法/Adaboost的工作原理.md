@@ -44,6 +44,7 @@ __同时我们会选择每次迭代训练过程中错误率最低的弱分类器
 __第 k+1 轮中的样本权重求解__ ，是根据该样本在第 k 轮的权重以及第 k 个分类器的准确率而定，具体的公式为：
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/4.png"/></div>
 
+__补充：__ 这里的Zk是归一化因子
 
 ### AdaBoost 算法示例
 
