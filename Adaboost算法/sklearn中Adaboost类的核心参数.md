@@ -9,7 +9,8 @@
     from sklearn.ensemble import AdaBoostRegressor
 
 ### Adaboost分类器：
-AdaBoostClassifier(base_estimator=None, n_estimators=50, learning_rate=1.0, algorithm=’SAMME.R’, random_state=None)
+
+__AdaBoostClassifier(base_estimator=None, n_estimators=50, learning_rate=1.0, algorithm=’SAMME.R’, random_state=None)__
 
 __base_estimator：__ 代表的是弱分类器。在 AdaBoost 的分类器和回归器中都有这个参数，在 AdaBoost 中默认使用的是决策树，一般我们不需要修改这个参数，当然你也可以指定具体的分类器。
 
@@ -23,7 +24,7 @@ __random_state：__ 代表随机数种子的设置，默认是 None。随机种�
 
 ### Adaboost回归：
 
-AdaBoostRegressor(base_estimator=None, n_estimators=50, learning_rate=1.0, algorithm=’linear’, random_state=None)
+__AdaBoostRegressor(base_estimator=None, n_estimators=50, learning_rate=1.0, algorithm=’linear’, random_state=None)__
 
 回归和分类的参数基本是一致的， __不同点在于回归算法里没有 algorithm 这个参数，但多了一个 loss 参数。__
 
