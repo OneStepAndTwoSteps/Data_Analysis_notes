@@ -34,10 +34,16 @@ adaboost.fit(train_x,train_y)
 fig=plt.figure()
 # 设置plt正确显示中文
 plt.rcParams['font.sans-serif']=['SimHei']
+# 创建子图，一行一列第一个子图
 ax=fig.add_subplot(111)
+# plot [1,n_estimators] 表示x轴的坐标，[dt_stump_err]*2 y轴的坐标 可选参数fmt是定义颜色，标记和线条样式等基本格式的便捷方式
 ax.plot([1,n_estimators],[dt_stump_err]*2,'k-',label='决策树弱分类器错误率')
 ax.plot([1,n_estimators],[dt_err]*2,'k--',label='决策树分类器错误率')
+# 先初始化adaboost_err 如果初始化下面无法使用list[num]进行赋值 会报错IndexError: list assignment index out of range
 adaboost_err=np.zeros((n_estimators,))
+# adaboost_err=[]
+# print(adaboost_err)
+
 # 遍历每次迭代结果 i为迭代次数，y为预测结果
 for i,y in enumerate(adaboost.staged_predict(test_x)):
     # 统计错误率
@@ -49,6 +55,9 @@ ax.set_xlabel('迭代次数')
 ax.set_ylabel('错误率')
 leg=ax.legend(loc='upper right',fancybox=True)
 plt.show()
+
+
+
 
 
 
