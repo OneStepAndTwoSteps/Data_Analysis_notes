@@ -1,5 +1,7 @@
 ## GridSearchCV的主要参数
 
+### GridSearchCV(estimator, param_grid, cv=None, scoring=None) 
+
 ### estimator:
 代表我们想要采用的分类器，如决策树，随机森林，SVM,kNN，朴素贝叶斯等等
 
