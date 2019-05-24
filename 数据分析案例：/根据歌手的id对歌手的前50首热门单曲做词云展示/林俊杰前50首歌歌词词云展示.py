@@ -21,7 +21,8 @@ headers = {
 
 def get_song(singer_id):
     # 这里有一个地方要注意 我们在查看我们的歌手的时候 我们的链接是这样的https://music.163.com/#/artist?id={id} 链接里面有一个#号这里我们要注意
-    # 现在暂时没找出原因，加了井号之后数据好像变成动态加载了，歌单里面的信息我们无法查看
+    # 加了井号之后数据并不是变成了动态加载，而是我们在使用requests请求时#后面的内容不会带入到路由中也就是说我们请求的内容还是https://music.163.com
+    # 而浏览器可以进行请求是因为浏览器会把#后面的内容当成位置去找。
     base_url="https://music.163.com/artist?id={id}"
     singer_url=base_url.format(id=singer_id)
     # print(singer_url)
