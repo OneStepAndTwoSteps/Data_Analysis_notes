@@ -27,3 +27,6 @@ print(" 最优参数：", clf.best_params_)
 运行结果如下：
 最优分数： 0.9667
 最优参数： {'n_estimators': 6}
+
+# 该链接有相同的案例
+https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E5%86%B3%E7%AD%96%E6%A0%91/%E5%86%B3%E7%AD%96%E6%A0%91demo.ipynb
