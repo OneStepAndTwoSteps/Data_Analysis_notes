@@ -1,4 +1,7 @@
 #author py chen
+
+# 使用load_digits数据集进行一个训练分类和预测分类结果显示
+
 # 载入KNN分类器模块
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import load_digits
