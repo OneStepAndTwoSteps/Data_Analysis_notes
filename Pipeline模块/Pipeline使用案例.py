@@ -14,7 +14,9 @@ rf=RandomForestClassifier()
 data=load_iris()
 
 # 定义参数调优的范围,randomforestclassifier__n_estimators __前面定义的是名字，后面定义的内容是参数
-parameters={"randomforestclassifier__n_estimators":range(1,11)}
+parameters={"randomforestclassifier__n_estimators":range(1,11),
+            "randomforestclassifier__max_depth":range(1,5)}
+
 
 # 定义pipeline 流水线
 pipeline=Pipeline([
