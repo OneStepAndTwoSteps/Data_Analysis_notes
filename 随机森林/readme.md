@@ -3,6 +3,8 @@ __模块：__
 
 from sklearn.ensemble import RandomForestClassifier
 
+__参数：__
+
 __n_estimators:__   随机森林里决策树的个数 默认为10
 
 __criterion:__      决策树分裂标准，默认是基尼系数(CART算法)，也可以选择entropy(ID3算法)
