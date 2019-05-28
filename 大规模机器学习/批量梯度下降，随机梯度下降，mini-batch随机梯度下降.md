@@ -26,8 +26,8 @@
 
 我们现在回顾一下我们的线性回归和梯度下降，第一个是式子是假设函数，第二个式子是代价函数，第三个式子是梯度下降，右边的图是我们通过改变我们的θ参数，从而减小我们的代价函数的图。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/4.png"/></div>
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/5.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/4+5.png"/></div>
+
 1.上图就是我们的梯度下降的过程，他会通过我们红色标点的轨迹找到我们的全局最小值，下载有一个问题，当我们的m很大时我们的微分项(红框)计算量会变得非常大，以美国人口普查为例，当我们的m=3亿时，我们需要将3亿条数据进行求和(这还仅仅只是计算出一次微分项)，这种梯度下降的算法有另外一个名字(批量梯度下降算法)，因为我们的数据量非常大，我们将我们的数据存储在硬盘上，我们进行计算时，我们不能一次性的进行计算(因为计算机的内存容纳不下这些数据)，所以我们会一次先传一部分的数据进去进行求和，直到3亿条数据全部传完然后计算出我们的微分项，求和完成之后我们再进行我们的梯度下降，这次训练完成之后我们只是计算了梯度下降中的一步(一个红色的叉叉)，然后我们需要再按照上面的方法进行微分项的求和，然后再进行梯度下降，一直迭代到找到全局最优值。
 
 2.接下来我们会讨论一种算法，我们不需要再传入所有的数据，只用传一个训练样本即可
@@ -35,7 +35,7 @@
 ### 批量梯度下降和随机梯度下降对比
 
 
-
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/6+7.png"/></div>
 
 1.第一个式子是代价函数，第二个式子是优化过程，在红色框框起来这个部分就是我们的优化目标(代价函数J_train(θ)，关于θj的偏微分)
 
@@ -46,7 +46,8 @@
 4对于随机梯度下降来讲，我们我们每次只要关注一个训练样本，而在这个过程中我们已经开始一点一点把参数，朝着全局最小值的方向进行修改了
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/6.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/8.png"/></div>
+
 
 1.批量梯度下降和随机梯度下降的对比：随机梯度下降的收敛速度更快，使用随机梯度下降在训练时，我们进行梯度下降的方向可能有误，但是可以通过下一次的样本训练进行一个修改，通过随机迂回的路线向全局最小值进行进发，随机梯度下降和批量梯度下降的收敛形式也不同，随机梯度下降会在一个区域(如我们圈起来的地方)中朝着全局最小值的方向徘徊，使得最后的结果非常接近全局最小值，我们就可以得到一个很好的假设，因此常用我们的梯度下降法，能得到一个很接近全局最小值的参数。
 
@@ -59,7 +60,7 @@
 在批量梯度下降算法中每次迭代我们都要使用到所有的m个样本，在随机梯度下降中我们每次迭代只需要一个样本，Mini-batch算法具体来说就是每次迭代，会使用b个样本，这个b我们称为mini-batch大小的参数，b的常用取值为2-100
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/7.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/9.png"/></div>
 
 1.这里我们的数据量为m=1000，mini-batch为10，我们以10为一个batch，进行一次内部循环 。
 
@@ -74,7 +75,7 @@
 	
 2.接下来我们会讨论一种算法，确保我们的随机梯度下降可以收敛，以及选择一个合适的学习率α
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/8.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/10.png"/></div>
 
 
 1.之前我们讲到判断梯度下降已经收敛的标准是我们的代价函数，我们确保我们每一次我们的代价函数的迭代中都是下降的，当训练集小的时候，计算比较容易，但是在大规模的训练集的情况下，这是不现实的，因为计算代价太大了，因为我们需要计算我们（红色框部分）的均方差。
@@ -86,7 +87,7 @@
 4.接下来看一下随机梯度下降的收敛图，我们对其进行分析
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/9.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/11.png"/></div>
 
 1.这里我们画出前一千个样本的cost函数(蓝线)，因为他们是前一千个样本的平均值，因此开起来会有很多噪声，它可能不是每一步迭代都在下降，假如你得到了像第一幅图的图像，这是一个很好的下降过程，因为你可以看出来代价函数的值在下降，然后通过一个点之后我们的下降速度变得缓慢，通过这个图我们可以判断我们的算法已经收敛了，如果我们降低我们的学习率(红线)，我们会得到一个下降的更缓慢的曲线，他可能使得我们的算法收敛到一个更好的结果，我们可以看出他并不会直接收敛到全局最小值，而是在一个范围内反复震荡，最后逐渐接近全局最小值，如果用一个更小的学习率，最后这种震荡就会更小，不过我们经常会忽略这两条线带来的结果差别，但是使用小的学习率有时候确实可以帮助我们得到更好的参数值。
 
@@ -96,7 +97,7 @@
 
 4.如果你得到的是第四幅图的情况，表示你需要使用更小的学习率进行学习
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/10.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/12.png"/></div>
 
 
 1.我们知道随机梯度下降不会直接帮助我们收敛到全局最小值，而是在一个全局最小值的范围反复的迭代。在大多数随机梯度下降的算法中，我们的学习率α是一个不变的常数，所以我们才得到了这样的情况，如果你想要让随机梯度下降更好的收敛到全局最小值，你需要做的是让学习率α随着时间逐渐变小，有一种方法是设置α为常数1，然后除以迭代次数加上某个常数2，迭代次数就是你运行随机梯度下降d额迭代次数，其实就是你已经计算过的训练样本的数量，而常数1和常数2是算法de 两个额外参数，同样需要选择合适的值，才能有更好的表现。
