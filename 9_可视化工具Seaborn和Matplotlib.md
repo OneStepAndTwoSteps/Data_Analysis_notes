@@ -470,7 +470,7 @@ plt.figure(2) 画板二中的图
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/2.png)
     
-    
+ __注意：plt.subplot(211)=plt.subplot(2,1,1)__   
     
     
  ## FacetGrid
