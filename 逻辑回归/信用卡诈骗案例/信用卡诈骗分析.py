@@ -144,10 +144,11 @@ plot_confusion_matrix(cm,classes=class_name,title='逻辑回归 混淆矩阵')
 # 显示模型评估分数
 show_metrics()
 
-# 计算精确值，召回率，阈值用于可视化 查看和置信分数的关系
+# 通过实际值和置信分数，计算精确值，召回率，阈值用于可视化，precision_recall_curve 函数会计算在不同概率阈值情况下的精确率和召回率，最后定义 plot_precision_recall 函数，绘制曲线
 precision,recall,thresholds=precision_recall_curve(y_test,score_y)
 print("precision: ",precision)
 print("recall: ",recall)
+# 绘制曲线
 plot_precision_recall()
 
 
