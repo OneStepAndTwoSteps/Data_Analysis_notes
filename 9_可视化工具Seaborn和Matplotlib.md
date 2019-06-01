@@ -488,7 +488,18 @@ plt.figure(2) 画板二中的图
     
  __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
     
+__例子3:__
+
+      sharex 控制x(sharex)或y(sharey)轴之间的属性共享：
+          1.True或者'all'：x或y轴属性将在所有子图(subplots)中共享.
+          2.False或'none'：每个子图的x或y轴都是独立的部分
+          3.'row'：每个子图在一个x或y轴共享行(row)
+          4.'col':每个子图在一个x或y轴共享列(column)
+
+    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
     
+   
+
  __plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。__  
     
 
