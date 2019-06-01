@@ -472,7 +472,7 @@ plt.figure(2) 画板二中的图
     
  __注意：plt.subplot(211)=plt.subplot(2,1,1)__   
     
- ## plt.subplots
+ ## plt.subplots 创建一个图形和一组子图。
  
     fig, ax = plt.subplots()
    
