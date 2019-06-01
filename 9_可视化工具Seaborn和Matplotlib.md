@@ -446,7 +446,7 @@
     
     import matplotlib.pyplot as plt
     plt.figure(1) # 创建第一个画板（figure）
-    plt.subplot(211) # 第一个画板的第一个子图
+    plt.subplot(211) # 第一个画板的第一个子图，由2行一列组成，第一个子图
     plt.plot([1, 2, 3])
     plt.subplot(212) # 第二个画板的第二个子图
     plt.plot([4, 5, 6])
@@ -455,7 +455,24 @@
     plt.figure(1) # 调取画板1; subplot(212)仍然被调用中
     plt.subplot(211) #调用subplot(211)
     plt.title('Easy as 1, 2, 3') # 做出211的标题
+    plt.show()
+    
+    # subplot 解释：
+    plt.subplot(221) # 表示分成两行两列，占用第一个，即第一行第一列的子图
+    plt.subplot(222) # 表示分成两行两列，占用第二个，即第一行第二列的子图
+    plt.subplot(212) # 表示分成两行一列，占用第二个，即第二行第一列的子图
+    
+plt.figure(1) 画板一中的图，画板一和画板二的图是分开的，是画板一一张图，画板二一张图。
 
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/1.png)    
+
+plt.figure(2) 画板二中的图
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/2.png)
+    
+    
+    
+    
  ## FacetGrid
     
   __当您想要在数据集的子集内可视化变量的分布或多个变量之间的关系时，FacetGrid类很有用。 FacetGrid可以绘制最多三个维度：row，col和hue。前两者与所得轴数有明显的对应关系;将hue变量视为沿着深度轴的第三维，其中不同的级别用不同的颜色绘制。__
