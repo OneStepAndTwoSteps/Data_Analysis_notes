@@ -472,7 +472,28 @@ plt.figure(2) 画板二中的图
     
  __注意：plt.subplot(211)=plt.subplot(2,1,1)__   
     
+ ## plt.subplots
+ 
+    fig, ax = plt.subplots()
+   
+ __例子1：__
+ 
+    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
     
+    ax1和ax2分别表示为一个子图。
+    
+ __例子2：__   
+    
+    fig, ax = plt.subplots(2,3) # 创建2行三列个子图(6个子图)
+    
+ __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
+    
+    
+ __plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。__  
+    
+
+    
+ 
  ## FacetGrid
     
   __当您想要在数据集的子集内可视化变量的分布或多个变量之间的关系时，FacetGrid类很有用。 FacetGrid可以绘制最多三个维度：row，col和hue。前两者与所得轴数有明显的对应关系;将hue变量视为沿着深度轴的第三维，其中不同的级别用不同的颜色绘制。__
