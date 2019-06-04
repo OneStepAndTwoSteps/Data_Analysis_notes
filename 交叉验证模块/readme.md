@@ -17,3 +17,21 @@ __交叉验证的目的是为了能有效地估计模型的泛化能力 (测试�
 __ps:什么是过拟合，什么是欠拟合？__
 
 https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88.md
+
+__ps:什么是偏差，什么是方差？__
+
+https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E6%96%B9%E5%B7%AE%E3%80%81%E5%81%8F%E5%B7%AE/readme.md
+
+### 如果我们的交叉验证集误差较大，我们如何判断是方差还是偏差呢?
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/%E6%96%B9%E5%B7%AE%E3%80%81%E5%81%8F%E5%B7%AE/2.png)
+
+对于训练集，当 𝑑(多项式次数) 较小时，模型拟合程度更低，误差较大;随着 𝑑 的增长(模型变复杂)，拟合程度提高，误差减小。 
+对于交叉验证集，当 𝑑(多项式次数) 较小时，模型拟合程度低，误差较大;但是随着 𝑑 的增长， 误差呈现先减小后增大的趋势，转折点是我们的模型开始过拟合训练数据集的时候。 
+
+
+__训练集误差和交叉验证集误差近似时:偏差/欠拟合__
+
+__交叉验证集误差远大于训练集误差时:方差/过拟合__ 
+
+
