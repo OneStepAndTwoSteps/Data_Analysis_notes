@@ -4,7 +4,7 @@
 
 接下来的我们看一个预测电影评分的案例。 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/1.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/1.png"/></div>
 
 
 
@@ -25,7 +25,7 @@
 
 接下来我会讲一个建立推荐系统的方法，这个方法被称为基于内容的推荐算法。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/2.png"/></div>
+<div align=center><img width="800" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/2.png"/></div>
 
 
 
@@ -40,19 +40,20 @@
 
 以alice对第三部电影的评分为例，我们从右侧的特征向量中我们可以看到𝑥(3)第一部电影的特征向量 [1,0.99 0]，同时我们假设我们我们通过一个学习算法得到了他的参数值θ1为[0,5,0]，根据预测用户j对电影i的评分公式我们可以得到θ5的转置乘以x(3)得到的评分为4.95。 我们从得到的结果来看，结果还是比较合理的。
 
-__符号对应的表示:__
+__在本案例中我们使用符号对应表示一些内容:__
+
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/3.png"/></div>
 
 __代价函数:__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/4.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/4.png"/></div>
 
 其中 𝑖:𝑟(𝑖,𝑗)表示我们只计算那些用户 𝑗 评过分的电影。(𝜃(𝑗))𝑇𝑥(𝑖)表示我们的预测评分，y(𝑖,j)是真实评分。 相减表示我们的误差，在一般的线性回归模型中，误差项和正则项应该都是乘以1/2𝑚，在这里我们将𝑚去掉，因为m是一个常数，删除他队结果没有影响。并且我们不对方差项𝜃0进行正则化处理(k从1开始到n)。 
 
 
 __优化目标:__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/5.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/5.png"/></div>
 
 在单个用户求电影参数是，我们的最小化目标就是这个关于θj的优化对象。但是在实际的推荐系统中我们不仅仅只对单个用户进行一个求参数，我们还需要对多个用户进行电影参数的求解。
 
@@ -60,7 +61,7 @@ __优化目标:__
 
 __总结：__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/6.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/6.png"/></div>
 
 我们的优化目标函数就是要去求我们的J(θ(1), θ(2),.... θ(nu))
 
@@ -77,7 +78,7 @@ __总结：__
 
 在之前的基于内容的推荐系统中，对于每一部电影，我们需要先得到它其中的特征量，然后使用这些特征训练出了每一个用户的参数。但是有一些电影的特征我们难以自行进行提取，但我们在使用协调过滤算法时，其有一个特点，它会自行去学习所要使用的特征。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/7.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/7.png"/></div>
 
 
 之前我们说过，有一些电影的特征，难以去获取，同时我们进行预测时使用的特征不仅仅只有两个，可能还需要其他的特征，那么我们如何获取这些特征呢？
@@ -92,7 +93,7 @@ __总结：__
 
 __优化目标:__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/8.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/8.png"/></div>
 
 假设我们的用户告诉了我们他的偏好，也就是说用户已经给我们提供了θ(1)到θ(nu)的值，此时我们要学习的是电影i的特征向量x(i),我们能做的就是提出下列的优化问题，所以需要把所有的指数j相加，得到对电影i的评分，因为我们想要得到电影i的特征，也就是向量x(i),为了使我们的预测值更加准确，我们需要保证我们的 (𝜃(𝑗))𝑇𝑥(𝑖) – y(i,j) 尽可能的小，后面我们加了一个正则项，防止我们特征值过大，这就是如何从一部特定的电影之中学习到特征的方法。
 
@@ -121,7 +122,7 @@ __总结：__
 
 __接下来我们会将这两个概念进行结合，得到一个新的协同过滤算法__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/9-1.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/9-1.png"/></div>
 
 前面我们说过通过特征向量我们可以学到我们的用户参数θ，同时我们也说过，通过我们的用户参数θ，我们也可以学习我们的特征向量，此时我们可以做的就是通过不断的计算，或许是通过随机的初始化这些参数然后解出θ，然后通过θ解出我们的电影特征，然后通过电影特征再更新我们的用户参数θ，然后不断迭代。
 
@@ -142,15 +143,15 @@ __接下来我们会将这两个概念进行结合，得到一个新的协同过
 
 __小结:__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/10.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/10.png"/></div>
 
 把所有的讲的这些结合起来就是我们的协同过滤算法，首先我们将会把x和θ初始化为小的随机数，这有点像神经网络的训练，我们也是将所有的神经网络的参数用小的随机数值来初始化。
 
-接下来我们要用梯度下降把这个代价函数最小化，如果你进行求导的话你会发现梯度下降算法写出来的更新式子是这样的(红色框框起来的部分)，就是关于特征值x(i)k的偏微分。第二个式子也就是关于我们正在最小化的参数θ所作的偏微分，这里再提醒一下，在式子中我们不再有关于1对应x0项，所以x是n维实数θ也是n维实数，在这个表达式里面我们将所有的参数θ和x做正则化，不存在θ0这种需要特别正则化的特殊情况，或者说跟θ1到θn的正则化，这就是为什么在式子中没有分出k=0的特殊情况。
+接下来我们要用梯度下降把这个代价函数最小化，如果你进行求导的话你会发现梯度下降算法写出来的更新式子是这样的(蓝色框框起来的部分)，就是关于特征值x(i)k的偏微分。第二个式子也就是关于我们正在最小化的参数θ所作的偏微分，这里再提醒一下，在式子中我们不再有关于1对应x0项，所以x是n维实数θ也是n维实数，在这个表达式里面我们将所有的参数θ和x做正则化，不存在θ0这种需要特别正则化的特殊情况，或者说跟θ1到θn的正则化，这就是为什么在式子中没有分出k=0的特殊情况。
 
 然后我们使用梯度下降最小化我们的代价函数J，关于特征x和参数θ。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/11.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/11.png"/></div>
 
 
 1.最后给你一个用户，如果这些用户具有一些参数θ，以及给你一部电影关于已知的特征x，我们可以预测该用户对电影的评分，及θ的转置乘以x。
@@ -164,13 +165,13 @@ __小结:__
 
 接下来我们会讨论协同过滤算法的向量化实现。另外在介绍一下你使用算法可以实现的一些功能，比如给定一个商品，你可以找到其他相关的商品，接下来我们看如何解决这样的问题。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/12.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/12.png"/></div>
 
 这是我们之前举得电影的例子，我们现在要做的是得到所有的用户对电影的评分，然后将其写入到右侧的矩阵，这里我们有四个用户5部电影，所以矩阵的第(i,j)个元素就是y(i,j)，第j个用户对第i部电影的评分
 
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/13.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/13.png"/></div>
 
 我们之前说评分可以使用(𝜃(𝑗))𝑇𝑥(𝑖) 来进行预测，所以左边这个评分我们可以使用右侧的矩阵进行表示，相同框的颜色的评分互相对应，以此类推分别对应。
 
@@ -178,7 +179,7 @@ __小结:__
 
 比如我们定义一个矩阵X，里面的都是我们的特征量x1到xn的转置，我们再定义一个矩阵O，里面都是我们的用户参数θ1到θn的转置，我们通过 X * O的转置，我们就可以得到我们的预测评分，这里有一个公式AT* B=BT * A ,所以这个协同过滤算法还有另外一个名字，就是低秩矩阵分解，实际上当你听到别人在讲低秩矩阵分解其实讲的就是协同过滤算法
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/14.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/14.png"/></div>
 
 最后在我们运行协同过滤算法之后，我们如何利用已经学习到的属性来找相关的电影。
 
@@ -195,7 +196,7 @@ __小结:__
 算法最后实现过程中的细节，即均值归一化，有时它可以让算法运行的更加的好。
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/15.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/15.png"/></div>
 
 我们沿用之前的电影评分的例子，不过在之前的基础上我们增加了一个用户Eve，但是Eve没有做任何的电影评价，那么我们的算法会对这个用户做什么呢？
 
@@ -204,7 +205,7 @@ __小结:__
 和以前一样我们江评分都放在矩阵Y中，就是把这些评分全部都整合再矩阵Y中，矩阵的最右边为Eve的评分，因为没有评分所以都是问号。
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/16.png"/></div>
+<div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/16.png"/></div>
 
 我要做的就是计算每个电影所得的均值，我要把它们存在一个叫μ的向量中，所以第一个电影得到了两颗五星，和两颗0星的评价，均值就是2.5星，而第二个电影的评价同理也是2.5星等等。
 
