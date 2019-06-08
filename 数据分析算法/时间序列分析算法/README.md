@@ -20,3 +20,8 @@ ARMA 的英文全称是 Auto Regressive Moving Average，中文叫做 __自回�
 
 ### ARIMA 模型
 ARIMA 的英文全称是 Auto Regressive Integrated Moving Average 模型，中文叫 __差分自回归滑动平均模型__ ，也叫求合自回归滑动平均模型。相比于 ARMA，ARIMA 多了一个差分的过程，作用是对不平稳数据进行差分平稳，在差分平稳后再进行建模。ARIMA 的原理和 ARMA 模型一样。相比于 ARMA(p,q) 的两个阶数，ARIMA 是一个三元组的阶数 (p,d,q)，称为 ARIMA(p,d,q) 模型。其中 d 是差分阶数。
+
+
+### 衡量模型拟合的好坏的一个标准AIC
+
+__arma.aic: AIC 准则，也叫作赤池消息准则，它是衡量统计模型拟合好坏的一个标准，数值越小代表模型拟合得越好。__
