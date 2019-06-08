@@ -21,6 +21,12 @@ features=credit_cards[features_columns]
 
 # label存储class标签
 labels=credit_cards['Class']
+print("label0: ",len(credit_cards[credit_cards['Class']==0]))
+print("label1: ",len(credit_cards[credit_cards['Class']==1]))
+
+# label0:  284315
+# label1:  492
+
 
 # 数据划分
 features_train, features_test, labels_train, labels_test = train_test_split(features, 
@@ -34,10 +40,10 @@ os_features,os_labels=oversampler.fit_sample(features_train,labels_train)
 
 # 查看生成结果
 print("label1: ",len(os_labels[os_labels==1]))
-print("label2: ",len(os_labels[os_labels==0]))
+print("label0: ",len(os_labels[os_labels==0]))
 
 # label1:  227454 标签1：欺诈交易数 (欺骗标签也已经具备了和正常交易标签相同的数据量)
-# label2:  227454 标签0：正常交易数   
+# label0:  227454 标签0：正常交易数   
 
 
 
