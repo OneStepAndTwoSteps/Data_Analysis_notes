@@ -54,9 +54,9 @@ __随机过采样的缺点：__
 
 ### 信息性过采样：合成少数类过采样技术（SMOTE）:
  
- SMOTE（Synthetic minoritye over-sampling technique,SMOTE）是Chawla在2002年提出的过抽样的算法，一定程度上可以避免以上的问题。
+ SMOTE（Synthetic minoritye over-sampling technique,SMOTE）是Chawla在2002年提出的过抽样的算法，一定程度上可以避免数据不平衡的问题。
     
- 正负样本分布:
+ __正负样本分布:__
  
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/1.png)
  
@@ -64,12 +64,12 @@ __随机过采样的缺点：__
 
  为了让数据平衡，我们采用SMOTE算法对少数类A进行过采样，SMOTE算法过程是这样的：
  
- 假设A类样本数为N,对于每个样本x:
+ __假设A类样本数为N,对于每个样本x:__
  
  （1）在N个样本中取x(i)的的k个近邻点，从中 __随机选一个点x(j)__,，在x(i)和x(j)之间插入一个点x(i)1作为新样本(x(i)1=x(i)+λ|x(j)-x(i)|,0<λ<1);
-   
- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/3.png)
  
+ <div align=center><img width="500" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/3.png/></div>  
+
  
  （2）将步骤（1）重复N次，就得到M个新样本（x(i)1,x(i)2.....x(i)N)
  
