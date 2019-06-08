@@ -58,8 +58,7 @@ __随机过采样的缺点：__
     
  __正负样本分布:__
  
- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/1.png)
- 
+   <div align=center><img width="600" height="350" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/1.png"/></div>  
  很明显的可以看出，蓝色样本数量远远大于红色样本，在常规调用分类模型去判断的时候可能会导致之间忽视掉红色样本带了的影响，只强调蓝色样本的分类准确性，这边需要增加红色样本来平衡数据集。
 
  为了让数据平衡，我们采用SMOTE算法对少数类A进行过采样，SMOTE算法过程是这样的：
@@ -68,7 +67,7 @@ __随机过采样的缺点：__
  
  （1）在N个样本中取x(i)的的k个近邻点，从中 __随机选一个点x(j)__,，在x(i)和x(j)之间插入一个点x(i)1作为新样本(x(i)1=x(i)+λ|x(j)-x(i)|,0<λ<1);
  
- <div align=center><img width="500" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/3.png/></div>  
+  <div align=center><img width="600" height="350" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/3.png"/></div>  
 
  
  （2）将步骤（1）重复N次，就得到M个新样本（x(i)1,x(i)2.....x(i)N)
