@@ -97,6 +97,7 @@ print("诈骗交易比例 %.6lf"%(num_fraud/num) )
 #  3.'row'：每个子图在一个x或y轴共享行(row)
 #  4.'col':每个子图在一个x或y轴共享列(column)
 # ax1 ax2 分别表示子图1和子图2
+# subplots(2,1) 表示两行一列
 f,(ax1,ax2)=plt.subplots(2,1,sharex=True,figsize=(16,8))
 # 显示50条柱状条
 bins=50
