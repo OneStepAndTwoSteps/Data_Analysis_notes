@@ -24,8 +24,8 @@ labels=credit_cards['Class']
 print("label0: ",len(credit_cards[credit_cards['Class']==0]))
 print("label1: ",len(credit_cards[credit_cards['Class']==1]))
 
-# label0:  284315
-# label1:  492
+# label0:  284315  此时的label0标签 正常交易数
+# label1:  492     此时的label1标签 欺诈交易数
 
 
 # 数据划分
