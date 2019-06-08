@@ -52,16 +52,17 @@ __随机过采样的缺点：__
     由于复制少数类事件，它加大了过拟合的可能性。
 
 
-### 信息性过采样：合成少数类过采样技术（SMOTE）:
+### 信息性过采样：合成少数类过采样技术（SMOTE）: 
  
- SMOTE（Synthetic minoritye over-sampling technique,SMOTE）是Chawla在2002年提出的过抽样的算法，一定程度上可以避免数据不平衡的问题。
+ SMOTE（Synthetic minoritye over-sampling technique,SMOTE）是Chawla在2002年提出的过抽样的算法，一定程度上可以避免数据不平衡的问题。可以参考
     
  __正负样本分布:__
  
    <div align=center><img width="600" height="350" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%B9%B3%E8%A1%A1/1.png"/></div>  
+   
  很明显的可以看出，蓝色样本数量远远大于红色样本，在常规调用分类模型去判断的时候可能会导致之间忽视掉红色样本带了的影响，只强调蓝色样本的分类准确性，这边需要增加红色样本来平衡数据集。
 
- 为了让数据平衡，我们采用SMOTE算法对少数类A进行过采样，SMOTE算法过程是这样的：
+ 为了让数据平衡，我们采用SMOTE算法对少数类A进行过采样， __SMOTE算法过程是这样的：__
  
  __假设A类样本数为N,对于每个样本x:__
  
