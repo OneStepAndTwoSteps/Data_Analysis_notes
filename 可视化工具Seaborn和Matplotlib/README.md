@@ -526,8 +526,8 @@ __例子3:__
  
  __例子2: 基于前面的数据进行plot 不是直接使用plt.plot(会报错)__
     
-    # 前面如果定义了子图和子图的大小，这里的figsize=[15,7]会失效
-    data['Weighted_Price'].plot(kind = "line",style='--r',label='按天',figsize=[15,7])
+    # 前面如果定义了子图和子图的大小，这里的figsize=[15,7]会失效，这里我们使用o标记，我们画出来的图也会像一个小圆点一样
+    data['Weighted_Price'].plot(kind = "line",style='--ro',label='按天',figsize=[15,7])
 
     ts = pd.Series(np.random.randn(1000), index = pd.date_range("1/1/2000", periods = 1000))
     ts = ts.cumsum()
@@ -562,9 +562,55 @@ __例子3:__
     # title → 标题名
     # legend → 是否显示图例，一般直接用plt.legend() 不带参数调用 legend 会自动获取图例句柄及相关标签，这里加上legend表示显示label
     # 也可以 → plt.plot()
- 
- 
- 
+
+### fmt:格式化字符串 格式字符串由颜色，标记和线条的部分组成： 就是上面说的style
+   __颜色__
+   
+     字符	颜色
+    'b'	蓝色
+    'g'	绿色
+    'r'	红色
+    'c'	青色
+    'm'	品红
+    'y'	黄色
+    'k'	黑色
+    'w'	白色
+    
+   __线条样式__
+
+    字符	描述
+    '-'	实线风格
+    '--'	虚线样式
+    '-.'	点划线样式
+    ':'	虚线样式
+    
+   __标记__ 
+
+    字符	描述
+    '.'	点标记
+    ','	像素标记
+    'o'	圆圈标记
+    'v'	triangle_down标记
+    '^'	triangle_up标记
+    '<'	triangle_left标记
+    '>'	triangle_right标记
+    '1'	tri_down标记
+    '2'	tri_up标记
+    '3'	tri_left标记
+    '4'	tri_right标记
+    's'	方形标记
+    'p'	五边形标记
+    '*'	明星标记
+    'h'	hexagon1标记
+    'H'	hexagon2标记
+    '+'	加上标记
+    'x'	x标记
+    'D'	钻石标记
+    'd'	thin_diamond标记
+    '|'	vline标记
+    '_'	hline标记
+
+    
  ## plt.xlim plt.ylim
    
    获取或设置当前轴的x限制。
