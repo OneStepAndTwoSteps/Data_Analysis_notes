@@ -75,7 +75,7 @@ __例子3:__
     ...      linewidth=2, markersize=12)
  
  
- __例子1：__
+ __例子1：直接使用plt.plot方法后面跟数据__
  
    #根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
    plt.plot(data['Weighted_Price'],'-',label='按天')
