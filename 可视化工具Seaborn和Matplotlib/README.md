@@ -515,7 +515,7 @@ __例子3:__
  
  __例子1：__
  
-   # 根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
+   #根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
    plt.plot(data['Weighted_Price'],'-',label='按天')
    
      label -> 图例标签, Dataframe格式以列名为label
@@ -525,14 +525,15 @@ __例子3:__
  
  
  __例子2: 基于前面的数据进行plot 不是直接使用plt.plot(会报错)__
- 
-    data['Weighted_Price'].plot(kind = "line",style='-',label='按天')
+    
+    # 前面如果定义了子图和子图的大小，这里的figsize=[15,7]会失效
+    data['Weighted_Price'].plot(kind = "line",style='--r',label='按天',figsize=[15,7])
 
     ts = pd.Series(np.random.randn(1000), index = pd.date_range("1/1/2000", periods = 1000))
     ts = ts.cumsum()
     ts.plot(kind = "line",
             label = "heheheh", # Series需要Lable
-            style = "--g.",
+            style = "go--",
             color = "red",
             alpha = 0.4,
             use_index = True,
@@ -549,7 +550,7 @@ __例子3:__
     # Series.plot()：series的index为横坐标，value为纵坐标
     # kind → line,bar,barh...（折线图，柱状图，柱状图-横...）
     # label → 图例标签，Dataframe格式以列名为label
-    # style → 风格字符串，这里包括了linestyle（-），marker（.），color（g）
+    # style → 风格字符串，这里包括了marker（o），linestyle（--），color（g） 就是官方文档中的fmt[marker][line][color] 顺序没有严格要求
     # color → 颜色，有color指定时候，以color颜色为准
     # alpha → 透明度，0-1
     # use_index → 将索引用为刻度标签，默认为True
@@ -558,8 +559,8 @@ __例子3:__
     # xlim,ylim → x,y轴界限
     # xticks,yticks → x,y轴刻度值
     # figsize → 图像大小
-    # title → 图名
-    # legend → 是否显示图例，一般直接用plt.legend()
+    # title → 标题名
+    # legend → 是否显示图例，一般直接用plt.legend() 不带参数调用 legend 会自动获取图例句柄及相关标签，这里加上legend表示显示label
     # 也可以 → plt.plot()
  
  
