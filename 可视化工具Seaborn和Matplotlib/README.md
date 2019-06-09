@@ -502,8 +502,71 @@ __例子3:__
 
  __plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。__  
     
+ ## plt.plot方法：
+ __matplotlib.pyplot.plot（* args，scalex = True，scaley = True，data = None，** kwargs ）__ 
+ 
+ __使用Line2D属性作为关键字参数来更好地控制外观。行属性和fmt可以混合使用。以下两个调用产生相同的结果：__
+         
+         # go--表示綠色线条，圆圈标记，线条样式为虚线
+     >>> plot(x, y, 'go--', linewidth=2, markersize=12)
+     >>> plot(x, y, color='green', marker='o', linestyle='dashed',
+    ...      linewidth=2, markersize=12)
+ 
+ 
+ __例子1：__
+ 
+   # 根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
+   plt.plot(data['Weighted_Price'],'-',label='按天')
+   
+     label -> 图例标签, Dataframe格式以列名为label
+     color -> 颜色, 有color指定的时候，以color颜色为准
+     alpha -> 透明度， 0-1
+     title -> 标题名
+ 
+ 
+ __例子2: 基于前面的数据进行plot 不是直接使用plt.plot(会报错)__
+ 
+    data['Weighted_Price'].plot(kind = "line",style='-',label='按天')
 
-    
+    ts = pd.Series(np.random.randn(1000), index = pd.date_range("1/1/2000", periods = 1000))
+    ts = ts.cumsum()
+    ts.plot(kind = "line",
+            label = "heheheh", # Series需要Lable
+            style = "--g.",
+            color = "red",
+            alpha = 0.4,
+            use_index = True,
+            rot = 45,
+            grid = True,
+            ylim = [-50, 50],
+            yticks = list(range(-50, 50, 10)),
+            figsize = (8,4),
+            title = "test",
+            legend = True)
+    # plt.grid(True, linestyle = "--",color = "gray", linewidth = "0.5",axis = 'x')  # 网格
+    plt.legend()
+    plt.show()
+    # Series.plot()：series的index为横坐标，value为纵坐标
+    # kind → line,bar,barh...（折线图，柱状图，柱状图-横...）
+    # label → 图例标签，Dataframe格式以列名为label
+    # style → 风格字符串，这里包括了linestyle（-），marker（.），color（g）
+    # color → 颜色，有color指定时候，以color颜色为准
+    # alpha → 透明度，0-1
+    # use_index → 将索引用为刻度标签，默认为True
+    # rot → 旋转刻度标签，0-360
+    # grid → 显示网格，一般直接用plt.grid
+    # xlim,ylim → x,y轴界限
+    # xticks,yticks → x,y轴刻度值
+    # figsize → 图像大小
+    # title → 图名
+    # legend → 是否显示图例，一般直接用plt.legend()
+    # 也可以 → plt.plot()
+ 
+ 
+ 
+ ## plt.xlim plt.ylim
+   
+   获取或设置当前轴的x限制。
  
  ## FacetGrid
     
