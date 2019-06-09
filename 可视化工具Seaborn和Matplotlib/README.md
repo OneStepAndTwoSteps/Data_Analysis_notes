@@ -1,5 +1,216 @@
 # 可视化工具Seaborn和Matplotlib
 
+ ## plt.subplot方法：
+   __subplot(nrows, ncols, index, **kwargs)__
+   
+   一个3位整数或三个独立的整数，用于描述子图的位置。其中第一个数字是行数(nrows)，第二个是列数(ncols)，第三个是子图的索引(index)。
+   代码示例：
+    
+    import matplotlib.pyplot as plt
+    plt.figure(1) # 创建第一个画板（figure）
+    plt.subplot(211) # 第一个画板的第一个子图，由2行一列组成，第一个子图
+    plt.plot([1, 2, 3])
+    plt.subplot(212) # 第二个画板的第二个子图
+    plt.plot([4, 5, 6])
+    plt.figure(2) #创建第二个画板
+    plt.plot([4, 5, 6]) # 默认子图命令是subplot(111)
+    plt.figure(1) # 调取画板1; subplot(212)仍然被调用中
+    plt.subplot(211) #调用subplot(211)
+    plt.title('Easy as 1, 2, 3') # 做出211的标题
+    plt.show()
+    
+    # subplot 解释：
+    plt.subplot(221) # 表示分成两行两列，占用第一个，即第一行第一列的子图
+    plt.subplot(222) # 表示分成两行两列，占用第二个，即第一行第二列的子图
+    plt.subplot(212) # 表示分成两行一列，占用第二个，即第二行第一列的子图
+    
+plt.figure(1) 画板一中的图，画板一和画板二的图是分开的，是画板一一张图，画板二一张图。
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/1.png)    
+
+plt.figure(2) 画板二中的图
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/2.png)
+    
+ __注意：plt.subplot(211)=plt.subplot(2,1,1)__   
+    
+ ## plt.subplots 创建一个图形和一组子图。
+ 
+    fig, ax = plt.subplots()
+   
+ __例子1：__
+ 
+    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
+    
+    ax1和ax2分别表示为一个子图。
+    
+ __例子2：__   
+    
+    fig, ax = plt.subplots(2,3) # 创建2行三列个子图(6个子图)
+    
+ __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
+    
+__例子3:__
+
+      sharex 控制x(sharex)或y(sharey)轴之间的属性共享：
+          1.True或者'all'：x或y轴属性将在所有子图(subplots)中共享.
+          2.False或'none'：每个子图的x或y轴都是独立的部分
+          3.'row'：每个子图在一个x或y轴共享行(row)
+          4.'col':每个子图在一个x或y轴共享列(column)
+
+    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
+    
+   
+
+ __plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。__  
+    
+ ## plt.plot方法：
+ __matplotlib.pyplot.plot（* args，scalex = True，scaley = True，data = None，** kwargs ）__ 
+ 
+ __使用Line2D属性作为关键字参数来更好地控制外观。行属性和fmt可以混合使用。以下两个调用产生相同的结果：__
+         
+         # go--表示綠色线条，圆圈标记，线条样式为虚线
+     >>> plot(x, y, 'go--', linewidth=2, markersize=12)
+     >>> plot(x, y, color='green', marker='o', linestyle='dashed',
+    ...      linewidth=2, markersize=12)
+ 
+ 
+ __例子1：__
+ 
+   #根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
+   plt.plot(data['Weighted_Price'],'-',label='按天')
+   
+     label -> 图例标签, Dataframe格式以列名为label
+     color -> 颜色, 有color指定的时候，以color颜色为准
+     alpha -> 透明度， 0-1
+     title -> 标题名
+ 
+ 
+ __例子2: 基于前面的数据进行plot 不是直接使用plt.plot(会报错)__
+    
+    # 前面如果定义了子图和子图的大小，这里的figsize=[15,7]会失效，这里我们使用o标记，我们画出来的图也会像一个小圆点一样
+    data['Weighted_Price'].plot(kind = "line",style='--ro',label='按天',figsize=[15,7])
+
+    ts = pd.Series(np.random.randn(1000), index = pd.date_range("1/1/2000", periods = 1000))
+    ts = ts.cumsum()
+    ts.plot(kind = "line",
+            label = "heheheh", # Series需要Lable
+            style = "go--",
+            color = "red",
+            alpha = 0.4,
+            use_index = True,
+            rot = 45,
+            grid = True,
+            ylim = [-50, 50],
+            yticks = list(range(-50, 50, 10)),
+            figsize = (8,4),
+            title = "test",
+            legend = True)
+    # plt.grid(True, linestyle = "--",color = "gray", linewidth = "0.5",axis = 'x')  # 网格
+    plt.legend()
+    plt.show()
+    # Series.plot()：series的index为横坐标，value为纵坐标
+    # kind → line,bar,barh...（折线图，柱状图，柱状图-横...）
+    # label → 图例标签，Dataframe格式以列名为label
+    # style → 风格字符串，这里包括了marker（o），linestyle（--），color（g） 就是官方文档中的fmt[marker][line][color] 顺序没有严格要求
+    # color → 颜色，有color指定时候，以color颜色为准
+    # alpha → 透明度，0-1
+    # use_index → 将索引用为刻度标签，默认为True
+    # rot → 旋转刻度标签，0-360
+    # grid → 显示网格，一般直接用plt.grid
+    # xlim,ylim → x,y轴界限
+    # xticks,yticks → x,y轴刻度值
+    # figsize → 图像大小
+    # title → 标题名
+    # legend → 是否显示图例，一般直接用plt.legend() 不带参数调用 legend 会自动获取图例句柄及相关标签，这里加上legend表示显示label
+    # 也可以 → plt.plot()
+
+### fmt:格式化字符串 格式字符串由颜色，标记和线条的部分组成： 就是上面说的style
+   __颜色__
+   
+     字符	颜色
+    'b'	蓝色
+    'g'	绿色
+    'r'	红色
+    'c'	青色
+    'm'	品红
+    'y'	黄色
+    'k'	黑色
+    'w'	白色
+    
+   __线条样式__
+
+    字符	描述
+    '-'	实线风格
+    '--'	虚线样式
+    '-.'	点划线样式
+    ':'	虚线样式
+    
+   __标记__ 
+
+    字符	描述
+    '.'	点标记
+    ','	像素标记
+    'o'	圆圈标记
+    'v'	triangle_down标记
+    '^'	triangle_up标记
+    '<'	triangle_left标记
+    '>'	triangle_right标记
+    '1'	tri_down标记
+    '2'	tri_up标记
+    '3'	tri_left标记
+    '4'	tri_right标记
+    's'	方形标记
+    'p'	五边形标记
+    '*'	明星标记
+    'h'	hexagon1标记
+    'H'	hexagon2标记
+    '+'	加上标记
+    'x'	x标记
+    'D'	钻石标记
+    'd'	thin_diamond标记
+    '|'	vline标记
+    '_'	hline标记
+
+    
+ ## plt.xlim plt.ylim
+   
+   获取或设置当前轴的x限制。
+ 
+ ## 设置seaborn的画图风格：
+    
+ __sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )__
+        
+        context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
+        相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
+        
+        绘制上下文参数，请参阅 plotting_context() 
+
+        style：string或dict   
+
+        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化 
+
+        palette：字符串或序列
+
+        调色板，请参阅 color_palette() 返回定义调色板的颜色列表。可用的seaborn调色板名称：深沉，柔和，  明亮，  柔和，  黑暗，   色盲
+                                                                                    deep, muted, bright, pastel, dark, colorblind
+
+        字体：字符串
+
+        字体系列，请参阅matplotlib字体管理器。
+
+        font_scale：float，optional
+
+        单独的缩放因子可以独立缩放字体元素的大小。
+
+        color_codes：bool
+
+        如果True并且palette是seaborn调色板，则将速记颜色代码（例如“b”，“g”，“r”等）重新映射到此调色板中的颜色。
+
+        rc：dict或None
+
+        rc参数映射字典覆盖上面的。
+
 ## 4类主要的可视化视图
     
     比较：比较数据间各类别的关系，或者是它们随着时间的变化趋势，比如折线图；
@@ -403,218 +614,8 @@
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB2.png)
   
  
- 
- ## 设置seaborn的画图风格：
-    
- __sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )__
-        
-        context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
-        相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
-        
-        绘制上下文参数，请参阅 plotting_context() 
 
-        style：string或dict   
 
-        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化 
-
-        palette：字符串或序列
-
-        调色板，请参阅 color_palette() 返回定义调色板的颜色列表。可用的seaborn调色板名称：深沉，柔和，  明亮，  柔和，  黑暗，   色盲
-                                                                                    deep, muted, bright, pastel, dark, colorblind
-
-        字体：字符串
-
-        字体系列，请参阅matplotlib字体管理器。
-
-        font_scale：float，optional
-
-        单独的缩放因子可以独立缩放字体元素的大小。
-
-        color_codes：bool
-
-        如果True并且palette是seaborn调色板，则将速记颜色代码（例如“b”，“g”，“r”等）重新映射到此调色板中的颜色。
-
-        rc：dict或None
-
-        rc参数映射字典覆盖上面的。
- 
- ## plt.subplot方法：
-   __subplot(nrows, ncols, index, **kwargs)__
-   
-   一个3位整数或三个独立的整数，用于描述子图的位置。其中第一个数字是行数(nrows)，第二个是列数(ncols)，第三个是子图的索引(index)。
-   代码示例：
-    
-    import matplotlib.pyplot as plt
-    plt.figure(1) # 创建第一个画板（figure）
-    plt.subplot(211) # 第一个画板的第一个子图，由2行一列组成，第一个子图
-    plt.plot([1, 2, 3])
-    plt.subplot(212) # 第二个画板的第二个子图
-    plt.plot([4, 5, 6])
-    plt.figure(2) #创建第二个画板
-    plt.plot([4, 5, 6]) # 默认子图命令是subplot(111)
-    plt.figure(1) # 调取画板1; subplot(212)仍然被调用中
-    plt.subplot(211) #调用subplot(211)
-    plt.title('Easy as 1, 2, 3') # 做出211的标题
-    plt.show()
-    
-    # subplot 解释：
-    plt.subplot(221) # 表示分成两行两列，占用第一个，即第一行第一列的子图
-    plt.subplot(222) # 表示分成两行两列，占用第二个，即第一行第二列的子图
-    plt.subplot(212) # 表示分成两行一列，占用第二个，即第二行第一列的子图
-    
-plt.figure(1) 画板一中的图，画板一和画板二的图是分开的，是画板一一张图，画板二一张图。
-
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/1.png)    
-
-plt.figure(2) 画板二中的图
-
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/2.png)
-    
- __注意：plt.subplot(211)=plt.subplot(2,1,1)__   
-    
- ## plt.subplots 创建一个图形和一组子图。
- 
-    fig, ax = plt.subplots()
-   
- __例子1：__
- 
-    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
-    
-    ax1和ax2分别表示为一个子图。
-    
- __例子2：__   
-    
-    fig, ax = plt.subplots(2,3) # 创建2行三列个子图(6个子图)
-    
- __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
-    
-__例子3:__
-
-      sharex 控制x(sharex)或y(sharey)轴之间的属性共享：
-          1.True或者'all'：x或y轴属性将在所有子图(subplots)中共享.
-          2.False或'none'：每个子图的x或y轴都是独立的部分
-          3.'row'：每个子图在一个x或y轴共享行(row)
-          4.'col':每个子图在一个x或y轴共享列(column)
-
-    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
-    
-   
-
- __plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。__  
-    
- ## plt.plot方法：
- __matplotlib.pyplot.plot（* args，scalex = True，scaley = True，data = None，** kwargs ）__ 
- 
- __使用Line2D属性作为关键字参数来更好地控制外观。行属性和fmt可以混合使用。以下两个调用产生相同的结果：__
-         
-         # go--表示綠色线条，圆圈标记，线条样式为虚线
-     >>> plot(x, y, 'go--', linewidth=2, markersize=12)
-     >>> plot(x, y, color='green', marker='o', linestyle='dashed',
-    ...      linewidth=2, markersize=12)
- 
- 
- __例子1：__
- 
-   #根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
-   plt.plot(data['Weighted_Price'],'-',label='按天')
-   
-     label -> 图例标签, Dataframe格式以列名为label
-     color -> 颜色, 有color指定的时候，以color颜色为准
-     alpha -> 透明度， 0-1
-     title -> 标题名
- 
- 
- __例子2: 基于前面的数据进行plot 不是直接使用plt.plot(会报错)__
-    
-    # 前面如果定义了子图和子图的大小，这里的figsize=[15,7]会失效，这里我们使用o标记，我们画出来的图也会像一个小圆点一样
-    data['Weighted_Price'].plot(kind = "line",style='--ro',label='按天',figsize=[15,7])
-
-    ts = pd.Series(np.random.randn(1000), index = pd.date_range("1/1/2000", periods = 1000))
-    ts = ts.cumsum()
-    ts.plot(kind = "line",
-            label = "heheheh", # Series需要Lable
-            style = "go--",
-            color = "red",
-            alpha = 0.4,
-            use_index = True,
-            rot = 45,
-            grid = True,
-            ylim = [-50, 50],
-            yticks = list(range(-50, 50, 10)),
-            figsize = (8,4),
-            title = "test",
-            legend = True)
-    # plt.grid(True, linestyle = "--",color = "gray", linewidth = "0.5",axis = 'x')  # 网格
-    plt.legend()
-    plt.show()
-    # Series.plot()：series的index为横坐标，value为纵坐标
-    # kind → line,bar,barh...（折线图，柱状图，柱状图-横...）
-    # label → 图例标签，Dataframe格式以列名为label
-    # style → 风格字符串，这里包括了marker（o），linestyle（--），color（g） 就是官方文档中的fmt[marker][line][color] 顺序没有严格要求
-    # color → 颜色，有color指定时候，以color颜色为准
-    # alpha → 透明度，0-1
-    # use_index → 将索引用为刻度标签，默认为True
-    # rot → 旋转刻度标签，0-360
-    # grid → 显示网格，一般直接用plt.grid
-    # xlim,ylim → x,y轴界限
-    # xticks,yticks → x,y轴刻度值
-    # figsize → 图像大小
-    # title → 标题名
-    # legend → 是否显示图例，一般直接用plt.legend() 不带参数调用 legend 会自动获取图例句柄及相关标签，这里加上legend表示显示label
-    # 也可以 → plt.plot()
-
-### fmt:格式化字符串 格式字符串由颜色，标记和线条的部分组成： 就是上面说的style
-   __颜色__
-   
-     字符	颜色
-    'b'	蓝色
-    'g'	绿色
-    'r'	红色
-    'c'	青色
-    'm'	品红
-    'y'	黄色
-    'k'	黑色
-    'w'	白色
-    
-   __线条样式__
-
-    字符	描述
-    '-'	实线风格
-    '--'	虚线样式
-    '-.'	点划线样式
-    ':'	虚线样式
-    
-   __标记__ 
-
-    字符	描述
-    '.'	点标记
-    ','	像素标记
-    'o'	圆圈标记
-    'v'	triangle_down标记
-    '^'	triangle_up标记
-    '<'	triangle_left标记
-    '>'	triangle_right标记
-    '1'	tri_down标记
-    '2'	tri_up标记
-    '3'	tri_left标记
-    '4'	tri_right标记
-    's'	方形标记
-    'p'	五边形标记
-    '*'	明星标记
-    'h'	hexagon1标记
-    'H'	hexagon2标记
-    '+'	加上标记
-    'x'	x标记
-    'D'	钻石标记
-    'd'	thin_diamond标记
-    '|'	vline标记
-    '_'	hline标记
-
-    
- ## plt.xlim plt.ylim
-   
-   获取或设置当前轴的x限制。
- 
  ## FacetGrid
     
   __当您想要在数据集的子集内可视化变量的分布或多个变量之间的关系时，FacetGrid类很有用。 FacetGrid可以绘制最多三个维度：row，col和hue。前两者与所得轴数有明显的对应关系;将hue变量视为沿着深度轴的第三维，其中不同的级别用不同的颜色绘制。__
