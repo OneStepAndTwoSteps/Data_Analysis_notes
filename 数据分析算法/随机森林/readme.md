@@ -40,7 +40,7 @@ __简而言之:__ 第一个阶段：我们制造多个模型(如分类器)，然
 
 __随机：__ 1、数据采样随机(如随机抽取60%的样本进行训练) 2、特征选择随机(在样本中随机抽取60%的特征进行训练) (每棵树数据量都是一致的) 因为二重随机，所以我们构造出的树基本都是不同的。一般数据都取总量的(60%-80%)
 
-<div align=center><img width="600" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/4.png"/></div>
+<div align=center><img width="800" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/4.png"/></div>
 
 __森林：__ 很多颗决策树组成的森林。
 
