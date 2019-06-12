@@ -14,7 +14,10 @@ __内积：__
 
 向量之间的内积为向量之间同位置相乘然后相加 (a1,a2,a3,a4......an)^T  *  (b1,b2,b3,b4......bn)^T =a1b1 +a2b2+...anbn  这里的转置为将shape为(1,n) 转换为(n,1)
     
-在几何上 A 和 B 的内积就是 A * B=|A| * |B| * cos(a)    设计向量B模为1，则A和B的内积等于A向B所在直线投影的矢量长度
+在几何上 A 和 B 的内积就是 A * B=|A| * |B| * cos(a)    设计向量B模为1，则A和B的内积等于A向B所在直线投影的矢量长度，如下图：
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/1.png"/></div>
+
 
 __基：__ 在我们的二维坐标系中，我们样本所在位置为(3,2)，那么实际上表示的线性组合就是 x(1,0)^T + y(0,1)^T ,我们将(1,0)和(0,1)又称为二维空间中的一组基，基有两个重要的特性 1、一组基之间线性无关(比如二维空间中的垂直关系,内积为0) 2.可以生成整个空间(1,0)和(0,1)延伸之后可以生成整个二维空间。
 
@@ -22,8 +25,13 @@ __基变换:__
 
 变换：数据与一个基做内积运算，结果作为第一个新的坐标分量， 然后与第二个基做内积运算，结果作为第二个新坐标的分量,举个例子，我们原先的基为(1,0)和(0,1)样本做在坐标为(3，2),现在基发生了变化(我们的坐标轴发生了旋转)，现在我们将原先的样本(3,1)映射到新的基中的坐标：如下图
 
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/2.png"/></div>
 
-两个矩阵相乘的意义是将右边矩阵中的每一列列向量变换到 左边矩阵中每一行行向量为基所表示的空间中去
+__两个矩阵相乘的意义是将右边矩阵中的每一列列向量变换到 左边矩阵中每一行行向量为基所表示的空间中去__
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/3.png"/></div>
+
+
 
 __PCA的思想：将我们的数据映射到一组新的基上，得到新的一种特征表达__
 
@@ -32,11 +40,17 @@ __PCA的思想：将我们的数据映射到一组新的基上，得到新的一
 
 __方向：__ 选择一个方向（或者说基）使得尽量保留最多的原始信息，让我们的数据维度下降，主成分保留，同时希望投影后的投影值尽可能分散。
 
-__方差:__ 
+__方差:__ 公式如图：
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/4.png"/></div>
+
 
 __目标：__ 寻找一个一维基，使得所有数据变换为这个基上的坐标表示后，方差值越大越好
 
 __协方差(假设均值为0，以0为均值去中心化我们就不用再减去均值了)：__ 下面公式中ai和bi分别表示一种特征，此协方差公式表示，ai和bi之间的特征关系。举个例子，现在我们有两条曲线A(~)和曲线B(~)曲线A和曲线B相差不大，我们的协方差会比较大，如果我们的曲线相差较大，我们的协方差较小，协方差取值在[-1,1]之间，越趋近于1表示特征之间区别越大。
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/5.png"/></div>
+
 
 如果单纯只选择方差最大的方向，后续方向应该会和方差最大的方向接近重合。(假设我们现在方差最大的轴是x轴，那么次方差最大的轴呢？那肯定是离x轴最近的轴，但是如果这样那么会导致特征之间线性相关(我们的特征之间差异很小))__(我们可以通过协方差的公式求两个特征之间的相关性)__ 这可以证明我们轴之间越接近相关性越大。
 
@@ -48,12 +62,27 @@ __例子：__ 假如将一组N维向量降为K维（K大于0，小于N），目�
 
 __协方差矩阵(均值为0时)：__ 如下图 X是我们的数据。 
 
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/6.png"/></div>
+
 
 
 协方差矩阵中对角线上的两个元素分别是两个字段的方差，非对角线上的元素是a和b的协方差(相等)(对称矩阵)，此时我们发现构造好了协方差矩阵我们就有了方差和协方差。
 
 
-__协方差矩阵对角化：__ 即除对角线外的其它元素化为0 (让协方差为0，使得特征非线性相关)，并且在对角线上 将元素按大小从上到下排列(将方差大的排在 "入1" "入2"...)那么如何将非对角线上的元素置0呢？可以通过线性代数中的实对称矩阵，实对称矩阵：一个n行n列的实对称矩阵一定可以找到n个单位正交特征向量。我们对我们的协方差矩阵(对称矩阵)进行矩阵分解，我们就可以得到正交向量，此时就可以进行对角化。
+__协方差矩阵对角化：__ 即除对角线外的其它元素化为0 (让协方差为0，使得特征非线性相关)，并且在对角线上 将元素按大小从上到下排列(将方差大的排在 "入1" "入2"...)
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/7.png"/></div>
+
+
+__那么如何将非对角线上的元素置0呢？__ 可以通过线性代数中的实对称矩阵。
+
+实对称矩阵：一个n行n列的实对称矩阵一定可以找到n个单位正交特征向量。
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/8.png"/></div>
+
+我们对我们的协方差矩阵(对称矩阵)进行矩阵分解，我们就可以得到正交向量，此时就可以进行对角化。
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/9.png"/></div>
 
 
 根据特征值的从大到小，将特征向量从上到下排列，则用前K行组成的矩阵 乘以原始数据矩阵X，就得到了我们需要的降维后的数据矩阵Y，比如有N个特征向量对应N个特征值，我们在N个特征值中找到K个最大的特征向量，有了这10个特征向量就可以进行降维操作
