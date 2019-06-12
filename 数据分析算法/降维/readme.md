@@ -23,14 +23,13 @@ __基：__ 在我们的二维坐标系中，我们样本所在位置为(3,2)，�
 
 __基变换:__
 
-变换：数据与一个基做内积运算，结果作为第一个新的坐标分量， 然后与第二个基做内积运算，结果作为第二个新坐标的分量,举个例子，我们原先的基为(1,0)和(0,1)样本做在坐标为(3，2),现在基发生了变化(我们的坐标轴发生了旋转)，现在我们将原先的样本(3,1)映射到新的基中的坐标：如下图
+__变换__ ：数据与一个基做内积运算，结果作为第一个新的坐标分量， 然后与第二个基做内积运算，结果作为第二个新坐标的分量,举个例子，我们原先的基为(1,0)和(0,1)样本做在坐标为(3，2),现在基发生了变化(我们的坐标轴发生了旋转)，现在我们将原先的样本(3,1)映射到新的基中的坐标： __如下图__
 
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/2.png"/></div>
 
 __两个矩阵相乘的意义是将右边矩阵中的每一列列向量变换到 左边矩阵中每一行行向量为基所表示的空间中去__
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/3.png"/></div>
-
+<div align=center><img width="600" height="200" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/3.png"/></div>
 
 
 __PCA的思想：将我们的数据映射到一组新的基上，得到新的一种特征表达__
@@ -71,18 +70,18 @@ __协方差矩阵(均值为0时)：__ 如下图 X是我们的数据。
 
 __协方差矩阵对角化：__ 即除对角线外的其它元素化为0 (让协方差为0，使得特征非线性相关)，并且在对角线上 将元素按大小从上到下排列(将方差大的排在 "入1" "入2"...)
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/7.png"/></div>
+<div align=center><img width="600" height="150" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/7.png"/></div>
 
 
 __那么如何将非对角线上的元素置0呢？__ 可以通过线性代数中的实对称矩阵。
 
 实对称矩阵：一个n行n列的实对称矩阵一定可以找到n个单位正交特征向量。
 
-<div align=center><img width="550" height="350" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/8.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/8.png"/></div>
 
 我们对我们的协方差矩阵(对称矩阵)进行矩阵分解，我们就可以得到正交向量，此时就可以进行对角化。
 
-<div align=center><img width="600" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/9.png"/></div>
+<div align=center><img width="600" height="200" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/9.png"/></div>
 
 
 根据特征值的从大到小，将特征向量从上到下排列，则用前K行组成的矩阵 乘以原始数据矩阵X，就得到了我们需要的降维后的数据矩阵Y，比如有N个特征向量对应N个特征值，我们在N个特征值中找到K个最大的特征向量，有了这10个特征向量就可以进行降维操作
