@@ -75,7 +75,7 @@ __协方差矩阵对角化：__ 即除对角线外的其它元素化为0 (让协
 
 __那么如何将非对角线上的元素置0呢？__ 可以通过线性代数中的实对称矩阵。
 
-实对称矩阵：一个n行n列的实对称矩阵一定可以找到n个单位正交特征向量。
+实对称矩阵：一个n行n列的实对称矩阵一定可以找到n个单位正交特征向量。 __图中P为基，C为协方差矩阵__
 
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/8.png"/></div>
 
@@ -90,11 +90,21 @@ __那么如何将非对角线上的元素置0呢？__ 可以通过线性代数�
 
 ### 举例说明-流程回顾
 
+<div align=center><img width="600" height="200" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/10.png"/></div>
 
+__如上图我们进行分析：__
 
+数据：我们现在有两个特征和5个样本
 
+协方差矩阵：我们通过公式可以求出协方差矩阵
 
+得到协方差矩阵之后，我们对其进行特征值和特征向量的求解 可以使用numpy工具：eig_val, eig_vec = np.linalg.eig(cov)，求解之后就是图上面的值
 
+因为这里我们要将2维特征降维为1维特征，所以我们需要选择大的方差，即lambda=2，所以我们对应的特征向量就是c1，即我们的基，这里我们需要将我们的基进行归一化所以 1/(1+1)^1/2 就是庚号2分之一
+
+此时我们就可以进行降维，降维后的值就是最后得出的值。
+
+同时我们可以将我们的基(特征向量归一化之后)，这里注意这里用到了我们所有的特征向量c1,c2,第一行为c1，第二行为c2进行对角化运算，运算之后，我们发现我们最后得到的结果却是是方差为2和2/5同时我们的协方差为0(非线性相关)
 
 
 
