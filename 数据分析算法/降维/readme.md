@@ -78,11 +78,11 @@ __那么如何将非对角线上的元素置0呢？__ 可以通过线性代数�
 
 实对称矩阵：一个n行n列的实对称矩阵一定可以找到n个单位正交特征向量。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/8.png"/></div>
+<div align=center><img width="550" height="350" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/8.png"/></div>
 
 我们对我们的协方差矩阵(对称矩阵)进行矩阵分解，我们就可以得到正交向量，此时就可以进行对角化。
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/9.png"/></div>
+<div align=center><img width="600" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/9.png"/></div>
 
 
 根据特征值的从大到小，将特征向量从上到下排列，则用前K行组成的矩阵 乘以原始数据矩阵X，就得到了我们需要的降维后的数据矩阵Y，比如有N个特征向量对应N个特征值，我们在N个特征值中找到K个最大的特征向量，有了这10个特征向量就可以进行降维操作
