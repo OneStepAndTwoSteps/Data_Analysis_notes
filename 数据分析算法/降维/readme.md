@@ -90,7 +90,7 @@ __那么如何将非对角线上的元素置0呢？__ 可以通过线性代数�
 
 ### 举例说明-流程回顾
 
-<div align=center><img width="600" height="200" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/10.png"/></div>
+<div align=center><img width="650" height="250" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E9%99%8D%E7%BB%B4PCA/10.png"/></div>
 
 __如上图我们进行分析：__
 
