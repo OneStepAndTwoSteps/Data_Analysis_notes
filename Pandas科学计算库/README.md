@@ -539,7 +539,10 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     #取年龄等于26，并且存活的数据的数量
     print(train_data[(train_data['Age']==29) & (train_data['Survived']==1)].count())
 
-
+  ### pandas一次显示指定的多个标签 
+    #使用 [[ ]] 两层嵌套括号 比如 
+    print(train_data[['Survived','Age']])
+    print("%s "%(new_user_data[new_user_data['节']==section][['名字','知识点']].values))
 
   ### pandas.Series.map
     
@@ -598,7 +601,32 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     
     dfname.columns.values.tolist()    # 列名称
 
-  
+  ### python dataframe 当无列名时进行赋值列名
+
+    # 为数据增加一行列名
+    column=['user_id','名字','知识点','节','课程','course_id']
+    data.columns=column
+
+
+  ### pandas 错误警告：
+
+    在使用pd.read_csv()时 出现了如下的错误
+
+      data=pd.read_csv(file_path)
+
+      pandas.errors.ParserError: Error tokenizing data. C error: Expected 20 fields in line 4, saw 21
+
+  __解决方案1：__ 加上分隔符 sep 
+
+      data=pd.read_csv(file_path,sep='\t')
+
+  __解决方案2：__ 忽略错误的行
+
+      data=pd.read_csv(file_path,error_bad_lines=False)
+
+
+
+
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
