@@ -608,6 +608,27 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     data.columns=column
 
 
+  ### 构造DataFrame
+
+    例子：如果想要构造这样的dataframe：
+
+   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/1.jpg)
+
+
+      import pandas as pd
+
+      list1=[[1,2,3],[4,5,6],[7,8,9]]
+
+      dict={'id':[1,2,3],'item':[[5,6,7,8],[1,2,3],[4,5,6]]}
+
+      data=pd.DataFrame(data=dict,columns=['id','item'])
+
+      print(data)
+
+
+
+
+
   ### pandas 错误警告：
 
     在使用pd.read_csv()时 出现了如下的错误
