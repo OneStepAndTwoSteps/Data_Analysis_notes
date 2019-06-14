@@ -610,10 +610,9 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
   ### 构造DataFrame
 
-    例子：如果想要构造这样的dataframe：
+   __例子：__ 如果想要构造这样的dataframe：
 
-   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/1.jpg)
-
+   <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/1.jpg"/></div> 
 
       import pandas as pd
 
