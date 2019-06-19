@@ -18,7 +18,8 @@ print(X[:,2])
 X[:,2]=1
 print(X[:,2])
 
-vt=VarianceThreshold()
+# 设置阈值，特征小于该值会被删除
+vt=VarianceThreshold(threshold=3)
 new_x=vt.fit_transform(X)
 
 print(new_x)
