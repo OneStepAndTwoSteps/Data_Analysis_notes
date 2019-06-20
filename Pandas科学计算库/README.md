@@ -587,6 +587,14 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     3  I am a rabbit
     dtype: object
 
+  ### pandas to_dict
+
+  例子：train_feature=vec.fit_transform(data.to_dict(orient='record'))
+
+    orient参数不同会有不一样的效果 
+
+    https://blog.csdn.net/m0_37804518/article/details/78444110
+
   ### pandas.set_option
    可以设置pandas的属性，比如打印出来数据时显示多少列，显示多宽等等，可以一次性设置多个格式如下
    
