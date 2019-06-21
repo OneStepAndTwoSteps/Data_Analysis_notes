@@ -651,8 +651,8 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
   ### pandas显示所有数据内容(不隐藏数据)：
 
-      #显示所有列 (列中有省略的不省略)
-      pd.set_option('display.max_columns', None)
+  显示所有列 (列中有省略的不省略)
+  pd.set_option('display.max_columns', None)
     
   __解决如下问题：__
 
@@ -661,8 +661,8 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       31 32 33 ... 39 40
       41 42 43 ... 49 50
 
-      #显示所有行 (行中有省略的不省略)
-      pd.set_option('display.max_rows', None)
+  显示所有行 (行中有省略的不省略)
+  pd.set_option('display.max_rows', None)
 
   __解决如下问题：__
 
