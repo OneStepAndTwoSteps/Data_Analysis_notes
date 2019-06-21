@@ -633,9 +633,6 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       print(data)
 
 
-
-
-
   ### pandas 错误警告：
 
     在使用pd.read_csv()时 出现了如下的错误
@@ -652,6 +649,28 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
       data=pd.read_csv(file_path,error_bad_lines=False)
 
+  ### pandas显示所有数据内容(不隐藏数据)：
+
+      #显示所有列 (列中有省略的不省略)
+      pd.set_option('display.max_columns', None)
+    
+  __解决如下问题：__
+
+      11 12 13 ... 19 20
+      21 22 23 ... 29 30
+      31 32 33 ... 39 40
+      41 42 43 ... 49 50
+
+      #显示所有行 (行中有省略的不省略)
+      pd.set_option('display.max_rows', None)
+
+  __解决如下问题：__
+
+      1 2 3
+      4 5 6
+      7 8 9
+      ...
+      100 101 102
 
 
 
