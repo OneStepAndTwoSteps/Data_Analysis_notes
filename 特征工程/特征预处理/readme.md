@@ -24,7 +24,7 @@ __1.1.1、z-score标准化：__
 
 在sklearn中，我们可以用StandardScaler来做z-score标准化。当然，如果我们是用pandas做数据预处理，可以自己在数据框里面减去均值，再除以方差，自己做z-score标准化。    
 
-如：当只有一个特征时，我们进行标准化也要用双 [],即[[]]
+__如：当只有一个特征时，我们进行标准化也要用双 [],即[[]]__
 
       ss=StandardScaler()
       train_x=data[['False']]
