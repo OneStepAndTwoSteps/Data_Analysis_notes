@@ -472,53 +472,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
   
   __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
   
-  __例子1：指定以什么为组执行操作__
-   
-        >>> df = pd.DataFrame({'Animal' : ['Falcon', 'Falcon',
-    ...                                'Parrot', 'Parrot'],
-    ...                    'Max Speed' : [380., 370., 24., 26.]})
-        >>> df
-           Animal  Max Speed
-        0  Falcon      380.0
-        1  Falcon      370.0
-        2  Parrot       24.0
-        3  Parrot       26.0
-        >>> df.groupby(['Animal']).mean()
-                Max Speed
-        Animal
-        Falcon      375.0
-        Parrot       25.0
-
-
-
-  __分层索引__
-
-    我们可以使用level参数对不同级别的层次索引进行分组：
-
-    >>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
-    ...           ['Capitve', 'Wild', 'Capitve', 'Wild']]
-    >>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
-    >>> df = pd.DataFrame({'Max Speed' : [390., 350., 30., 20.]},
-    ...                    index=index)
-    >>> df
-                    Max Speed
-    Animal Type
-    Falcon Capitve      390.0
-           Wild         350.0
-    Parrot Capitve       30.0
-           Wild          20.0
-    >>> df.groupby(level=0).mean()
-            Max Speed
-    Animal
-    Falcon      370.0
-    Parrot       25.0
-    >>> df.groupby(level=1).mean()
-             Max Speed
-    Type
-    Capitve      210.0
-    Wild         185.0
-
-  __例子3__
+  __groupby函数 例子1__
 
     import pandas as pd
     import numpy as np
@@ -547,6 +501,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
   __dataframe根据key1进行分组__                                                                                                                                                                                                                                                           
     grouped1=df_obj.groupby('key1')
+
     [x for x in grouped1]
 
 
@@ -560,7 +515,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       3       b  three  0.546663 -0.970285
       5       b    two -0.347244  0.146132)]
 
-  __可以指定指定的内容进行运算__
+  __使用groupby指定字段内容进行运算__
 
   如：
 
@@ -625,7 +580,34 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     3          3.0      0.242363      26.403259
 
 
+__分层索引__
 
+    我们可以使用level参数对不同级别的层次索引进行分组：
+
+    >>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
+    ...           ['Capitve', 'Wild', 'Capitve', 'Wild']]
+    >>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
+    >>> df = pd.DataFrame({'Max Speed' : [390., 350., 30., 20.]},
+    ...                    index=index)
+    >>> df
+                    Max Speed
+    Animal Type
+    Falcon Capitve      390.0
+           Wild         350.0
+    Parrot Capitve       30.0
+           Wild          20.0
+
+    >>> df.groupby(level=0).mean()
+            Max Speed
+    Animal
+    Falcon      370.0
+    Parrot       25.0
+    
+    >>> df.groupby(level=1).mean()
+             Max Speed
+    Type
+    Capitve      210.0
+    Wild         185.0
 
   ### pandas按若干个列的组合条件筛选数据
     #取年龄等于26，并且存活的数据的数量
