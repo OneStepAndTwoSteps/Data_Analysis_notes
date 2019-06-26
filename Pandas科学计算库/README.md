@@ -519,6 +519,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
   如：
 
+    # 按照 key1 进行分组从上面的数据中我们可以发现分为a,b两组
     grouped = df.groupby(df['key1'])
     grouped.mean()
 
