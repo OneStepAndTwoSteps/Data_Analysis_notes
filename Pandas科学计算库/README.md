@@ -602,12 +602,39 @@ __分层索引__
     Animal
     Falcon      370.0
     Parrot       25.0
-    
+
     >>> df.groupby(level=1).mean()
              Max Speed
     Type
     Capitve      210.0
     Wild         185.0
+
+__groupby 函数的两个方法 .size() .count()__
+
+可以使用 GroupBy 对象（不论是 DataFrameGroupBy 还是 SeriesGroupBy）的 .size() 方法查看分组大小：
+
+.size 如:
+
+  grouped.size()
+
+out：
+
+  key1
+  a       3
+  b       2
+
+.count 如：
+
+  grouped.count()
+
+out：
+
+      key2	data1	data2
+  key1			
+  a	  5	    5	    5
+  b	  3	    3	    3
+
+__.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
 
   ### pandas按若干个列的组合条件筛选数据
     #取年龄等于26，并且存活的数据的数量
