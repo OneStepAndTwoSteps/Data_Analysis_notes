@@ -282,7 +282,7 @@ __自定义函数apply__
         df3 = pd.merge(df1, df2, how='inner')
    __运行结果:__ 
    
-   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/2.png)
+   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/2-1.png)
     
    __3. left 左连接__
     
