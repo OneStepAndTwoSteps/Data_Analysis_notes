@@ -449,6 +449,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     1   3.0 4.0 NaN 1
     2   3.0 4.0 NaN 5
     3   3.0 3.0 NaN 4
+
    __将“A”，“B”，“C”和“D”列中的所有NaN元素分别替换为0,1,2和3。__
 
     >>> values = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
@@ -458,6 +459,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     1   3.0 4.0 2.0 1
     2   0.0 1.0 2.0 5
     3   0.0 3.0 2.0 4
+    
   __只替换第一个NaN元素。__
 
     >>> df.fillna(value=values, limit=1)
@@ -614,26 +616,26 @@ __groupby 函数的两个方法 .size() .count()__
 
 可以使用 GroupBy 对象（不论是 DataFrameGroupBy 还是 SeriesGroupBy）的 .size() 方法查看分组大小：
 
-.size 如:
+__.size 如:__
 
-  grouped.size()
+    grouped.size()
 
-out：
+__out：__
 
-  key1
-  a       3
-  b       2
+    key1
+    a       3
+    b       2
 
-.count 如：
+__.count 如：__
 
-  grouped.count()
+    grouped.count()
 
-out：
+__out：__
 
-      key2	data1	data2
-  key1			
-  a	  5	    5	    5
-  b	  3	    3	    3
+        key2	data1	data2
+    key1			
+    a	  5	    5	    5
+    b	  3	    3	    3
 
 __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
 
@@ -652,7 +654,7 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
 
     用于将系列中的每个值替换为另一个值，该值可以从函数，a dict或a 派生Series。
   
-  例子：
+  __例子：__
   
       >>> s = pd.Series(['cat', 'dog', np.nan, 'rabbit'])
       >>> s
@@ -664,14 +666,14 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
   
   map接受a dict或a Series。除非dict具有默认值（例如），否则将dict转换为未找到的NaN值defaultdict：
   
-    >>> s.map({'cat': 'kitten', 'dog': 'puppy'})
-    0   kitten
-    1    puppy
-    2      NaN
-    3      NaN
-    dtype: object
-    
-  它还接受一个功能：
+      >>> s.map({'cat': 'kitten', 'dog': 'puppy'})
+      0   kitten
+      1    puppy
+      2      NaN
+      3      NaN
+      dtype: object
+      
+  __它还接受一个功能：__
 
     >>> s.map('I am a {}'.format)
     0       I am a cat
@@ -691,7 +693,9 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
 
   ### pandas to_dict
 
-  例子：train_feature=vec.fit_transform(data.to_dict(orient='record'))
+  __例子：__
+    
+    train_feature=vec.fit_transform(data.to_dict(orient='record'))
 
     orient参数不同会有不一样的效果 
 
@@ -700,9 +704,9 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
   ### pandas.set_option
    可以设置pandas的属性，比如打印出来数据时显示多少列，显示多宽等等，可以一次性设置多个格式如下
    
-   例子：
+   __例子：__
       
-      # print(pd.set_option('display.max_columns',None,'display.width',10))
+    # print(pd.set_option('display.max_columns',None,'display.width',10))
     
   ### python dataframe 获得 列名columns 和行名称 index
    
@@ -779,7 +783,7 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
 
   ### 数据的偏度和峰度
 
-  df.skew()  偏度
+  __df.skew()  偏度__
 
     Definition:是描述数据分布形态的统计量，其描述的是某总体取值分布的对称性，简单来说就是数据的不对称程度。
     偏度是三阶中心距计算出来的。
@@ -789,7 +793,7 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
     （4）数值的绝对值越大，表明数据分布越不对称，偏斜程度大。
 
 
-  df.kurt()  峰度
+  __df.kurt()  峰度__
 
     Definition:偏度是描述某变量所有取值分布形态陡缓程度的统计量，简单来说就是数据分布顶的尖锐程度。
     峰度是四阶标准矩计算出来的。
