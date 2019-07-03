@@ -240,7 +240,7 @@ __例子3:__
     
 ## 散点图：
 
-  引入工具包，Matplotlib的pyplot包
+引入工具包，Matplotlib的pyplot包
   
      import matplotlib.pyplot as plt
      
@@ -252,7 +252,7 @@ __例子3:__
     
 在引用 seaborn 工具包之后，就可以使用 seaborn 工具包的函数了。如果想要做散点图，可以直接使用 sns.jointplot(x, y, data=None, kind=‘scatter’) 函数。其中 x、y 是 data 中的下标。data 就是我们要传入的数据，一般是 DataFrame 类型。kind 这类我们取 scatter，代表散点的意思。当然 kind 还可以取其他值，这个我在后面的视图中会讲到，不同的 kind 代表不同的视图绘制方式。
 
-例子：
+__例子：__
     
     import numpy as np
     import pandas as pd
@@ -271,14 +271,14 @@ __例子3:__
     #sns还是要借助pyplot来打印图的 其自身无show方法
     plt.show    
     
-运行结果：
+__运行结果：__
   
-  Matplotlib:   
+__Matplotlib:__ 
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%95%A3%E7%82%B9%E5%9B%BE.png)
   
   
-  seaborn:    
+__seaborn:__    
   
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
   
@@ -292,7 +292,7 @@ __例子3:__
   
   在 Seaborn 中，我们使用 sns.lineplot (x, y, data=None) 函数。其中 x、y 是 data 中的下标。data 就是我们要传入的数据，一般是 DataFrame 类型。
   
-  例子：
+__例子：__
   
     import pandas as pd
     import matplotlib.pyplot as plt
@@ -308,13 +308,13 @@ __例子3:__
     sns.lineplot(x="年", y="月", data=df)
     plt.show()
 
-  运行结果：
+__运行结果：__
   
-  M:  
+M:  
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
   
-  S:
+S:
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
   
@@ -330,15 +330,15 @@ __例子3:__
   
   
   
-  ## 直方图：
-  
-  直方图是比较常见的视图，它是把横坐标等分成了一定数量的小区间，这个小区间也叫作“箱子”，然后在每个“箱子”内用矩形条（bars）展示该箱子的箱子数（也就是 y 值），这样就完成了对数据集的直方图分布的可视化。
-  
-  在 Matplotlib 中，我们使用 plt.hist(x, bins=10) 函数，其中参数 x 是一维数组，bins 代表直方图中的箱子数量，默认是 10。
-  
-  在 Seaborn 中，我们使用 sns.distplot(x, bins=10, kde=True) 函数。其中参数 x 是一维数组，bins 代表直方图中的箱子数量，kde 代表显示核密度估计，默认是 True，我们也可以把 kde 设置为 False，不进行显示。核密度估计是通过核函数帮我们来估计概率密度的方法。
-  
-  例子：
+## 直方图：
+
+直方图是比较常见的视图，它是把横坐标等分成了一定数量的小区间，这个小区间也叫作“箱子”，然后在每个“箱子”内用矩形条（bars）展示该箱子的箱子数（也就是 y 值），这样就完成了对数据集的直方图分布的可视化。
+
+在 Matplotlib 中，我们使用 plt.hist(x, bins=10) 函数，其中参数 x 是一维数组，bins 代表直方图中的箱子数量，默认是 10。
+
+在 Seaborn 中，我们使用 sns.distplot(x, bins=10, kde=True) 函数。其中参数 x 是一维数组，bins 代表直方图中的箱子数量，kde 代表显示核密度估计，默认是 True，我们也可以把 kde 设置为 False，不进行显示。核密度估计是通过核函数帮我们来估计概率密度的方法。
+
+__例子：__
     
     import numpy as np
     import pandas as pd
@@ -357,14 +357,14 @@ __例子3:__
     plt.show()
 
 
-  运行结果：
+__运行结果：__
   
-  M:  
+M:
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%96%B9%E5%BD%A2%E5%9B%BE.png)
   
   
-  S:   
+S:  
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE.png)
   
@@ -376,12 +376,12 @@ __例子3:__
     
 条形图可以帮我们查看类别的特征。在条形图中，长条形的长度表示类别的频数，宽度表示类别。
   
-  在 Matplotlib 中，我们使用 plt.bar(x, height) 函数，其中参数 x 代表 x 轴的位置序列，height 是 y 轴的数值序列，也就是柱子的高度。
+在 Matplotlib 中，我们使用 plt.bar(x, height) 函数，其中参数 x 代表 x 轴的位置序列，height 是 y 轴的数值序列，也就是柱子的高度。
   
-  在 Seaborn 中，我们使用 sns.barplot(x=None, y=None, data=None) 函数。其中参数 data 为 DataFrame 类型，x、y 是 data 中的变量。
+在 Seaborn 中，我们使用 sns.barplot(x=None, y=None, data=None) 函数。其中参数 data 为 DataFrame 类型，x、y 是 data 中的变量。
   
   
-  例子：
+__例子：__
     
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -396,13 +396,13 @@ __例子3:__
     plt.show()
 
   
-  运行结果：
+__运行结果：__
   
-   M：   
+M:  
    
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
   
-   S:  
+S:
    
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
   
@@ -418,7 +418,7 @@ __例子3:__
   在 Seaborn 中，我们使用 sns.boxplot(x=None, y=None, data=None) 函数。其中参数 data 为 DataFrame 类型，x、y 是 data 中的变量。
   
   
-  例子：
+__例子：__
   
     # 数据准备
     # 生成 0-1 之间的 10*4 维度数据
@@ -432,12 +432,12 @@ __例子3:__
     sns.boxplot(data=df)
     plt.show()
 
-  运行结果：
+__运行结果：__
   
-  M:   
+M:   
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E7%AE%B1%E5%9E%8B%E5%9B%BE.png)
-  S:    
+S:    
   
    ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%AE%B1%E5%9E%8B%E5%9B%BE.png)
   
@@ -450,7 +450,7 @@ __例子3:__
   这里我设置了 lables 数组，分别代表高中、本科、硕士、博士和其他几种学历的分类标签。nums 代表这些学历对应的人数。
   
   
-  例子：
+__例子：__
       
       import matplotlib.pyplot as plt
       # 数据准备
@@ -460,9 +460,9 @@ __例子3:__
       plt.pie(x = nums, labels=labels)
       plt.show()
 
-  运行结果：
+__运行结果：__
   
-   S:    
+S:    
    
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E9%A5%BC%E5%9B%BE.png) 
     
@@ -470,15 +470,38 @@ __例子3:__
  ## 热力图：
 
  
-  热力图是一种非常直观的多元变量分析方法。
+  热力图是一种非常直观的多元变量分析方法。通过热力图我们可以发现特征之间的相关性。
  
   热力图，英文叫 heat map，是一种矩阵表示方法，其中矩阵中的元素值用颜色来代表，不同的颜色代表不同大小的值。通过颜色就能直观地知道某个位置上数值的大小。另外你也可以将这个位置上的颜色，与数据集中的其他位置颜色进行比较。
   
- 我们一般使用 Seaborn 中的 sns.heatmap(data) 函数，其中 data 代表需要绘制的热力图数据。
+  我们一般使用 Seaborn 中的 sns.heatmap(data) 函数，其中 data 代表需要绘制的热力图数据。
  
- 这里我们使用 Seaborn 中自带的数据集 flights，该数据集记录了 1949 年到 1960 年期间，每个月的航班乘客的数量。
+  这里我们使用 Seaborn 中自带的数据集 flights，该数据集记录了 1949 年到 1960 年期间，每个月的航班乘客的数量。
 
- 例子
+  __热力图参数说明：__
+
+    ax = sns.heatmap(data,vmin=0, vmax=1, cmap = 'GnBu', center=0.5, 
+                 robust=False,annot=True)
+
+    data : 要显示的数据
+
+    vmin, vmax : 显示的数据值的最大和最小的范围，热力图左右的的标签
+
+    cmap : matplotlib颜色表名称或对象，或颜色列表，可选从数据值到色彩空间的映射。如果没有提供，默认设置
+
+    center : 指定色彩的中心值
+
+    robust : 如果“Ture”和“ vmin或” vmax不存在，则使用强分位数计算颜色映射范围，而不是极值。
+
+    annot : 如果为True，则将数据值写入每个单元格中
+
+    fmt : 表格里显示数据的类型
+      fmt ='.0%'#显示百分比
+      fmt ='f' 显示完整数字 = fmt ='g'
+      fmt ='.3'显示小数的位数 = fmt ='.3f' = fmt ='.3g'
+
+
+__例子__
  
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -489,11 +512,11 @@ __例子3:__
     sns.heatmap(data)
     plt.show()
 
- 运行结果
+__运行结果__
     
     通过 seaborn 的 heatmap 函数，我们可以观察到不同年份，不同月份的乘客数量变化情况，其中颜色越浅的代表乘客数量越多，如下图所示：
   
-  S:    
+S:    
   
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE.png)
  
@@ -511,7 +534,7 @@ __例子3:__
   因为需要计算角度，所以我们要准备 angles 数组；又因为需要设定统计结果的数值，所以我们要设定 stats 数组。并且需要在原有 angles 和 stats 数组上增加一位，也就是添加数组的第一个元素。
   
   
-  例子：
+__例子：__
     
     import numpy as np
     import matplotlib.pyplot as plt
@@ -539,9 +562,9 @@ __例子3:__
     
 代码中 flt.figure 是创建一个空白的 figure 对象，这样做的目的相当于画画前先准备一个空白的画板。然后 add_subplot(111) 可以把画板划分成 1 行 1 列。再用 ax.plot 和 ax.fill 进行连线以及给图形上色。最后我们在相应的位置上显示出属性名。这里需要用到中文，Matplotlib 对中文的显示不是很友好，因此我设置了中文的字体 font，这个需要在调用前进行定义。最后我们可以得到下面的蜘蛛图，看起来是不是很酷？
 
-运行结果：
+__运行结果：__
      
-  M：     
+M：     
   
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E8%9C%98%E8%9B%9B%E5%9B%BE.png)
       
@@ -555,7 +578,7 @@ __例子3:__
 
 这里我们使用 Seaborn 中自带的数据集 tips，这个数据集记录了不同顾客在餐厅的消费账单及小费情况。代码中 total_bill 保存了客户的账单金额，tip 是该客户给出的小费金额。我们可以用 Seaborn 中的 jointplot 来探索这两个变量之间的关系。
 
-例子：
+__例子：__
   
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -568,18 +591,18 @@ __例子3:__
     sns.jointplot(x="total_bill", y="tip", data=tips, kind='hex')
     plt.show()
 
-运行结果：
+__运行结果：__
 
- 代码中我用 kind 分别显示了他们的散点图、核密度图和 Hexbin 图，如下图所示。
+代码中我用 kind 分别显示了他们的散点图、核密度图和 Hexbin 图，如下图所示。
   
-  散点图：  
+__散点图：__  
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
   核图：  
   
   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%A0%B8%E5%9B%BE.png)
  
- Hexbin图：    
+ __Hexbin图：__    
  
  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83hexbin%E5%9B%BE.png)
   
@@ -591,7 +614,7 @@ __例子3:__
  
  这里我们使用 Seaborn 中自带的 iris 数据集，这个数据集也叫鸢尾花数据集。鸢尾花可以分成 Setosa、Versicolour 和 Virginica 三个品种，在这个数据集中，针对每一个品种，都有 50 个数据，每个数据中包括了 4 个属性，分别是花萼长度、花萼宽度、花瓣长度和花瓣宽度。通过这些数据，需要你来预测鸢尾花卉属于三个品种中的哪一种。
  
- 例子：
+ __例子：__
     
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -605,7 +628,7 @@ __例子3:__
 这里我们用 Seaborn 中的 pairplot 函数来对数据集中的多个双变量的关系进行探索，如下图所示。从图上你能看出，一共有 sepal_length、sepal_width、petal_length 和 petal_width4 个变量，它们分别是花萼长度、花萼宽度、花瓣长度和花瓣宽度。
   
   
-下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中的第一张图代表的就是花萼长度自身的分布图，它右侧的这张图代表的是花萼长度与花萼宽度这两个变量之间的关系。    
+__下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中的第一张图代表的就是花萼长度自身的分布图，它右侧的这张图代表的是花萼长度与花萼宽度这两个变量之间的关系。__    
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB.png)
  
@@ -666,7 +689,7 @@ __bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bin
     clear ： bool，可选，默认值：False
     如果为True并且该图已经存在，那么它将被清除。
 
-例子：
+__例子：__
 
     # 热力图可视化特征之间的关系 corr函数建立content[features_mean]特征中的关系值
     corr=content[features_mean].corr()
