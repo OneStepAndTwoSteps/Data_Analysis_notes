@@ -17,6 +17,6 @@ __它主要是直观的表示观测与预测值之间的差异。一般我们所
 
 如图所示：
 
-
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/seaborn_and_Matplotlib/QQ%E5%9B%BE.png)
 
 
