@@ -357,6 +357,10 @@ __自定义函数apply__
     
     train_content=pd.read_csv("train.csv")
   
+  以xls的格式读取文件里的内容
+    
+    train_content=pd.read_excel("train.xls")
+    
   显示pd_content的前面三行(不包括列名字)  
      
      print(train_content.head(3)
