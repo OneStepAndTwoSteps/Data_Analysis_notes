@@ -5,5 +5,5 @@ __NetworkX包裏面有PageRank函數的封裝__
 
 
 ### networkx的进阶.py 效果图
-<div align=center><img width="400" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/PageRank%E7%AE%97%E6%B3%95/8.png"/></div>
+<div><img width="400" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/PageRank%E7%AE%97%E6%B3%95/9.png"/></div>
 
