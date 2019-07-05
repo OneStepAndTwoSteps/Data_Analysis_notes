@@ -1,5 +1,8 @@
 # 可视化工具Seaborn和Matplotlib
 
+ ## plt画图支持中文显示 
+    plt.rcParams['font.sans-serif']=['SimHei']
+   
  ## plt.subplot方法：
    __subplot(nrows, ncols, index, **kwargs)__
    
