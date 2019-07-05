@@ -2,7 +2,8 @@
 
  ## plt画图支持中文显示 
     plt.rcParams['font.sans-serif']=['SimHei']
-   
+ ## plt画图支持负号正常显示 
+    plt.rcParams['axes.unicode_minus']=False
  ## plt.subplot方法：
    __subplot(nrows, ncols, index, **kwargs)__
    
