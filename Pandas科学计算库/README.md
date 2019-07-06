@@ -805,6 +805,35 @@ __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN�
     （2）Kurtosis>0 比正态分布的高峰更加陡峭——尖顶峰
     （3）Kurtosis<0 比正态分布的高峰来得平缓——平顶峰
 
+  ### pandas 计算矩阵关系系数
+
+  使用.corr() 可以用于计算矩阵关系系数，可以使用得到的关系系数绘制热力图
+    
+  __举例：__
+
+    现在我们有一些数据，我们要计算这些特征之间的关系
+    
+    corrmat = train_data.drop('Id',axis=1).corr()   # train_data 是read_cav()读取进来的数据
+    corrmat
+
+  __out__
+
+    	            MSSubClass	LotFrontage	  LotArea	 OverallQual  OverallCond
+
+    MSSubClass	  1.000000	  -0.386347	  -0.139781	  0.032628	  -0.059316	
+    LotFrontage	  -0.386347 	1.000000	  0.426095	  0.251646	  -0.059213	
+    LotArea	      -0.139781	  0.426095	  1.000000	  0.105806	  -0.005636	
+    OverallQual	  0.032628	  0.251646  	0.105806	  1.000000	  -0.091932	
+    OverallCond   -0.059316	  -0.059213	  -0.005636 	-0.091932	  1.000000	
+
+  __绘制热力图__
+
+    fig,ax=plt.subplots(figsize=(20,16))
+    sns.heatmap(corrmat,annot=True,fmt ='.1')
+    plt.show()
+
+
+
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
