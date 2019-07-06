@@ -485,11 +485,11 @@ S:
   __热力图参数说明：__
 
     ax = sns.heatmap(data,vmin=0, vmax=1, cmap = 'GnBu', center=0.5, 
-                 robust=False,annot=True)
+                 robust=False,annot=True,cbar=True)
 
     data : 要显示的数据
 
-    vmin, vmax : 显示的数据值的最大和最小的范围，热力图左右的的标签
+    vmin, vmax : 显示的数据值的最大和最小的范围，热力图最右侧的渐变条的最小值和最大值
 
     cmap : matplotlib颜色表名称或对象，或颜色列表，可选从数据值到色彩空间的映射。如果没有提供，默认设置
 
@@ -499,11 +499,20 @@ S:
 
     annot : 如果为True，则将数据值写入每个单元格中
 
+    annot_kws={'size': 10} 用于控制数值的大小
+
+    cbar=True 是否绘制颜色条，就是最右侧的渐变条是否显示，默认为True(显示)
+
+    yticklabels=columns.values, xticklabels=columns.values 用于设置y轴和x轴的坐标轴显示内容
+
     fmt : 表格里显示数据的类型
       fmt ='.0%'#显示百分比
       fmt ='f' 显示完整数字 = fmt ='g'
       fmt ='.3'显示小数的位数 = fmt ='.3f' = fmt ='.3g' 
       注意：比如我使用 fmt ='.1' 如果我们的相关系数为0.02 在第二位才开始有值，他会保留0.02，而使用 fmt ='.1'会强制保留1位小数，就是0.0
+
+    
+
 
 
 __例子__
