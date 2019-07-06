@@ -511,11 +511,7 @@ S:
       fmt ='.3'显示小数的位数 = fmt ='.3f' = fmt ='.3g' 
       注意：比如我使用 fmt ='.1' 如果我们的相关系数为0.02 在第二位才开始有值，他会保留0.02，而使用 fmt ='.1'会强制保留1位小数，就是0.0
 
-    
-
-
-
-__例子__
+__例子1__
  
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -534,7 +530,22 @@ S:
   
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE.png)
  
+
+__例子2__
+
+    corrmat = train_data.drop('Id',axis=1).corr()
+    fig,ax=plt.subplots(figsize=(20,16))
+    sns.heatmap(corrmat,annot=True,fmt ='.1')
+    plt.show()
  
+
+__运行结果__
+
+S:    
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE2.png)
+ 
+
  ## 蜘蛛图：
   
   蜘蛛图是一种显示一对多关系的方法。在蜘蛛图中，一个变量相对于另一个变量的显著性是清晰可见的。
