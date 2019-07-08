@@ -232,6 +232,8 @@ __自定义函数apply__
   
     在数据清洗后，我们就要对数据进行统计了。Pandas 和 NumPy 一样，都有常用的统计函数，如果遇到空值 NaN，会自动排除。
     常用的统计函数包括：
+    以下函数可以指定计算的axis为行还是列，默认为列 axis=0。注意如果计算所在某一列/行中存在字符，则该列/行将不进行计算
+ 
       count()     统计个数，空值NaN不计算
       describe()  一次性输出多个统计指标，包括：count,mean,std,min,max 等
       min()       最小值
@@ -247,7 +249,7 @@ __自定义函数apply__
       idxmax()    统计最大值的索引值
       
       
-   表格中有一个 describe() 函数，统计函数千千万，describe() 函数最简便。它是个统计大礼包，可以快速让我们对数据有个全面的了解。下面我直接使用 df1.descirbe() 输出结果为：
+   表格中有一个 describe() 函数，统计函数千千万，describe() 函数最简便。它是个统计大礼包，可以快速让我们对数据有个全面的了解。下面我直接使用 df1.describe() 输出结果为：
       
         df1 = DataFrame({'name':['ZhangFei', 'GuanYu', 'a', 'b', 'c'], 'data1':range(5)})
         print df1.describe()
