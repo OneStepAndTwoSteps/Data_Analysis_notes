@@ -268,7 +268,7 @@ __自定义函数apply__
   
     在数据清洗后，我们就要对数据进行统计了。Pandas 和 NumPy 一样，都有常用的统计函数，如果遇到空值 NaN，会自动排除。
     常用的统计函数包括：
-    以下函数可以指定计算的axis为行还是列，默认为列 axis=0。注意如果计算所在某一列/行中存在字符，则该列/行将不进行计算
+    以下函数可以指定计算的axis为行还是列，默认为行(就是某一列中的每一行特征) axis=0。注意如果计算所在某一列/行中存在字符，则该列/行将不进行计算
  
       count()     统计个数，空值NaN不计算
       describe()  一次性输出多个统计指标，包括：count,mean,std,min,max 等
@@ -449,7 +449,42 @@ __自定义函数apply__
 3、使用Numpy中的array方法
 
     np.array(df)
-    
+
+### pandas.mode() 
+
+__返回出现频率最高的值 默认 axis=0，即每一特征中出现最高的值 默认忽略NA值，如果想将NA值计算进去可以使用 dropna=False__
+
+__注意：如果存在频率相同的值会返回两个值__
+
+__数据:__
+
+    >>> df = pd.DataFrame([('bird', 2, 2),
+    ...                    ('mammal', 4, np.nan),
+    ...                    ('arthropod', 8, 0),
+    ...                    ('bird', 2, np.nan)],
+    ...                   index=('falcon', 'horse', 'spider', 'ostrich'),
+    ...                   columns=('species', 'legs', 'wings'))
+    >>> df
+              species  legs  wings
+    falcon        bird     2    2.0
+    horse       mammal     4    NaN
+    spider   arthropod     8    0.0
+    ostrich       bird     2    NaN  
+
+__例子1__
+
+    >>> df.mode()
+      species  legs  wings
+    0    bird   2.0    0.0
+    1     NaN   NaN    2.0
+
+__例子2__
+
+    >>> df.mode(dropna=False)
+      species  legs  wings
+    0    bird     2    NaN
+
+
 ### pandas.DataFrame.fillna 用指定的方法填充NA/NaN
 
 __DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）__
