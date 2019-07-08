@@ -516,6 +516,11 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
   
   __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
   
+  __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
+
+  ![Image_text]('https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/2.png')
+
+
   __groupby函数 例子1__
 
     import pandas as pd
