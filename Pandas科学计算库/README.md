@@ -553,8 +553,8 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
   
   __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
 
-  ![Image_text]('https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/2.png')
 
+<div align=center><img width="650" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/pandas/2.png"/></div>
 
   __groupby函数 例子1__
 
