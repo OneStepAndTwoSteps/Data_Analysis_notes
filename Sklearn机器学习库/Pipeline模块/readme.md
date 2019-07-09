@@ -1,7 +1,9 @@
 
 ### pipeline的流程案例-代码解释：
 
-    from sklearn.preprocessing import StandardScalerfrom sklearn.decomposition import PCAfrom sklearn.linear_model import LogisticRegression
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.decomposition import PCA
+    from sklearn.linear_model import LogisticRegression
     from sklearn.pipeline import Pipeline
 
     pipe_lr = Pipeline([('sc', StandardScaler()),
