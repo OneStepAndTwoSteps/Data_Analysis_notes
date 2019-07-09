@@ -55,6 +55,7 @@ __LabelEncoder和OneHotEncoder__
 
 我们也可以通过sklearn的模块实现对离散变量的one-hot编码，其中LabelEncoder是将离散变量替换为数字，OneHotEncoder则实现对替换为数字的离散变量进行one-hot编码。
 
+Label Encoder有助于检索和保留序数特征所隐含的信息
 
 __例子__
 
