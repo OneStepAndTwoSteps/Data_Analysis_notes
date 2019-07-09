@@ -1,5 +1,5 @@
 
-### KFold模块
+## KFold模块
 
 from sklearn.cross_validation import KFold
 
@@ -36,7 +36,41 @@ k折交叉验证最大的优点：
 
 通常使用10折交叉验证，当然这也取决于训练数据的样本数量。
 
+### KFold模块使用
 
+__函数使用__
 
+    KFold(n_splits=3, shuffle=False, random_state=None)
 
+__参数介绍__
+    
+    n_splits：表示划分几等份
+    
+    shuffle：在每次划分时，是否进行洗牌
+        
+        ①若为Falses时，其效果等同于random_state等于整数，每次划分的结果相同
+
+        ②若为True时，每次划分的结果都不一样，表示经过洗牌，随机取样的
+        
+    random_state：随机种子数
+
+__方法__
+
+    .get_n_splits([X，y，群组])         返回交叉验证器中的拆分迭代次数
+    .split(X [，y，groups])             生成索引以将数据拆分为训练和测试集。
+    
+__案例__
+    
+    from sklearn.model_selection import KFold
+
+    X = ["a", "b", "c", "d"]
+    kf = KFold(n_splits=2)
+    print(kf.get_n_splits(X))    # 输出 2
+
+    for train_index,test_index in kf.split(X):
+        print("TRAIN:", train_index, "TEST:", test_index)
+        
+    # TRAIN: [2 3] TEST: [0 1]
+    # TRAIN: [0 1] TEST: [2 3]
+    
 
