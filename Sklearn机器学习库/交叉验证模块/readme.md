@@ -19,11 +19,12 @@ __交叉验证的目的是为了能有效地估计模型的泛化能力 (测试�
 
 我们可以将我们将6000个样本进行训练，余下的2000个样本作为我们的交叉验证集，2000个样本作为我们的验证集，这是推荐的。
 
+### 补充
 
-《[ps:什么是过拟合，什么是欠拟合？](https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88.md)》
+-《[ps:什么是过拟合，什么是欠拟合？](https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88.md)》
 
 
-《[ps:什么是偏差，什么是方差？](https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E6%96%B9%E5%B7%AE%E3%80%81%E5%81%8F%E5%B7%AE/readme.md)》
+-《[ps:什么是偏差，什么是方差？](https://github.com/OneStepAndTwoSteps/data_mining_analysis/blob/master/%E6%96%B9%E5%B7%AE%E3%80%81%E5%81%8F%E5%B7%AE/readme.md)》
 
 
 ### 如果我们的交叉验证集误差较大，我们如何判断是方差还是偏差呢?
