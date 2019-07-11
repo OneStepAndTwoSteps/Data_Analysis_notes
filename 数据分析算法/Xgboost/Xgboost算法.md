@@ -84,8 +84,9 @@ __下图是xgboost的预测算法模型：__
 
 <div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/xgboost/2.png"/></div>
 
+__之前我们说过，我们会根据前面的树模型的残差作为下一个模型的训练值__
 
-我们如何选择每一轮加入什么 f(树) 呢？答案是非常直接的，选取一个f(树) 来使得我们的目标函数尽量最大地降低。
+那么我们如何选择每一轮加入什么 f(树) 呢？ 答案是非常直接的，我们想要的是选取一个f(树) 可以使得我们的目标函数尽量最大地降低。__下图是目标函数。__
 
 <div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/xgboost/5.png"/></div>
 
