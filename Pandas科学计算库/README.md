@@ -167,7 +167,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
       df2['Chinese'].astype('str') 
       df2['Chinese'].astype(np.int64) 
 
-
+  
 ### 数据间的空格
 
   有时候我们先把格式转成了 str 类型，是为了方便对数据进行操作，这时想要删除数据间的空格，我们就可以使用 strip 函数：
@@ -510,6 +510,64 @@ __例子2__
     0    bird     2    NaN
 
 
+### 删除缺失值：df.dropna()
+
+    df = pd.DataFrame({"name": ['Alfred', 'Batman', 'Catwoman'],
+                      "toy": [np.nan, 'Batmobile', 'Bullwhip'],
+                      "born": [pd.NaT, pd.Timestamp("1940-04-25"),
+                               pd.NaT]})
+
+    >>> df
+
+          name        toy       born
+    0    Alfred        NaN        NaT
+    1    Batman  Batmobile 1940-04-25
+    2  Catwoman   Bullwhip        NaT
+
+__删除至少缺少一个元素的行__
+
+    df.dropna()
+
+       name        toy       born
+    1  Batman  Batmobile 1940-04-25
+
+
+__删除至少缺少一个元素的列。__
+
+    df.dropna(axis='columns')
+
+          name
+    0    Alfred
+    1    Batman
+    2  Catwoman
+
+__删除缺少所有元素的行。__
+
+    >>> df.dropna(how='all')
+
+          name        toy       born
+    0    Alfred        NaN        NaT
+    1    Batman  Batmobile 1940-04-25
+    2  Catwoman   Bullwhip        NaT
+
+__仅保留至少包含2个非NA值的行。__
+
+    >>> df.dropna(thresh=2)
+
+          name        toy       born
+    1    Batman  Batmobile 1940-04-25
+    2  Catwoman   Bullwhip        NaT
+
+__删除某列中缺失值：__
+
+    df['toy'].dropna()
+
+    1    Batmobile
+    2     Bullwhip
+    Name: toy, dtype: object
+
+
+
 ### pandas.DataFrame.fillna 用指定的方法填充NA/NaN
 
 __DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）__
@@ -539,9 +597,9 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       >>> df.fillna(0)
           A   B   C   D
       0   0.0 2.0 0.0 0
-      1   3.0 4.0 0.0 1
       2   0.0 0.0 0.0 5
       3   0.0 3.0 0.0 4
+      1   3.0 4.0 0.0 1
 
    __我们还可以向前或向后传播非空值。__
 
