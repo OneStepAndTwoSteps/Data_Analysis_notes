@@ -848,6 +848,47 @@ __out：__
 
 __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
 
+
+### pd.cut：
+
+  需要将数据值分段并排序到箱中时使用cut。此函数对于从连续变量转换为分类变量也很有用。例如，cut可以将年龄转换为年龄范围组。支持分箱到相同数量的箱柜或预先指定的箱柜阵列。
+
+  pandas.cut（x，bins，right = True，labels = None，retbins = False，precision = 3，include_lowest = False，duplicates ='raise' ）
+
+__参数介绍：__
+    
+    x: 数据
+    
+    bins：进行划分的一维数组
+      
+      当 bins 为 整数时,将x划分为多少个等间距的区间
+
+      当 bins 为 序列时,将x划分在指定的序列中，若不在该序列中，则是NaN
+
+    right：是否包含右端点
+
+    labels : 是否用标记来代替返回的bins
+
+    precision: 精度
+
+    include_lowest:是否包含左端点
+
+__例子：__
+
+当bins为整数时：将数据分为三份等间距的区间
+
+   pd.cut(np.array([1, 7, 5, 4, 6, 3]), 3)
+
+      [(0.994, 3.0], (5.0, 7.0], (3.0, 5.0], (3.0, 5.0], (5.0, 7.0], (0.994, 3.0]]  # 输出的数据区间划分
+      Categories (3, interval[float64]): [(0.994, 3.0] < (3.0, 5.0] < (5.0, 7.0]]   # 3份等间距区间
+
+当bins为以序列时，可以看到1不属于我们2-4区间，也不属于4-6区间，也不属于6-8区间，所以输出的内容为NAN
+
+    pd.cut(np.array([1, 7, 5, 4, 6, 3]), [2,4,6,8]) 
+
+      [NaN, (6.0, 8.0], (4.0, 6.0], (2.0, 4.0], (4.0, 6.0], (2.0, 4.0]]
+      Categories (3, interval[int64]): [(2, 4] < (4, 6] < (6, 8]]
+
   ### pandas按若干个列的组合条件筛选数据
     #取年龄等于26，并且存活的数据的数量
     print(train_data[(train_data['Age']==29) & (train_data['Survived']==1)].count())
