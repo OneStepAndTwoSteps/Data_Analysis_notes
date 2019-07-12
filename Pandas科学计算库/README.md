@@ -287,8 +287,33 @@ __自定义函数apply__
       
    表格中有一个 describe() 函数，统计函数千千万，describe() 函数最简便。它是个统计大礼包，可以快速让我们对数据有个全面的了解。下面我直接使用 df1.describe() 输出结果为：
       
-        df1 = DataFrame({'name':['ZhangFei', 'GuanYu', 'a', 'b', 'c'], 'data1':range(5)})
-        print df1.describe()
+   分析泰坦尼克数据为例：
+
+      train_df.describe() # 默认只计算数值类型
+
+      out:
+
+            PassengerId	  Survived	 Pclass	       Age	       SibSp	     Parch	    Fare
+      count	891.000000	 891.000000	891.000000	714.000000	891.000000	891.000000	891.000000
+      mean	446.000000	 0.383838	  2.308642	  29.699118	  0.523008  	0.381594	  32.204208
+      std	  257.353842	  0.486592	0.836071  	14.526497	  1.102743	  0.806057	  49.693429
+      min	  1.000000	    0.000000	1.000000  	0.420000	  0.000000	  0.000000	  0.000000
+      25%	  223.500000	  0.000000	2.000000	  20.125000	  0.000000	  0.000000	  7.910400
+      50%	  446.000000	  0.000000	3.000000	  28.000000	  0.000000	  0.000000	  14.454200
+      75%	  668.500000	  1.000000	3.000000	  38.000000	  1.000000	  0.000000	  31.000000
+      max	  891.000000	  1.000000	3.000000	  80.000000	  8.000000	  6.000000	  512.329200
+
+      train_df.describe(include=['O']) # 只计算类型为str的数据
+      
+      out:
+      
+            Name	                           Sex	Ticket	Cabin	       Embarked
+      count	  891         	                 891	891	     204	          889
+      unique	891	                           2	  681	     147	          3
+      top	Panula, Master. Juha Niilo	       male	1601	C23 C25 C27	      S
+      freq    1                              577	7	         4	          644
+
+
    __运行结果:__  
    
   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/describe.png)
@@ -549,6 +574,50 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     
   ### pandas.DataFrame.groupby   
   
+  DataFrame.groupby(by=None, axis=0, level=None, as_index=True, sort=True, group_keys=True, squeeze=False, observed=False, **kwargs)[source]
+
+  __参数介绍：__
+    
+    as_index:为True时会将第一列数据设置为index，为False时则会新建一个数字索引。默认为True
+
+      import pandas as pd
+
+      df = pd.DataFrame(data={'books':['bk1','bk1','bk1','bk2','bk2','bk3'], 'price': [12,12,12,15,15,17]})
+
+      df
+
+      out：
+          books	price
+        0  bk1	  12
+        1	 bk1	  12
+        2	 bk1	  12
+        3	 bk2	  15
+        4	 bk2	  15
+        5	 bk3	  17
+
+      a=df.groupby('books', as_index=True).sum()
+      print(a.index)
+      a
+
+      out：
+
+        Index(['bk1', 'bk2', 'bk3'], dtype='object', name='books')
+
+              price
+        books	
+        bk1	    36
+        bk2	    30
+        bk3	    17
+
+      df.groupby('books', as_index=False).sum() 
+      
+      out： 
+
+          books	price
+        0	bk1	  36
+        1	bk2	  30
+        2	bk3	  17
+
   __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
   
   __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
