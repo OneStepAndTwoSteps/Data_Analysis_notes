@@ -148,6 +148,11 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
   想把“张飞”这行删掉。
   
     df2 = df2.drop(index=['ZhangFei'])
+  
+  刪除不需要的列名也可以用delete()，删除train_data.columns的第一列，注意delete不能对df数据类型使用。
+
+    coeff_df = pd.DataFrame(train_data.columns.delete(0))
+
 
   __2. 重命名列名 columns，让列表名更容易识别：__
   
