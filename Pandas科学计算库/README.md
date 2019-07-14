@@ -1081,6 +1081,32 @@ __案例：__
     except Exception as e:
         print(e)
 
+__df.to_sql暂时还不支持我们设置主键__
+
+    如果想要设置主键：加上 标记为 <---- 的两句
+
+    import MySQLdb
+    import pandas as pd
+    from sqlalchemy import create_engine
+
+    host = '127.0.0.1'
+    port = 3306
+    db = 'db_name'
+    user = 'db_user'
+    password = 'db_user_password'
+    
+    # ?charset=utf8 表示使用utf8字符集
+    engine = create_engine(str(r"mysql+mysqldb://%s:" + '%s' + "@%s/%s?charset=utf8") % (user, password, host, db))
+    conn = engine.connect()     <-------
+
+    try:
+        # 将数据写入test1表，如果表存在就进行替换，如果数据库的编码格式为latin，并且数据中存在中文，会报乱码。
+        Associate_dknowledge.to_sql('test1',con=engine,if_exists='replace',index=False)
+        conn.execute('alter table `{}` add primary key(`index`)'.format(file_name))       <-------
+
+    except Exception as e:
+        print(e)
+
 
 
   ## 总结：
