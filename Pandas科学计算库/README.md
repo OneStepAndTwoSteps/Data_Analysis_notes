@@ -1108,6 +1108,29 @@ __df.to_sql暂时还不支持我们设置主键__
         print(e)
 
 
+__df.to_sql防止主键重复__
+  
+  为了防止主键重复，于是我们修改原先的数据中的index，让其接着数据库中最大index往下排序
+
+    try:
+
+        result=conn.execute('SELECT COUNT(*) FROM `{course_name}`'.format(course_name=course_name)) 
+        # 需要写入sql数据的长度
+        data_len=len(data)
+        # 数据库原先数据的长度
+        sql_data_len=result.fetchall()[0][0]
+        # 修改准备写入的数据的index，使其接在sql中主键数字的后面
+        data.index=np.arange(sql_data_len, sql_data_len+data_len)
+        print(data)
+        # 使用追加方式进行写入，这里我们将index设为主键，所以下面的index要等于True
+        data.to_sql(test1,con=engine,if_exists='append',index=True)
+        # 如果原先sql不存在数据才设置主键，否则不做操作
+        if sql_data_len == 0:
+            conn.execute('alter table `{}` add primary key(`index`)'.format(course_name)) 
+        else:
+            pass
+    except Exception as e:
+        print(e)
 
   ## 总结：
   
