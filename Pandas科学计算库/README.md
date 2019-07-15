@@ -1101,7 +1101,7 @@ __df.to_sql暂时还不支持我们设置主键__
 
     try:
         # 将数据写入test1表，如果表存在就进行替换，如果数据库的编码格式为latin，并且数据中存在中文，会报乱码。
-        Associate_dknowledge.to_sql('test1',con=engine,if_exists='replace',index=False)
+        Associate_dknowledge.to_sql('test1',con=engine,if_exists='replace',index=True)
         conn.execute('alter table `{}` add primary key(`index`)'.format(file_name))       <-------
 
     except Exception as e:
@@ -1112,6 +1112,7 @@ __df.to_sql暂时还不支持我们设置主键__
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
+   
    Pandas 包与 NumPy 工具库配合使用可以发挥巨大的威力，正是有了 Pandas 工具，Python 做数据挖掘才具有优势。
   
   
