@@ -499,6 +499,10 @@ S:
     vmin, vmax : 显示的数据值的最大和最小的范围，热力图最右侧的渐变条的最小值和最大值
 
     cmap : matplotlib颜色表名称或对象，或颜色列表，可选从数据值到色彩空间的映射。如果没有提供，默认设置
+         
+         例子：
+              colormap = plt.cm.RdBu
+              sns.heatmap(train.astype(float).corr(),linewidths=0.1,vmax=1.0, square=True, cmap=colormap, linecolor='white', annot=True)
 
     center : 指定色彩的中心值
 
