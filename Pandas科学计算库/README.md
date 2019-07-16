@@ -1134,6 +1134,20 @@ __df.to_sql if_exists='append' 时防止主键冲突__
         pass
 
 
+  ### pandas的拼接循环：
+
+  举个例子：
+
+    现在有两个df数据 train_df 和 test_df 
+
+    现在 combine=[train_df,test_df]
+
+    for dataset in combine:
+        dataset['Title']=dataset.Name.str.extract('([A-Za-z]+)\.',expand=False)
+
+  这里的 for dataset in combine 其实只是循环了两次，第一次是train_data 第二次是test_data数据，其实上就是操作修改我们train_data和test_data，之后输出train_df 我们会发现其多了一个特征 ‘Title’ 。
+
+
   ## 总结：
   
    和 NumPy 一样，Pandas 有两个非常重要的数据结构：Series 和 DataFrame。使用 Pandas 可以直接从 csv 或 xlsx 等文件中导入数据，以及最终输出到 excel 表中。
