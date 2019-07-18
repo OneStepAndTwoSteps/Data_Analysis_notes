@@ -390,7 +390,8 @@ S:
 在 Matplotlib 中，我们使用 plt.bar(x, height) 函数，其中参数 x 代表 x 轴的位置序列，height 是 y 轴的数值序列，也就是柱子的高度。
   
 在 Seaborn 中，我们使用 sns.barplot(x=None, y=None, data=None) 函数。其中参数 data 为 DataFrame 类型，x、y 是 data 中的变量。
-  
+
+__最简单的方式：__ train_data[['Sex','Survived']].groupby(['Sex']).mean().plot.bar()
   
 __例子：__
     
@@ -416,8 +417,8 @@ M:
 S:
    
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
-  
-  
+
+
 ## 箱型图：
 
   它可以帮我们分析出数据的差异性、离散程度和异常值等。 
@@ -689,11 +690,19 @@ alpha=.7透明程度
     
 __bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bins指明40时，我们两条年龄的柱状图会进行合并显示，bins指定80则每条柱状图表示一个年龄)__
 
-此时纵坐标表示满足条件的数据的数量
+__两个特征进行可视化展示：__
 
+    # 此时纵坐标表示满足条件的数据的数量
     g = sns.FacetGrid(train_data, col='Survived',height=5)
     g.map(plt.hist,'Age',bins=80，alpha=.7)
     plt.show()
+
+__三个特征进行可视化展示：__
+
+    # 此时纵坐标表示满足条件的数据的数量
+    grid = sns.FacetGrid(train_data, row='Pclass', col='Sex', size=2.2, aspect=1.6)
+    grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png)
 
