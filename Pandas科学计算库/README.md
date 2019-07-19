@@ -1112,26 +1112,81 @@ __df.to_sql if_exists='append' 时防止主键冲突__
   
   为了防止主键重复，于是我们修改原先的数据中的index，让其接着数据库中最大index往下排序
 
-    try:
-        # 当表不存在的时候该句会报错
-        result=conn.execute('SELECT COUNT(*) FROM `{table_name}`'.format(table_name='test1')) 
-        # 需要写入sql数据的长度
-        data_len=len(data)
-        # 数据库原先数据的长度
-        sql_data_len=result.fetchall()[0][0]
-        # 修改准备写入的数据的index，使其接在sql中主键数字的后面
-        data.index=np.arange(sql_data_len, sql_data_len+data_len)
-        print(data)
-    except Exception as e:
-        print(e)
+    import MySQLdb
+    import pandas as pd
+    from sqlalchemy import create_engine
 
-    # 使用追加方式进行写入，这里我们将index设为主键，所以下面的index要等于True
-    data.to_sql(test1,con=engine,if_exists='append',index=True)
-    # 如果原先sql不存在数据才设置主键，否则不做操作
-    if sql_data_len == 0:
-        conn.execute('alter table `{}` add primary key(`index`)'.format(course_name)) 
-    else:
-        pass
+    host = '127.0.0.1'
+    port = 3306
+    db = 'db_name'
+    user = 'db_user'
+    password = 'db_user_password'
+
+    engine = create_engine(str(r"mysql+mysqldb://%s:" + '%s' + "@%s/%s?charset=utf8") % (user, password, host, db))
+    conn = engine.connect()
+    Session = sessionmaker(bind=engine)
+
+    def df_to_sql(test1,data,flag): 
+        session = Session(bind=conn)
+        # 通过flag表示是否更新表，如果更新就替换之前的表，否则追加
+        print('flag: ',flag)
+        # 如果是更新表，则覆盖原有表
+        if flag==True:
+            method='replace'
+            data.to_sql(test1,con=engine,if_exists=method,index=True)
+        # 如果是追加数据，则追加
+        else:
+            method='append'
+            try:
+                result=session.execute('SELECT COUNT(*) FROM `test1`') 
+                """ 为了防止主键重复，于是我们修改原先的数据中的index，让其接着数据库中最大index往下排序"""
+                data_len=len(data)
+                sql_data_len=result.fetchall()[0][0]
+                data.index=np.arange(sql_data_len, sql_data_len+data_len)
+                print(data)
+                data.to_sql(test1,con=engine,if_exists=method,index=True)
+                session.commit()
+                session.close()
+            except Exception as e:
+                print(e)
+
+
+    def set_primary_key(course_name):
+      try:
+          conn.execute('alter table test1 add primary key(`index`)') 
+      except Exception as e:
+          print(e)
+
+#### 注意：
+
+这里我们最好使用session会话，这样我们进行一次修改之后就会提交一次事务，否则可能造成事务未提交的情况，这个时候如果我们还留有事务，但是此时如果我们要进行表的替换replace，那么因为之前存在事务，但是我们要尝试去删表，就会造成metadata lock，就会阻塞，所以我们采用session，及时进行事务的提交。
+
+
+
+### 数据库数据转为df：
+
+    import pandas as pd
+    import pymysql
+    import sqlalchemy
+    from sqlalchemy import create_engine
+
+    host = '127.0.0.1'
+    port = 3306
+    db = 'db_name'
+    user = 'db_user'
+    password = 'db_user_password'
+
+    # 1. 用sqlalchemy构建数据库链接engine
+    engine = create_engine(str(r"mysql+mysqldb://%s:" + '%s' + "@%s/%s?charset=utf8") % (user, password, host, db))
+    # sql 命令
+    sql_cmd = "SELECT * FROM table"
+    df = pd.read_sql(sql=sql_cmd, con=engine)
+
+    # 2. 用DBAPI构建数据库链接engine
+    con = pymysql.connect(host=localhost, user=username, password=password, database=dbname, charset='utf8', use_unicode=True)
+    df = pd.read_sql(sql_cmd, con)
+
+  
 
 
   ### pandas的拼接循环：
