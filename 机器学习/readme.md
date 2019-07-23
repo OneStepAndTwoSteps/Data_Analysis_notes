@@ -79,5 +79,7 @@ __查准率为什么要结合查全率：__
 __F1值就是精确值和召回率的调和均值,__ 也就是 2/F1=1/P+1/R --> F1=2PR/(P+R)=__2TP/(2TP+FP+FN)__ ,__F1 作为精确率 P 和召回率 R 的调和平均，数值越大代表模型的结果越好。__
 
 
+### sklearn相关案例
 
+-《[sklearn相关案例](https://github.com/OneStepAndTwoSteps/Data_Analysis/tree/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0)》
 
