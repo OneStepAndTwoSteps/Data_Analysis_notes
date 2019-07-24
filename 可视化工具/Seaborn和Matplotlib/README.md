@@ -11,6 +11,22 @@
     参数设置：sns.set(参数)
     参数重置：sns.set()
 
+
+## 设置seaborn画布大小
+
+  可以在最前面定义好画布大小
+
+  例子：
+
+    # 要设置sns的画布大小，要在最前面定义好plt.figure(figsize)
+    plt.figure(figsize=(15,12))
+    sns.barplot(x='MLA Test Accuracy Mean',y='MLA Name',data=MLA_compare,color='m')
+
+    plt.title('Machine Learning Algorithm Accuracy Score \n')
+    plt.xlabel('Accuracy Score (%)')
+    plt.ylabel('Algorithm')
+
+
  ## plt.subplot方法：
    __subplot(nrows, ncols, index, **kwargs)__
    
