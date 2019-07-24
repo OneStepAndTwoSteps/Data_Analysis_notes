@@ -1202,6 +1202,47 @@ __df.to_sql if_exists='append' 时防止主键冲突__
 
   这里的 for dataset in combine 其实只是循环了两次，第一次是train_data 第二次是test_data数据，其实上就是操作修改我们train_data和test_data，之后输出train_df 我们会发现其多了一个特征 ‘Title’ 。
 
+### df.copy()
+
+  __复制此对象的索引和数据。__
+
+  当deep=True（默认）时，将使用调用对象的数据和索引的副本创建新对象。对副本的数据或索引的修改不会反映在原始对象中（请参阅下面的注释）。
+
+  何时deep=False，将创建一个新对象而不复制调用对象的数据或索引（仅复制对数据和索引的引用）。对原始数据的任何更改都将反映在浅层副本中（反之亦然）。
+
+  __例子：__
+
+    a=train_data['Survived']
+    b=train_data['Survived']
+    print(a.tail())
+    print(b.tail())
+    
+    a:                             b:
+
+    886    0                      886    0
+    887    1                      887    1
+    888    0                      888    0
+    889    1                      889    1
+    890    0                      890    0
+    Name: Survived, dtype: int64  Name: Survived, dtype: int64
+    
+__现在我们没有进行deepcopy，我们修改b的数据，a的数据也会发生修改，所以我们如果要保持a和b数据独立，我们必须deepcopy__
+
+    b['haha']=1           
+    b.tail(1)
+
+    haha    1
+    Name: Survived, dtype: int64
+    
+    a.tail(1)
+
+    haha    1
+    Name: Survived, dtype: int64
+      
+__如果要使用deepcopy，使用df.copy(deep=True)即可__
+
+    
+
 
   ## 总结：
   
