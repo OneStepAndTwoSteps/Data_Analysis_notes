@@ -47,7 +47,7 @@
       
 ## 数据结构Series 和 Dataframe
 
-### Serie
+### Series
   __Series 是个定长的字典序列__ 。说是定长是因为在存储的时候，相当于两个 ndarray，这也是和字典结构最大的不同。因为在字典的结构里，元素的个数是不固定的。
   
   __Series 的两个基本属性__ 有两个基本属性：index 和 values。在 Series 结构中，index 默认是 0,1,2,……递增的整数序列，当然我们也可以自己来指定索引，比如 index=[‘a’, ‘b’, ‘c’, ‘d’]。
@@ -128,7 +128,42 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
   
 需要说明的是，在运行的过程可能会存在缺少 xlrd 和 openpyxl 包的情况，到时候如果缺少了，可以在命令行模式下使用“pip install”命令来进行安装。
 
+
+### Dataframe 和 Series 的坑
+
+___场景：在一段df数据中我们进行取值__
+
+__数据：__
   
+    train_data.head()
+
+__out：__
+
+      Survived	Pclass	Sex	Age	Fare	Embarked	Title	Isalone
+    0 	0	      3	      1	  1	  0   	2	        2	    0
+    1	  1	      1	      0	  2	  0	    0	        3	    0
+    2	  1	      3	      0	  1	  0   	2	        1	    1
+    3	  1	      1	      0	  2	  0	    2	        3	    0
+    4	  0	      3	      1	  2	  0	    2	        2	    1
+
+
+__双括号和单括号之间的区别：__
+
+__双括号取出的 Survived 是 DataFrame 格式__
+
+    type(train_data[['Survived']].head())
+
+    pandas.core.frame.DataFrame
+
+__单括号取出的 Survived 是 Series 格式__
+
+    type(train_data['Survived'].head())
+    pandas.core.series.Series
+
+取出来为 Series 格式，但是你没有发觉，此后如果想赋值一个新的列，那么无法成功，因为Series中只能有一列。
+
+
+
 ### 数据清洗
   数据清洗是数据准备过程中必不可少的环节，Pandas 也为我们提供了数据清洗的工具，在后面数据清洗的章节中会给你做详细的介绍，这里简单介绍下 Pandas 在数据清洗中的使用方法。
   
