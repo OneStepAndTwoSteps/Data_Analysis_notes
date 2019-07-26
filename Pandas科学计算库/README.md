@@ -1276,6 +1276,12 @@ __现在我们没有进行deepcopy，我们修改b的数据，a的数据也会�
       
 __如果要使用deepcopy，使用df.copy(deep=True)即可__
 
+
+### df 追加数据
+
+__例子：__
+
+    df = df.append(df2)
     
 
 
