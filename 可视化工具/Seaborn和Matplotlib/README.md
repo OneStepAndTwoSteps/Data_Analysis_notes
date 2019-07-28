@@ -738,8 +738,10 @@ __两个特征进行可视化展示：__
 
 __三个特征进行可视化展示：__
 
-    # 此时纵坐标表示满足条件的数据的数量
-    grid = sns.FacetGrid(train_data, row='Pclass', col='Sex', size=2.2, aspect=1.6)
+    # 此时纵坐标表示满足条件的数据的数量 
+    # aspect 每个刻面的宽高比，使每个刻面的宽度以英寸为单位 ，是宽和高的比
+    # size 定义图的大小，但是定义了 size 之后 height 会失效
+    grid = sns.FacetGrid(train_data, row='Pclass', col='Sex', size=2.2,aspect=1.6)
     grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid3.png)
@@ -751,7 +753,7 @@ __四个特征进行可视化展示：__
     # size 定义图的大小
     # margin_titles = True时 会将行变量的标题被绘制到最后一列的右侧。此选项是实验性的，可能无法在所有情况下使用。
     # palette 用于hue变量的不同级别的颜色。应该是可以解释的东西color_palette()，或者是将色调级别映射到matplotlib颜色的字典。
-    
+
     g = sns.FacetGrid(train,size=5, col="Sex", row="Embarked", margin_titles=True, hue = "Survived",palette = pal)
 
     # edgecolor 边的颜色
