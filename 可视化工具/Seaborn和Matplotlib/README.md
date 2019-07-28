@@ -733,14 +733,35 @@ __两个特征进行可视化展示：__
     g.map(plt.hist,'Age',bins=80，alpha=.7)
     plt.show()
 
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png)
+
 __三个特征进行可视化展示：__
 
     # 此时纵坐标表示满足条件的数据的数量
     grid = sns.FacetGrid(train_data, row='Pclass', col='Sex', size=2.2, aspect=1.6)
     grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid3.png)
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png)
+
+__四个特征进行可视化展示：__
+
+    # row行特征(特征是二分类，所以行方向有两个子图) col表示列特征(列方向是三分类，所以有三个子图) hue是第三个变量的级别，该参数绘制不同颜色的不同数据子集
+    # size 定义图的大小
+    # margin_titles = True时 会将行变量的标题被绘制到最后一列的右侧。此选项是实验性的，可能无法在所有情况下使用。
+    # palette 用于hue变量的不同级别的颜色。应该是可以解释的东西color_palette()，或者是将色调级别映射到matplotlib颜色的字典。
+    
+    g = sns.FacetGrid(train,size=5, col="Sex", row="Embarked", margin_titles=True, hue = "Survived",palette = pal)
+
+    # edgecolor 边的颜色
+    # .add_legend(); 是否显示图例，在这里就是Survived的图例(因为只有他没有明确显示含义)
+    g = g.map(plt.hist, "Age", edgecolor = 'white').add_legend();
+    g.fig.suptitle("Survived by Sex and Age", size = 25)
+    plt.subplots_adjust(top=0.90)
+
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid4.png)
 
 
  ## matplotlib.pyplot.figure
