@@ -54,11 +54,11 @@ __在 logisticregression 和 SVC 中有有一个方法 .decision_function 可以
 
     # 打印AUC的面积
     ROC_AUC = auc(FPR, TPR)
-    print (ROC_AUC)
+    print ('Logistic AUC: ',ROC_AUC)
 
     # 打印AUC的面积
     ROC_AUC2 = auc(FPR2, TPR2)
-    print (ROC_AUC2)
+    print ('SVM AUC : ',ROC_AUC2)
 
     plt.figure(figsize =[11,9])
     plt.plot(FPR, TPR, label= 'ROC curve(area = %0.2f)'%ROC_AUC, linewidth= 4)
@@ -70,13 +70,17 @@ __在 logisticregression 和 SVC 中有有一个方法 .decision_function 可以
     plt.xlabel('False Positive Rate', fontsize = 18)
     plt.ylabel('True Positive Rate', fontsize = 18)
     plt.title('ROC for Titanic survivors', fontsize= 18)
+
+    # 加上legend方法才会显示图例
+    plt.legend(loc="lower right",fontsize=16)
+
     plt.show()
 
 
 #### 展示图
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc5.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc5-1.png"/></div>
 
 
 
