@@ -16,7 +16,7 @@ ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver o
 
 在roc曲线中，我们绘制出来的图像他的横坐标表示 FPR 他的纵坐标表示 TPR __如下图所示__
 
-<div align=center><img width="400" height="300" src=""/></div>
+<div align=center><img width="500" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc.png"/></div>
 
 
 其中 FPR 的计算公式为 FP/(FP+TN),表示伪正类率(False positive rate， FPR)，预测为正但实际为负的样本占所有负例样本的比例；通俗来讲就是 当我们设置男性为正类，那么将女性预测为男性占所有女性的比例。
@@ -25,7 +25,7 @@ ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver o
 
 计算公式图：
 
-<div align=center><img width="400" height="300" src=""/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3.png"/></div>
 
 
 #### 我们再来看看ROC曲线中的“四点一线”
@@ -57,7 +57,7 @@ ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver o
 
 ROC曲线有个很好的特性：当测试集中的正负样本的分布变化的时候，ROC曲线能够保持不变。在实际的数据集中经常会出现类不平衡（class imbalance）现象，即负样本比正样本多很多（或者相反），而且测试数据中的正负样本的分布也可能随着时间变化。下图是 ROC 曲线和 PR 曲线对比图。
 
-<div align=center><img width="400" height="300" src=""/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc%E5%92%8Cpr.png"/></div>
 
 
 在上图中，(a)和(c)为ROC曲线，(b)和(d)为Precision-Recall曲线。(a)和(b)展示的是分类其在原始测试集（正负样本分布平衡）的结果，(c)和(d)是将测试集中负样本的数量增加到原来的10倍后，分类器的结果。可以明显的看出，ROC曲线基本保持原貌，而Precision-Recall曲线则变化较大。
