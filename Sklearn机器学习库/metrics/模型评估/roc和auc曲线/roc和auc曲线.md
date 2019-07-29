@@ -176,12 +176,15 @@ pos_label帮助我们选择正类，这里我们将2设置为正类。
 
 
 
-#### 参考链接：
+#### 笔记参考链接：
 
--《[参考链接1](https://www.jianshu.com/p/c61ae11cc5f6)》
--《[参考链接2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)》
--《[参考链接3](https://juejin.im/post/5a1a768251882535cd4a8984#heading-11)》
--《[参考链接4](https://wulc.me/2018/06/16/ROC%20%E6%9B%B2%E7%BA%BF%E4%B8%8E%20PR%20%E6%9B%B2%E7%BA%BF/)》
+-《[机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率](https://www.jianshu.com/p/c61ae11cc5f6)》
+
+-《[sklearn.metrics.roc_curve¶](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)》
+
+-《[ROC曲线与AUC值及其铺垫](https://juejin.im/post/5a1a768251882535cd4a8984#heading-11)》
+
+-《[ROC 曲线与 PR 曲线](https://wulc.me/2018/06/16/ROC%20%E6%9B%B2%E7%BA%BF%E4%B8%8E%20PR%20%E6%9B%B2%E7%BA%BF/)》
 
 
 
