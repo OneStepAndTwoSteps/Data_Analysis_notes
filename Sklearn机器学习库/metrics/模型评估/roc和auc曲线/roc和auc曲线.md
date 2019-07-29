@@ -1,0 +1,176 @@
+# roc和auc曲线
+
+## 什么是roc 曲线？
+
+ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver operating characteristic curve), 是反映敏感性和特异性连续变量的综合指标,是用构图法揭示敏感性和特异性的相互关系，它通过将连续变量设定出多个不同的临界值，从而计算出一系列敏感性和特异性，再以敏感性为纵坐标、（1-特异性）为横坐标绘制成曲线，曲线下面积越大，诊断准确性越高。在ROC曲线上，最靠近坐标图左上方的点为敏感性和特异性均较高的临界值。
+
+## roc曲线的作用
+
+二分类问题在机器学习中是一个很常见的问题，经常会用到。ROC (Receiver Operating Characteristic) 曲线和 AUC (Area Under the Curve) 值常被用来评价一个二值分类器 (binary classifier) 的优劣。
+
+
+### 注意：roc曲线只适用于二分类
+
+
+## roc曲线
+
+在roc曲线中，我们绘制出来的图像他的横坐标表示 FPR 他的纵坐标表示 TPR __如下图所示__
+
+<div align=center><img width="400" height="300" src=""/></div>
+
+
+其中 FPR 的计算公式为 FP/(FP+TN),表示伪正类率(False positive rate， FPR)，预测为正但实际为负的样本占所有负例样本的比例；通俗来讲就是 当我们设置男性为正类，那么将女性预测为男性占所有女性的比例。
+
+其中 TPR 的计算公式为 TP/(TP+FN)，表示真正类率(True positive rate， TPR 也称召回率)，预测为正且实际为正的样本占所有正例样本的比例。通俗来讲就是 当我们设置男性为正类，那么预测为男性的占所有男性的比例
+
+计算公式图：
+
+<div align=center><img width="400" height="300" src=""/></div>
+
+
+#### 我们再来看看ROC曲线中的“四点一线”
+
+第一个点，(0,1)，即FPR=0, TPR=1，这意味着FN（false negative）=0，并且FP（false positive）=0。这是一个完美的分类器，它将所有的样本都正确分类。
+
+第二个点，(1,0)，即FPR=1，TPR=0，类似地分析可以发现这是一个最糟糕的分类器，因为它成功避开了所有的正确答案。
+
+第三个点，(0,0)，即FPR=TPR=0，即FP（false positive）=TP（true positive）=0，可以发现该分类器预测所有的样本都为负样本（negative）。此时我们的threshold值最大，为什么呢？因为我们判断正类需要该样本的分数大于阈值，此时FP=TP=0 意味着所有的正类分数都小于阈值，即判断为正类为0，
+
+第四个点（1,1），即FPR=TPR=1，分类器实际上预测所有的样本都为正样本。此时threshold最小，即把所有的样本都视为正类。
+
+对于ROC曲线，我们可以这样理解，对于二分类问题，曲线的每一个点都代表一个阈值，分类器给每个样本一个得分，得分大于阈值的我们认为是正样本，小于阈值的我们认为是负样本。
+
+
+通过阈值我们可以得到 各个评估值 的得分，比如TPR,FPR值，通过这些值我们可以得到在不同阈值下，我们模型预测的好坏，这样我们之后也可以通过设置阈值来帮助我们模型进行准确度的提升。
+
+
+### 在如上图所示的 roc 曲线中如何评估模型的优劣
+
+    1、在ROC空间，ROC曲线越凸向左上方向效果越好。
+
+    2、若学习器A的ROC曲线将另外一个学习器B的曲线完全包住，则A的性能一定比B好，否则若二者曲线有交叉，则可以较为合理的认为ROC曲线越接近左上角，也就是AUC值越大，整个分类器的性能越好。
+
+    3、对于并不是完全包住，那我们得从实际情况对那种参数更加偏好来考虑，但是一般我们就考察ROC围成的面积，也就是AUC值。哪个AUC值大，哪个分类器就好。
+
+
+### 为什么使用roc曲线
+
+ROC曲线有个很好的特性：当测试集中的正负样本的分布变化的时候，ROC曲线能够保持不变。在实际的数据集中经常会出现类不平衡（class imbalance）现象，即负样本比正样本多很多（或者相反），而且测试数据中的正负样本的分布也可能随着时间变化。下图是 ROC 曲线和 PR 曲线对比图。
+
+<div align=center><img width="400" height="300" src=""/></div>
+
+
+在上图中，(a)和(c)为ROC曲线，(b)和(d)为Precision-Recall曲线。(a)和(b)展示的是分类其在原始测试集（正负样本分布平衡）的结果，(c)和(d)是将测试集中负样本的数量增加到原来的10倍后，分类器的结果。可以明显的看出，ROC曲线基本保持原貌，而Precision-Recall曲线则变化较大。
+
+
+## AUC值
+
+AUC值 Area Under Curve (曲线下面积)，也就是ROC曲线之下与坐标轴围成的面积。我们很容易就会看出来，AUC其实是ROC    曲线的积分，但是这样很不直观，也不能感性理解，其实AUC确实是有物理意义的。AUC是指 随机给定一个正样本和一个负样本，分类器输出的正样本的概率比分类器出去负样本的概率大的可能性。
+
+从上图的roc曲线中我们可以发现，经过曲线划分，我们的曲线下的面积为0.5，所以我们的AUC面积一般来说都是大于0.5的。当AUC值等于0.5时，我们可以认为分类器不起作用。AUC小于0.5时，实际情况基本不会出现，不符合真实情况。
+
+__简单说：AUC值越大的分类器，正确率越高。__
+
+## 小结
+
+1、通过比较roc曲线的左上凸的趋势，以用来评估我们二分类模型的优劣，在ROC空间，ROC曲线越凸向左上方向效果越好
+
+2、若学习器A的ROC曲线将另外一个学习器B的曲线完全包住，则A的性能一定比B好，否则若二者曲线有交叉，则可以较为合理的认为ROC曲线越接近左上角，也就是AUC值越大，整个分类器的性能越好。
+
+3、对于并不是完全包住，那我们得从实际情况对那种参数更加偏好来考虑，但是一般我们就考察ROC围成的面积，也就是AUC值。哪个AUC值大，哪个分类器就好。
+
+4、通过阈值我们可以得到 各个评估值 的得分，比如TPR,FPR值，通过这些值我们可以得到在不同阈值下，我们模型预测的好坏，这样我们之后也可以通过设置阈值来帮助我们模型进行准确度的提升。
+
+5、AUC值越大的分类器，正确率越高。
+
+## sklearn.metrics.roc_curve使用说明
+
+### 导入包
+
+    from sklearn.metrics import roc_curve, auc
+
+
+### 参数说明
+
+    参数：
+
+        y_true：数组，存储数据的标签，维度就是样本数，形如[0,1,1,0,1...]这样的，也可以是-1和1，只要有两个值
+
+    　　y_score：数组，存储数据的预测概率值，维度也是样本数，形如[0.38,0.5,0.8]这样的
+
+    　　pos_label：整型或字符串，当y_true中只有一个值时，比如都是1或者都是0，无法判断哪个是正样本，需要用一个数字或字符串指出
+
+    　　sample_weight：采样权重，这个官方没有仔细说，是一个可选参数，有待考察
+
+    　　drop_intermediate：丢掉一些阈值，以便画roc曲线图
+
+    返回值：一共三个，分别是fpr,tpr,thresholds
+
+    　　fpr：数组，随阈值上涨的假阳性率
+
+    　　tpr：数组，随阈值上涨的真正例率
+
+    　　thresholds：数组，对预测值排序后的score列表，作为阈值，排序从大到小
+
+### 案例
+
+    import numpy as np
+    from sklearn import metrics
+    y = np.array([1, 1, 2, 2])
+    scores = np.array([0.1, 0.4, 0.35, 0.8])
+    fpr, tpr, thresholds = metrics.roc_curve(y, scores, pos_label=2)
+
+    print('取不同阈值时fpr的变化：',fpr)
+    print('取不同阈值时tpr的变化：',tpr)
+
+
+    print('\n')
+    print('阈值：',thresholds)
+
+
+    # 取不同阈值时fpr的变化： [0.  0.5 0.5 1. ]
+    # 取不同阈值时tpr的变化： [0.5 0.5 1.  1. ]
+    #
+    #
+    # 阈值： [0.8  0.4  0.35 0.1 ]
+
+pos_label帮助我们选择正类，这里我们将2设置为正类。
+
+这里我们的阈值默认为 预测值排序后的score列表 在案例中也就是 [0.1, 0.4, 0.35, 0.8]，此时当我们的分数超过我们的阈值，比如当阈值取0.1时，socres所有的分数都大于等于0.1，所有我们将其都人作为正类，之后我们就可以进行计算得出 TP,FP,FN,TN,然后也就可以计算出 fpr 和 tpr。
+
+输出的fpr和tpr是根据不同阈值得出的结果。
+
+
+
+### 绘制曲线
+
+
+    from sklearn.metrics import roc_curve, auc
+    #plt.style.use('seaborn-pastel')
+    y_score = logreg.decision_function(X_test)
+
+    FPR, TPR, _ = roc_curve(y_test, y_score)
+    ROC_AUC = auc(FPR, TPR)
+    print (ROC_AUC)
+
+    plt.figure(figsize =[11,9])
+    plt.plot(FPR, TPR, label= 'ROC curve(area = %0.2f)'%ROC_AUC, linewidth= 4)
+    plt.plot([0,1],[0,1], 'k--', linewidth = 4)
+    plt.xlim([0.0,1.0])
+    plt.ylim([0.0,1.05])
+    plt.xlabel('False Positive Rate', fontsize = 18)
+    plt.ylabel('True Positive Rate', fontsize = 18)
+    plt.title('ROC for Titanic survivors', fontsize= 18)
+    plt.show()
+
+
+#### 示意图
+
+
+
+
+<div align=center><img width="400" height="300" src=""/></div>
+
+
+
+
