@@ -100,17 +100,19 @@ __简单说：AUC值越大的分类器，正确率越高。__
 
     　　pos_label：整型或字符串，当y_true中只有一个值时，比如都是1或者都是0，无法判断哪个是正样本，需要用一个数字或字符串指出
 
-    　　sample_weight：采样权重，这个官方没有仔细说，是一个可选参数，有待考察
+    　　sample_weight：采样权重，可选择取其中的一部分进行计算。
 
-    　　drop_intermediate：丢掉一些阈值，以便画roc曲线图
+    　　drop_intermediate：即可选择去掉一些对于ROC性能不利的阈值，使得得到的曲线有更好的表现性能。
 
     返回值：一共三个，分别是fpr,tpr,thresholds
 
-    　　fpr：数组，随阈值上涨的假阳性率
+    　　fpr：数组，根据不同阈值求出的fpr。
 
-    　　tpr：数组，随阈值上涨的真正例率
+    　　tpr：数组，根据不同阈值求出的tpr。
 
     　　thresholds：数组，对预测值排序后的score列表，作为阈值，排序从大到小
+
+        这三个返回值阈值对应的 fpr tpr 是一一对应的。
 
 ### 案例
 
@@ -169,8 +171,17 @@ pos_label帮助我们选择正类，这里我们将2设置为正类。
 
 
 
-<div align=center><img width="400" height="300" src=""/></div>
+<div align=center><img width="500" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc2.png"/></div>
 
+
+
+
+#### 参考链接：
+
+-《[参考链接1](https://www.jianshu.com/p/c61ae11cc5f6)》
+-《[参考链接2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)》
+-《[参考链接3](https://juejin.im/post/5a1a768251882535cd4a8984#heading-11)》
+-《[参考链接4](https://wulc.me/2018/06/16/ROC%20%E6%9B%B2%E7%BA%BF%E4%B8%8E%20PR%20%E6%9B%B2%E7%BA%BF/)》
 
 
 
