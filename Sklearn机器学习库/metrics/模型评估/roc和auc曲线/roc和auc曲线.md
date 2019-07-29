@@ -2,7 +2,11 @@
 
 ## 什么是roc 曲线？
 
-ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver operating characteristic curve), 是反映敏感性和特异性连续变量的综合指标,是用构图法揭示敏感性和特异性的相互关系，它通过将连续变量设定出多个不同的临界值，从而计算出一系列敏感性和特异性，再以敏感性为纵坐标、（1-特异性）为横坐标绘制成曲线，曲线下面积越大，诊断准确性越高。在ROC曲线上，最靠近坐标图左上方的点为敏感性和特异性均较高的临界值。
+ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver operating characteristic curve), 是反映敏感性和特异性连续变量的综合指标,是用构图法揭示敏感性和特异性的相互关系，它通过将连续变量设定出多个不同的临界值，从而计算出一系列敏感性和特异性，再 __以敏感性为纵坐标__、__（1-特异性）为横坐标__ 绘制成曲线，__曲线下面积越大，诊断准确性越高。__ 在ROC曲线上，__最靠近坐标图左上方的点为敏感性和特异性均较高的临界值。__
+
+### TP FP TN FN 分别代表含义
+
+-《[TP FP TN FN 分别代表含义](https://github.com/OneStepAndTwoSteps/Data_Analysis/tree/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)》
 
 ## roc曲线的作用
 
@@ -19,11 +23,11 @@ ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver o
 <div align=center><img width="500" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc.png"/></div>
 
 
-其中 FPR 的计算公式为 FP/(FP+TN),表示伪正类率(False positive rate， FPR)，预测为正但实际为负的样本占所有负例样本的比例；通俗来讲就是 当我们设置男性为正类，那么将女性预测为男性占所有女性的比例。
+其中 FPR 的计算公式为 FP/(FP+TN),表示伪正类率(False positive rate， FPR)，预测为正但实际为负的样本占所有负例样本的比例；通俗来讲就是 当我们设置男性为正类，那么将女性预测为男性占所有女性的比例。__FPR越大，预测正类中实际负类越多。__
 
-其中 TPR 的计算公式为 TP/(TP+FN)，表示真正类率(True positive rate， TPR 也称召回率)，预测为正且实际为正的样本占所有正例样本的比例。通俗来讲就是 当我们设置男性为正类，那么预测为男性的占所有男性的比例
+其中 TPR 的计算公式为 TP/(TP+FN)，表示真正类率(True positive rate， TPR 也称召回率)，预测为正且实际为正的样本占所有正例样本的比例。通俗来讲就是 当我们设置男性为正类，那么预测为男性的占所有男性的比例。__TPR越大，预测正类中实际正类越多。__
 
-计算公式图：
+__计算公式图：__
 
 <div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3.png"/></div>
 
@@ -42,6 +46,14 @@ ROC曲线指受试者工作特征曲线 / 接收器操作特性曲线(receiver o
 
 
 通过阈值我们可以得到 各个评估值 的得分，比如TPR,FPR值，通过这些值我们可以得到在不同阈值下，我们模型预测的好坏，这样我们之后也可以通过设置阈值来帮助我们模型进行准确度的提升。
+
+如下面这幅图，(a)图中实线为ROC曲线，线上每个点对应一个阈值。
+
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/roc3.png"/></div>
+
+(a) 理想情况下，TPR应该接近1，FPR应该接近0。ROC曲线上的每一个点对应于一个threshold，对于一个分类器，每个threshold下会有一个TPR和FPR。比如Threshold最大时，TP=FP=0，对应于原点；Threshold最小时，TN=FN=1，对应于右上角的点(1,1)。
+
+(b) P和N得分不作为特征间距离d的一个函数，随着阈值theta增加，TP和FP都增加。
 
 
 ### 在如上图所示的 roc 曲线中如何评估模型的优劣
@@ -180,7 +192,7 @@ pos_label帮助我们选择正类，这里我们将2设置为正类。
 
 -《[机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率](https://www.jianshu.com/p/c61ae11cc5f6)》
 
--《[sklearn.metrics.roc_curve¶](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)》
+-《[sklearn.metrics.roc_curve](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)》
 
 -《[ROC曲线与AUC值及其铺垫](https://juejin.im/post/5a1a768251882535cd4a8984#heading-11)》
 
