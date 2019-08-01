@@ -63,7 +63,7 @@ __使用RMSLE的好处一：__  假如真实值为1000，若果预测值是600�
 
 __如下图:__
 
-<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle2.png"/></div>
+<div align=center><img width="500" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle2.jpg"/></div>
 
 __使用RMSLE的好处二：__ 当数据当中有少量的值和真实值差值较大的时候，使用log函数能够减少这些值对于整体误差的影响。
 
