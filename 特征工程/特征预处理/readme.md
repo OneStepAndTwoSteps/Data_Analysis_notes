@@ -87,7 +87,12 @@ __比如：__
 
 训练集某特征的均值是3， 标准差是4， 你做了z-score标准化，变成了均值0， 标准差1的数据，最后训练了模型。对于你的测试集的该特征，你需要减3再除以4，这样标准化后再去做预测。
       
+#### 参考案例
+
+
+-《[案例中里面的第9部分](https://github.com/ljpzzz/machinelearning/blob/master/classic-machine-learning/regression_production_example.ipynb)》
       
+
 
          
 ### Sklearn的数据预处理模块：
