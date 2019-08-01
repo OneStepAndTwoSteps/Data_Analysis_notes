@@ -7,13 +7,12 @@
 
 #### 公式：
 
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mae.png"/></div>
 
 
 #### MAE 的不足？
 
 MAE虽能较好衡量回归模型的好坏，但是绝对值的存在导致函数不光滑，在某些点上不能求导，可以考虑将绝对值改为残差的平方，这就是均方误差。
-
-
 
 ### MSE
 
@@ -23,6 +22,7 @@ __均方误差是反映估计量与被估计量之间差异程度的一种度量
 
 #### 公式：
 
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse.png"/></div>
 
 由于MSE与我们的目标变量的量纲不一致，为了保证量纲一致性，我们需要对MSE进行开方 。
 
@@ -36,6 +36,8 @@ __均方误差是反映估计量与被估计量之间差异程度的一种度量
 
 #### 公式：
 
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmse.png"/></div>
+
 
 上面的几种衡量标准的取值大小与具体的应用场景有关系，很难定义统一的规则来衡量模型的好坏。
 
@@ -46,7 +48,7 @@ __均方误差是反映估计量与被估计量之间差异程度的一种度量
 
 #### 公式：
 
-
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle.png"/></div>
 
 ## 在回归模型中我们主要使用的评估指标为 RMSE 和 RMLSE
 
@@ -56,6 +58,11 @@ __均方误差是反映估计量与被估计量之间差异程度的一种度量
 
 
 __使用RMSLE的好处一：__  假如真实值为1000，若果预测值是600，那么RMSE=400， RMSLE=0.510  假如真实值为1000，若预测结果为1400， 那么RMSE=400， RMSLE=0.336  可以看出来在均方根误差相同的情况下，预测值比真实值小这种情况的错误比较大，即对于预测值小这种情况惩罚较大。__如果预测值比实际值低时，它的惩罚更高。__
+
+
+__如下图:__
+
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle2.png"/></div>
 
 __使用RMSLE的好处二：__ 当数据当中有少量的值和真实值差值较大的时候，使用log函数能够减少这些值对于整体误差的影响。
 
