@@ -45,6 +45,19 @@ __1.2、max-min区间缩放法：__
 __所以实际算法中， 除非你对特征的取值区间有需求，否则max-min标准化没有 z-score标准化好用。__
 
 
+__1.3、RobustScaler标准化__
+
+如果数据有离群点，上述StandardScaler效果可能不好，这种情况可以使用RobustScaler，它有对数据中心化和数据的缩放鲁棒性更强的参数。
+
+RobustScaler根据分位数范围（默认为IQR：Interquartile Range）删除中位数并缩放数据。IQR是第1四分位数（第25个分位数）和第3个四分位数（第75个分位数）之间的范围。
+
+通过计算训练集中样本的相关统计数据，对每个特征独立地进行居中和缩放。然后存储中间和四分位数范围以使用该transform方法用于以后的数据。
+
+数据集的标准化是许多机器学习估计器的常见要求。通常，这通过去除均值和缩放到单位方差来完成。但是，异常值通常会以负面方式影响样本均值/方差。在这种情况下，中位数和四分位数范围通常会产生更好的结果。
+
+
+
+
 ### 归一化
 
 __1.3、Normalizer归一化：__
@@ -92,6 +105,9 @@ __比如：__
 
 -《[案例中里面的第9部分](https://github.com/ljpzzz/machinelearning/blob/master/classic-machine-learning/regression_production_example.ipynb)》
       
+### 数据规范化
+
+-《[sklearn 中数据规范化库的使用](https://github.com/OneStepAndTwoSteps/Data_Analysis/blob/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/preprocessing/%E6%95%B0%E6%8D%AE%E8%A7%84%E8%8C%83%E5%8C%96.md)》
 
 
          
