@@ -47,71 +47,12 @@
 　　　　　　　　　　None：不做任务量限制，任务产生就执行。
 　　　　　　　　　　int 值：限制总并行执行的最大任务数。
 
-### StratifiedKFold和KFold的主要区别
-
-StratifiedKFold用法类似Kfold，但是他是分层采样，确保训练集，测试集中各类别样本的比例与原始数据集中相同。
-
-__举个例子：__
-
-    import numpy as np
-    from sklearn.model_selection import StratifiedKFold,KFold
-
-    X=np.array([
-        [1,2,3,4],
-        [11,12,13,14],
-        [21,22,23,24],
-        [31,32,33,34],
-        [41,42,43,44],
-        [51,52,53,54],
-        [61,62,63,64],
-        [71,72,73,74]
-    ])
-
-    y=np.array([1,1,0,0,1,1,0,0])
-
-
-__KFold:__
-
-    #按顺序分别取第1-2、3-4、5-6和7-8的数据。
-    kfolder = KFold(n_splits=4,random_state=1)
-    for train, test in kfolder.split(X,y):
-    print('Train: %s | test: %s' % (train, test),'\n')
-
-__out__
-
-    Train: [2 3 4 5 6 7] | test: [0 1] 
-
-    Train: [0 1 4 5 6 7] | test: [2 3] 
-
-    Train: [0 1 2 3 6 7] | test: [4 5] 
-
-    Train: [0 1 2 3 4 5] | test: [6 7] 
-
-
-__StratifiedKFold:__
-
-    #依照标签的比例来抽取数据，本案例集标签0和1的比例是1：1
-    #因此在抽取数据时也是按照标签比例1：1来提取的
-    sfolder = StratifiedKFold(n_splits=4,random_state=1)
-    for train, test in sfolder.split(X,y):
-    print('Train: %s | test: %s' % (train, test))
-
-__out__
-
-    Train: [1 3 4 5 6 7] | test: [0 2]  # 0对应上面的第0个样本-标签1 2对应上面的第2个样本-标签0
-
-    Train: [0 2 4 5 6 7] | test: [1 3]
-
-    Train: [0 1 2 3 5 7] | test: [4 6]
-
-    Train: [0 1 2 3 4 6] | test: [5 7]
-
 
 ### cross_val_score 负分的表示含义
 
 在cross_val_score进行计算得分时，使用随机森林回归 决策树回归 线性回归 adaboost等这些回归算法会出现了负数的情况，那么为什么会出现负数的情况，还有这些负数如何评价模型的好坏呢？
 
-这是因为我们用回归一般都是用MSE RMSE这些评估的，这些值的目标是最小化损失函数，而我们的目标是最大化评估分数，所以sklearn会加上一个负号表示打分。所以这些负数里数值越大模型越好，比如-1比-2好。
+这是因为我们用回归一般都是用MSE RMSE这些评估的，这些值的目标是最小化损失函数，而我们的目标是最大化评估分数，所以sklearn会加上一个负号表示打分。所以这些负数里数值越大模型越好，比如-1比-2好。(我的想法是这样：因为损失函数越小越好，但是我们的目标要最大化评估分数，所以评估分数要越高越好，所以加上一个负号之后 1 就变成 -1 ， 2 变成 -2 在损失函数看来 1 比 2 好，在评估分数看来 -1 比 -2好)
 
 #### 小结
 
