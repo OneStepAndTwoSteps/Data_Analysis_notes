@@ -56,3 +56,8 @@ __out__
     Train: [0 1 2 3 5 7] | test: [4 6]
 
     Train: [0 1 2 3 4 6] | test: [5 7]
+    
+
+#### 小结
+
+我们可以看出在测试集中，我们的 StratifiedKFold 0和1标签的比例是1：1，而KFold没有。
