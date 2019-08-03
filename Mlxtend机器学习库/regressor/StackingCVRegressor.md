@@ -76,7 +76,7 @@
 
 ## 方法
 
-
+### 方法
 #### fit（X，y，groups = None，sample_weight = None）
 
 适合的集合回归量和元回归量。
@@ -104,7 +104,7 @@
 
 - self ：对象
 
-
+### 方法
 #### fit_transform（X，y = None，fit_params）
 
 适合数据，然后转换它。
@@ -127,7 +127,7 @@
 
     变形阵列。
 
-
+### 方法
 #### get_params（deep=True）
 
 获取此估算工具的参数。
@@ -144,6 +144,7 @@
 
     映射到其值的参数名称。
 
+### 方法
 #### predict（X）
 
 预测X的目标值。
@@ -159,7 +160,7 @@
 *   y_target ：array-like，shape = [n_samples]或[n_samples，n_targets]
 
     预测目标值。
-
+### 方法
 #### predict_meta_features（X）
 
 获取测试数据的元功能。
@@ -177,7 +178,7 @@
 
     测试数据的元特征，其中n_samples是测试数据中的样本数，len（self.regressors）是回归量的数量。
 
-
+### 方法
 #### score（X，y，sample_weight =无）
 
 返回预测的确定系数R2。
@@ -211,10 +212,6 @@
     设置此估算器的参数。
 
     可以使用列出有效的参数键get_params()。
-
-### 返回
-
-self
 
 
 
