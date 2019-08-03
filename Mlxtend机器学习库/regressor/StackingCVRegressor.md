@@ -2,7 +2,7 @@
 
 在 Mlxtend中有一個 StackingCVRegressor 方法可以幫助我們進行堆叠
 
-导入包
+#### 导入包
 
     from mlxtend.regressor import StackingCVRegressor
 
@@ -22,43 +22,43 @@
 ### 参数说明
 
 
-- regressors : array-like, shape = [n_regressors]
+*   regressors : array-like, shape = [n_regressors]
 回归列表。调用fit方法StackingCVRegressor将适合将存储在class属性中的这些原始回归量的克隆self.regr_。
 
-- meta_regressor : object
+*   meta_regressor : object
 元回归器将安装在回归器的整体上
 
-- cv : int, 交叉验证生成器或可迭代，可选（默认值：5）
+*   cv : int, 交叉验证生成器或可迭代，可选（默认值：5）
 确定交叉验证拆分策略。cv的可能输入是： - None，使用默认的5倍交叉验证， - integer，指定a中的折叠数KFold， - 用作交叉验证生成器的对象。 - 可迭代的屈服列车，测试分裂。对于整数/无输入，它将使用KFold交叉验证
 
-- shuffle : bool (default: True)
+*   shuffle : bool (default: True)
 如果为True，并且cv参数为整数，则训练数据将在交叉验证之前的拟合阶段进行混洗。如果cv 参数是特定的交叉验证技术，则省略该参数。
 
-- random_state : int, 随机种子
+*   random_state : int, 随机种子
 控制cv分离器的随机性。当cv为整数时使用shuffle=True。v0.16.0中的新功能。
 
-- verbose : int, optional (default=0)
+*   verbose : int, optional (default=0)
 控制建筑过程的详细程度。v0.16.0中的新功能
 
-- refit : bool (default: True)
+*   refit : bool (default: True)
 如果为True（默认），则克隆用于堆叠回归的回归量，或者使用原始值，在调用fit方法时将对数据集进行重新设置。如果您正在使用支持scikit-learn fit / predict API接口但与scikit-learn clone函数不兼容的估算器，则建议设置refit = False 。
 
-- use_features_in_secondary : bool (default: False)
+*   use_features_in_secondary : bool (default: False)
 如果为True，则元回归量将在原始回归量和原始数据集的预测上进行训练。如果为假，则元回归量将仅针对原始回归量的预测进行训练。
 
-- store_train_meta_features : bool (default: False)
+*   store_train_meta_features : bool (default: False)
 如果为True，则从用于拟合存储在self.train_meta_features_数组中的元回归量的训练数据计算的元特征，其可以在调用之后被访问fit。
 
-- n_jobs : int or None, optional (default=None)
+*   n_jobs : int or None, optional (default=None)
 用于执行计算的CPU数。 None除非在：obj：joblib.parallel_backendcontext中，否则表示1 。 -1表示使用所有处理器。请参阅：术语：Glossary <n_jobs> 了解更多详情。 New in v0.16.0.
 
-- pre_dispatch : int, or string, optional
+*   pre_dispatch : int, or string, optional
 控制在并行执行期间调度的作业数。减少此数量可有助于避免在分配的作业多于CPU可处理的内容时消耗内存消耗。此参数可以是： - 无，在这种情况下，立即创建和生成所有作业。将此用于轻量级和快速运行的作业，以避免由于按需生成作业而导致的延迟 - 一个int，给出生成的总作业的确切数量 - 一个字符串，给出一个表达式作为n_jobs的函数，如在'2 * n_jobs'v0.16.0中的新功能。
 
 
 ### 属性
 
-- train_meta_features ：numpy数组，shape = [n_samples，n_regressors]
+*   train_meta_features ：numpy数组，shape = [n_samples，n_regressors]
 用于训练数据的元特征，其中n_samples是训练数据中的样本数，len（self.regressors）是回归量的数量。
 
 
@@ -72,16 +72,16 @@
 
 ### 参数
 
-- X ：numpy数组，shape = [n_samples，n_features]
+*   X ：numpy数组，shape = [n_samples，n_features]
 训练向量，其中n_samples是样本数，n_​​features是要素数。
 
-- y ：numpy数组，shape = [n_samples]
+*   y ：numpy数组，shape = [n_samples]
 目标值。
 
-- groups ：numpy数组/无，shape = [n_samples]
+*   groups ：numpy数组/无，shape = [n_samples]
 每个样本所属的组。这由特定折叠策略使用，例如GroupKFold（）
 
-- sample_weight ：array-like，shape = [n_samples]，可选
+*   sample_weight ：array-like，shape = [n_samples]，可选
 样本权重作为sample_weights传递给回归量列表中的每个回归量以及meta_regressor。如果某个回归程序在fit（）方法中不支持sample_weight，则会引发错误。
 
 ### 返回
@@ -97,15 +97,15 @@
 
 ### 参数
 
-- X ：numpy数组形状[n_samples，n_features]
+*   X ：numpy数组形状[n_samples，n_features]
 训练集。
 
-- y ：numpy数组形状[n_samples]
+*   y ：numpy数组形状[n_samples]
 目标值。
 
 ### 返回
 
-- X_new ：numpy数组形状[n_samples，n_features_new]
+*   X_new ：numpy数组形状[n_samples，n_features_new]
 变形阵列。
 
 
@@ -115,13 +115,12 @@
 
 ### 参数
 
-- deep ：布尔值，可选
+*   deep ：布尔值，可选
 如果为True，将返回此估计器的参数并包含作为估算器的子对象。
 
 ### 返回
 
-- params ：将字符串映射到任何字符串
-
+*   params ：将字符串映射到任何字符串
 映射到其值的参数名称。
 
 #### predict（X）
@@ -130,12 +129,12 @@
 
 ### 参数
 
-- X ：{array-like，sparse matrix}，shape = [n_samples，n_features]
+*   X ：{array-like，sparse matrix}，shape = [n_samples，n_features]
 训练向量，其中n_samples是样本数，n_​​features是要素数。
 
 ### 返回
 
-- y_target ：array-like，shape = [n_samples]或[n_samples，n_targets]
+*   y_target ：array-like，shape = [n_samples]或[n_samples，n_targets]
 预测目标值。
 
 #### predict_meta_features（X）
@@ -144,12 +143,13 @@
 
 ### 参数
 
-- X ：numpy数组，shape = [n_samples，n_features]
+
+*   X ：numpy数组，shape = [n_samples，n_features]
 测试向量，其中n_samples是样本数，n_​​features是特征数。
 
 ### 返回
 
-- meta-features ：numpy数组，shape = [n_samples，len（self.regressors）]
+*   meta-features ：numpy数组，shape = [n_samples，len（self.regressors）]
 测试数据的元特征，其中n_samples是测试数据中的样本数，len（self.regressors）是回归量的数量。
 
 
@@ -165,28 +165,22 @@
 
 ### 参数
 
-- X ：array-like，shape =（n_samples，n_features）
-
+*   X ：array-like，shape =（n_samples，n_features）
 测试样品。对于一些估计器，这可以是预先计算的核矩阵，而是shape =（n_samples，n_samples_fitted），其中n_samples_fitted是在估计器的拟合中使用的样本的数量。
 
-- y ：array-like，shape =（n_samples）或（n_samples，n_outputs）
-
+*   y ：array-like，shape =（n_samples）或（n_samples，n_outputs）
 X的真值。
 
-- sample_weight ：array-like，shape = [n_samples]，可选
-
+*   sample_weight ：array-like，shape = [n_samples]，可选
 样品重量。
 
 ### 返回
 
-- score ：漂浮
-
+*   score ：漂浮
 自我预测（X）的R ^ 2。年。
 
-- set_params（params）
-
+*   set_params（params）
 设置此估算器的参数。
-
 可以使用列出有效的参数键get_params()。
 
 ### 返回
