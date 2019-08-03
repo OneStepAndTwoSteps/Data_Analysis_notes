@@ -82,7 +82,7 @@
 适合的集合回归量和元回归量。
 
 
-### 参数
+#### 参数
 
 *   X ：numpy数组，shape = [n_samples，n_features]
 
@@ -100,7 +100,7 @@
 
     样本权重作为sample_weights传递给回归量列表中的每个回归量以及meta_regressor。如果某个回归程序在fit（）方法中不支持sample_weight，则会引发错误。
 
-### 返回
+#### 返回
 
 - self ：对象
 
@@ -111,7 +111,7 @@
 
 使用可选参数fit_params使变换器适合X和y，并返回X的变换版本。
 
-### 参数
+#### 参数
 
 *   X ：numpy数组形状[n_samples，n_features]
 
@@ -121,7 +121,7 @@
 
     目标值。
 
-### 返回
+#### 返回
 
 *   X_new ：numpy数组形状[n_samples，n_features_new]
 
@@ -132,13 +132,13 @@
 
 获取此估算工具的参数。
 
-### 参数
+#### 参数
 
 *   deep ：布尔值，可选
 
     如果为True，将返回此估计器的参数并包含作为估算器的子对象。
 
-### 返回
+#### 返回
 
 *   params ：将字符串映射到任何字符串
 
@@ -149,13 +149,13 @@
 
 预测X的目标值。
 
-### 参数
+#### 参数
 
 *   X ：{array-like，sparse matrix}，shape = [n_samples，n_features]
 
     训练向量，其中n_samples是样本数，n_​​features是要素数。
 
-### 返回
+#### 返回
 
 *   y_target ：array-like，shape = [n_samples]或[n_samples，n_targets]
 
@@ -165,14 +165,14 @@
 
 获取测试数据的元功能。
 
-### 参数
+#### 参数
 
 
 *   X ：numpy数组，shape = [n_samples，n_features]
 
     测试向量，其中n_samples是样本数，n_​​features是特征数。
 
-### 返回
+#### 返回
 
 *   meta-features ：numpy数组，shape = [n_samples，len（self.regressors）]
 
@@ -187,7 +187,7 @@
 
 最好的分数是1.0，它可能是负的（因为模型可以任意恶化）。总是预测y的期望值的常数模型，忽略输入特征，将得到R2得分为0.0。
 
-### 参数
+#### 参数
 
 *   X ：array-like，shape =（n_samples，n_features）
 
@@ -201,7 +201,7 @@
 
     样品重量。
 
-### 返回
+#### 返回
 
 *   score ：float
 
