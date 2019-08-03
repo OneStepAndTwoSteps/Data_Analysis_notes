@@ -23,7 +23,8 @@
 
 
 *   regressors : array-like, shape = [n_regressors]
-回归列表。调用fit方法StackingCVRegressor将适合将存储在class属性中的这些原始回归量的克隆self.regr_。
+
+    回归列表。调用fit方法StackingCVRegressor将适合将存储在class属性中的这些原始回归量的克隆self.regr_。
 
 *   meta_regressor : object
 元回归器将安装在回归器的整体上
