@@ -460,7 +460,7 @@ __自定义函数apply__
     
     train_content=pd.read_csv("train.csv")
   
-  以xls的格式读取文件里的内容
+  以xls的格式读取文件里的内容 (excel文件读取方式)
     
     train_content=pd.read_excel("train.xls")
     
@@ -1000,11 +1000,23 @@ __例子：__
     
     dfname.columns.values.tolist()    # 列名称
 
-  ### python dataframe 当无列名时进行赋值列名
+  ### python dataframe 当读取csv文件，但csv数据中无列名时进行赋值列名
 
+  __错误示范：__
+
+    data=pd.read_csv('filepath')
     # 为数据增加一行列名
     column=['user_id','名字','知识点','节','课程','course_id']
     data.columns=column
+
+  __正确示范：__
+
+    data=pd.read_csv('filepath'，header=None)
+    # 为数据增加一行列名
+    column=['user_id','名字','知识点','节','课程','course_id']
+    data.columns=column
+
+  不加 header=None ，在进行read_csv之后，默认会将第一行数据设置为列名，此时如果直接进行 data.columns=column 那么第一行数据被替换成我们指定的列名，这样我们的数据就变少了，如果加上了header=None,那么读取之后的数据是没有列名的(第一行数据还是数据，不会成为列名)，此时我们进行命名列名就不会替换掉我们的数据。
 
 
   ### 构造DataFrame
