@@ -5,6 +5,47 @@ __交叉验证是在机器学习建立模型和验证模型参数时常用的办
 
 那么什么时候才需要交叉验证呢？交叉验证用在数据不是很充足的时候。 __它的基本想法就是重复地使用数据：把给定的数据进行切分，将切分的数据集组合为训练集和测试集，在此基础上反复地进行训练、测试以及模型选择。__ 比如在我日常项目里面，对于普通适中问题，如果数据样本量小于一万条，我们就会采用交叉验证来训练优化选择模型。如果样本大于一万条的话，我们一般随机的把数据分成三份，一份为训练集（Training Set），一份为验证集（Validation Set），最后一份为测试集（Test Set）。用训练集来训练模型，用验证集来评估模型预测的好坏和选择模型及其对应的参数。把最终得到的模型再用于测试集，最终决定使用哪个模型以及对应参数。
 
+### 补充说明：
+
+#### 为什么交叉验证可以给我带来避免过拟合的作用呢？
+
+首先我们要知道，在进行训练我们的模型时，我们的模型的参数是会发生变化的，这个变化的参数不是我们可以指定的超参数的变化，而是模型内部参数的变化，所以在我们进行交叉验证时(以k=10折交叉验证为例)，我们的模型的会根据训练的数据的不同而发生改变，所以每组训练完毕，模型参数会更新到较优参数，所以我们的模型会被不断的优化，这就避免了过拟合的风险(因为我们的训练数据为10组了)
+
+#### 接下来我会介绍我们在进行交叉验证时，什么参数会发生变化和参数变化的过程
+
+1、以BaggingClassifier为例，直接get_params拿到的只是你的配置参数，每颗决策树的参数。它的参数在Attributes里面，你可以用model1.estimators_features_ 这样类似的方法拿所有的模型参数。而get_params拿的只是你可以配置的超参数。
+
+    base_estimator_ : estimator
+    The base estimator from which the ensemble is grown.
+
+    estimators_ : list of estimators
+    The collection of fitted base estimators.
+
+    estimators_samples_ : list of arrays
+    The subset of drawn samples for each base estimator.
+
+    estimators_features_ : list of arrays
+    The subset of drawn features for each base estimator.
+
+    classes_ : array of shape = [n_classes]
+    The classes labels.
+
+    n_classes_ : int or list
+    The number of classes.
+
+    oob_score_ : float
+    Score of the training dataset obtained using an out-of-bag estimate.
+
+    oob_decision_function_ : array of shape = [n_samples, n_classes]
+    Decision function computed with out-of-bag estimate on the training set. If n_estimators is small it might be possible that a data point was never left out during the bootstrap. In this case, oob_decision_function_ might contain NaN.
+
+
+2、同时假设我们分了10组数据做交叉验证，10种组合可以迭代训练出10组模型参数，我们选择最好的一组模型参数作为最终结果就行了。每组训练完毕，模型参数会更新到较优参数。而训练前后不变的只是一些超参数，比如你决定GBDT配置5个决策树，这个训练前后不会变。
+
+
+
+
+
 ## 交叉验证的作用
 
 __交叉验证是用来估计预测误差的__，从而进行模型选择，这一点与AIC、BIC本质没有区别。但是AIC、BIC等准则是从统计理论中推导出来的，而交叉验证是完完全全基于给定的样本。
