@@ -168,7 +168,7 @@ __单括号取出的 Survived 是 Series 格式__
 
 Pandas __dtype__ 映射：
 
-<div align=center><img width="600" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/3.png"/></div>
+<div align=center><img width="700" height="430" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/3.png"/></div>
 
 
 ### 数据清洗
