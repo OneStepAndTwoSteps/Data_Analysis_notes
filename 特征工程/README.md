@@ -173,4 +173,10 @@
 *   __4.流行学习 (TSNE)__
 
     常用于非线性降维可视化
+    
+#### 部分笔记参考 
+
+-《[刘建平老师博客-特征表达](https://www.cnblogs.com/pinard/p/9061549.html#!comments)》
+
+-《[用户特征工程 超详细解读](https://blog.csdn.net/bitcarmanlee/article/details/52244237)》
 
