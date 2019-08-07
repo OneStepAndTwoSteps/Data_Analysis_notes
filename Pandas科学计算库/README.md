@@ -1377,7 +1377,22 @@ __解释：__
 
 6、然后我们就可以返回 .1分位数的值，也就是 i + (j-i) * fraction = ret = 2 + (10 - 2)* 0.3 = 4.4 ，也就是前 10% 的数据。
 
+__案例2__
 
+    import pandas as pd
+    import numpy as np
+    dt = pd.Series(np.array([6, 47, 49, 15, 42, 41, 7, 39, 43, 40, 36])
+    print("数据格式：")
+    print(dt)
+    print('Q1:', df.quantile(.25))
+    print('Q2:', df.quantile(.5))
+    print('Q3:', df.quantile(.75))
+
+__计算结果__
+
+    Q1: 25.5
+    Q2: 40.0
+    Q3: 42.5
 
   ## 总结：
   
