@@ -488,11 +488,15 @@ __运行结果:__
 
 ###  NumPy自然指数计算函数
 
-NumPy中以自然数为底的指数计算方法为exp，expm1用来计算exp(x) - 1
+NumPy中以自然数为底的指数计算方法为exp 也就是e的多少次方，expm1用来计算exp(x) - 1
 
     >>> import numpy as np
+    >>> import math
     
     >>> np.exp(2)
+    7.38905609893065
+
+    >>> math.exp(2)
     7.38905609893065
 
     >>> np.expm1(2)
