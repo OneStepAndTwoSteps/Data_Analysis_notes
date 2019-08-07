@@ -164,6 +164,14 @@ __单括号取出的 Survived 是 Series 格式__
 
 
 
+### pandas 数据类型
+
+Pandas __dtype__ 映射：
+
+
+![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/3.png)
+
+
 ### 数据清洗
   数据清洗是数据准备过程中必不可少的环节，Pandas 也为我们提供了数据清洗的工具，在后面数据清洗的章节中会给你做详细的介绍，这里简单介绍下 Pandas 在数据清洗中的使用方法。
   
