@@ -495,9 +495,9 @@ __自定义函数apply__
       # 查看不同船舱人员的的人均年龄
       train_survived=train_content.pivot_table(index="Pclass",values="Age")
   
-  ### icol和col 取范围
+### icol和col 取范围
     
-   iloc和loc的区别是 iloc只能跟整数，而loc可以跟数字
+  iloc和loc的区别是 iloc只能跟整数，而loc可以跟数字
    
      print(train_content.iloc[83,3])     #找的是除title以外的第84行，因为数组默认是从0开始向上增长的
      print(train_content.iloc[82:83,3:5]) #去尾的83不包括 5不包括
@@ -505,6 +505,13 @@ __自定义函数apply__
 
      print(train_content.loc[83,"Age"])
      print(train_content.loc[82:83,"Name":"Age"])   #还可以跟范围
+
+
+### 查找 df 数据列中 列数据等于 x 长度的值
+
+    # 找到在 genres 列中列长度等于7的数据
+    train[train['genres'].str.len() == 7]
+
 
 ### 将Pandas中的DataFrame类型转换成Numpy中array类型的三种方法
   dataframe 转列表  
