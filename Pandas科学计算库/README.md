@@ -302,6 +302,14 @@ __查找空值：__
 
     其中 axis=1 代表按照列为轴进行操作，axis=0 代表按照行为轴进行操作，args 是传递的两个参数，即 n=2, m=3，在 plus 函数中使用到了 n 和 m，从而生成新的 df。
   
+  __使用 apply 函数对数据进行清洗 (进阶) ：__
+    
+    # 将 train['production_companies'] 中的数据作为 x 传给apply函数，在apply中做处理
+    # (取得的 production_companies 特征中的所有数据 [该数据是一个字典] 然后做if else判断)
+    
+    train['production_companies'].apply(lambda x: [i['name'] for i in x] if x != {} else []).values
+
+
 __自定义函数apply__
  
       def search_hundredth(train_content):
