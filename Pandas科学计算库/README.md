@@ -1336,13 +1336,13 @@ __四分位距__（InterQuartile Range, IQR）= 第3四分位数与第1四分位
 
 *   __确定p分位数位置的两种方法__
 
-    position = (n+1)*p
+    position = (n+1)*p    - 箱型图采用的计算方法
 
-    position = 1 + (n-1)*p
+    position = 1 + (n-1)*p  - python中计算分位数位置的方案
 
     其中 n 表示序列中包含的项数。也就是有多少个数。
 
-在python中计算分位数位置的方案采用 position=1+(n-1)*p
+在python中计算分位数位置的方案采用 __position=1+(n-1)*p__
 
 __案例1__
 
