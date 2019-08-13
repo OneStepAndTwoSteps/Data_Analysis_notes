@@ -3,18 +3,18 @@
 
 ### 案例解析：
 
-<div align=center> <img width='500' height='400' src=''/></div>
+<div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/1.png'/></div>
 
 在上图中，白点是中位数，黑色盒型的范围是下四分位点到上四分位点，细黑线表示须。外部形状即为核密度估计（在概率论中用来估计未知的密度函数，属于非参数检验方法之一）。
 
 
 小提琴图，可以认为是 __密度图 + 箱式图 + 其他特性__ 的合体。
 
-<div align=center> <img src=''/></div>
+<div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/2.jpg'/></div>
 
 
 
-其实就是把上面那个密度图（进行一个切割然后放倒），和下面的箱式图，给怼到一起了。这样就充分发挥了两种图的优势。
+其实就是把上面那个密度图（进行一个切割然后放倒），下面其实就是一个箱式图，然后合在一起。这样就充分发挥了两种图的优势。
 
 
 *   __数据化分析解读：__
