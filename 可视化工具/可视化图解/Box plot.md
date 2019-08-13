@@ -18,10 +18,49 @@ __7组不同数据，无论其分布怎么改变，用boxplot做出来，都是�
 
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/box%20plot/2.png"/></div>
 
-*   __Q1,Q2,Q3的计算方式__
 
-    -[Q1,Q2,Q3的计算方式](https://github.com/OneStepAndTwoSteps/Data_Analysis/tree/master/Pandas%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93#df-%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE
-)
+*   __我们一组序列数为例__ 12，15，17，19，20，23，25，28，30，33，34，35，36，37
+
+
+*   __Q1的计算方式__
+
+    1、确定四分位数的位置。Qi所在位置=i（n+1）/4，其中i=1，2，3。n表示序列中包含的项数。
+
+    2、根据位置，计算相应的四分位数。
+
+    例中：
+
+    Q1所在的位置=（14+1）/4=3.75，也就是我们[四分位数求解的第一种方法 position = (n+1)*p](https://github.com/OneStepAndTwoSteps/Data_Analysis/blob/master/Pandas%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%BA%93/README.md#%E5%88%86%E4%BD%8D%E6%95%B0%E8%A7%A3%E9%87%8A)
+    
+    此时fraction=0.75
+
+    因为我们的 Q1所在的位置 为3.75，所以在 第三项 和 第四项 之间，所以第三项就是i 第四项就是j
+
+    Q1=0.25×第三项+0.75×第四项=0.25×17+0.75×19=18.5；
+
+
+*   __Q2的计算方式__
+
+    中位数，即一组数由小到大排列处于中间位置的数。若序列数为偶数个，该组的中位数为中间两个数的平均数。
+
+    例中：
+
+    Q2所在的位置=2（14+1）/4=7.5，
+
+    Q2=0.5×第七项+0.5×第八项=0.5×25+0.5×28=26.5
+
+
+
+*   __Q3的计算方式__
+
+    计算方法同下四分位数。
+
+    例中：
+
+    Q3所在的位置=3（14+1）/4=11.25，
+
+    Q3=0.75×第十一项+0.25×第十二项=0.75×34+0.25×35=34.25。
+
 
 *   __上限(图中的最大值)__
 
