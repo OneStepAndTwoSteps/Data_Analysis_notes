@@ -13,12 +13,11 @@
 <div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/2.jpg'/></div>
 
 
-
 其实就是把上面那个密度图（进行一个切割然后放倒），下面其实就是一个箱式图，然后合在一起。这样就充分发挥了两种图的优势。
 
 
 *   __数据化分析解读：__
 
-    1. Drama等于0 的分布比較分散，Drama等于1 的分布很不均匀（中间大两头小）；
+    1.Drama等于0 的分布比較分散，Drama等于1 的分布很不均匀（中间大两头小）；
 
-    2. Drama 等于 0 和 Drama 等于 1 的分布存在比较明显的离散值（上侧的须或下侧的须较长）。
+    2.Drama 等于 0 和 Drama 等于 1 的分布存在比较明显的离散值（上侧的须或下侧的须较长）。
