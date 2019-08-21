@@ -78,5 +78,5 @@ plotly本身是基于javascript开发的，但是提供了大量与其他主流�
 
 #### 如下图
 
-<div align=center><img  src=""/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/plotly/example/2.png"/></div>
 
