@@ -3,9 +3,11 @@
 
 ### 案例解析：
 
-<div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/1-1.png'/></div>
+<div align=leftr> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/1-1.png'/></div>
 
-<div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/3.png'/></div>
+
+
+<div align=right> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/3.png'/></div>
 
 
 *   上图讲解：
