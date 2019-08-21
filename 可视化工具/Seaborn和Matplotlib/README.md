@@ -816,7 +816,7 @@ __例子：__
 
 #### 如下图：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid4.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/3.png"/></div>
 
     
  ## 可视化导图总结：
