@@ -805,7 +805,19 @@ __例子：__
     plt.show()
 
     
-    
+
+### 循环绘制图像
+
+    f, axes = plt.subplots(3, 5, figsize=(24, 12))
+    plt.suptitle('Violinplot of revenue vs genres')
+    for i, e in enumerate([col for col in train.columns if 'genre_' in col]):
+        # % 取余，如果 i 比 5 小，那么余数就是他自己
+        sns.violinplot(x=e, y='revenue', data=train, ax=axes[i // 5][i % 5]);
+
+#### 如下图：
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid4.png"/></div>
+
     
  ## 可视化导图总结：
     
