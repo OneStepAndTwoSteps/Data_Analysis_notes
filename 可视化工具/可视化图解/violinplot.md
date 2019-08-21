@@ -4,13 +4,11 @@
 ### 案例解析：
 
 
-<center class="half">
-    <img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/1-1.png" width="300"/>
-    <img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/3.png" width="300"/>
-</center>
+<div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/3.png'/></div>
 
 
-*   上图讲解：
+
+*   __上图讲解：__
     
     白点是中位数。
     
@@ -32,6 +30,9 @@
 
 
 其实就是把上面那个密度图（进行一个切割然后放倒），下面其实就是一个箱式图，然后合在一起。这样就充分发挥了两种图的优势。
+
+
+<div align=center> <img src='https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/1-1.png'/></div>
 
 
 *   __数据化分析解读：__
