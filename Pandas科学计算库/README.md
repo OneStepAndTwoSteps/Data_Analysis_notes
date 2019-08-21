@@ -278,6 +278,17 @@ __查找空值：__
     英语     False
     数学     True
   
+  __直接查看那个列存在空值：__
+
+    train.isnull().any()[train.isnull().any().values==True]
+
+  out：
+
+    overview    True
+    runtime     True
+    tagline     True
+    dtype: bool
+
   
   __使用 apply 函数对数据进行清洗：__
   
