@@ -51,3 +51,32 @@ plotly本身是基于javascript开发的，但是提供了大量与其他主流�
     )
     fig = go.Figure(data=data, layout=layout)                      # 将graph部分和layout部分组合成figure对象
     py.iplot(fig,filename='scatter2010')                           # 绘图
+
+
+
+###  案例二
+
+    # 计算出每一年的发行的电影数量，让其按index进行排序
+    d1 = train['release_date_year'].value_counts().sort_index()
+    # 计算每年的 电影总收入
+    d2 = train.groupby(['release_date_year'])['revenue'].sum()
+    # 计算每年的 电影平均收入
+    d3 = train.groupby(['release_date_year'])['revenue'].mean()
+    # go.Scatter 根据数据进行绘制图线，顺序和代表的图例一一对应
+    data = [go.Scatter (x=d1.index, y=d1.values, name='film count'), go.Scatter(x=d2.index, y=d2.values, name='total revenue', yaxis='y2')]
+    #  yaxis='y2' 对应下面的 yaxis2 (固定写法)
+    layout = go.Layout(dict(title = "Number of films and total revenue per year",
+                    xaxis = dict(title = 'Year'),
+                    yaxis = dict(title = 'Count'),
+                    # overlaying 表示是否覆盖，不指定则只会绘制后面的线条
+                    yaxis2 = dict(title='Total revenue', overlaying='y', side='right'),
+
+                    ),
+                    # orientation 指定图例放置的位置，v为右侧，h为下侧
+                    legend=dict(orientation="h"))
+    py.iplot(dict(data=data, layout=layout))
+
+#### 如下图
+
+<div align=center><img  src=""/></div>
+
