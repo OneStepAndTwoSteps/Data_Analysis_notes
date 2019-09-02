@@ -330,6 +330,29 @@ __自定义函数apply__
       search_func=train_content.apply(search_hundredth)
       print(search_func)
 
+      1. 不同于 transform 只允许在 Series 上进行一次转换， apply对整个DataFrame 作用
+
+      2.apply隐式地将group 上所有的列作为自定义函数
+
+__自定义函数 transfrom__
+
+  apply()里面可以跟自定义的函数，包括简单的求和函数以及复杂的特征间的差值函数等（注：apply不能直接使用agg()方法 / transform()中的python内置函数，例如sum、max、min、'count‘等方法）
+
+  transform() 里面不能跟自定义的特征交互函数，因为transform是真针对每一元素（即每一列特征操作）进行计算，也就是说在使用 transform() 方法时，需要记得三点：
+
+  1、__它只能对每一列进行计算__，所以在groupby()之后，.transform()之前是要指定要操作的列，这点也与apply有很大的不同。
+
+  2、由于是只能对每一列计算，所以方法的通用性相比apply()就局限了很多，例如只能求列的最大/最小/均值/方差/分箱等操作
+
+  3、transform还有什么用呢?最简单的情况是试图将函数的结果分配回原始的dataframe。也就是说返回的shape是 (len(df)，1)。注：如果与groupby()方法联合使用，需要对值进行去重。
+
+
+__transform 和 apply的相同之处：__
+
+  都能针对dataframe完成特征的计算，并且常常与groupby()方法一起使用。
+
+
+
   ### 数据统计
   
     在数据清洗后，我们就要对数据进行统计了。Pandas 和 NumPy 一样，都有常用的统计函数，如果遇到空值 NaN，会自动排除。
