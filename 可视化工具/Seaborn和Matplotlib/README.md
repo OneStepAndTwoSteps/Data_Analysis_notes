@@ -519,9 +519,10 @@ S:
     
     square 布尔值: 如果为True，则将Axes方面设置为“相等”，以使每个单元格为方形。
     
+    annot_kws，当annot为True时，可设置各个参数，包括大小，颜色，加粗，斜体字等
          例子：
               colormap = plt.cm.RdBu
-              sns.heatmap(train.astype(float).corr(),linewidths=0.1,vmax=1.0, square=True, cmap=colormap, linecolor='white', annot=True)
+              sns.heatmap(train.astype(float).corr(),linewidths=0.1,vmax=1.0, square=True, cmap=colormap, linecolor='white', annot=True,annot_kws={'size':9,'weight':'bold', 'color':'blue'})
 
     center : 指定色彩的中心值
 
