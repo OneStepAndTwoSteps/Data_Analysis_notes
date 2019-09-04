@@ -911,7 +911,9 @@ __out:__
 __例子:__
 
     top_ten=10
+    # 取 SalePrice 列中值最大的前 top_ten 个 (有正负之分，负相关强的不予显示)
     columns=corrmat.nlargest(top_ten,'SalePrice')['SalePrice'].index
+    # 计算协方差矩阵，可以用于绘制热力图
     cm=np.corrcoef(train_data[columns].values.T)
     cm
     
