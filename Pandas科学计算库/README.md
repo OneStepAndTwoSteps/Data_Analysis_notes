@@ -1006,6 +1006,11 @@ __例子：__
 
     [col for col in train.columns if 'str' in col]
 
+  ### 过滤出包含某个字符串的列信息 df.filter()
+
+    #过滤出包含 matchType 字符串的所有列
+    matchType_encoding = train.filter(regex='matchType')
+
   ### pandas.Series.map
     
     根据输入的对应关系映射系列的值。
