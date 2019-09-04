@@ -818,7 +818,19 @@ __例子：__
 
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/3.png"/></div>
 
-    
+
+### sns.jointplot 绘图
+
+#### 使用方法：
+
+    # ratio 比率：数字，可选 关节轴高度与边缘轴高度的比率。
+    sns.jointplot(x='x_轴特征',y='y_轴特征',data=输入数据,height=10,ratio=3,color='r')
+
+#### 如下图
+
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/4.png"/></div>
+
+
  ## 可视化导图总结：
     
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/python%E5%8F%AF%E8%A7%86%E5%8C%96.png)
