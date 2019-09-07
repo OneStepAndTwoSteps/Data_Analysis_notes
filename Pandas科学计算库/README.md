@@ -812,8 +812,9 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         7    a  three -0.958547 -2.016811
 
 
-*   __dataframe根据key1进行分组__                                                                                                                                                                                                                                                           
-        grouped1=df_obj.groupby('key1')
+*   __dataframe根据key1进行分组__                          
+                                                                                     
+       grouped1=df_obj.groupby('key1')
 
         [x for x in grouped1]
 
