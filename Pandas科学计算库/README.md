@@ -787,17 +787,17 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
 *   __groupby函数 例子1__
 
-      import pandas as pd
-      import numpy as np
+        import pandas as pd
+        import numpy as np
 
-      dict_obj = {'key1' : ['a', 'b', 'a', 'b', 
-                            'a', 'b', 'a', 'a'],
-                  'key2' : ['one', 'one', 'two', 'three',
-                            'two', 'two', 'one', 'three'],
-                  'data1': np.random.randn(8),
-                  'data2': np.random.randn(8)}
-      df_obj = pd.DataFrame(dict_obj)
-      print(df_obj)
+        dict_obj = {'key1' : ['a', 'b', 'a', 'b', 
+                              'a', 'b', 'a', 'a'],
+                    'key2' : ['one', 'one', 'two', 'three',
+                              'two', 'two', 'one', 'three'],
+                    'data1': np.random.randn(8),
+                    'data2': np.random.randn(8)}
+        df_obj = pd.DataFrame(dict_obj)
+        print(df_obj)
 
     __out：__
 
@@ -813,20 +813,20 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
 
 *   __dataframe根据key1进行分组__                                                                                                                                                                                                                                                           
-      grouped1=df_obj.groupby('key1')
+        grouped1=df_obj.groupby('key1')
 
-      [x for x in grouped1]
+        [x for x in grouped1]
 
 
-      [('a',   key1   key2     data1     data2
-        0       a    one -0.109110  0.528666
-        2       a    two  2.685447  1.672294
-        4       a    two -0.859890 -0.964093
-        6       a    one  0.254899  0.830872
-        7       a  three -0.958547 -2.016811), ('b',   key1   key2     data1     data2
-        1       b    one -0.746051  1.994562
-        3       b  three  0.546663 -0.970285
-        5       b    two -0.347244  0.146132)]
+        [('a',   key1   key2     data1     data2
+          0       a    one -0.109110  0.528666
+          2       a    two  2.685447  1.672294
+          4       a    two -0.859890 -0.964093
+          6       a    one  0.254899  0.830872
+          7       a  three -0.958547 -2.016811), ('b',   key1   key2     data1     data2
+          1       b    one -0.746051  1.994562
+          3       b  three  0.546663 -0.970285
+          5       b    two -0.347244  0.146132)]
 
 *   __使用groupby指定字段内容进行运算__
 
