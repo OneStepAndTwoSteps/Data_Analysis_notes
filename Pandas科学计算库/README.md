@@ -996,6 +996,30 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         crashtpp                5
         Name: matchType, dtype: int64
 
+### pd.to_frame
+
+pd.to_frame 将 Series 转化为 dataframe
+
+*   __例子__
+
+        train.groupby(['matchType','matchId']).count().groupby(['matchType','matchId']).size().shape
+      
+        group = train.groupby(['matchType','matchId','groupId']).count().groupby(['matchType','matchId']).size().to_frame('groups in match')
+        print(group)
+
+        group.shape
+    __out__
+
+        (47965,)
+
+                              groups in match
+        matchType	  matchId	
+        duo	        0003b92987589e	  47
+                    0006eb8c17708d	  44
+                    00086c74bb4efc	  48
+        (47965,1)
+
+    我们可以通过 shape 查看他到底是不是 series，只有 series 才可以进行 to_farme.
 
 
 
