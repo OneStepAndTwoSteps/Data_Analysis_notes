@@ -832,66 +832,66 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
     __如：__
 
-      # 按照 key1 进行分组从上面的数据中我们可以发现分为a,b两组
-      grouped = df.groupby(df['key1'])
-      grouped.mean()
+        # 按照 key1 进行分组从上面的数据中我们可以发现分为a,b两组
+        grouped = df.groupby(df['key1'])
+        grouped.mean()
 
     __out：__
 
-      # 这里使用 df['key1'] 做了分组键，即按 a 和 b 进行分组。下例中没有显示 key2 列，是因为其值不是数字类型，被 mean() 方法自动忽视了
-          data1	data2
-      key1		
-      a	0.202560	0.010185
-      b	-0.182211	0.390136
+        # 这里使用 df['key1'] 做了分组键，即按 a 和 b 进行分组。下例中没有显示 key2 列，是因为其值不是数字类型，被 mean() 方法自动忽视了
+            data1	data2
+        key1		
+        a	0.202560	0.010185
+        b	-0.182211	0.390136
         
     __如：__ 
 
-      # 以key1进行分组，将data2字段中的内容进行求和
-      grouped1=df_obj.groupby(['key1'])['data2'].sum()
-      grouped1
+        # 以key1进行分组，将data2字段中的内容进行求和
+        grouped1=df_obj.groupby(['key1'])['data2'].sum()
+        grouped1
 
     __out：__
 
-      key1
-      a    0.050927
-      b    1.170409
-      Name: data2, dtype: float64
+        key1
+        a    0.050927
+        b    1.170409
+        Name: data2, dtype: float64
 
     __如：__ 注意使用groupby进行多列的组合时，顺序会影响我们的分组效果 如groupby(['key1','key2']) 和groupby(['key2','key1'])展示出来的效果就会不同
 
-      # 以key1，和key2 进行分组，将data2字段中的内容进行求和
-      grouped1=df_obj.groupby(['key1','key2'])['data2'].sum()
-      grouped1
+        # 以key1，和key2 进行分组，将data2字段中的内容进行求和
+        grouped1=df_obj.groupby(['key1','key2'])['data2'].sum()
+        grouped1
 
     __out：__
 
-      key1  key2 
-      a     one      1.359537
-            three   -2.016811
-            two      0.708200
-      b     one      1.994562
-            three   -0.970285
-            two      0.146132
+        key1  key2 
+        a     one      1.359537
+              three   -2.016811
+              two      0.708200
+        b     one      1.994562
+              three   -0.970285
+              two      0.146132
 
 
     __如：__
 
-      # 以Pclass进行分组，将字段中'Pclass','Survived'的内容进行求和
-      print(train_data.groupby(['Pclass'])['Pclass','Survived'].mean())
+        # 以Pclass进行分组，将字段中'Pclass','Survived'的内容进行求和
+        print(train_data.groupby(['Pclass'])['Pclass','Survived'].mean())
+        
+                  Pclass    Survived
+        Pclass                  
+        1          1.0      0.629630
+        2          2.0      0.472826
+        3          3.0      0.242363
       
-                Pclass    Survived
-      Pclass                  
-      1          1.0      0.629630
-      2          2.0      0.472826
-      3          3.0      0.242363
-      
-      print(train_data.groupby(['Pclass'])['Pclass'，'Survived','Age'].mean())
+        print(train_data.groupby(['Pclass'])['Pclass'，'Survived','Age'].mean())
 
-                Pclass    Survived        Age
-      Pclass                             
-      1          1.0      0.629630      37.048118
-      2          2.0      0.472826      29.866958
-      3          3.0      0.242363      26.403259
+                  Pclass    Survived        Age
+        Pclass                             
+        1          1.0      0.629630      37.048118
+        2          2.0      0.472826      29.866958
+        3          3.0      0.242363      26.403259
 
 
 *   __分层索引__
