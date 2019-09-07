@@ -171,6 +171,12 @@ Pandas __dtype__ 映射：
 <div align=center><img width="700" height="430" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/3.png"/></div>
 
 
+### 将 object 类型转为 category 分类类型
+
+
+
+
+
 ### 数据清洗
   数据清洗是数据准备过程中必不可少的环节，Pandas 也为我们提供了数据清洗的工具，在后面数据清洗的章节中会给你做详细的介绍，这里简单介绍下 Pandas 在数据清洗中的使用方法。
   
@@ -943,6 +949,55 @@ __out：__
     b	  3	    3	    3
 
 __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
+
+
+*   __groupby.first()__
+
+    首先计算每组中的值
+
+    __例子：__
+
+        train.groupby('matchId')['matchType'].value_counts()
+
+    __out__
+
+        matchId         matchType       
+        0000a43bce5eec  squad-fpp            95
+        0000eb01ea6cdd  squad-fpp            98
+        0002912fe5ed71  solo                 95
+        0003b92987589e  duo                 100
+        0006eb8c17708d  duo-fpp              93
+        00077604e50a63  squad-fpp            98
+
+
+    __例子：__
+
+    首先使用 groupby('matchId') ,将 matchId 作为索引，后面接 matchType , first的作用在于，因为 某一个 matchId 下面可能有多个 matchType ，而first()只取第一个 matchType的值 。
+
+        train.groupby('matchId')['matchType'].first().value_counts()
+
+    __out__
+
+        squad-fpp           18576
+        duo-fpp             10620
+        squad                6658
+        solo-fpp             5679
+        duo                  3356
+        solo                 2297
+        normal-squad-fpp      358
+        normal-duo-fpp        158
+        normal-solo-fpp        96
+        crashfpp               73
+        flaretpp               29
+        normal-solo            23
+        normal-squad           16
+        normal-duo             12
+        flarefpp                9
+        crashtpp                5
+        Name: matchType, dtype: int64
+
+
+
 
 
 ### pd.cut 为数据分段：
