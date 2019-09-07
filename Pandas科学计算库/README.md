@@ -732,223 +732,223 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     3   NaN 3.0 NaN 4
     
     
-  ### pandas.DataFrame.groupby   
+### pandas.DataFrame.groupby   
   
   DataFrame.groupby(by=None, axis=0, level=None, as_index=True, sort=True, group_keys=True, squeeze=False, observed=False, **kwargs)[source]
 
-  __参数介绍：__
+*   __参数介绍：__
     
-    as_index:为True时会将第一列数据设置为index，为False时则会新建一个数字索引。默认为True
+      as_index:为True时会将第一列数据设置为index，为False时则会新建一个数字索引。默认为True
 
-      import pandas as pd
+        import pandas as pd
 
-      df = pd.DataFrame(data={'books':['bk1','bk1','bk1','bk2','bk2','bk3'], 'price': [12,12,12,15,15,17]})
+        df = pd.DataFrame(data={'books':['bk1','bk1','bk1','bk2','bk2','bk3'], 'price': [12,12,12,15,15,17]})
 
-      df
+        df
 
-      out：
-          books	price
-        0  bk1	  12
-        1	 bk1	  12
-        2	 bk1	  12
-        3	 bk2	  15
-        4	 bk2	  15
-        5	 bk3	  17
+        out：
+            books	price
+          0  bk1	  12
+          1	 bk1	  12
+          2	 bk1	  12
+          3	 bk2	  15
+          4	 bk2	  15
+          5	 bk3	  17
 
-      a=df.groupby('books', as_index=True).sum()
-      print(a.index)
-      a
+        a=df.groupby('books', as_index=True).sum()
+        print(a.index)
+        a
 
-      out：
+        out：
 
-        Index(['bk1', 'bk2', 'bk3'], dtype='object', name='books')
+          Index(['bk1', 'bk2', 'bk3'], dtype='object', name='books')
 
-              price
-        books	
-        bk1	    36
-        bk2	    30
-        bk3	    17
+                price
+          books	
+          bk1	    36
+          bk2	    30
+          bk3	    17
 
-      df.groupby('books', as_index=False).sum() 
-      
-      out： 
+        df.groupby('books', as_index=False).sum() 
+        
+        out： 
 
-          books	price
-        0	bk1	  36
-        1	bk2	  30
-        2	bk3	  17
+            books	price
+          0	bk1	  36
+          1	bk2	  30
+          2	bk3	  17
 
-  __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
-  
-  __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
+    __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
+    
+    __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
 
 
 <div align=center><img width="650" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/pandas/2.png"/></div>
 
-  __groupby函数 例子1__
+*   __groupby函数 例子1__
 
-    import pandas as pd
-    import numpy as np
+      import pandas as pd
+      import numpy as np
 
-    dict_obj = {'key1' : ['a', 'b', 'a', 'b', 
-                          'a', 'b', 'a', 'a'],
-                'key2' : ['one', 'one', 'two', 'three',
-                          'two', 'two', 'one', 'three'],
-                'data1': np.random.randn(8),
-                'data2': np.random.randn(8)}
-    df_obj = pd.DataFrame(dict_obj)
-    print(df_obj)
+      dict_obj = {'key1' : ['a', 'b', 'a', 'b', 
+                            'a', 'b', 'a', 'a'],
+                  'key2' : ['one', 'one', 'two', 'three',
+                            'two', 'two', 'one', 'three'],
+                  'data1': np.random.randn(8),
+                  'data2': np.random.randn(8)}
+      df_obj = pd.DataFrame(dict_obj)
+      print(df_obj)
 
-  __out：__
+    __out：__
 
-      key1   key2     data1     data2
-      0    a    one -0.109110  0.528666
-      1    b    one -0.746051  1.994562
-      2    a    two  2.685447  1.672294
-      3    b  three  0.546663 -0.970285
-      4    a    two -0.859890 -0.964093
-      5    b    two -0.347244  0.146132
-      6    a    one  0.254899  0.830872
-      7    a  three -0.958547 -2.016811
-
-
-  __dataframe根据key1进行分组__                                                                                                                                                                                                                                                           
-    grouped1=df_obj.groupby('key1')
-
-    [x for x in grouped1]
+        key1   key2     data1     data2
+        0    a    one -0.109110  0.528666
+        1    b    one -0.746051  1.994562
+        2    a    two  2.685447  1.672294
+        3    b  three  0.546663 -0.970285
+        4    a    two -0.859890 -0.964093
+        5    b    two -0.347244  0.146132
+        6    a    one  0.254899  0.830872
+        7    a  three -0.958547 -2.016811
 
 
-    [('a',   key1   key2     data1     data2
-      0       a    one -0.109110  0.528666
-      2       a    two  2.685447  1.672294
-      4       a    two -0.859890 -0.964093
-      6       a    one  0.254899  0.830872
-      7       a  three -0.958547 -2.016811), ('b',   key1   key2     data1     data2
-      1       b    one -0.746051  1.994562
-      3       b  three  0.546663 -0.970285
-      5       b    two -0.347244  0.146132)]
+*   __dataframe根据key1进行分组__                                                                                                                                                                                                                                                           
+      grouped1=df_obj.groupby('key1')
 
-  __使用groupby指定字段内容进行运算__
+      [x for x in grouped1]
 
-  __如：__
 
-    # 按照 key1 进行分组从上面的数据中我们可以发现分为a,b两组
-    grouped = df.groupby(df['key1'])
-    grouped.mean()
+      [('a',   key1   key2     data1     data2
+        0       a    one -0.109110  0.528666
+        2       a    two  2.685447  1.672294
+        4       a    two -0.859890 -0.964093
+        6       a    one  0.254899  0.830872
+        7       a  three -0.958547 -2.016811), ('b',   key1   key2     data1     data2
+        1       b    one -0.746051  1.994562
+        3       b  three  0.546663 -0.970285
+        5       b    two -0.347244  0.146132)]
 
-  __out：__
+*   __使用groupby指定字段内容进行运算__
 
-    # 这里使用 df['key1'] 做了分组键，即按 a 和 b 进行分组。下例中没有显示 key2 列，是因为其值不是数字类型，被 mean() 方法自动忽视了
-         data1	data2
-    key1		
-    a	0.202560	0.010185
-    b	-0.182211	0.390136
+    __如：__
+
+      # 按照 key1 进行分组从上面的数据中我们可以发现分为a,b两组
+      grouped = df.groupby(df['key1'])
+      grouped.mean()
+
+    __out：__
+
+      # 这里使用 df['key1'] 做了分组键，即按 a 和 b 进行分组。下例中没有显示 key2 列，是因为其值不是数字类型，被 mean() 方法自动忽视了
+          data1	data2
+      key1		
+      a	0.202560	0.010185
+      b	-0.182211	0.390136
+        
+    __如：__ 
+
+      # 以key1进行分组，将data2字段中的内容进行求和
+      grouped1=df_obj.groupby(['key1'])['data2'].sum()
+      grouped1
+
+    __out：__
+
+      key1
+      a    0.050927
+      b    1.170409
+      Name: data2, dtype: float64
+
+    __如：__ 注意使用groupby进行多列的组合时，顺序会影响我们的分组效果 如groupby(['key1','key2']) 和groupby(['key2','key1'])展示出来的效果就会不同
+
+      # 以key1，和key2 进行分组，将data2字段中的内容进行求和
+      grouped1=df_obj.groupby(['key1','key2'])['data2'].sum()
+      grouped1
+
+    __out：__
+
+      key1  key2 
+      a     one      1.359537
+            three   -2.016811
+            two      0.708200
+      b     one      1.994562
+            three   -0.970285
+            two      0.146132
+
+
+    __如：__
+
+      # 以Pclass进行分组，将字段中'Pclass','Survived'的内容进行求和
+      print(train_data.groupby(['Pclass'])['Pclass','Survived'].mean())
       
-  __如：__ 
+                Pclass    Survived
+      Pclass                  
+      1          1.0      0.629630
+      2          2.0      0.472826
+      3          3.0      0.242363
+      
+      print(train_data.groupby(['Pclass'])['Pclass'，'Survived','Age'].mean())
 
-    # 以key1进行分组，将data2字段中的内容进行求和
-    grouped1=df_obj.groupby(['key1'])['data2'].sum()
-    grouped1
-
-  __out：__
-
-    key1
-    a    0.050927
-    b    1.170409
-    Name: data2, dtype: float64
-
-  __如：__ 注意使用groupby进行多列的组合时，顺序会影响我们的分组效果 如groupby(['key1','key2']) 和groupby(['key2','key1'])展示出来的效果就会不同
-
-    # 以key1，和key2 进行分组，将data2字段中的内容进行求和
-    grouped1=df_obj.groupby(['key1','key2'])['data2'].sum()
-    grouped1
-
-  __out：__
-
-    key1  key2 
-    a     one      1.359537
-          three   -2.016811
-          two      0.708200
-    b     one      1.994562
-          three   -0.970285
-          two      0.146132
+                Pclass    Survived        Age
+      Pclass                             
+      1          1.0      0.629630      37.048118
+      2          2.0      0.472826      29.866958
+      3          3.0      0.242363      26.403259
 
 
-  __如：__
+*   __分层索引__
 
-    # 以Pclass进行分组，将字段中'Pclass','Survived'的内容进行求和
-    print(train_data.groupby(['Pclass'])['Pclass','Survived'].mean())
-    
-              Pclass    Survived
-    Pclass                  
-    1          1.0      0.629630
-    2          2.0      0.472826
-    3          3.0      0.242363
-    
-    print(train_data.groupby(['Pclass'])['Pclass'，'Survived','Age'].mean())
+        我们可以使用level参数对不同级别的层次索引进行分组：
 
-              Pclass    Survived        Age
-    Pclass                             
-    1          1.0      0.629630      37.048118
-    2          2.0      0.472826      29.866958
-    3          3.0      0.242363      26.403259
+        >>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
+        ...           ['Capitve', 'Wild', 'Capitve', 'Wild']]
+        >>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
+        >>> df = pd.DataFrame({'Max Speed' : [390., 350., 30., 20.]},
+        ...                    index=index)
+        >>> df
+                        Max Speed
+        Animal Type
+        Falcon Capitve      390.0
+              Wild         350.0
+        Parrot Capitve       30.0
+              Wild          20.0
 
+        >>> df.groupby(level=0).mean()
+                Max Speed
+        Animal
+        Falcon      370.0
+        Parrot       25.0
 
-__分层索引__
+        >>> df.groupby(level=1).mean()
+                Max Speed
+        Type
+        Capitve      210.0
+        Wild         185.0
 
-    我们可以使用level参数对不同级别的层次索引进行分组：
+*   __groupby 函数的两个方法 .size() .count()__
 
-    >>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
-    ...           ['Capitve', 'Wild', 'Capitve', 'Wild']]
-    >>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
-    >>> df = pd.DataFrame({'Max Speed' : [390., 350., 30., 20.]},
-    ...                    index=index)
-    >>> df
-                    Max Speed
-    Animal Type
-    Falcon Capitve      390.0
-           Wild         350.0
-    Parrot Capitve       30.0
-           Wild          20.0
+    可以使用 GroupBy 对象（不论是 DataFrameGroupBy 还是 SeriesGroupBy）的 .size() 方法查看分组大小：
 
-    >>> df.groupby(level=0).mean()
-            Max Speed
-    Animal
-    Falcon      370.0
-    Parrot       25.0
+    __.size 如:__
 
-    >>> df.groupby(level=1).mean()
-             Max Speed
-    Type
-    Capitve      210.0
-    Wild         185.0
+        grouped.size()
 
-__groupby 函数的两个方法 .size() .count()__
+    __out：__
 
-可以使用 GroupBy 对象（不论是 DataFrameGroupBy 还是 SeriesGroupBy）的 .size() 方法查看分组大小：
+        key1
+        a       3
+        b       2
 
-__.size 如:__
+    __.count 如：__
 
-    grouped.size()
+        grouped.count()
 
-__out：__
+    __out：__
 
-    key1
-    a       3
-    b       2
+            key2	data1	data2
+        key1			
+        a	  5	    5	    5
+        b	  3	    3	    3
 
-__.count 如：__
-
-    grouped.count()
-
-__out：__
-
-        key2	data1	data2
-    key1			
-    a	  5	    5	    5
-    b	  3	    3	    3
-
-__.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
+    __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
 
 
 *   __groupby.first()__
