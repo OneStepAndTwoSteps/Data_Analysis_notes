@@ -215,12 +215,14 @@ __例子3:__
 
         style：string或dict   
 
-        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化 
+        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化  如 white(背景为白) darkgrid(灰色网格)
 
         palette：字符串或序列
 
         调色板，请参阅 color_palette() 返回定义调色板的颜色列表。可用的seaborn调色板名称：深沉，柔和，  明亮，  柔和，  黑暗，   色盲
                                                                                     deep, muted, bright, pastel, dark, colorblind
+
+        set_palette() 设置线条(如：柱形图的柱子)的颜色
 
         字体：字符串
 
@@ -433,6 +435,27 @@ M:
 S:
    
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
+
+
+__例子2：__
+
+  通过 groupby 分析分组数据，通过.value_counts()统计数量 .sort_index() 让 index 的值从小到大排序。最后通过.bar 绘图
+
+    group = train.groupby(['matchType','matchId','groupId'])['Id'].count().to_frame('players').reset_index()
+    group.loc[group['players'] >4,'players'] = '5+'
+    group['players'] = group['players'].astype(str)
+
+    fig,ax=plt.subplots(1,3,figsize=(16,4))
+    
+    # ax.ravel() 为每个子图设置变量
+    for mt,ax in zip(['solo','duo','squad'],ax.ravel()):
+        ax.set_xlabel(mt)
+        group[group['matchType']==mt]['players'].value_counts().sort_index().plot.bar(ax=ax)
+
+__运行结果：__
+
+![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/5.png)
+
 
 
 ## 箱型图：
