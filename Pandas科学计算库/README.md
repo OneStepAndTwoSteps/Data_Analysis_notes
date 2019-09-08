@@ -949,8 +949,25 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         a	  5	    5	    5
         b	  3	    3	    3
 
-    __.size 和 .count的区别： size计数时包含NaN值，而count不包含NaN值__
+    __.size 和 .count的区别：__
+    
+    __1、size计数时包含NaN值，而count不包含NaN值__
 
+    __2、使用 .size 的数据 和 使用 .count() 的数据 产生的输出结果数据的shape不一样__
+
+            count会保留所有特征 同时特征中的值是结算结果(所有值相同 类型：DataFrame)，但是size不会，size之后保留一列特征(就是计算结果 类型：Series)
+
+    *   __例子__
+
+            train.groupby(['matchType','matchId']).size().shape
+
+            train.groupby(['matchType','matchId']).count().shape
+      
+        __out__
+
+            (47965,)
+
+            (47965, 27)
 
 *   __groupby.first()__
 
