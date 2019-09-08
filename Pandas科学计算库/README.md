@@ -1023,22 +1023,46 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         Name: matchType, dtype: int64
 
 
-*   __groupby 进阶__
+*   __pandas.groupby 进阶 groupby.apply().groupby__
+
+    这里注意了，groupby 的后面是不能直接跟 .groupby 的，第一个 groupby 需要经过函数运算，才可以后面接 .groupby
 
     __例子__
 
-        desc2 = train.groupby(['matchType','matchId','groupId']).count().groupby(['matchType','matchId']).size().to_frame('groups in match')
+        match = train.groupby(['matchType','matchId']).size().to_frame('players in match')
+
+        # groupby 里面定义的特征是分组特征，函数计算的是最后一个分组特征的值。
+        group = train.groupby(['matchType','matchId','groupId']).size().to_frame('players in group')
+
+        # 基于上面分组之后的数据，再进行groupby，就是计算在上面基础的情况下 matchId的计算量，groupId的计算量。
+        pd.concat([match.groupby('matchType').describe()[toTapleList(['players in match'],['min','mean','max'])], 
+                  group.groupby('matchType').describe()[toTapleList(['players in group'],['min','mean','max'])]], axis=1)
 
     __解释：__
+
+        解释 groupby.groupby的计算方法：
+        
+        以 group 为例，第一次使用 groupby 将 matchType , matchId , groupId 作为分组条件，使用size作为计算方法，计算出 在相同 matchType 、 matchId ，条件下 不同 groupId出现的次数。此时注意：我们的数据其实就只有一行，即size计算出来的那一行，上述代码中将其命名为 'players in group'。
+
+        紧接着，我们使用第二个 groupby ，将 matchType 作为分组条件，然后使用 .describe 方法，其实他做的就是计算 'players in group' 这一行数据呀，因为经过分组计算之后，我们仅剩的数据特征就是 'players in group' 。 
+
+        所以说两个 groupby 第一个先进行计算，后面的groupby是通过指定分组条件的基础上计算 第一个 groupby 分组计算后 得到的数据。
+
+    __例子2__
+
+          desc2 = train.groupby(['matchType','matchId','groupId']).count().groupby(['matchType','matchId']).size().to_frame('groups in match')
+
+    __解释2：__
 
         首先 我们想得到每个 groupId 在每个 matchId 下出现的次数
         
         使用 train.groupby(['matchType','matchId','groupId']).count().groupby(....)  而不是 直接使用 train.groupby(['matchType','matchId']).size()
         的目的在于，因为在相同的 matchId 下可能存在 相同的 groupId ，所以我们两个groupby连接。
 
-        第一个 groupby 用于，帮助我们发现每个 groupId 在 matchId 下出现的次数(相同的groupId去重)，第二个groupby帮助我们进行统计。
+        第一个 groupby 用于，帮助我们发现每个 不同的groupId 在 matchId 下出现的次数(通过 count 计算)，第二个 groupby 就是指定分组，帮助我们对之前groupby计算出来的数据进行统计。
 
         所以说直接使用  train.groupby(['matchType','matchId']).size() 我们统计的是 matchId 下不同类别出现的次数，可能包含相同的 groupId。
+
 
 ### pd.to_frame
 
