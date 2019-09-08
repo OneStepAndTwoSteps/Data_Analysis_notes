@@ -531,7 +531,7 @@ __transform 和 apply的相同之处：__
      
      print(train_content.head(3)
   
-  pivot_table函数
+### df.pivot_table函数
     
   pivot_table有四个最重要的参数index、values、columns、aggfunc
 
