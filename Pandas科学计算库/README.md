@@ -979,7 +979,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
 *   __groupby.first()__
 
-    首先计算每组中的值
+    首先计算每组中的值(如果某一个分组下有多个不同的值，取第一个值)
 
     __例子：__
 
