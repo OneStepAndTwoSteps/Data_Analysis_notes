@@ -1014,6 +1014,24 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         crashtpp                5
         Name: matchType, dtype: int64
 
+
+*   __groupby 进阶__
+
+    __例子__
+
+        desc2 = train.groupby(['matchType','matchId','groupId']).count().groupby(['matchType','matchId']).size().to_frame('groups in match')
+
+    __解释：__
+
+        首先 我们想得到每个 groupId 在每个 matchId 下出现的次数
+        
+        使用 train.groupby(['matchType','matchId','groupId']).count().groupby(....)  而不是 直接使用 train.groupby(['matchType','matchId']).size()
+        的目的在于，因为在相同的 matchId 下可能存在 相同的 groupId ，所以我们两个groupby连接。
+
+        第一个 groupby 用于，帮助我们发现每个 groupId 在 matchId 下出现的次数(相同的groupId去重)，第二个groupby帮助我们进行统计。
+
+        所以说直接使用  train.groupby(['matchType','matchId']).size() 我们统计的是 matchId 下不同类别出现的次数，可能包含相同的 groupId。
+
 ### pd.to_frame
 
 pd.to_frame 将 Series 转化为 dataframe
@@ -1041,6 +1059,48 @@ pd.to_frame 将 Series 转化为 dataframe
 
 
 
+
+### pd.concat 合并 DataFrame
+
+*   __主要说明一下 axis=0 和 axis=1 时的区别：__
+
+        axis = 1，表示按行合并
+        axis = 0，表示按列合并
+
+
+    __使用方法：__
+
+        pd.concat([df1,df2],axis=num)
+
+    __例子：__
+
+        pd.concat([desc1,desc2],axis=1) 按行合并，就是向右延伸
+
+    __out：__
+
+        	      numGroups	                 maxPlace	            groups in match
+              min	mean	max	            min	mean	max	         min	mean	max
+        matchType									
+        duo	  1.0	45.812482	52.0	    3.0	47.608919	52.0	    1.0	45.348777	52.0
+        solo	1.0	91.115157	100.0	    1.0	93.908771	100.0	    1.0	85.669426	100.0
+        squad	2.0	27.039389	37.0	    2.0	27.982982	37.0	    2.0	26.834984	37.0
+
+    __例子：__
+
+        pd.concat([desc1,desc2],axis=0) 按列合并，就是向下延伸(默认axis=0)
+
+    __out：__
+
+              groups in match	              maxPlace	        numGroups
+                  max	mean	min	        max	mean	min	    max	mean	min
+        matchType									
+        duo	      NaN	NaN	NaN	52.0	    47.608919	3.0	      52.0	45.812482	1.0
+        solo	    NaN	NaN	NaN	100.0	    93.908771	1.0	      100.0	91.115157	1.0
+        squad	    NaN	NaN	NaN	37.0	    27.982982	2.0	      37.0	27.039389	2.0
+        
+        duo	      52.0	45.348777	1.0	  NaN	NaN	NaN	        NaN	NaN	NaN
+        solo	    100.0	85.669426	1.0	  NaN	NaN	NaN	        NaN	NaN	NaN
+        squad	    37.0	26.834984	2.0	  NaN	NaN	NaN	        NaN	NaN	NaN
 
 ### pd.cut 为数据分段：
 
