@@ -11,6 +11,21 @@ __import__
     from sklearn.impute import SimpleImputer 
 
 
+__参数说明__
+
+*   missing_values : number, string, np.nan (default) or None
+        
+        缺少值的占位符。所有事件都 missing_values将被估算。
+
+
+*   strategy : string, optional (default=”mean”)
+
+        如果是“mean”，则使用每列的平均值替换缺失值。只能与数字数据一起使用。
+        如果是“median”，则使用每列的中位数替换缺失值。只能与数字数据一起使用。
+        如果“most_frequent”，则使用每列中最常用的值替换missing。可以与字符串或数字数据一起使用。
+        如果是“constant”，则用fill_value替换缺失值。可以与字符串或数字数据一起使用。
+
+
 __example__
 
 *   __生成数据：__
