@@ -266,6 +266,7 @@ __out__
 
 __add code__
 
+    # 定义要查看的参数 cv_keys
     cv_keys = ('mean_test_score', 'std_test_score', 'params')
 
     for r, _ in enumerate(grid.cv_results_['mean_test_score']):
