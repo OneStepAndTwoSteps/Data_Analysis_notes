@@ -10,7 +10,40 @@
 
     参数设置：sns.set(参数)
     参数重置：sns.set()
+    
+  __sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )__
+        
+        context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
+        相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
+        
+        绘制上下文参数，请参阅 plotting_context() 
 
+        style：string或dict   
+
+        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化  如 white(背景为白) darkgrid(灰色网格)
+
+        palette：字符串或序列
+
+        调色板，请参阅 color_palette() 返回定义调色板的颜色列表。可用的seaborn调色板名称：深沉，柔和，  明亮，  柔和，  黑暗，   色盲
+                                                                                    deep, muted, bright, pastel, dark, colorblind
+
+        set_palette() 设置线条(如：柱形图的柱子)的颜色
+
+        字体：字符串
+
+        字体系列，请参阅matplotlib字体管理器。
+
+        font_scale：float，optional
+
+        单独的缩放因子可以独立缩放字体元素的大小。
+
+        color_codes：bool
+
+        如果True并且palette是seaborn调色板，则将速记颜色代码（例如“b”，“g”，“r”等）重新映射到此调色板中的颜色。
+
+        rc：dict或None
+
+        rc参数映射字典覆盖上面的。
 
 ## 设置seaborn画布大小
 
@@ -226,45 +259,42 @@ __例子3:__
     '_'	hline标记
 
     
- ## plt.xlim plt.ylim
+## plt 设置图像的相关方法
    
-   获取或设置当前轴的x限制。
- 
- ## 设置seaborn的画图风格：
+*   __plt.xlim plt.ylim__
     
- __sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )__
-        
-        context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
-        相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
-        
-        绘制上下文参数，请参阅 plotting_context() 
+    * 获取或设置当前轴的x限制。如
 
-        style：string或dict   
+            plt.ylim(0,100)
+ 
 
-        轴样式参数，请参阅 axes_style()           这会影响轴的颜色   背景颜色会发生变化  如 white(背景为白) darkgrid(灰色网格)
+*   __plt.xlabel()__
 
-        palette：字符串或序列
+    * 设置x轴上的标题 如 
+      
+            plt.xlabel('国家名称',fontsize=16)
 
-        调色板，请参阅 color_palette() 返回定义调色板的颜色列表。可用的seaborn调色板名称：深沉，柔和，  明亮，  柔和，  黑暗，   色盲
-                                                                                    deep, muted, bright, pastel, dark, colorblind
 
-        set_palette() 设置线条(如：柱形图的柱子)的颜色
+*   __plt.title()__
 
-        字体：字符串
+    * 设置标题 
+    
+            plt.title('各国商品贸易（占GDP的百分比%）',fontsize=26)
 
-        字体系列，请参阅matplotlib字体管理器。
+*   __plt.xticks()__
 
-        font_scale：float，optional
+    * 设置x轴上的刻度。如
 
-        单独的缩放因子可以独立缩放字体元素的大小。
+            # 用于变换坐标名称
+            x_tick = np.linspace(0,100,6)
+            new_x_tick =[str(i)+'%' for i in x_tick]
 
-        color_codes：bool
+            plt.yticks(x_tick,new_x_tick,fontsize=14)
 
-        如果True并且palette是seaborn调色板，则将速记颜色代码（例如“b”，“g”，“r”等）重新映射到此调色板中的颜色。
 
-        rc：dict或None
 
-        rc参数映射字典覆盖上面的。
+
+
 
 ## 4类主要的可视化视图
     
@@ -461,6 +491,13 @@ M:
 S:
    
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
+
+
+* __补充：__
+
+  * 如果想要绘制横向的条形图 使用 plt.barh() 函数
+
+  * 可以通过对生成的 bar = plt.bar() 对象进行 set_height 或者 set_width 对数据进行重新设置。
 
 
 __例子2：__
