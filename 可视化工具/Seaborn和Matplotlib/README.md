@@ -48,7 +48,7 @@
     
     style.use('bmh')
     
-  - [不同样式的展示图：](https://matplotlib.org/3.1.0/gallery/style_sheets/style_sheets_reference.html)
+  __- 《[查看不同样式的展示图](https://matplotlib.org/3.1.0/gallery/style_sheets/style_sheets_reference.html)》__
   
     
     
