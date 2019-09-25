@@ -1310,15 +1310,20 @@ __例子：__
 
       pandas.errors.ParserError: Error tokenizing data. C error: Expected 20 fields in line 4, saw 21
 
-  __解决方案1：__ 加上分隔符 sep 
+  __解决方案1：__ 确保特征列(第一行)数据最长，包含下面所有的特征
+
+      row1: column1,column2
+      row2: column1,column2,column3,column4
+      
+      第一行是作为我们的特征名称，必须要大于等于第二行
+
+  __解决方案2：__ 加上分隔符 sep 
 
       data=pd.read_csv(file_path,sep='\t')
 
-  __解决方案2：__ 忽略错误的行
+  __解决方案3：__ 忽略错误的行
 
       data=pd.read_csv(file_path,error_bad_lines=False)
-
-  
 
 
   ### 数据的偏度和峰度
