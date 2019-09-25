@@ -26,7 +26,33 @@
     plt.xlabel('Accuracy Score (%)')
     plt.ylabel('Algorithm')
 
+## 设置画布的风格
+   
+  导入 style 模块
+ 
+    from matplotlib import style 
 
+  获取所有的自带样式
+    
+    print(plt.style.available) # 打印样式列表
+    
+    ['bmh', 'classic', 'dark_background', 'fast', 
+    'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-bright', 
+    'seaborn-colorblind', 'seaborn-dark-palette', 'seaborn-dark', 'seaborn-darkgrid',
+     'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 
+    'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks',
+     'seaborn-white', 'seaborn-whitegrid', 'seaborn', 'Solarize_Light2', 
+    'tableau-colorblind10', '_classic_test']
+   
+  设置画布风格如：
+    
+    style.use('bmh')
+    
+  - [不同样式的展示图：](https://matplotlib.org/3.1.0/gallery/style_sheets/style_sheets_reference.html)
+  
+    
+    
+    
  ## plt.subplot方法：
    __subplot(nrows, ncols, index, **kwargs)__
    
