@@ -133,18 +133,18 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 *   ___场景：在一段df数据中我们进行取值__
 
-    __数据：__
+    *   __数据：__
   
-        train_data.head()
+            train_data.head()
 
-    __out：__
+        out：
 
-          Survived	Pclass	Sex	Age	Fare	Embarked	Title	Isalone
-        0 	0	      3	      1	  1	  0   	2	        2	    0
-        1	  1	      1	      0	  2	  0	    0	        3	    0
-        2	  1	      3	      0	  1	  0   	2	        1	    1
-        3	  1	      1	      0	  2	  0	    2	        3	    0
-        4	  0	      3	      1	  2	  0	    2	        2	    1
+              Survived	Pclass	Sex	Age	Fare	Embarked	Title	Isalone
+            0 	0	      3	      1	  1	  0   	2	        2	    0
+            1	  1	      1	      0	  2	  0	    0	        3	    0
+            2	  1	      3	      0	  1	  0   	2	        1	    1
+            3	  1	      1	      0	  2	  0	    2	        3	    0
+            4	  0	      3	      1	  2	  0	    2	        2	    1
 
 
 *   __双括号和单括号之间的区别：__
