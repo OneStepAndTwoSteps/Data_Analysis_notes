@@ -174,6 +174,56 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
         data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])].values
 
 
+*   __df中已存在index或者columns如果需要改名需要使用rename，不可以直接进行替换：__
+
+    __数据展示__
+
+        data = pd.DataFrame(geoCoord).T
+        data
+
+    out：
+
+        	      0	      1
+        甘肃	103.73	36.03
+        青海	101.74	36.56
+        四川	104.06	30.67
+        河北	114.48	38.03
+        云南	102.73	25.04
+
+    我们可以看到原先的列中就存在列名，其列名为 0 和 1。现在我们想要对其进行改名
+
+
+    __错误做法：__
+
+        data = pd.DataFrame(geoCoord).T
+        data.columns={'centroid_lon','centroid_lat'}
+        data
+
+    error-out:
+
+        	    centroid_lat	centroid_lon
+        甘肃	  103.73	        36.03
+        青海	  101.74	        36.56
+        四川	  104.06	        30.67
+        河北	  114.48	        38.03
+
+    这里我们发现，即使我们在定义列名的时候先指定定义 centroid_lon 再 定义 centroid_lat 也是无用的，他会优先将字符串顺序高的列替换原先的 0 列，优先级低的替换 1 列。
+
+    __正确做法：__
+
+        data = pd.DataFrame(geoCoord).T
+        data.rename(columns={0:'centroid_lon',1:'centroid_lat'},inplace=True)
+        data
+
+    right-out:
+
+
+              centroid_lon	centroid_lat
+        甘肃	  103.73	        36.03
+        青海	  101.74	        36.56
+        四川	  104.06	        30.67
+        河北	  114.48	        38.03
+
 
 ### pandas 数据类型
 
