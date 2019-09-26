@@ -149,80 +149,80 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 *   __双括号和单括号之间的区别：__
 
-    __双括号取出的 Survived 是 DataFrame 格式__
+    *   __双括号取出的 Survived 是 DataFrame 格式__
 
-        type(train_data[['Survived']].head())
+            type(train_data[['Survived']].head())
 
-        pandas.core.frame.DataFrame
+            pandas.core.frame.DataFrame
 
-    __单括号取出的 Survived 是 Series 格式__
+    *   __单括号取出的 Survived 是 Series 格式__
 
-        type(train_data['Survived'].head())
-        pandas.core.series.Series
+            type(train_data['Survived'].head())
+            pandas.core.series.Series
 
-    取出来为 Series 格式，但是你没有发觉，此后如果想赋值一个新的列，那么无法成功，因为Series中只能有一列。
+        取出来为 Series 格式，但是你没有发觉，此后如果想赋值一个新的列，那么无法成功，因为Series中只能有一列。
 
 *   __为列进行赋值后，数据全为NaN：__
 
-    那是因为df赋值时是按照索引意义对应进行赋值，如果两个df之间的索引对不上，那么数据全为NaN
+    *   那是因为df赋值时是按照索引意义对应进行赋值，如果两个df之间的索引对不上，那么数据全为NaN
 
 
-        # data 和 carshare 两个 df 的 索引 不同，其赋值给 data 之后，data的 car_hours字段为NaN
-        data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])]
+            # data 和 carshare 两个 df 的 索引 不同，其赋值给 data 之后，data的 car_hours字段为NaN
+            data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])]
 
-        # 可以使用 .values 方法，让其不按照 index 一一对应。
-        data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])].values
+            # 可以使用 .values 方法，让其不按照 index 一一对应。
+            data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])].values
 
 
 *   __df中已存在index或者columns如果需要改名需要使用rename，不可以直接进行替换：__
 
-    __数据展示__
+    *   __数据展示__
 
-        data = pd.DataFrame(geoCoord).T
-        data
+            data = pd.DataFrame(geoCoord).T
+            data
 
-    out：
+        out：
 
-        	      0	      1
-        甘肃	103.73	36.03
-        青海	101.74	36.56
-        四川	104.06	30.67
-        河北	114.48	38.03
-        云南	102.73	25.04
+                    0	      1
+            甘肃	103.73	36.03
+            青海	101.74	36.56
+            四川	104.06	30.67
+            河北	114.48	38.03
+            云南	102.73	25.04
 
-    我们可以看到原先的列中就存在列名，其列名为 0 和 1。现在我们想要对其进行改名
-
-
-    __错误做法：__
-
-        data = pd.DataFrame(geoCoord).T
-        data.columns={'centroid_lon','centroid_lat'}
-        data
-
-    error-out:
-
-        	    centroid_lat	centroid_lon
-        甘肃	  103.73	        36.03
-        青海	  101.74	        36.56
-        四川	  104.06	        30.67
-        河北	  114.48	        38.03
-
-    这里我们发现，即使我们在定义列名的时候先指定定义 centroid_lon 再 定义 centroid_lat 也是无用的，他会优先将字符串顺序高的列替换原先的 0 列，优先级低的替换 1 列。
-
-    __正确做法：__
-
-        data = pd.DataFrame(geoCoord).T
-        data.rename(columns={0:'centroid_lon',1:'centroid_lat'},inplace=True)
-        data
-
-    right-out:
+        我们可以看到原先的列中就存在列名，其列名为 0 和 1。现在我们想要对其进行改名
 
 
-              centroid_lon	centroid_lat
-        甘肃	  103.73	        36.03
-        青海	  101.74	        36.56
-        四川	  104.06	        30.67
-        河北	  114.48	        38.03
+    *   __错误做法：__
+
+            data = pd.DataFrame(geoCoord).T
+            data.columns={'centroid_lon','centroid_lat'}
+            data
+
+        error-out:
+
+                  centroid_lat	centroid_lon
+            甘肃	  103.73	        36.03
+            青海	  101.74	        36.56
+            四川	  104.06	        30.67
+            河北	  114.48	        38.03
+
+        这里我们发现，即使我们在定义列名的时候先指定定义 centroid_lon 再 定义 centroid_lat 也是无用的，他会优先将字符串顺序高的列替换原先的 0 列，优先级低的替换 1 列。
+
+    *   __正确做法：__
+
+            data = pd.DataFrame(geoCoord).T
+            data.rename(columns={0:'centroid_lon',1:'centroid_lat'},inplace=True)
+            data
+
+        right-out:
+
+
+                  centroid_lon	centroid_lat
+            甘肃	  103.73	        36.03
+            青海	  101.74	        36.56
+            四川	  104.06	        30.67
+            河北	  114.48	        38.03
 
 
 ### pandas 数据类型
