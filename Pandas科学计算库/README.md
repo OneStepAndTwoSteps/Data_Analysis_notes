@@ -131,36 +131,47 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 ### Dataframe 和 Series 的坑
 
-___场景：在一段df数据中我们进行取值__
+*   ___场景：在一段df数据中我们进行取值__
 
-__数据：__
+    __数据：__
   
-    train_data.head()
+        train_data.head()
 
-__out：__
+    __out：__
 
-      Survived	Pclass	Sex	Age	Fare	Embarked	Title	Isalone
-    0 	0	      3	      1	  1	  0   	2	        2	    0
-    1	  1	      1	      0	  2	  0	    0	        3	    0
-    2	  1	      3	      0	  1	  0   	2	        1	    1
-    3	  1	      1	      0	  2	  0	    2	        3	    0
-    4	  0	      3	      1	  2	  0	    2	        2	    1
+          Survived	Pclass	Sex	Age	Fare	Embarked	Title	Isalone
+        0 	0	      3	      1	  1	  0   	2	        2	    0
+        1	  1	      1	      0	  2	  0	    0	        3	    0
+        2	  1	      3	      0	  1	  0   	2	        1	    1
+        3	  1	      1	      0	  2	  0	    2	        3	    0
+        4	  0	      3	      1	  2	  0	    2	        2	    1
 
 
-__双括号和单括号之间的区别：__
+*   __双括号和单括号之间的区别：__
 
-__双括号取出的 Survived 是 DataFrame 格式__
+    __双括号取出的 Survived 是 DataFrame 格式__
 
-    type(train_data[['Survived']].head())
+        type(train_data[['Survived']].head())
 
-    pandas.core.frame.DataFrame
+        pandas.core.frame.DataFrame
 
-__单括号取出的 Survived 是 Series 格式__
+    __单括号取出的 Survived 是 Series 格式__
 
-    type(train_data['Survived'].head())
-    pandas.core.series.Series
+        type(train_data['Survived'].head())
+        pandas.core.series.Series
 
-取出来为 Series 格式，但是你没有发觉，此后如果想赋值一个新的列，那么无法成功，因为Series中只能有一列。
+    取出来为 Series 格式，但是你没有发觉，此后如果想赋值一个新的列，那么无法成功，因为Series中只能有一列。
+
+*   __为列进行赋值后，数据全为NaN：__
+
+    那是因为df赋值时是按照索引意义对应进行赋值，如果两个df之间的索引对不上，那么数据全为NaN
+
+
+        # data 和 carshare 两个 df 的 索引 不同，其赋值给 data 之后，data的 car_hours字段为NaN
+        data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])]
+
+        # 可以使用 .values 方法，让其不按照 index 一一对应。
+        data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])].values
 
 
 
