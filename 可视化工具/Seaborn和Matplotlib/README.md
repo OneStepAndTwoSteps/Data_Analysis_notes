@@ -11,6 +11,15 @@
     参数设置：sns.set(参数)
     参数重置：sns.set()
     
+ *  sns 设置中文字体
+
+          sns.set(font='SimHei')
+
+ *  sns 设置画布风格
+
+        sns.set_style('darkgrid') # 背景
+        sns.set_palette('Reds')   # 线条
+
   __sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )__
         
         context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
@@ -59,7 +68,7 @@
     plt.xlabel('Accuracy Score (%)')
     plt.ylabel('Algorithm')
 
-## 设置画布的风格
+## plt 设置画布的风格
    
   导入 style 模块
  
