@@ -15,6 +15,8 @@
   设置pandas保留小数位数为三位
   
     pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
+    pd.options.display.float_format = '{:,.3f}'.format
   
   默认显示列数，行数,当设置为None时，表示显示所有内容
     
