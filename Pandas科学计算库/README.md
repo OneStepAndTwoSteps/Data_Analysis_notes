@@ -1736,4 +1736,28 @@ __计算结果__
    Pandas 包与 NumPy 工具库配合使用可以发挥巨大的威力，正是有了 Pandas 工具，Python 做数据挖掘才具有优势。
   
   
+### df.memory_usage  
+
+Pandas dataframe.memory_usage()函数返回每列的内存使用情况（以字节为单位）。内存使用情况可以选择包括索引和对象dtype元素的贡献。默认情况下，此值显示在DataFrame.info中。
+
+
+-   __参数：__
   
+      index：指定是否在返回的Series中包括DataFrame索引的内存使用情况。如果index = True（默认），则索引的内存使用量将是输出中的第一项。
+
+      deep：如果为True，则通过查询对象dtype进行系统级内存消耗来深入检查数据，并将其包含在返回值中。
+
+-   __返回：__
+  
+      一个系列，其索引是原始列名，其值是每列的内存使用量 __（以字节为单位）__
+
+-   __代码示例：__
+
+        >>> df.memory_usage()
+        Index           128
+        int64         40000
+        float64       40000
+        complex128    80000
+        object        40000
+        bool           5000
+        dtype: int64
