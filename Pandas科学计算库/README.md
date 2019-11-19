@@ -1206,6 +1206,8 @@ pd.to_frame 将 Series 转化为 dataframe
 
 ### pd.cut 为数据分段：
 
+  量化将连续数映射成离散数。我们可以把离散化的数字看作是代表强度度量的容器的有序的序列。使用cut将连续数据进行切分量化成固定宽度的数据范围。
+
   需要将数据值分段并排序到箱中时使用cut。此函数对于从连续变量转换为分类变量也很有用。例如，cut可以将年龄转换为年龄范围组。支持分箱到相同数量的箱柜或预先指定的箱柜阵列。
 
   pandas.cut（x，bins，right = True，labels = None，retbins = False，precision = 3，include_lowest = False，duplicates ='raise' ）
@@ -1254,6 +1256,41 @@ __例子：__
         
           [NaN, 6到8区间, 4到6区间, 2到4区间, 4到6区间, 2到4区间]
           Categories (3, object): [2到4区间 < 4到6区间 < 6到8区间]
+
+
+### pd.qcut 为数据分段：
+
+上面我们将的是用pd.cut来个连续数据分段，但是有时候不好使呀固定宽度来进行分组，我们可以使用qcut，表示使用分数位进行切分数据
+
+*   __按分位数分箱计数 定义数据：__
+
+        large_counts = [
+            296, 8286, 64011, 80, 3, 725, 867, 2215, 7689, 11495, 91897, 44, 28, 7971,
+            926, 122, 22222
+        ]
+
+
+*   __按分位数分箱计数 例子1：__
+
+        ### Continue example Example 2-3 with large_counts
+        import pandas as pd
+        ### Map the counts to quartiles
+        pd.qcut(large_counts, 4, labels=False) # 按四分位进行切分
+
+        Out:
+          array([1, 2, 3, 0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 2, 1, 0, 3], dtype=int64)
+
+*   __按分位数分箱计数 例子2：__
+
+        ### Compute the quantiles themselves
+        large_counts_series = pd.Series(large_counts)
+        large_counts_series.quantile([0.25, 0.5, 0.75]) # 这里指定三分位进行划分。
+
+        Out:
+          0.25     122.0
+          0.50     926.0
+          0.75    8286.0
+          dtype: float64
 
   ### pandas按若干个列的组合条件筛选数据
     #取年龄等于26，并且存活的数据的数量
