@@ -855,6 +855,20 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
           0	bk1	  36
           1	bk2	  30
           2	bk3	  17
+    
+    *   __使用 as_index 时的注意事项：__
+
+            1、df.groupby('books', as_index=False).agg('sum') 
+
+            和
+
+            2、 df.groupby('books', as_index=False).agg(['sum']) 
+
+            的结果是不一样的。
+
+            对于代码2，as_index=False 的效果不会被体现。也就是结果仍然会使用分组数据作为index。
+            
+            *** 但是在最后加上reset_index()能达到和上面代码相同的效果，因为会重新设置index ***
 
     __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
     
@@ -1156,11 +1170,10 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     __代码：__
 
         # 1、表示按照 '购买时间' 这一列来做聚合，'成交价格' 这一列来做统计。
-        # 2、最好加上 .reset_index() 否则将会将 '购买时间' 这一列的数据作为索引 
-        d1.groupby(['购买时间'])['成交价格'].agg(['max']).reset_index() 
+        d1.groupby(['购买时间'],as_index=False)['成交价格'].agg('max') 
 
         # 上面这句代码的结果等同于这句代码
-        d2 = d2.pivot_table(index="购买时间",values=["成交价格"])
+        d2 = d2.pivot_table(index="购买时间",values=["成交价格"],aggfunc='max')
 
     __效果：__
 
@@ -1171,10 +1184,56 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         3	2020-01-18 09:10:06.812429	3539.0
         4	2020-01-18 10:10:06.812429	3609.0
 
+    __**注意事项**__
+
+    __1、__ 对于agg函数来说，函数中的参数多个和单个是有差别的，如果函数中的参数是 __单个__ 比如 agg('max') ,那么最后统计出来的那列数据的列名就是原来的列名，比如为 "购买价格"，但是如果函数中的参数为 __一个列表__ ,比如 agg(['max']) ,那么最后统计出来的那列数据的列名就是 'max' 。
+
+        * d1.groupby(['购买时间'])['成交价格'].agg('max') 
+
+        
+                                    成交价格
+        购买时间	
+        2020-01-08 00:00:00.000000	5999.0
+        2020-01-09 00:00:00.000000	3829.0
+
+        * d1.groupby(['购买时间'])['成交价格'].agg(['max']) 
+
+                                    max
+        购买时间	
+        2020-01-08 00:00:00.000000	5999.0
+        2020-01-09 00:00:00.000000	3829.0
+
+    __2、__ 同时对于agg(['max']), as_index 的效果会失效，也就是说即使你指定了 as_index=False，那么结果仍然会将分组列作为索引。当然可以通过 __reset_index__ 的方法进行解决。
+
+        d1.groupby(['购买时间'])['成交价格'].agg(['max']).reset_index() 
 
 ### pd.to_frame
 
 pd.to_frame 将 Series 转化为 dataframe
+
+*   __例子__
+
+        x2 = pd.Series(data=[1,2,3,4], index=['a', 'b', 'c', 'd'])
+        display(x2)
+        print('***********')
+        x2.to_frame('hehe')
+        x2
+    __out__
+
+        a    1
+        b    2
+        c    3
+        d    4
+        dtype: int64
+
+        ***********
+
+            hehe
+        a	  1
+        b	  2
+        c	  3
+        d	  4
+    
 
 *   __例子__
 
@@ -1196,8 +1255,6 @@ pd.to_frame 将 Series 转化为 dataframe
         (47965,1)
 
     我们可以通过 shape 查看他到底是不是 series，只有 series 才可以进行 to_farme.
-
-
 
 
 ### pd.concat 合并 DataFrame
