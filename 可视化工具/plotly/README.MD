@@ -169,83 +169,116 @@ __特别说明：__ Plotly绘图函数，无论是哪种类型的图表，绝大
 
 *   plot_bgcolor：设置x轴和y轴之间的绘图区域的颜色。默认值：”#fff” ；
 
-*   margin 设置 图表的页面边距。1) 主要的4个参数：1、r、t、b，分别对应：左右上下，除了上(t)默认值为100，其它默认值均为80；2) pad：设置绘图区域和轴线之间的填充量，默认值为0；3) autoexpand：布尔型，表示是否默认自动
+*   margin 设置 图表的页面边距。
+    
+        1) 主要的4个参数：l、r、t、b，分别对应：左右上下，除了上(t)默认值为100，其它默认值均为80；
+        
+        2) pad：设置绘图区域和轴线之间的填充量，默认值为0；3) autoexpand：布尔型，表示是否默认自动
 
 *   xaxis、yaxis：设置x、y 坐标轴参数，包括如下设置项：
 
-    *   title：设置坐标轴的标题，包括标题内容、字体、颜色、大小等；
+        title：设置坐标轴的标题，包括标题内容、字体、颜色、大小等；
 
-    *   tickformat：设置刻度线标签格式，如：‘,’ 可以显示千分位标示；‘YYYY-MM-DD’可以将日期格式化为类似 2019-01-01；
+        tickformat：设置刻度线标签格式，如：‘,’ 可以显示千分位标示；
+                    ‘YYYY-MM-DD’可以将日期格式化为类似 2019-01-01；
 
-    *   ticksuffix：设置刻度标签后缀字符串；
+        ticksuffix：设置刻度标签后缀字符串；
 
-    *   tickprefix：设置刻度标签前缀字符串；
+        tickprefix：设置刻度标签前缀字符串；
 
-    *   showline：布尔值，确定是否显示坐标轴直线；
+        showline：布尔值，确定是否显示坐标轴直线；
 
-    *   zeroline : 布尔值，确定是否在该轴的0值处绘制垂直的直线；
+        zeroline : 布尔值，确定是否在该轴的0值处绘制垂直的直线；
 
-    *   linecolor：坐标轴线的颜色；
+        linecolor：坐标轴线的颜色；
 
-    *   linewidth：坐标轴线的宽度；
+        linewidth：坐标轴线的宽度；
 
-    *   range：列表，设置坐标轴的取值范围；
+        range：列表，设置坐标轴的取值范围；
 
-    *   overlaying：设置相同的坐标轴id(双坐标)；
+        overlaying：设置相同的坐标轴id(双坐标)；
 
-    *   rangemode：根据输入数据的极值计算范围。默认为”normal”，取值为“tozero”`，则范围扩展为0，无论输入数据是否为“非负”，无论输入数据如何，范围都是非负的。目前笔者用到过的场景：双Y坐标轴时，实现Y轴的0刻度线对齐；
+        rangemode：根据输入数据的极值计算范围。
+                   默认为”normal”，取值为“tozero”`，则范围扩展为0，无论输入数据是否为“非负”，
+                   无论输入数据如何，范围都是非负的。
+                   目前笔者用到过的场景：双Y坐标轴时，实现Y轴的0刻度线对齐；
 
-    *   side：设置坐标轴在绘图区域的位置，共4个取值：top、bottom(默认)、left、right；
+        side：设置坐标轴在绘图区域的位置，共4个取值：top、bottom(默认)、left、right；
 
-    *   autotick：布尔变量，是否删除部分日期，False为保持原状；
+        autotick：布尔变量，是否删除部分日期，False为保持原状；
 
-    *   ticks：是否绘制刻度线，包括：outside(外部)、inside(内部)，默认为空(‘ ‘)，不显示刻度线；
+        ticks：是否绘制刻度线，包括：outside(外部)、inside(内部)，默认为空(‘ ‘)，不显示刻度线；
 
-    *   ticklen：设置刻度线长度，默认为5；
+        ticklen：设置刻度线长度，默认为5；
 
-    *   tickwidth：设置刻度线宽度，默认为1；
+        tickwidth：设置刻度线宽度，默认为1；
 
-    *   tickcolor：设置刻度线颜色，默认值：”#444″ ；
+        tickcolor：设置刻度线颜色，默认值：”#444″ ；
 
-    *   tickfont：设置刻度线标签字体，包括字体、颜色、大小；
+        tickfont：设置刻度线标签字体，包括字体、颜色、大小；
 
-    *   nticks：设置坐标轴的最大刻度个数；
+        nticks：设置坐标轴的最大刻度个数；
 
-    *   showticklabels：布尔变量，默认为True，确定是否绘制刻度标签；
+        showticklabels：布尔变量，默认为True，确定是否绘制刻度标签；
 
-    *   showgrid：布尔值，确定是否绘制网格线。如果为“True”，则在每个刻度线处绘制网格线；
+        showgrid：布尔值，确定是否绘制网格线。如果为“True”，则在每个刻度线处绘制网格线；
 
-    *   gridcolor：设置网格线的颜色；
+        gridcolor：设置网格线的颜色；
 
-    *   gridwidth：设置网格线的宽度；
+        gridwidth：设置网格线的宽度；
 
-    *   rangeslider：设置滑动条，有如下设置项：
-
+        rangeslider：设置滑动条，有如下设置项：
 
                 1）bgcolor：设置滑动条的背景颜色，默认值："#fff" ；
+                
                 2）bordercolor：设置滑动条的边框颜色，默认值："#444" ；
+                
                 3）borderwidth：设置滑动条的边框宽度，默认无；
+                
                 4）autorange：布尔值，设置是否根据输入数据计算滑动条的范围。如果提供range，则autorange设置为“False”；
-                5）range：列表，设置滑动条的范围。如果未设置，则默认为完整的x轴范围。如果轴type是“log”，则必须设置范围；如果轴type是“date”，则它应该是日期字符串或日期数据，Plotly对时间序列的支持比较友好，既支持字符串格式，又支持日期/时间格式；如果轴“type”是“ category”，它应该是数字或比例，其中每个类别按其出现的顺序从零开始分配序列号；
+                
+                5）range：列表，设置滑动条的范围。如果未设置，则默认为完整的x轴范围。
+                如果轴type是“log”，则必须设置范围；
+                如果轴type是“date”，则它应该是日期字符串或日期数据
+                如果轴“type”是“ category”，它应该是数字或比例，其中每个类别按其出现的顺序从零开始分配序列号；
+                Plotly对时间序列的支持比较友好，既支持字符串格式，又支持日期/时间格式；
+
                 6）thickness：设置滑动条的高度，作为总绘图区域高度的一部分，默认值：0.15 ；
+                
                 7）visible：布尔值，默认为True，设置滑动条是否可见；
+                
                 8）y：设置滑动条的轴范围是否与主图中的值相同；
 
-    *   rangeslider：设置范围选择按钮，有如下设置项：
+        rangeslider：设置范围选择按钮，有如下设置项：
 
                 1）visible：设置范围选择按钮是否可见。特别说明：范围选择按钮仅适用于数据为date或设置“type”为“date”的x轴；
+
                 2）buttons：设置按钮，有如下设置项：
-                a、 visible：布尔值，设置此按钮是否可见，默认为True；
-                b、 step：设置按钮的时间单位，默认为"month" ，包括如下取值："month" | "year" | "day" | "hour" | "minute" | "second" | "all" ；
-                c、 count：数值，默认为1，用于设置按钮时间单位的数量，与step一起使用，指定该按钮的时间筛选范围；
-                d、 stepmode：设置时间范围的更新模式，默认为"backward"，按则开始位置为“计数”乘以“步”，若设置为"todate" ，则开始位置返回当年的开始日期；
-                e、 label：设置按钮上显示的文本内容；
+
+                        a、 visible：布尔值，设置此按钮是否可见，默认为True；
+
+                        b、 step：设置按钮的时间单位，默认为"month" ，
+                        包括如下取值："month" | "year" | "day" | "hour" | "minute" | "second" | "all" ；
+
+                        c、 count：数值，默认为1，用于设置按钮时间单位的数量，与step一起使用，指定该按钮的时间筛选范围；
+
+                        d、 stepmode：设置时间范围的更新模式，默认为"backward"，按则开始位置为“计数”乘以“步”，
+                        若设置为"todate" ，则开始位置返回当年的开始日期；
+
+                        e、 label：设置按钮上显示的文本内容；
+
                 3）x、y：取值0～1之间，设置在标准化坐标中位置，0.5为居中；
+
                 4）xanchor：设置标题相对于x位置的水平对齐方式，有如下取值："auto" | "left" | "center" | "right" ；
+
                 5）yanchor：设置标题相对于y位置的垂直对齐方式，有如下取值："auto" | "top" | "middle" | "bottom" ；
+
                 6）font：设置标题字体。包含：字体、颜色、大小等；
+
                 7）bgcolor：设置范围选择按钮的背景颜色，默认值："#eee" ；
+
                 8）bordercolor：设置范围选择按钮的边框颜色，默认值："#444" ；
+
                 9）borderwidth：设置范围选择按钮的边框宽度，默认无；
 
 
@@ -295,14 +328,19 @@ Plotly绘制基本柱状图的重要函数是graph_objs中的Bar函数，通过�
 *   xaxis、yaxis：设置x、y 坐标轴参数，特别说明如下设置项：
 
         domain：2个0～1之间的元素组成的列表，设置图表占画布的坐标轴范围；
+
         dtick：设置坐标轴刻度的间隔区间；
 
 *   annotations：设置数据注释，主要包括如下设置项：
 
         xref、yref：设置文本样式；
+
         x、y：设置文本位置；
+
         text：设置文本内容；
+
         font：设置文本的格式，包括字体、大小、颜色等；
+
         showarrow：布尔值，是否添加从标签到数据点的箭头；
 
 ### (四)、fig.tool.make_subplots参数
@@ -329,11 +367,16 @@ Plotly绘制基本柱状图的重要函数是graph_objs中的Bar函数，通过�
 
 *   histnorm：设置纵坐标显示格式。有如下设置项：
 
-    为空(“”)时表示：纵坐标显示落入区间的样本数目，所有矩形的高相加为总样本数量；
-    为percent 时表示：纵坐标显示落入区间的样本占总体样本的百分比，所有矩形的高相加为100%；
-    为probability时表示：纵坐标显示落入区间的样本频率；
-    为 density 时表示：每个小矩形的面积为落入区间的样本数量，所有面积值相加为样本总数；
-    为 probability density时表示：每个小矩形的面积为落入区间的样本占总体的比例，所有面积值相加为1；
+        为空(“”)时表示：纵坐标显示落入区间的样本数目，所有矩形的高相加为总样本数量；
+
+        为percent 时表示：纵坐标显示落入区间的样本占总体样本的百分比，所有矩形的高相加为100%；
+
+        为probability时表示：纵坐标显示落入区间的样本频率；
+
+        为 density 时表示：每个小矩形的面积为落入区间的样本数量，所有面积值相加为样本总数；
+
+        为 probability density时表示：每个小矩形的面积为落入区间的样本占总体的比例，所有面积值相加为1；
+
 
 *   histfunc：指定分组函数，可选参数有：count、sum、avg、min、max，依次安照落入区间的样本，进行计数、求和、求均值、求最小值和最大值；
 
@@ -341,9 +384,11 @@ Plotly绘制基本柱状图的重要函数是graph_objs中的Bar函数，通过�
 
 *   cumulative：累积直方图参数，有如下设置项：
 
-    enabled：布尔型，设置为True会显示累积直方图，设置为False则不对频率或频数进行累积；
-    direction用于设置累积方向，确定频率是从1～0(降序)，还是从0～1(升序)；
-    currentbin有三个选项，即include、exclude、half，为了防止偏差，一般选择half；
+        enabled：布尔型，设置为True会显示累积直方图，设置为False则不对频率或频数进行累积；
+
+        direction用于设置累积方向，确定频率是从1～0(降序)，还是从0～1(升序)；
+        
+        currentbin有三个选项，即include、exclude、half，为了防止偏差，一般选择half；
 
 *   autobinx：布尔型，是否自动划分区间；
 
@@ -407,13 +452,24 @@ Plotly支持绘制表格图表，而且绘图效果非常美观；
 *   header：表格的表头，包括如下设置项：
 
         values：列表，表头的文本内容；
+
         format：设置单元格值格式规则，类似坐标轴的格式化参数tickformat；
+
         prefix：单元格值的前缀；
+
         suffix：单元格值的后缀；
+
         height：单元格的高度，默认值为28；
-        align：字符串、字符串组成的列表，设置框内“文本”的水平对齐方式，包括："left" | "center" | "right" ，默认为center；
+
+        align：字符串、字符串组成的列表，设置框内“文本”的水平对齐方式，
+               包括："left" | "center" | "right" ，默认为center；
+
         line：设置边框的宽度和颜色，包括2个子参数：width和color；
-        fill：设置单元格填充颜色，默认为white，它接受特定颜色或颜色数组或2D颜色数组。常用的颜色：darkslategray、lightskyblue、lightcyan、paleturquoise、lavender、royalblue、paleturquoise、white、grey、lightgrey；
+
+        fill：设置单元格填充颜色，默认为white，它接受特定颜色或颜色数组或2D颜色数组。
+              常用的颜色：darkslategray、lightskyblue、lightcyan、paleturquoise、
+              lavender、royalblue、paleturquoise、white、grey、lightgrey；
+
         font：设置表头的文字格式，包括字体、大小、颜色；
     
 *   cells：表格内容的单元格值，设置项与 header的参数基本一致；
@@ -450,14 +506,19 @@ Plotly支持绘制表格图表，而且绘图效果非常美观；
 
 *   shared_xaxes：子图表是否共享同一个横坐标轴
 
-    True或'columns'：表示在同一列中的子图之间共享轴；
-    'rows'：表示在同一行的子图中共享轴；
-    'all'：表示在网格中的所有子图上共享轴；
+        True或'columns'：表示在同一列中的子图之间共享轴；
+
+        'rows'：表示在同一行的子图中共享轴；
+
+        'all'：表示在网格中的所有子图上共享轴；
 
 *   shared_yaxes：子图表是否共享同一个纵坐标轴
-    'columns'：表示在同一列的子图中共享轴；
-    True或'rows'：表示在同一行的子图中共享轴；
-    'all'：表示在网格中的所有子图上共享轴；
+
+        'columns'：表示在同一列的子图中共享轴；
+
+        True或'rows'：表示在同一行的子图中共享轴；
+        
+        'all'：表示在网格中的所有子图上共享轴；
 
 *   specs：分配子图的区间，比较常用的参数；
 
