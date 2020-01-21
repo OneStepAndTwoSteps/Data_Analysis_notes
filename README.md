@@ -1,3 +1,34 @@
+### 使用真实数据
+
+学习机器学习时，最好使用真实数据，而不是人工数据集。幸运的是，有上千个开源数据集 可以进行选择，涵盖多个领域。以下是一些可以查找的数据的地方：
+
+*   __流行的开源数据仓库：__ 
+    
+    *   [UC	Irvine	Machine	Learning Repository](https://link.jianshu.com/?t=http%3A%2F%2Farchive.ics.uci.edu%2Fml%2F)
+    
+    *   [Kaggle	datasets](https://link.jianshu.com/?t=https%3A%2F%2Fwww.kaggle.com%2Fdatasets)   
+    
+    *   [Amazon’s AWS datasets](https://link.jianshu.com/?t=http%3A%2F%2Faws.amazon.com%2Ffr%2Fdatasets%2F)
+
+
+*   __准入口（提供开源数据列表）__
+
+    *   http://dataportals.org/ 
+
+    *   http://opendatamonitor.eu/ 
+
+    *   http://quandl.com/ 
+
+*   __其它列出流行开源数据仓库的网页：__ 
+
+    *   [Wikipedia’s list of Machine Learning datasets](https://link.jianshu.com/?t=https%3A%2F%2Fgoo.gl%2FSJHN2k)
+
+    *   [Quora.com question](https://link.jianshu.com/?t=http%3A%2F%2Fgoo.gl%2FzDR78y)
+
+    *   [Datasets subreddit](https://link.jianshu.com/?t=https%3A%2F%2Fwww.reddit.com%2Fr%2Fdatasets)
+
+
+
 ### 数据挖掘，机器学习，深度学习的区别是什么？
 
 __数据挖掘__ 通常是从现有的数据中提取规律模式（pattern）以及使用算法模型（model）。核心目的是找到这些数据变量之间的关系，因此我们也会通过数据可视化对变量之间的关系进行呈现，用算法模型挖掘变量之间的关联关系。通常情况下，我们只能判断出来变量 A 和变量 B 是有关系的，但并不一定清楚这两者之间有什么具体关系。在我们谈论数据挖掘的时候，更强调的是从数据中挖掘价值。
