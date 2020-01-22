@@ -6,6 +6,7 @@
 
 3、数据集划分方法——__随机划分法__：ShuffleSplit，GroupShuffleSplit，StratifiedShuffleSplit
 
+这几个只是用于数据的分组，如果想要进行交叉验证和获得验证分数，还是需要使用相应的函数如：__cross_validate__、__cross_val_score__ 等。
 
 
 ## 为什么要使用交叉验证？交叉验证的介绍
