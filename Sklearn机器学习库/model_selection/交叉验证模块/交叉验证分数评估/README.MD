@@ -1,4 +1,4 @@
-## cross_validate和cross_val_score的不同
+## cross_validate和cross_val_score
 
 最简单的使用交叉验证的方法是cross_val_score函数
 
