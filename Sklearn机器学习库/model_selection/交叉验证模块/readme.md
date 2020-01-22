@@ -1,4 +1,14 @@
-# 为什么要使用交叉验证？交叉验证的介绍
+# sklearn中的数据集的划分
+
+1、数据集划分方法——__K折交叉验证__：KFold，GroupKFold，StratifiedKFold
+
+2、数据集划分方法——__留一法__：LeaveOneGroupOut，LeavePGroupsOut，LeaveOneOut，LeavePOut
+
+3、数据集划分方法——__随机划分法__：ShuffleSplit，GroupShuffleSplit，StratifiedShuffleSplit
+
+
+
+## 为什么要使用交叉验证？交叉验证的介绍
 
 交叉验证是指在给定的建模样本中，拿出其中的大部分样本进行模型训练，生成模型，留小部分样本用刚建立的模型进行预测，并求这小部分样本的预测误差，记录它们的平方加和。这个过程一直进行，直到所有的样本都被预测了一次而且仅被预测一次，比较每组的预测误差，选取误差最小的那一组作为训练模型。
 
