@@ -1,5 +1,5 @@
 
-## 模型评估指标：准确率(Accuracy), 精确率(Precision), 召回率(Recall) 和 F1-Measure.
+### 模型评估指标：准确率(Accuracy), 精确率(Precision), 召回率(Recall) 和 F1-Measure.
 
 __准确率(Accuracy), 精确率(Precision), 召回率(Recall) 和 F1-Measure.这四个评价指标常用来评估机器学习(ML), 自然语言处理(NLP), 信息检索(IR)等领域。__
         
