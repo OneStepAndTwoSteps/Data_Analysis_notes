@@ -29,7 +29,7 @@
 如果 __选择选项 3__，你需要计算训练集的中位数，用中位数填充训练集的缺失值，__不要忘记保存该中位数__ 。后面用测试集评估系统时，需要替换测试集中的缺失值，__也可以用来实时替换新数据中的缺失值。__
 
 
-### Scikit-Learn 提供了一个方便的类来处理缺失值： Imputer 。下面是其使用方法：
+Scikit-Learn 提供了一个方便的类来处理缺失值： Imputer 。下面是其使用方法：
 
 *   __首先，需要创建一个 Imputer 实例，指定用某属性的中位数来替换该属性所有的缺失值：__
 
@@ -41,7 +41,7 @@
 
         imputer.fit(housing_new)
 
-*   __imputer 计算出了每个属性的中位数，并将结果保存在了实例变量 statistics_ 中。__
+*   __imputer 计算出了每个属性的中位数，并将结果保存在了实例变量 statistics_中。__
 
     虽然此时只有属性 total_bedrooms 存在缺失值，__但我们不能确定在以后的新的数据中会不会有其他属性也存在缺失值，所以安全的做法是将 imputer 应用到每个数值：__
 
@@ -62,4 +62,17 @@
         x = imputer.transform(housing_new)
         housing_tr = pd.DataFrame(x,columns=housing_new.columns) 
 
-*   此时就已经将中位数填充到数据中了。
+*   此时就已经将中位数填充到数据中了。总代码：
+
+
+
+        from sklearn import impute
+        imputer = impute.SimpleImputer(strategy='median')
+        # 原数据中存在非数值的列，这里先将其删除，然后记录每一个属性的中位数
+        housing_new = housing.copy(deep=True).drop('ocean_proximity',axis=1)
+
+        imputer.fit(housing_new)
+        # 这里将数据填充到数据中，此时x就包含了我们全部的数据(当然非数值数据不在其中)。
+        x = imputer.transform(housing_new)
+        housing_tr = pd.DataFrame(x,columns=housing_new.columns) 
+
