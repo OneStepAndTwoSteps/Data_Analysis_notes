@@ -73,6 +73,6 @@
 
 *   __输出一个Scipy的稀疏矩阵__
 
-    <20640x5 sparse matrix of type '<class 'numpy.float64'>'
-        with 20640 stored elements in Compressed Sparse Row format>
+        <20640x5 sparse matrix of type '<class 'numpy.float64'>'
+            with 20640 stored elements in Compressed Sparse Row format>
 

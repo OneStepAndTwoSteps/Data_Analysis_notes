@@ -30,4 +30,6 @@
         Index(['NEAR BAY', '<1H OCEAN', 'INLAND', 'NEAR OCEAN', 'ISLAND'], dtype='object')
 
 
-__注意：__ 使用labelencode转换数据之后，对于有大小之分的数据可使用，对于无大小之分的数据存在问题，比如现在将数据转化为了 0 - 4的数值，那么 label1的特征就和label0 的特征距离近，所以相似，此时就需要使用onehot编码。
+__注意：__ 
+
+使用labelencode转换数据之后，对于有大小之分的数据可使用，对于无大小之分的数据存在问题，比如现在将数据转化为了 0 - 4的数值，那么 label1的特征就和label0 的特征距离近，所以相似，此时就需要使用onehot编码。
