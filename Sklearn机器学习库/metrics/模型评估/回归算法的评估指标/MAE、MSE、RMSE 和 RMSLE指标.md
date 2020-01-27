@@ -118,6 +118,31 @@ MSE对误差取了平方（令e=真实值-预测值），因此若e>1，则MSE�
 
 上面的几种衡量标准的取值大小与具体的应用场景有关系，很难定义统一的规则来衡量模型的好坏。
 
+#### 案例：
+
+    # 导入决策树
+    from sklearn.tree import DecisionTreeRegressor
+
+    # 实例化
+    dtr = DecisionTreeRegressor()
+    some_data = housing.iloc[:5]
+    some_labels = housing_labels.iloc[:5]
+    # 在流水线中将数据清洗完毕
+    some_data_pre = full_pipeline.transform(some_data)
+
+    # 训练模型
+    dtr_pre = dtr.fit(housing_prepared,housing_labels)
+    # 预测之前清理完成的数据
+    dtr_predictions = dtr_pre.predict(some_data_pre)
+    
+    # 计算RMSE分数 (当然在交叉验证中有现成的RMSE方法，那里就不需要在开庚号啦)
+    dtr_mse = mean_squared_error(some_labels,dtr_predictions)
+    dtr_rmse = np.sqrt(dtr_mse)
+    # 查看分数
+    dtr_rmse
+
+
+
 ### 4、RMSLE
 
 均方根平方对数误差（RMSLE）
