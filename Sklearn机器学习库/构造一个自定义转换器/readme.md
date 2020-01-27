@@ -13,7 +13,7 @@
         class CombinedAttributesAdder(BaseEstimator,TransformerMixin):
             def __init__(self,add_bedroom_per_room=True):
                 self.add_bedroom_per_room = add_bedroom_per_room
-            def fit(self,x,y):
+            def fit(self,x,y=None):
                 return self
             def transform(self,x,y=None):
                 # 求取每个房间平均的房间数
