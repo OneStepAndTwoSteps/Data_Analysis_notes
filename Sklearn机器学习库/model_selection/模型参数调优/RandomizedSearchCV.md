@@ -1,4 +1,6 @@
-### 模型调优 - 随机搜索
+### RandomizedSearchCV 
+
+__模型调优 - 随机搜索__
     
 但是当超参数的搜索空间很大时，最好使用 __RandomizedSearchCV__ 。
     
@@ -66,4 +68,43 @@ __注意：__ 使用 __随机搜索__ 时就不能使用列表 __指定多条dic
         cvres = grid_search.cv_results_
         for mean_score,params in zip(cvres['mean_test_score'],cvres['params']):
             print(np.sqrt(-mean_score),params)
-    
+
+
+#### 属性筛选
+
+__每个属性在随机森林中的分数：__
+
+    这里我们使用的是RandomizedSearchCV所以它没有.feature_importances_方法，但是我们可以通过：
+
+    rdgrid_search.best_estimator_.feature_importances_ 方法查看
+
+__案例：__
+
+    feature_importances = rdgrid_search.best_estimator_.feature_importances_ 
+
+    # 因为训练数据是经过特征组合和onehot向量化的，所以这里指定他们的特征名称，让名称和特征重要值进行组合。
+    extra_attribs = ["rooms_per_hhold", "pop_per_hhold", "bedrooms_per_room"]
+    cat_one_hot_attribs = list(encoder.classes_)
+    attributes = attribute + extra_attribs + cat_one_hot_attribs
+
+    sorted(zip(feature_importances,attributes), reverse=True)
+
+__输出：__
+
+    [(0.40140789378914327, 'median_income'),
+    (0.14722384301328129, 'INLAND'),
+    (0.11052461094138229, 'pop_per_hhold'),
+    (0.06446225001619467, 'longitude'),
+    (0.05875453187145547, 'bedrooms_per_room'),
+    (0.058284227824105646, 'latitude'),
+    (0.04498560495190621, 'housing_median_age'),
+    (0.0429344962211386, 'rooms_per_hhold'),
+    (0.016626005100248267, 'total_rooms'),
+    (0.015172190771710623, 'total_bedrooms'),
+    (0.015027265803833633, 'population'),
+    (0.013600441727164157, 'households'),
+    (0.005724775743725753, '<1H OCEAN'),
+    (0.0031180068959337577, 'NEAR OCEAN'),
+    (0.0019602616976249097, 'NEAR BAY'),
+    (0.0001935936311514464, 'ISLAND')]
+
