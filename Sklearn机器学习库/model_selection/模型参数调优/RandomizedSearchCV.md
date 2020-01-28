@@ -31,7 +31,8 @@
     params_grid = {'n_estimators':[3,10,30],'max_features':[2,4,6,8]}
 
     forest_reg = RandomForestRegressor()
-    rdgrid_search = RandomizedSearchCV(forest_reg,param_distributions=params_grid,cv=5,scoring='neg_mean_squared_error')
+    rdgrid_search = RandomizedSearchCV(forest_reg,param_distributions=params_grid,cv=5,
+                                        scoring='neg_mean_squared_error')
     rdgrid_search.fit(housing_prepared,housing_labels)
 
 
@@ -42,27 +43,27 @@ __注意：__ 使用 __随机搜索__ 时就不能使用列表 __指定多条dic
 
 *   __获取指定的参数在模型中的最优参数__
 
-    grid_search.best_params_
+        grid_search.best_params_
 
-    {'max_features': 6, 'n_estimators': 30}
+        {'max_features': 6, 'n_estimators': 30}
 
 
 *   __获取指定的参数在模型中的最优估计量__
 
-    grid_search.best_estimator_
+        grid_search.best_estimator_
 
-    
-    RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-                        max_features=6, max_leaf_nodes=None,
-                        min_impurity_decrease=0.0, min_impurity_split=None,
-                        min_samples_leaf=1, min_samples_split=2,
-                        min_weight_fraction_leaf=0.0, n_estimators=30,
-                        n_jobs=None, oob_score=False, random_state=None,
-                        verbose=0, warm_start=False)
+        
+        RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
+                            max_features=6, max_leaf_nodes=None,
+                            min_impurity_decrease=0.0, min_impurity_split=None,
+                            min_samples_leaf=1, min_samples_split=2,
+                            min_weight_fraction_leaf=0.0, n_estimators=30,
+                            n_jobs=None, oob_score=False, random_state=None,
+                            verbose=0, warm_start=False)
 
 *   __获取不同参数的评估得分__
 
-    cvres = grid_search.cv_results_
-    for mean_score,params in zip(cvres['mean_test_score'],cvres['params']):
-        print(np.sqrt(-mean_score),params)
-   
+        cvres = grid_search.cv_results_
+        for mean_score,params in zip(cvres['mean_test_score'],cvres['params']):
+            print(np.sqrt(-mean_score),params)
+    
