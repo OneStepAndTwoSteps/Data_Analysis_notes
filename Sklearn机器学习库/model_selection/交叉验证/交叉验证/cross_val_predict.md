@@ -19,7 +19,9 @@ __但它不是返回一个评估分数__ ，而是返回基于每一个测试折
 
 __cross_val_predict__ 默认的 method=’predict’ ，当 __cross_val_predict__ 的 method为 __'decision_function'__ 时。可以用于计算 __决策分数__ 。而不是 __预测值__。
 
-__注意：__ 不是 cross_val_predict 可以 decision_function 方法，而是需要模型算法支持 decision_function 方法时才能使用！
+__注意：__ 
+    
+    不是 cross_val_predict 可以 decision_function 方法，而是需要模型算法支持 decision_function 方法时才能使用,比如SGD支持使用这个方法！
 
 __decision_function__ 方法返回每个实例的分数，然后就可以根据这些分数，使用任意阈值进行预测, __可以把每个样例返回的分数理解成阈值__。
 
