@@ -21,7 +21,9 @@ __cross_val_predict__ 默认的 method=’predict’ ，当 __cross_val_predict_
 
 __注意：__ 
     
-    不是 cross_val_predict 可以 decision_function 方法，而是需要模型算法支持 decision_function 方法时才能使用,比如SGD支持使用这个方法！
+    不是 cross_val_predict 可以 decision_function 方法，而是需要模型算法支持 decision_function 方法时才能使用。
+    
+    比如SGD支持使用 decision_function 这个方法，所以可以 cross_val_predict(sgd_clf,x_train,y_train_5,cv=3) ！
 
 __decision_function__ 方法返回每个实例的分数，然后就可以根据这些分数，使用任意阈值进行预测, __可以把每个样例返回的分数理解成阈值__。
 
