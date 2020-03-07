@@ -15,7 +15,11 @@ __投票选举__ 的场景类似把专家召集到一个会议桌前，当做一
 
 __再学习__ 相当于把 K 个专家（K 个分类器）进行加权融合，形成一个新的超级专家（强分类器），让这个超级专家做判断。
 
-__投票选举和再学习的区别__ 。Boosting 的含义是提升，它的作用是每一次训练的时候都对上一次的训练进行改进提升，在训练的过程中这 K 个“专家”之间是有依赖性的，当引入第 K 个“专家”（第 K 个分类器）的时候，实际上是对前 K-1 个专家的优化。 __实际上每一次迭代(优化)都会引入一个新的弱分类器（这个分类器是每一次迭代中计算出来的，是新的分类器，不是事先准备好的）。__ 而 bagging 在做投票选举的时候可以并行计算，也就是 K 个“专家”在做判断的时候是相互独立的，不存在依赖性。
+__投票选举和再学习的区别__ 。
+
+*   __Boosting__ 的含义是提升，它的作用是每一次训练的时候都对上一次的训练进行改进提升，在训练的过程中这 K 个“专家”之间是有依赖性的，当引入第 K 个“专家”（第 K 个分类器）的时候，实际上是对前 K-1 个专家的优化。 __实际上每一次迭代(优化)都会引入一个新的弱分类器（这个分类器是每一次迭代中计算出来的，是新的分类器，不是事先准备好的）。__ 
+
+*   __bagging__ 在做投票选举的时候可以并行计算，也就是 K 个“专家”在做判断的时候是相互独立的，不存在依赖性。
 
 ### Adaboost的工作原理：
 
@@ -23,7 +27,11 @@ __投票选举和再学习的区别__ 。Boosting 的含义是提升，它的作
 
 假设弱分类器为Gi(x)，他在强分类器中的权重为αi，那么我们可以得到这个强分类器的公式：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/1.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/1.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/1.png"/></div>
+
+
 
 也就是将我们的弱分类器进行一个组合，变成强分类器。
 
@@ -31,7 +39,10 @@ __投票选举和再学习的区别__ 。Boosting 的含义是提升，它的作
 
 我们通常采用 __弱分类器对样本分类的错误率进行一个权重的分配__ ，用公式表示就是：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/2.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/2.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/2.png"/></div>
+
 
 其中 __ei表示的是第 i 个分类器的分类错误率。__
 
@@ -39,34 +50,49 @@ __同时我们会选择每次迭代训练过程中错误率最低的弱分类器
 
  通常我们使用 __Dk+1 代表第 k+1 轮训练中，样本的权重集合__ ，其中 Wk+1,1 代表第 k+1 轮中第 N 个样本的权重，因此用公式表示为：
  
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/3.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/3.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/3.png"/></div>
+
 
 __第 k+1 轮中的样本权重求解__ ，是根据该样本在第 k 轮的权重以及第 k 个分类器的准确率而定，具体的公式为：
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/4.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/4.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/4.png"/></div>
+
 
 __补充：__ 这里的Zk是归一化因子
 
 ### AdaBoost 算法示例
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/12.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/12.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/12.png"/></div>
+
 
 首先在第一轮训练中，我们得到 10 个样本的权重为 1/10，即初始的 10 个样本权重一致，D1=(0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1)。
 
 假设我有 3 个基础分类器：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/5.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/5.png"/></div> -->
 
+<div align=center><img src="Adaboost算法/5.png"/></div>
 
 我们可以知道分类器 f1 的错误率为 0.3，根据上面我们的训练样本中我们可以发现x大于2.5时我们的预测值是-1，但是6、7、8、这三个样本的真实值是1，所以，也就是 x 取值 6、7、8 时分类错误；分类器 f2 同理错误率为 0.4，即 x 取值 0、1、2、9 时分类错误；分类器 f3 同理错误率为 0.3，即 x 取值为 3、4、5 时分类错误。
 
 这 3 个分类器中，我们发现f1、f3 分类器的错误率最低，因此我们选择 f1 或 f3 作为最优分类器，假设我们选 f1 分类器作为最优分类器，即第一轮训练得到：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/6.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/6.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/6.png"/></div>
 
 
 根据分类器权重公式得到：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/7.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/7.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/7.png"/></div>
+
 
 然后我们对下一轮的样本更新求权重值，代入 Wk+1,i 和Dk+1 的公式，可以得到新的权重矩阵：D2=(0.0715, 0.0715, 0.0715, 0.0715, 0.0715, 0.0715, 0.1666, 0.1666, 0.1666, 0.0715)。 __D2表示第二轮的训练中第0到9个样本的权重值。__
 
@@ -74,12 +100,16 @@ __补充：__ 这里的Zk是归一化因子
 
 在这 3 个分类器中，f3 分类器的错误率最低，因此我们选择 f3 作为第二轮训练的最优分类器，即：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/8.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/8.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/8.png"/></div>
+
 
 根据分类器权重公式得到：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/9.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/9.png"/></div> -->
 
+<div align=center><img src="Adaboost算法/9.png"/></div>
 
 然后我们对下一轮的样本更新求权重值，代入 Wk+1,i 和Dk+1  的公式，可以得到 D3=(0.0455,0.0455,0.0455,0.1667, 0.1667,0.01667,0.1060, 0.1060, 0.1060, 0.0455)。 __D3表示第三轮的训练中第0到9个样本的权重值。__
 
@@ -87,11 +117,17 @@ __补充：__ 这里的Zk是归一化因子
 
 在这 3 个分类器中，f2 分类器的错误率最低，因此我们选择 f2 作为第三轮训练的最优分类器，即：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/10.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/10.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/10.png"/></div>
+
 
 根据分类器权重公式得到：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/11.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/Adaboost%E7%AE%97%E6%B3%95/11.png"/></div> -->
+
+<div align=center><img src="Adaboost算法/11.png"/></div>
+
 
 __假设我们只进行 3 轮的训练，选择 3 个弱分类器，组合成一个强分类器，那么最终的强分类器 G(x) = 0.4236G1(x) + 0.6496G2(x)+0.7514G3(x)。__
 
