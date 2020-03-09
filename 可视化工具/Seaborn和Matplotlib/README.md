@@ -131,19 +131,24 @@ plt.figure(2) 画板二中的图
     
  ## plt.subplots 创建一个图形和一组子图。
  
-    fig, ax = plt.subplots()
-   
+  fig, ax = plt.subplots()
+
+ *  plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。
+
+* [ax 的相关方法 <-- 点击跳转](https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes)
+
+
  __例子1：__
  
-    f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
+* f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
     
-    ax1和ax2分别表示为一个子图。
+* ax1和ax2分别表示为一个子图。
     
  __例子2：__   
     
-    fig, ax = plt.subplots(2,3) # 创建2行三列个子图(6个子图)
+* fig, ax = plt.subplots(2,3) # 创建2行三列个子图(6个子图)
     
- __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
+* __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
     
 __例子3:__
 
@@ -155,9 +160,32 @@ __例子3:__
 
     f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
     
-   
+__例子4:__
 
- __plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。__  
+    f, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 6))
+
+    # ax1 图绘制
+    ax1.plot([i for i in range(620)],error)
+    ax1.set_ylim(0,0.1) # 限制y轴的最大值和最小值。
+
+    y_ticks = np.arange(0,0.1,0.02)
+    ax1.set_yticks(y_ticks) # 设置y轴做标准刻度，可以用于设置间隔
+
+    ax1.set_title('validation error')
+    ax1.set_xlabel('Number of trees')
+
+
+    # ax2 图绘制
+    # ax2.scatter(x = [ i for i in range(len(x_train))],y=y_train)
+
+    # 展示图
+    plt.show()
+
+__例4 效果图：__
+
+<div align=center><img width="800" height="250" src="seaborn_and_Matplotlib/subplots1.jpg"/></div>
+
+
     
  ## plt.plot方法：
  __matplotlib.pyplot.plot（* args，scalex = True，scaley = True，data = None，** kwargs ）__ 
@@ -369,12 +397,15 @@ __运行结果：__
   
 __Matplotlib:__ 
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%95%A3%E7%82%B9%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%95%A3%E7%82%B9%E5%9B%BE.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/M散点图.png"/></div>
   
 __seaborn:__    
   
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%95%A3%E7%82%B9%E5%9B%BE.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/S散点图.png"/></div>
   
   
   
@@ -406,7 +437,10 @@ __运行结果：__
   
 M:  
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%8A%98%E7%BA%BF%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%8A%98%E7%BA%BF%E5%9B%BE.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/M折线图.png"/></div>
+
   
 S:
   
@@ -420,8 +454,9 @@ S:
     plt.show()
          
          
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%8A%98%E7%BA%BF%E5%9B%BE2.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%8A%98%E7%BA%BF%E5%9B%BE2.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/S折线图2.png"/></div>
   
   
 ## 直方图：
@@ -455,15 +490,23 @@ __运行结果：__
   
 M:
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%96%B9%E5%BD%A2%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%96%B9%E5%BD%A2%E5%9B%BE.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/M方形图.png"/></div>
   
+
   
 S:  
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE.png) -->
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE2.png)
+<div align=center><img src="seaborn_and_Matplotlib/S方形图.png"/></div>
+
   
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%96%B9%E5%BD%A2%E5%9B%BE2.png) -->
+  
+<div align=center><img src="seaborn_and_Matplotlib/S方形图2.png"/></div>
+
   
   
   ## 条形图
@@ -495,11 +538,16 @@ __运行结果：__
   
 M:  
    
- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
+ <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%9D%A1%E5%BD%A2%E5%9B%BE.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/M条形图.png"/></div>
+
+
 S:
    
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%9D%A1%E5%BD%A2%E5%9B%BE.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/S条形图.png"/></div>
 
 
 * __补充：__
@@ -526,8 +574,9 @@ __例子2：__
 
 __运行结果：__
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/5.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/5.png) -->
 
+<div align=center><img src="seaborn_and_Matplotlib/5.png"/></div>
 
 
 ## 箱型图：
@@ -559,11 +608,18 @@ __运行结果：__
   
 M:   
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E7%AE%B1%E5%9E%8B%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E7%AE%B1%E5%9E%8B%E5%9B%BE.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/M箱型图.png"/></div>
+
+
 S:    
   
-   ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%AE%B1%E5%9E%8B%E5%9B%BE.png)
+   <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%AE%B1%E5%9E%8B%E5%9B%BE.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/S箱型图.png"/></div>
+
+
 ##  饼图
 
   饼图是常用的统计学模块，可以显示每个部分大小与总和之间的比例。在 Python 数据可视化中，它用的不算多。我们主要采用 Matplotlib 的 pie 函数实现它。
@@ -589,6 +645,9 @@ S:
    
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E9%A5%BC%E5%9B%BE.png) 
     
+<div align=center><img src="seaborn_and_Matplotlib/S饼图.png"/></div>
+
+
     
  ## 热力图：
   
@@ -675,8 +734,10 @@ __运行结果__
   
 S:    
   
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE.png) -->
  
+<div align=center><img src="seaborn_and_Matplotlib/S热力图.png"/></div>
+
 
 __例子2__
 
@@ -690,8 +751,9 @@ __运行结果__
 
 S:    
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE2.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E7%83%AD%E5%8A%9B%E5%9B%BE2.png) -->
  
+<div align=center><img src="seaborn_and_Matplotlib/S热力图2.png"/></div>
 
  ## 蜘蛛图：
   
@@ -740,6 +802,7 @@ M：
   
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E8%9C%98%E8%9B%9B%E5%9B%BE.png)
       
+<div align=center><img src="seaborn_and_Matplotlib/M蜘蛛图.png"/></div>
   
   
 ## 二元变量分布
@@ -769,15 +832,22 @@ __运行结果：__
   
 __散点图：__  
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%95%A3%E7%82%B9%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%95%A3%E7%82%B9%E5%9B%BE.png) -->
+<div align=center><img src="seaborn_and_Matplotlib/二元S散点图.png"/></div>
+  
+
   核图：  
   
-  ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%A0%B8%E5%9B%BE.png)
+  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%A0%B8%E5%9B%BE.png) -->
+<div align=center><img src="seaborn_and_Matplotlib/二元S核图.png"/></div>
  
  __Hexbin图：__    
  
- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83hexbin%E5%9B%BE.png)
+ <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83hexbin%E5%9B%BE.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/二元hexbin图.png"/></div>
+
+
  ## 成对关系：
  
 如果想要探索数据集中的多个成对双变量的分布，可以直接采用 sns.pairplot() 函数。它会同时展示出 DataFrame 中每对变量的关系，另外在对角线上，你能看到每个变量自身作为单变量的分布情况。它可以说是探索性分析中的常用函数，可以很快帮我们理解变量对之间的关系。
@@ -802,12 +872,15 @@ __散点图：__
   
 __下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中的第一张图代表的就是花萼长度自身的分布图，它右侧的这张图代表的是花萼长度与花萼宽度这两个变量之间的关系。__    
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB.png) -->
+ 
+<div align=center><img src="seaborn_and_Matplotlib/成对关系.png"/></div>
  
  解释图：(条形图是自身，其他的分别是和其他参数组合起来的比较图)
     
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB2.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB2.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/成对关系2.png"/></div>
  
 
 
@@ -833,7 +906,9 @@ __两个特征进行可视化展示：__
     plt.show()
 
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/FacetGrid.png"/></div>
 
 __三个特征进行可视化展示：__
 
@@ -843,7 +918,9 @@ __三个特征进行可视化展示：__
     grid = sns.FacetGrid(train_data, row='Pclass', col='Sex', size=2.2,aspect=1.6)
     grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid3.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid3.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/FacetGrid3.png"/></div>
 
 
 __四个特征进行可视化展示：__
@@ -862,7 +939,9 @@ __四个特征进行可视化展示：__
     plt.subplots_adjust(top=0.90)
 
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid4.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/FacetGrid4.png) -->
+
+<div align=center><img src="seaborn_and_Matplotlib/FacetGrid4.png"/></div>
 
 
  ## matplotlib.pyplot.figure
@@ -915,8 +994,10 @@ __例子：__
 
 #### 如下图：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/3.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/3.png"/></div> -->
 
+
+<div align=center><img src="seaborn_and_Matplotlib/3.png"/></div>
 
 ### sns.jointplot 绘图
 
@@ -927,13 +1008,16 @@ __例子：__
 
 #### 如下图
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/4.png"/></div>
+<!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/4.png"/></div> -->
 
+<div align=center><img src="seaborn_and_Matplotlib/4.png"/></div>
 
  ## 可视化导图总结：
     
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/python%E5%8F%AF%E8%A7%86%E5%8C%96.png)
+<!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/python%E5%8F%AF%E8%A7%86%E5%8C%96.png) -->
   
+<div align=center><img src="seaborn_and_Matplotlib/python可视化.png"/></div>
+
  
  
  
