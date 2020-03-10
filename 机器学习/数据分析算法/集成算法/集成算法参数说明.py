@@ -215,28 +215,35 @@ GradientBoostingRegressor(loss='ls', learning_rate=0.1, n_estimators=100,
  
 '''
 参数含义:
+
 1.loss：{'ls', 'lad', 'huber', 'quantile'}, optional (default='ls')
 指定优化的损失函数。
 (1).loss='ls':损失函数是平方损失函数
 (2).loss='lad':损失函数为绝对值损失函数
 (3).loss='huber'：损失函数是上边两种损失函数的结合。
+
 2.learning_rate : float, optional (default=0.1)
 通过learning_rate缩减每个分类器的贡献。在learning_rate和n_estimators之间需要权衡。
 通常学习率越小，需要的基本分类器就越多，因此在learning_rate和n_estimators之间要有所折中。
 学习率就是下面公式中的v：
                     F_m(x)=F_m-1(x)+v*alpha_m*G_m(x)
 其中G_m(x)就是第m个基本分类器。aplha_m是第m个基本分类器的系数。
+
 3.n_estimators : int (default=100)
 指定基本决策树的数量。梯度提升对过拟合有很好的鲁棒性，因此该值越大，性能越好。
+
 4.max_depth : integer, optional (default=3)
 指定每个基本决策树的最大深度。最大深度限制了决策树中的节点数量。
 调整这个参数可以获得更好的性能。
+
 5.criterion : string, optional (default="friedman_mse")
 评估节点分裂的质量指标。
+
 6.min_samples_split : int, float, optional (default=2)
 表示分裂一个内部节点需要的最少样本数。
 (1).如果为整数，则min_samples_split就是最少样本数。
 (2).如果为浮点数(0到1之间)，则每次分裂最少样本数为ceil(min_samples_split * n_samples)
+
 7.min_impurity_decrease：float, optional (default=0.)
  如果节点的分裂导致不纯度的减少(分裂后样本比分裂前更加纯净)大于或等于min_impurity_decrease，则分裂该节点。
  个人理解这个参数应该是针对分类问题时才有意义。这里的不纯度应该是指基尼指数。
@@ -247,15 +254,19 @@ GradientBoostingRegressor(loss='ls', learning_rate=0.1, n_estimators=100,
  其中N是样本的总数，N_t是当前节点的样本数，N_t_L是分裂后左子节点的样本数，
  N_t_R是分裂后右子节点的样本数。impurity指当前节点的基尼指数，right_impurity指
  分裂后右子节点的基尼指数。left_impurity指分裂后左子节点的基尼指数。
+
 8.min_impurity_split：树生长过程中早停止的阈值。如果当前节点的不纯度高于阈值，节点将分裂，否则它是叶子节点。
 这个参数已经被弃用。用min_impurity_decrease代替了min_impurity_split。
+
 9.init:BaseEstimator, None, optional (default=None)
 一个基本分类器对象或者None,该分类器对象用于执行初始的预测。
-如果为None，则使用loss.init_estimator.
+如果为None，则使用loss.init_estimator.、
+
 10.random_state：int, RandomState instance or None, optional (default=None)
 (1).如果为整数，则它指定了随机数生成器的种子。
 (2).如果为RandomState实例，则指定了随机数生成器。
 (3).如果为None，则使用默认的随机数生成器。
+
 11.max_features：int, float, string or None, optional (default=None)
  搜寻最佳划分的时候考虑的特征数量。
 (1).如果为整数，每次分裂只考虑max_features个特征。
@@ -266,14 +277,17 @@ GradientBoostingRegressor(loss='ls', learning_rate=0.1, n_estimators=100,
 (6).如果已经考虑了max_features个特征，但还是没有找到一个有效的切分，那么还会继续寻找
 下一个特征，直到找到一个有效的切分为止。
 (7).如果max_features < n_features，则会减少方差，增加偏差。
+
 12. verbose:int, default: 0
 如果为0则不输出日志信息，如果为1则每隔一段时间打印一次日志信息
+
 13.max_leaf_nodes：int or None, optional (default=None)
 指定每颗决策树的叶子节点的最大数量。
 (1).如果为None，则叶子节点数量不限。
 (2).如果不为None，则max_depth被忽略。
 14.warm_start：bool, default: False
 当为True时，则继续使用上一次训练的结果，增加更多的estimators来集成。
+
 15.presort：bool or 'auto', optional (default='auto')
 在训练过程中，是否预排序数据加速寻找最佳划分。
 属性:
