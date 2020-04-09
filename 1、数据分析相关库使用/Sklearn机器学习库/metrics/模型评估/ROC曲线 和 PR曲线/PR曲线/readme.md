@@ -28,6 +28,7 @@ __在ROC空间，ROC曲线越凸向左上方向效果越好。与ROC曲线左上
 
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/Performance_metrics/Fβ.png"/></div>
 
+`β > 0`,度量了查全率对查准率的相对重要性，`β = 1` 时退化为标准的F1，`β > 1`时查全率有更大的影响，`β < 1`时，查准率有更大的影响。
 
 ### 使用场景
 
