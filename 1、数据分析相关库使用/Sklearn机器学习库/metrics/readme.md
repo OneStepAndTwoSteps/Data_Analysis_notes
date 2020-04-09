@@ -82,7 +82,7 @@ __F1值就是精确值和召回率的调和均值,__
 
     也就是 2/F1=1/P+1/R --> F1=2PR/(P+R)= 2TP/(2TP+FP+FN)
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/Performance metrics/F1.png"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/Performance_metrics/F1.png"/></div>
 
 __F1 作为精确率 P 和召回率 R 的调和平均，数值越大代表模型的结果越好。__
 
