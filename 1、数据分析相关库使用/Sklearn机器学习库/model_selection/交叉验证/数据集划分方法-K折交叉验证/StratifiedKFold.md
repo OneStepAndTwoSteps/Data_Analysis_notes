@@ -1,4 +1,4 @@
-### __StratifiedKFold
+# StratifiedKFold
 
 StratifiedKFold用法类似Kfold，但是他是分层采样，确保训练集，测试集中各类别样本的比例与原始数据集中相同。
 
