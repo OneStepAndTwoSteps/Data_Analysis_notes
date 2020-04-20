@@ -8,13 +8,13 @@
 
 #### 公式：
 
-<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mae.png"/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mae.png"/></div>
 
 其只衡量了预测值误差的平均模长，而不考虑方向，取值范围也是从0到正无穷（如果考虑方向，则是残差/误差的总和——平均偏差（MBE））。
 
 #### 如下图
 
-<div align=center><img width="600" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mea2-1.png"/></div>
+<div align=center><img width="600" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mea2-1.png"/></div>
 
 
 <div align=center>MAE损失（Y轴）-预测值（X轴）</div>
@@ -35,7 +35,7 @@ __均方误差是反映估计量与被估计量之间差异程度的一种度量
 
 #### 其公式如下所示：
 
-<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse.png"/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse.png"/></div>
 
 仔细看一下，这不就是回归常用的均方损失函数吗？
 
@@ -43,7 +43,7 @@ __均方误差是反映估计量与被估计量之间差异程度的一种度量
 
 __下图是MSE函数的图像__ ，其中目标值是100，预测值的范围从-10000到10000，Y轴代表的MSE取值范围是从0到正无穷，并且在预测值为100处达到最小。
 
-<div align=center><img  width="600" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse2-1.png"/></div>
+<div align=center><img  width="600" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse2-1.png"/></div>
 
 <div align=center>MSE损失（Y轴）-预测值（X轴）</div>
 
@@ -70,7 +70,7 @@ __下图是MSE函数的图像__ ，其中目标值是100，预测值的范围从
 下面让我们观察MAE和RMSE（即MSE的平方根，同MAE在同一量级中）在两个例子中的计算结果。第一个例子中，预测值和真实值很接近，而且误差的方差也较小。第二个例子中，因为存在一个异常点，而导致误差非常大。
 
 
-<div align=center><img  src="https://github.com/OneStepAndTwoSteps/Data_Analysis/blob/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse_and_mae1-2.png"/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse_and_mae1-2.png"/></div>
 
 
 <div align=center>左图：误差比较接近 右图：有一个误差远大于其他误差</div>
@@ -91,7 +91,7 @@ MSE对误差取了平方（令e=真实值-预测值），因此若e>1，则MSE�
 而MSE在这种情况下的表现就很好，即便使用固定的学习率也可以有效收敛。MSE损失的梯度随损失增大而增大，而损失趋于0时则会减小。这使得在训练结束时，使用MSE模型的结果会更精确。
 
 
-<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse_and_mae2-2.png"/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/mse_and_mae2-2.png"/></div>
 
 
 
@@ -113,7 +113,7 @@ MSE对误差取了平方（令e=真实值-预测值），因此若e>1，则MSE�
 
 从公式来看，其实就是MSE的开庚号， __开庚号之和有什么意义呢？__ 上面说了 __为了保证量纲一致性__ ，我们需要对MSE进行开方 。否则那就是误差的平方倍了呀，举个例子，假如房价预测值为100W 真实值为98W，那么不开庚号，的出来的结果就是 2W的平方呀，那么单位就对不上了，所以要开方。
 
-<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmse.png"/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmse.png"/></div>
 
 
 上面的几种衡量标准的取值大小与具体的应用场景有关系，很难定义统一的规则来衡量模型的好坏。
@@ -149,7 +149,7 @@ MSE对误差取了平方（令e=真实值-预测值），因此若e>1，则MSE�
 
 #### 公式：
 
-<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle.png"/></div>
+<div align=center><img  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle.png"/></div>
 
 ## 在回归模型中我们主要使用的评估指标为 RMSE 和 RMLSE
 
@@ -169,7 +169,7 @@ __使用RMSLE的好处一：__
 
 __如下图:__ 图的最低点是真实值：3，从图来看，越偏离真实值，误差越大。但偏左边和偏右边误差增长幅度不一样，预测值比真实值小这种情况的错误比较大，反正亦如
 
-<div align=center><img width="600" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle2.jpg"/></div>
+<div align=center><img width="600" height="400"  src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis_notes/master/1%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E5%BA%93%E4%BD%BF%E7%94%A8/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/rmsle2.jpg"/></div>
 
 __使用RMSLE的好处二：__ 
 

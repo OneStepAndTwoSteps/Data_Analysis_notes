@@ -15,6 +15,7 @@ __cross_validate 通过交叉验证评估指标，并记录适合度/得分时�
 
 ### 例子 
 
+`分类：`
 
     dtree=tree.DecisionTreeClassifier(random_state=0)
     base_results=model_selection.cross_validate(dtree,x_train,y_train,cv=cv_split)
