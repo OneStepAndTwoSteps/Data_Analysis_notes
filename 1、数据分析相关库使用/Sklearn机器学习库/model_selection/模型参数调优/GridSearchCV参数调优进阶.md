@@ -1,5 +1,6 @@
 ## 使用GridSearchCV进行参数调优
 
+
 ### 案例
 
 __code__
@@ -68,5 +69,38 @@ __方法2 code__
     # 设置clf[1] 这个模型的参数为 最优参数
     clf[1].set_params(**best_params)
 
+
+### 注意
+
+值得注意的是在指定参数的时候参数写的越详细，那么训练之后模型的效果或更好，如：
+
+    rdr_param = [{
+            'n_estimators':[300],
+            'max_depth':[None,3,6,9],
+            'random_state':[0],
+            'max_features':['auto'],
+            'bootstrap':[True],
+            'max_leaf_nodes': [None,3,6], 
+            'min_impurity_decrease': [0.0], 
+            'min_impurity_split': [None],
+            'min_samples_leaf': [1], 
+            'min_samples_split': [2], 
+            'min_weight_fraction_leaf': [0.0], 
+            'n_jobs': [None], 
+            'oob_score': [False], 
+            'verbose': [0], 
+            'warm_start': [False]
+        }]
+
+
+`上面` 参数的效果比 `下面` 的效果更好
+
+    rdr_param = [{
+        'n_estimators':[300],
+        'max_depth':[None,3,6,9],
+        'random_state':[0],
+        'max_features':['auto'],
+        'max_leaf_nodes': [None,3,6], 
+    }]
 
 
