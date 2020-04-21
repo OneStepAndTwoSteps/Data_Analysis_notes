@@ -840,6 +840,22 @@ __删除某列中缺失值：__
     5   42379     小红     ...    正常      NaN
 
 
+### 修改 dataframe 中的数据，保留其中部分内容 
+
+只保留 qiandao['姓名'] 名字中的汉字，其他字符去除。
+
+    def filter_name(names):
+      data_lists = []
+      df_name = pd.DataFrame({'new_姓名':data_lists})
+      
+      for index,name in zip(names.index,names):
+          name = re.sub(u'[^\u4e00-\u9fff]+','',name,flags=re.U)
+          df_name.loc[index,'new_姓名'] = name
+      return df_name
+
+    filter_name(qiandao['姓名'])
+
+`[^\u4e00-\u9fff]+` 用于匹配汉字。
 
 ### pandas.DataFrame.fillna 用指定的方法填充NA/NaN
 
