@@ -1010,13 +1010,33 @@ __例子：__
 
 <!-- <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/4.png"/></div> -->
 
-<div align=center><img src="seaborn_and_Matplotlib/4.png"/></div>
+<div align=center><img width="450" height="450" src="seaborn_and_Matplotlib/4.png"/></div>
+
+### GridSpec 定位网格进行绘图
+
+from  matplotlib.gridspec import GridSpec
+
+    fig = plt.figure(figsize=(15,12))
+    gls = GridSpec(4,4,fig,wspace=0.5,hspace=0.5)
+    plt.subplot(gls[:2,:])
+    sns.boxplot(x='hour',y='count',hue='workingday',data=bike_train)
+    plt.subplot(gls[2:,:2])
+    sns.boxplot(x='hour',y='casual',hue='workingday',data=bike_train)
+    plt.subplot(gls[2:,2:])
+    sns.boxplot(x='hour',y='registered',hue='workingday',data=bike_train)
+
+
+<div align=center><img width="950" height="600"src="seaborn_and_Matplotlib/6.jpg"/></div>
+
+
+
+
 
  ## 可视化导图总结：
     
 <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/python%E5%8F%AF%E8%A7%86%E5%8C%96.png) -->
   
-<div align=center><img src="seaborn_and_Matplotlib/python可视化.png"/></div>
+<div align=center><img width="500" height="600" src="seaborn_and_Matplotlib/python可视化.png"/></div>
 
  
  
