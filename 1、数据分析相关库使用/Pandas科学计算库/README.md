@@ -556,7 +556,7 @@ __transform 和 apply的相同之处：__
         DBNOs	        0.658	1.146	0.000	0.000	0.000	1.000	53.000
 
 
-   __数据表合并__
+   __一、数据表合并 merge__
     
    有时候我们需要将多个渠道源的多个数据表进行合并，一个 DataFrame 相当于一个数据库的数据表，那么多个 DataFrame 数据表的合并就相当于多个数据库的表合并。
     
@@ -612,6 +612,24 @@ __transform 和 apply的相同之处：__
    
   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/5.png)
   
+
+   __一、数据表合并 `join`__
+
+    join(self, other, on=None, how='left', lsuffix='', rsuffix='',sort=False):
+
+  其中参数的意义与 `merge` 方法基本相同,只是 `join` 方法 `默认` 为 `左外连接how=left`
+
+  * 1.默认按索引合并，可以合并相同或相似的索引，不管他们有没有重叠列。
+
+  * 2.可以连接多个DataFrame
+
+  * 3.可以连接除索引外的其他列
+
+  * 4.连接方式用参数how控制
+
+  * 5.通过lsuffix='', rsuffix='' 区分相同列名的列
+
+
  ### 如何用 SQL 方式打开 Pandas
     
  Pandas 的 DataFrame 数据类型可以让我们像处理数据表一样进行操作，比如数据表的增删改查，都可以用 Pandas 工具来完成。
