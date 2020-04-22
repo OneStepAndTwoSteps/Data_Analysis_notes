@@ -617,7 +617,7 @@ __transform 和 apply的相同之处：__
 
     join(self, other, on=None, how='left', lsuffix='', rsuffix='',sort=False):
 
-  其中参数的意义与 `merge` 方法基本相同,只是 `join` 方法 `默认` 为 `左外连接how=left`
+  其中参数的意义与 `merge` 方法基本相同,只是 `join` 方法 `默认` 为 `左外连接how=left`,参数`on` 指定列进行对应合并。
 
   * 1.默认按索引合并，可以合并相同或相似的索引，不管他们有没有重叠列。
 
