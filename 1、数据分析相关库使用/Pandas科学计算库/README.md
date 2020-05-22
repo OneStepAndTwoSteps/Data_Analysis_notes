@@ -145,6 +145,16 @@ __特殊用法：__
     
     array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]])
 
+
+### np.vstack() 和 np.hstack()
+
+* `np.vstack` : 按垂直方向（`行顺序`）堆叠数组构成一个新的数组
+
+* `np.hstack` : 按水平方向（`列顺序`）堆叠数组构成一个新的数组
+
+  [np.vstack() 和 np.hstack() 案例说明](https://www.jianshu.com/p/2469e0e2a1cf)
+
+
 ### 重新设置索引 reset_index()
 
 生成数据：
