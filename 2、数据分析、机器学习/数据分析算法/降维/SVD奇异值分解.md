@@ -58,6 +58,8 @@
 
         <div align=center><img width="600" height="400" src="./static/14.jpg"/></div>
 
+        <!-- <div align=center><img width="600" height="400" src="./static/7.jpg"/></div> -->
+
 ### `4、求解出 特征向量 后根据公式可以求解得到 Σ 中的特征值`
 
 *   根据先前公式：
@@ -96,9 +98,12 @@
 
 <div align=center><img width="550" height="700" src="./static/12.jpg" ></div>
 
+<!-- <div align=center><img width="550" height="700" src="./static/10.jpg" ></div> -->
+
 
 <div align=center><img width="950" height="700"  src="./static/13.jpg"></div>
 
+<!-- <div align=center><img width="550" height="700" src="./static/11.jpg" ></div> -->
 
 
 
