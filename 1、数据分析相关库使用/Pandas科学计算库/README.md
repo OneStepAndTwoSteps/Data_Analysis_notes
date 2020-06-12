@@ -390,6 +390,12 @@ Pandas __dtype__ 映射：
     # inplace：刷选过缺失值得新数据是存为副本还是直接在原数据上进行修改。
     df2.rename(columns={'Chinese': 'YuWen', 'English': 'Yingyu'}, inplace = True)
 
+  或者使用：
+  
+    # 直接覆盖式重命名
+    df.columns = ['Chinese','English']  
+
+
   __3. 去重复的值：__
     数据采集可能存在重复的行，这时只要使用 drop_duplicates() 就会自动把重复的行去掉。
   
