@@ -155,6 +155,45 @@ __特殊用法：__
   [np.vstack() 和 np.hstack() 案例说明](https://www.jianshu.com/p/2469e0e2a1cf)
 
 
+### np.stack()
+
+numpy 和 tensorflow 都有 stack() 函数，该函数主要是用来提升维度。
+
+
+<div align='center'><img height='350' width='480' src='./static/1_2.jpg'> </div>
+
+
+`axis分別等于0，1，2时：`
+
+* 当axis=0时表示最外层的中括号，三个轴则最外层有三个中括号。axis=0则表示将向内一层的内容看做一个整体，比如示例中arrays[0]的值，axis=1在在axis=0的基础上再取更内一层的内容，层层向内解包，最后进入axis=2，则直接取得元素的值，如arrays[0][0][0]
+
+`综上有：`
+
+* `np.stack(arrays, axis=0)` 则表示取出每个二维数组（最外层有两个中括号）相应的索引对应的数组进行堆叠，这里np.stack(arrays, axis=0)则表示arrays[0], arrays[1], arrays[2]进行堆叠，所以结果与原始数组一样。
+
+* `np.stack(arrays, axis=1)` 则表示arrays[0][0], arrays[1][0]和arrays[2][0]进行堆叠，然后是arrays[0][1]，arrays[1][1]与arrays[2][1]进行堆叠。
+
+* `np.stack(arrays, axis=2)` 则表示arrays[0][0][0]，arrays[1][0][0]和arrays[2][0][0]进行堆叠，然后是arrays[0][0][1]，arrays[1][0][1]与arrays[2][0][1]进行堆叠，接着为arrays[0][0][2]，arrays[1][0][2]与arrays[2][0][2]进行堆叠......
+
+
+`切割后重新组合：`
+
+* 哪里切割组合后 axis 指定哪里：如下所示：
+
+<div align='center'><img height='350' width='520' src='./static/2.jpg'> </div>
+
+
+
+
+`注意：`
+
+    np.stack((reR,reG,reB,reA),2) 等同于 np.stack((reR,reG,reB,reA),axis=2)
+
+
+* [np.stack() 案例说明](https://blog.csdn.net/u011501388/article/details/81057578)
+
+
+
 ### 重新设置索引 reset_index()
 
 生成数据：
@@ -391,7 +430,7 @@ Pandas __dtype__ 映射：
     df2.rename(columns={'Chinese': 'YuWen', 'English': 'Yingyu'}, inplace = True)
 
   或者使用：
-  
+
     # 直接覆盖式重命名
     df.columns = ['Chinese','English']  
 
