@@ -1721,8 +1721,58 @@ __例子：__
 
   不加 header=None ，在进行read_csv之后，默认会将第一行数据设置为列名，此时如果直接进行 data.columns=column 那么第一行数据被替换成我们指定的列名，这样我们的数据就变少了，如果加上了header=None,那么读取之后的数据是没有列名的(第一行数据还是数据，不会成为列名)，此时我们进行命名列名就不会替换掉我们的数据。
 
+### pd.melt
 
-  ### 构造DataFrame
+#### pandas.melt 使用参数：
+
+     pandas.melt(frame, id_vars=None, value_vars=None, var_name=None, value_name='value', col_level=None)
+
+#### 参数解释：
+
+* frame:要处理的数据集。
+
+* id_vars:不需要被转换的列名。
+
+* value_vars:需要转换的列名，不指定则剩下的列全部都要转换。
+
+* var_name 和 value_name 是自定义设置对应的列名。
+
+* col_level :如果列是 MultiIndex，则使用此级别。
+
+#### 案例：
+
+代码：
+
+    d = {'广州': ['100','110','120'], '北京': [200,220,280],'上海':[110,111,133],'商品':['水','可乐','牛奶']}
+    df = pd.DataFrame(data=d)
+    df
+
+输出：
+
+      广州	北京	上海	商品
+    0	100	  200	  110	  水
+    1	110	  220	  111	  可乐
+    2	120	  280	  133	  牛奶
+
+代码：
+
+    pd.melt(df,id_vars=['商品'],var_name='城市',value_name='销量')
+
+输出：
+
+      商品	城市	销量
+    0	水	  广州	100
+    1	可乐	广州	110
+    2	牛奶	广州	120
+    3	水	  北京	200
+    4	可乐	北京	220
+    5	牛奶	北京	280
+    6	水	  上海	110
+    7	可乐	上海	111
+    8	牛奶	上海	133
+
+
+### 构造DataFrame
 
    __例子：__ 如果想要构造这样的dataframe：
 
