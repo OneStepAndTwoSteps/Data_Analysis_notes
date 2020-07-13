@@ -1,5 +1,24 @@
 # note
 
+## 关于 ARIMA
+
+* https://www.cnblogs.com/bradleon/p/6827109.html
+
+* https://www.cnblogs.com/bradleon/p/6832867.html
+
+## 关于时间序列分析
+
+* https://www.biaodianfu.com/time-series-forecasting-codes-python.html
+
+## 平稳性检测 
+
+时间序列的平稳性是时间序列分析过程中进行许多统计操作处理的基本前提假设。所以，非平稳的时间序列数据常常需要被转换成平稳性的数据。时间序列的平稳性过程是一个随机过程，它的无条件联合概率分布不会随着时间的变换而变换，所以平稳序列的均值和方差等参数也不会随时间的变化而变化，这就为后续的平稳性检验提供理论基础。
+
+对时间序列的平稳性进行检验，我们通常可以先查看数据的时间序列图来初步判定数据是否平稳。
+
+并且通过Python中的seasonal_decompose函数可以提取序列的趋势、季节和随机效应。对于非平稳的时间序列，可以通过对趋势和季节性进行建模并将它们从模型中剔除，从而将非平稳的数据转换为平稳数据，并对其残差进行进一步的分析。
+
+
 ## 小波去噪
 
 [小波去噪](https://blog.csdn.net/qq_40587575/article/details/83188527
@@ -17,7 +36,7 @@
 
 [kaggle Wavelet Transform](https://www.kaggle.com/theoviel/denoising-with-direct-wavelet-transform)
 
-当遇到销售数据非常不稳定时，比如，销售额连续几天为零，而在其他时候，则会在几天内保持在峰值。因此，我们需要某种“去噪”技术来发现销售数据的潜在趋势并作出预测。
+当遇到销售数据非常不稳定时，我们需要某种“去噪”技术来发现销售数据的潜在趋势并作出预测。
 
 
 现在，我将展示如何消除这些不稳定的销售价格，以提取潜在的趋势。这种方法可能会丢失原始时间序列中的一些信息，但在提取有关时间序列趋势的某些特征时，它可能是有用的。
@@ -95,15 +114,14 @@
 ### 均值平滑函数
 
     def average_smoothing(signal, kernel_size=3, stride=1):
-        sample = []
+        sample = [0]*(kernel_size-stride)    # 通过 len(y_a1) 可以发现与原始数据同长度
         start = 0
         end = kernel_size
         while end <= len(signal):
             start = start + stride
             end = end + stride
-            sample.extend(np.ones(end - start)*np.mean(signal[start:end]))
+            sample.extend([np.mean(signal[start:end])])
         return np.array(sample)
-
 
 ### 绘图
 
