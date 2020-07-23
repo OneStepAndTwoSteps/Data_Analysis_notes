@@ -3,6 +3,21 @@
 plotly本身是基于javascript开发的，但是提供了大量与其他主流数据分析语言的API，比如Python， R， Matlab
 
 
+
+## [kaggle 中无法正常显示 plotly 绘制的图像](https://www.kaggle.com/product-feedback/26898)
+
+当你在Kaggle中建立了一个Notebook探索数据时候，经常需要用到一些可视化工具，例如Matplotlib, seaborn, plotly, pyecharts, altair等等。其中plotly可以绘制出美观的，交互性强的可视化图表，非常好用。
+
+但是，如果你在notebook中使用了plotly相关的功能，会发现无法正常加载图形，只有一片空白（同样会发生在Pyecharts上）
+
+### 解决方案：
+
+
+        from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+        init_notebook_mode(connected=True)    #THIS LINE IS MOST IMPORTANT AS THIS WILL DISPLAY PLOT ON 
+        #NOTEBOOK WHILE KERNEL IS RUNNING
+
+
 ### 导入包
 
     import plotly.offline as py     # 绘图的函数

@@ -18,23 +18,45 @@
 
 并且通过Python中的seasonal_decompose函数可以提取序列的趋势、季节和随机效应。对于非平稳的时间序列，可以通过对趋势和季节性进行建模并将它们从模型中剔除，从而将非平稳的数据转换为平稳数据，并对其残差进行进一步的分析。
 
+## 差分法
+
+    df.diff(1) # 一阶差分
+    df.diff(2) # 二阶差分
+
+
+## FFT 快速傅里叶变换
+
+* [傅里叶分析之掐死教程（完整版）更新于2014.06.06](https://zhuanlan.zhihu.com/p/19763358)
+
+* [傅里叶变换、拉普拉斯变换、Z 变换的联系是什么？为什么要进行这些变换？](https://www.zhihu.com/answer/774074211)
+
+* [如何通俗地解释什么是离散傅里叶变换？](https://www.zhihu.com/answer/542909849)
+
+* [如何通俗地讲解傅立叶分析和小波分析间的关系？](https://www.zhihu.com/question/22864189/answer/40772083)
+
+* [傅里叶变换 fft_generic halcon](https://www.cnblogs.com/tmdsleep/p/5424854.html)
+
+* [时间序列检测周期性 FFT 和 ACF](https://www.zhihu.com/answer/952512004https://www.zhihu.com/answer/952512004)
+
+* [时间序列检测周期性 kaggle](https://www.kaggle.com/kk0105/wikipedia-traffic-eda-arima)
+
 
 ## 小波去噪
 
-[小波去噪](https://blog.csdn.net/qq_40587575/article/details/83188527
+* [小波去噪](https://blog.csdn.net/qq_40587575/article/details/83188527
 )
 
-[小波去噪 2](https://blog.csdn.net/danxibaoxxx/article/details/81539233?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.edu_weight&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.edu_weight)
+* [小波去噪 2](https://blog.csdn.net/danxibaoxxx/article/details/81539233?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.edu_weight&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.edu_weight)
 
 
-[小波去噪 3 ](https://www.cnblogs.com/YiYA-blog/p/10705969.html)
+* [小波去噪 3 ](https://www.cnblogs.com/YiYA-blog/p/10705969.html)
 
-[小波去噪 4 api](https://blog.csdn.net/Fvine_/article/details/83381250)
+* [小波去噪 4 api](https://blog.csdn.net/Fvine_/article/details/83381250)
 
 
-[小波阀值去噪法基础](http://blog.sina.com.cn/s/blog_4d7c97a00101cib3.html)
+* [小波阀值去噪法基础](http://blog.sina.com.cn/s/blog_4d7c97a00101cib3.html)
 
-[kaggle Wavelet Transform](https://www.kaggle.com/theoviel/denoising-with-direct-wavelet-transform)
+* [kaggle Wavelet Transform](https://www.kaggle.com/theoviel/denoising-with-direct-wavelet-transform)
 
 当遇到销售数据非常不稳定时，我们需要某种“去噪”技术来发现销售数据的潜在趋势并作出预测。
 

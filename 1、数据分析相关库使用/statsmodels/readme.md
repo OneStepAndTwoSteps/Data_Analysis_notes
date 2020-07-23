@@ -16,6 +16,6 @@ statsmodels 是一个Python软件包，为scipy提供了补充，以进行统计
 
 * `比较`：statsmodels 更关注统计推断，提供不确定估计和参数 p-value。相反的，scikit-learn 注重预测。
 
-## `时间序列的相关处理手法`
+## `时间序列的相关处理手法`labels[key]
 
 * https://www.kaggle.com/kk0105/everything-you-can-do-with-a-time-series
