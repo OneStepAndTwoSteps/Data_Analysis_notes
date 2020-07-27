@@ -815,7 +815,7 @@ __transform 和 apply的相同之处：__
      
      print(train_content.head(3)
   
-### df.pivot_table函数
+### `df.pivot_table 函数`
     
   pivot_table有四个最重要的参数index、values、columns、aggfunc
 
@@ -834,7 +834,37 @@ __transform 和 apply的相同之处：__
       
       # 查看不同船舱人员的的人均年龄
       train_survived=train_content.pivot_table(index="Pclass",values="Age")
-  
+
+### `df.pivot 函数`
+
+    DataFrame.pivot(self, index=None, columns=None, values=None) → ’DataFrame’
+
+介绍：
+
+* index：重塑的新表的索引名称是什么。
+
+* columns：重塑的新表的列名称是什么，一般来说就是被统计列的分组。
+
+* values就是生成新列的值应该是多少，如果没有，则会对data_df剩下未统计的列进行重新排列放到columns的上层。
+
+
+数据展示：
+
+<div align=center><img width="950" height="150" src="./static/3.jpg"/></div>
+
+    train_group = train_flattened.groupby(["month", "weekday"])['Visits'].mean().reset_index()
+    train_group = train_group.pivot('weekday','month','Visits')
+    train_group.sort_index(inplace=True)
+
+
+结果展示：
+
+<div align=center><img width="450" height="250" src="./static/4.jpg"/></div>
+
+
+
+
+
 ### icol和col 取范围
     
   iloc和loc的区别是 iloc只能跟整数，而loc可以跟数字
@@ -2219,4 +2249,36 @@ Pandas dataframe.memory_usage()函数返回每列的内存使用情况（以字�
         bool           5000
         dtype: int64
 
+# pandas 对时间序列的处理
 
+https://www.kaggle.com/kk0105/everything-you-can-do-with-a-time-series
+
+## `df.dt` 
+
+* `df.dt.dayofweek : 返回星期几` 
+
+  `筛选：周六和周日: 下面代码中出现的 date 为列名`
+
+      train_flattened['weekend'] = ((train_flattened.date.dt.dayofweek) // 5 == 1).astype(float) 
+      # 能够整除5，就是 周六 + 周日
+
+  or
+
+      # 筛选出 dayofweek = 5 的和 dayofweek = 6 的数据，也就是挑选周六 和 周日 
+      train_flattened['weekend'] = ((train_flattened.date.dt.dayofweek) == 5 | 6 ).astype(float) 
+
+
+  `注意`：对于 `dayofweek` 来说 `0` 为 `星期一`
+
+* `dt.year `
+
+      train_flattened['year']=train_flattened.date.dt.year 
+
+
+* `dt.month `
+
+      train_flattened['month']=train_flattened.date.dt.month 
+
+* `dt.day `
+
+      train_flattened['day']=train_flattened.date.dt.day 

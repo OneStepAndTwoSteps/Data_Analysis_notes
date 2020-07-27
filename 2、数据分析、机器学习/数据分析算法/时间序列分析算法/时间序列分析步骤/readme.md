@@ -36,7 +36,7 @@
 
 * [傅里叶变换 fft_generic halcon](https://www.cnblogs.com/tmdsleep/p/5424854.html)
 
-* [时间序列检测周期性 FFT 和 ACF](https://www.zhihu.com/answer/952512004https://www.zhihu.com/answer/952512004)
+* [时间序列检测周期性 FFT 和 ACF](https:/www.zhihu.com/answer/952512004)
 
 * [时间序列检测周期性 kaggle](https://www.kaggle.com/kk0105/wikipedia-traffic-eda-arima)
 
