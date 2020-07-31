@@ -13,15 +13,23 @@ plotly本身是基于javascript开发的，但是提供了大量与其他主流�
 ### 解决方案：
 
 
-        from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-        init_notebook_mode(connected=True)    #THIS LINE IS MOST IMPORTANT AS THIS WILL DISPLAY PLOT ON 
-        #NOTEBOOK WHILE KERNEL IS RUNNING
+    from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+    init_notebook_mode(connected=True)    #THIS LINE IS MOST IMPORTANT AS THIS WILL DISPLAY PLOT ON 
+    #NOTEBOOK WHILE KERNEL IS RUNNING
 
 
-### 导入包
+### 常用的包导入
 
     import plotly.offline as py     # 绘图的函数
-    import plotly.graph_objs as go  # 定义绘图的参数
+
+    import plotly.graph_objs as go              # 可用于绘制不同图型，如 go.bar()
+    import plotly.express as px                 # 可用于绘制不同图型，如 px.bar()
+    import plotly.figure_factory as ff          # 用于构建特定复杂图表的辅助方法
+    from plotly.subplots import make_subplots   # 创建子图
+
+graph_objs 和 express 之间的关系相当于，matplotlib 和 seaborn，express的封装更高级些
+
+
 
 
 ## 二、图表类型
