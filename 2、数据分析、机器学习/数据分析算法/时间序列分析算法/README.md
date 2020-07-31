@@ -1,3 +1,7 @@
+# 时间序列模型：
+
+时间序列流程介绍：https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/blob/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/readme.md
+
 ## AR、MA、ARMA、ARIMA模型介绍
 
 ### `时间序列预测模型`
@@ -68,12 +72,6 @@ ARIMA 的英文全称是 Auto Regressive Integrated Moving Average 模型，中�
 * `原理：`将非平稳的时间序列转化成平稳的时间序列，然后将因变量仅对它的滞后值(阶数，p=2，表示滞后2阶)以及随机误差项的现值和滞后值(阶数)进行回归所建立的模型。
 
 
-#### __差分__
-
-可以通过 `pandas` 来实现差分
-
-    df.diff(1) 实现一阶差分
-    df.diff(2) 实现二阶差分
 
 
 #### __参数和数学形式：__
@@ -157,3 +155,49 @@ ARIMA 的英文全称是 Auto Regressive Integrated Moving Average 模型，中�
 
 ### 实战案例为比特币走势预测
 https://github.com/OneStepAndTwoSteps/data_mining_analysis/tree/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E9%A2%84%E6%B5%8B%E6%AF%94%E7%89%B9%E5%B8%81%E8%B5%B0%E5%8A%BF
+
+
+## Prophet 模型介绍
+
+从官网的介绍来看，`Facebook` 所提供的 `prophet` 算法不仅可以处理时间序列存在一些异常值的情况，也可以处理部分缺失值的情形，还能够几乎全自动地预测时间序列未来的走势。从论文上的描述来看，这个 `prophet` 算法是基于时间序列分解和机器学习的拟合来做的，其中在拟合模型的时候使用了 `pyStan` 这个开源工具，因此能够在较快的时间内得到需要预测的结果。除此之外，为了方便统计学家，机器学习从业者等人群的使用，`prophet` 同时提供了 `R` 语言和 `Python` 语言的接口。
+
+
+`Prophet` 程序的核心是一个 `加性回归模型`，包含四个主要组成部分：
+
+* 分段线性或逻辑增长曲线趋势。Prophet通过从数据中选择变化点来自动检测趋势的变化。
+
+* 使用傅立叶级数模拟的年度季节性分量。
+
+* 使用虚拟变量的每周季节性成分。
+
+* 用户提供的重要假日列表。
+
+
+
+参考链接：
+
+* Prophet 模型使用介绍：https://zhuanlan.zhihu.com/p/52330017
+
+* Prophet 模型使用介绍：https://blog.csdn.net/anshuai_aw1/article/details/83412058
+
+* Kaggle 中使用：https://www.kaggle.com/kk0105/predictive-analysis-with-different-approaches
+
+
+
+
+
+## 时间序列相关资料
+
+* [数据分析之时间序列分析](https://www.jianshu.com/p/ff6abad2514f)
+
+
+
+
+
+
+
+
+
+
+
+

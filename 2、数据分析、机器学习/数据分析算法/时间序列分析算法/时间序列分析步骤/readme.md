@@ -1,27 +1,129 @@
 # note
 
-## 关于 ARIMA
+## 关于 ARIMA 
 
 * https://www.cnblogs.com/bradleon/p/6827109.html
 
 * https://www.cnblogs.com/bradleon/p/6832867.html
 
+* https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/blob/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/README.md
+
 ## 关于时间序列分析
 
 * https://www.biaodianfu.com/time-series-forecasting-codes-python.html
 
-## 平稳性检测 
 
+## 时间序列平稳性检测
+
+### `1、如何判断数据是否是平稳？`
+
+    <div align=center><img width="470" height="550"  src="./static/stationary.png"/></div>
+
+    平稳性是指序列的时间不变性。（即）时间序列中的两个点之间的关系只取决于它们之间的距离，而不是方向（向前/向后）
+
+    当一个时间序列是静止的，它可以更容易地建模。统计建模方法假设或要求时间序列是平稳的。
+
+    有多种测试可以用来检查平稳性。
+
+    * `ADF( Augmented Dicky Fuller Test)`
+
+    * `KPSS`
+
+    * `PP (Phillips-Perron test)`
+
+    通常我们会使用 `ADF` 来进行检测
+
+
+### `2、使用 ADF 进行平稳检测`
+
+*   Augmented Dickey-Fuller test
+    An augmented Dickey–Fuller test (ADF) tests the null hypothesis that a unit root is present in a time series sample. It is basically Dickey-Fuller test with more lagged changes on RHS.
+
+
+
+
+*   时间序列分析之ADF检验: https://blog.csdn.net/FrankieHello/article/details/86766625/
+
+    简单点说，有 `单位根` 是不平稳的一种特殊情况。使用 `单位根检验` ，如果 `单位根` 存在，这个过程就是一个 `随机游走（random walk）`。
+
+    `随机游走（random walk）` 也称 `随机漫步`，`随机行走` 等是指基于过去的表现，无法预测将来的发展步骤和方向。
+
+*   返回平稳的定义，一阶二阶矩不随时间改变就是宽平稳。有单位跟则二阶矩随时间改变而改变，所以不平稳。 其他情况比如有确定性趋势项之类的，也是不平稳，但是没有单位根，减掉趋势项就平稳了。
+
+    具体操作的时候一定要注意是确定性趋势还是随机趋势（单位根），两者相差很大。
+
+*   `ADF` 检验模板：
+
+        from statsmodels.tsa.stattools import adfuller
+
+        # Stationarity tests
+        def test_stationarity(timeseries):
+            
+            #Perform Dickey-Fuller test:
+            print('Results of Dickey-Fuller Test:')
+            dftest = adfuller(timeseries, autolag='AIC')
+            dfoutput = pd.Series(dftest[0:4], index=['Test Statistic','p-value','#Lags Used','Number of Observations Used'])
+            for key,value in dftest[4].items():
+                dfoutput['Critical Value (%s)'%key] = value
+            print (dfoutput)
+
+        test_stationarity(ts)
+
+*   输出结果：
+
+        Results of Dickey-Fuller Test:
+        Test Statistic                 -4.395704
+        p-value                         0.142953
+        #Lags Used                      0.000000
+        Number of Observations Used    33.000000
+        Critical Value (1%)            -3.646135
+        Critical Value (5%)            -2.954127
+        Critical Value (10%)           -2.615968
+        dtype: float64
+
+
+*   `如何查看是否拒绝原假设：`1%、%5、%10不同程度拒绝原假设的统计值和ADF Test result的比较，ADF Test result同时小于1%、5%、10%即说明非常好地拒绝该假设，本数据中，adf结果为-4.395704， 小于三个level的统计值。所以是平稳的，否则可以进行一阶差分后，再进行检验。
+
+### `3、不平稳该如何解决？`
+
+    * __1、差分__
+
+        可以通过 `pandas` 来实现差分
+
+            df.diff(1) 实现一阶差分
+            df.diff(2) 实现二阶差分
+
+## 使用加法模型或乘法模型？
+
+我们公开了时间序列的幼稚分解（应该优先使用更复杂的方法）。它们是分解时间序列的几种方法，但在我们的示例中，我们将简单分解为三个部分。
+
+* 加法模型是：`Y[t] = t[t] + S[t] + e[t]`
+
+* 乘法模型是：`Y[t] = t[t] x S[t] x e[t]`
+
+其中：
+
+
+* `T[T]`：趋势
+
+* `S[t]`：季节性
+
+* `e[t]`：残余
+
+`加性模型`是线性的，随时间变化的量是相同的。线性趋势是一条直线。线性季节性具有相同的频率（周期宽度）和振幅（周期高度）。
+
+`乘法模型`是非线性的，如二次型或指数型。变化随着时间的推移而增加或减少。非线性趋势是一条曲线，非线性的季节性随时间的推移有增加或减少的频率和/或振幅。
+
+在例子中，如果我们可以看到它不是一个线性模型。这就是我们使用乘法模型的原因。
+
+### `综上所述`
+
+`小结：`就是如果时间序列图的趋势随着时间的推移，序列的季节波动变得越来越大，则建议使用乘法模型；如果序列的季节波动能够基本维持恒定，则建议使用加法模型。
 时间序列的平稳性是时间序列分析过程中进行许多统计操作处理的基本前提假设。所以，非平稳的时间序列数据常常需要被转换成平稳性的数据。时间序列的平稳性过程是一个随机过程，它的无条件联合概率分布不会随着时间的变换而变换，所以平稳序列的均值和方差等参数也不会随时间的变化而变化，这就为后续的平稳性检验提供理论基础。
 
 对时间序列的平稳性进行检验，我们通常可以先查看数据的时间序列图来初步判定数据是否平稳。
 
 并且通过Python中的seasonal_decompose函数可以提取序列的趋势、季节和随机效应。对于非平稳的时间序列，可以通过对趋势和季节性进行建模并将它们从模型中剔除，从而将非平稳的数据转换为平稳数据，并对其残差进行进一步的分析。
-
-## 差分法
-
-    df.diff(1) # 一阶差分
-    df.diff(2) # 二阶差分
 
 
 ## FFT 快速傅里叶变换
