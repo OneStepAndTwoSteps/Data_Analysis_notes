@@ -342,6 +342,9 @@
 
 * [Python量化基础：时间序列的平稳性检验](https://blog.csdn.net/qixizhuang/article/details/86716149)
 
+
+* [时间序列-平稳性](https://www.jianshu.com/p/dedf38416694)
+
 * [时间序列预测初学者指南（Python）](https://www.biaodianfu.com/time-series-forecasting-codes-python.html)
 
 

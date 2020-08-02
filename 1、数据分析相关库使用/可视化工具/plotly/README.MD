@@ -8,7 +8,10 @@ plotly本身是基于javascript开发的，但是提供了大量与其他主流�
 
 当你在Kaggle中建立了一个Notebook探索数据时候，经常需要用到一些可视化工具，例如Matplotlib, seaborn, plotly, pyecharts, altair等等。其中plotly可以绘制出美观的，交互性强的可视化图表，非常好用。
 
-但是，如果你在notebook中使用了plotly相关的功能，会发现无法正常加载图形，只有一片空白（同样会发生在Pyecharts上）
+但是，如果你在 `notebook` 中使用了 `plotly` 相关的功能，会发现无法正常加载图形，只有一片空白（同样会发生在Pyecharts上）
+
+`值得注意的是：`在 `Kaggle` 中，如果你是 `fork` 别人的 `notebook` ，有可能这个 `notebook` 的 `python` 版本是低版本的，可能使用不了 `plotly.express` ，此时你应该重新创建一个。
+
 
 ### 解决方案：
 
@@ -28,7 +31,6 @@ plotly本身是基于javascript开发的，但是提供了大量与其他主流�
     from plotly.subplots import make_subplots   # 创建子图
 
 graph_objs 和 express 之间的关系相当于，matplotlib 和 seaborn，express的封装更高级些
-
 
 
 

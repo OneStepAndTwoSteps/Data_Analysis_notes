@@ -379,9 +379,9 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 ### pandas 数据类型
 
-Pandas __dtype__ 映射：
+<!-- Pandas __dtype__ 映射： -->
 
-<div align=center><img width="700" height="430" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/3.png"/></div>
+<!-- <div align=center><img width="700" height="430" src="./static/pandas/3.png"/></div> -->
 
 
 ### 将 object 类型转为 category 分类类型
@@ -664,7 +664,7 @@ __transform 和 apply的相同之处：__
 
    __运行结果:__ 
    
-   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/1.png)
+   ![Image text](./static/1.png)
     
     
    __2. inner 内连接__
@@ -674,7 +674,7 @@ __transform 和 apply的相同之处：__
         df3 = pd.merge(df1, df2, how='inner')
    __运行结果:__ 
    
-   ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/2-1.png)
+   ![Image text](./static/2-1.png)
     
    __3. left 左连接__
     
@@ -683,7 +683,7 @@ __transform 和 apply的相同之处：__
           df3 = pd.merge(df1, df2, how='left')
    __运行结果:__
    
-  ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/3.png)
+  ![Image text](./static/3.png)
 
    __4. right 右连接__
         
@@ -692,23 +692,24 @@ __transform 和 apply的相同之处：__
         df3 = pd.merge(df1, df2, how='right')
    __运行结果:__
    
-  ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/4.png)
+  ![Image text](./static/4.png)
 
    __5. outer 外连接__
 
    外连接相当于求两个 DataFrame 的并集。
         
-        df3 = pd.merge(df1, df2, how='outer')
+        df3 = pd.merge(df1, df2, how='outer'，on= '指定列进行对应合并')
+
    __运行结果:__
    
-  ![Image text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/5.png)
+  ![Image text](./static/5.png)
   
 
    __一、数据表合并 `join`__
 
     join(self, other, on=None, how='left', lsuffix='', rsuffix='',sort=False):
 
-  其中参数的意义与 `merge` 方法基本相同,只是 `join` 方法 `默认` 为 `左外连接how=left`,参数`on` 指定列进行对应合并。
+  其中参数的意义与 `merge` 方法基本相同,只是 `join` 方法 `默认` 为 `左外连接how=left`,参数 `on` 指定列进行对应合并。
 
   * 1.默认按索引合并，可以合并相同或相似的索引，不管他们有没有重叠列。
 
@@ -718,7 +719,16 @@ __transform 和 apply的相同之处：__
 
   * 4.连接方式用参数how控制
 
-  * 5.通过lsuffix='', rsuffix='' 区分相同列名的列
+  * 5.当两个df数据的列名相同时，需要指定 lsuffix='', rsuffix='' 区分相同列名的列，如下
+
+    例子：
+
+        df1.join(df2, lsuffix='_l', rsuffix='_r',on='shop_id') # 列名重复的时候需要指定lsuffix, rsuffix参数
+
+    效果图：
+
+      <div align=center><img width="550" height="250" src="./static/join.jpg"/></div>
+
 
 
 ### `df.pct_change()`
@@ -817,23 +827,29 @@ __transform 和 apply的相同之处：__
   
 ### `df.pivot_table 函数`
     
-  pivot_table有四个最重要的参数index、values、columns、aggfunc
+`pivot_table` 有四个最重要的参数 `index`、`values`、`columns`、`aggfunc`
 
-  index     index代表索引，每个pivot_table必须拥有一个index。
-  Values    Values可以对需要的计算数据进行筛选
-  Aggfunc   aggfunc参数可以设置我们对数据聚合时进行的函数操作。当我们未设置aggfunc时，它默认aggfunc='mean'计算均值，可以设置多个 如：
-            [aggfunc=[np.sum,np.mean]] 此时会显示np.sum和np.mean统计出来的数据。
+* `index`：`index` 代表索引，每个 `pivot_table` 必须拥有一个 `index` 。
+  
+* `Values`：`Values` 可以对需要的计算数据进行筛选
+  
+* `Aggfunc`：`aggfunc` 参数可以设置我们对数据聚合时进行的函数操作。
+
+  当我们未设置 `aggfunc` 时，它默认 `aggfunc='mean'` 计算均值，可以设置多个 如：
+            `[aggfunc=[np.sum,np.mean]]` 此时会显示 `np.sum` 和 `np.mean` 统计出来的数据。
             
-  Columns   Columns类似Index可以设置列层次字段，它不是一个必要参数，作为一种分割数据的可选方式。
+* `Columns`：Columns类似Index可以设置列层次字段，它不是一个必要参数，作为一种分割数据的可选方式。
 
-      #以 Pclass(船舱)为索引 查看不同船舱人员的平均存活率Survived。
-      train_survived=train_content.pivot_table(index="Pclass",values="Survived")
-      
-      # 查看不同船舱的收费均值是多少
-      train_age_fare=train_content.pivot_table(index="Pclass",values=["Age","Fare"])
-      
-      # 查看不同船舱人员的的人均年龄
-      train_survived=train_content.pivot_table(index="Pclass",values="Age")
+案例：
+
+    #以 Pclass(船舱)为索引 查看不同船舱人员的平均存活率Survived。
+    train_survived=train_content.pivot_table(index="Pclass",values="Survived")
+    
+    # 查看不同船舱的收费均值是多少
+    train_age_fare=train_content.pivot_table(index="Pclass",values=["Age","Fare"])
+    
+    # 查看不同船舱人员的的人均年龄
+    train_survived=train_content.pivot_table(index="Pclass",values="Age")
 
 ### `df.pivot 函数`
 
@@ -1164,7 +1180,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
 
 
-<div align=center><img width="650" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/pandas/2.png"/></div>
+<div align=center><img width="650" height="300" src="./static/2.png"/></div>
 
 *   __groupby函数 例子1__
 
@@ -1846,7 +1862,7 @@ __例子：__
 
    __例子：__ 如果想要构造这样的dataframe：
 
-   <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/pandas/1.jpg"/></div> 
+   <div align=center><img src="./static/1.jpg"/></div> 
 
       import pandas as pd
 
