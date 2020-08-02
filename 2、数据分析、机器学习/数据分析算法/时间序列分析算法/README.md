@@ -1,40 +1,8 @@
 # 时间序列模型：
 
-<<<<<<< HEAD
-时间序列流程介绍：https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/blob/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/readme.md
-=======
-* [数据分析之时间序列分析](https://www.jianshu.com/p/ff6abad2514f)
+时间序列处理流程相关介绍：https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/blob/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4/readme.md
 
-## 加法模型和乘法模型
-
-我们公开了时间序列的幼稚分解（应该优先使用更复杂的方法）。它们是分解时间序列的几种方法，但在我们的示例中，我们将简单分解为三个部分。
-
-* 加法模型是：`Y[t] = t[t] + S[t] + e[t]`
-
-* 乘法模型是：`Y[t] = t[t] x S[t] x e[t]`
-
-其中：
-
-
-* `T[T]`：趋势
-
-* `S[t]`：季节性
-
-* `e[t]`：残余
-
-`加性模型`是线性的，随时间变化的量是相同的。线性趋势是一条直线。线性季节性具有相同的频率（周期宽度）和振幅（周期高度）。
-
-`乘法模型`是非线性的，如二次型或指数型。变化随着时间的推移而增加或减少。非线性趋势是一条曲线，非线性的季节性随时间的推移有增加或减少的频率和/或振幅。
-
-在例子中，如果我们可以看到它不是一个线性模型。这就是我们使用乘法模型的原因。
-
-### `综上所述`
-
-`小结：`就是如果时间序列图的趋势随着时间的推移，序列的季节波动变得越来越大，则建议使用乘法模型；如果序列的季节波动能够基本维持恒定，则建议使用加法模型。
-
->>>>>>> 5a3cc648f76759c0544e82bcf74264888595ff98
-
-## AR、MA、ARMA、ARIMA模型介绍
+## `AR、MA、ARMA、ARIMA模型介绍`
 
 ### `时间序列预测模型`
 时间序列分析模型建立了 __观察结果__ 与 __时间变化__ 的关系，能帮我们预测未来一段时间内的结果变化情况。
@@ -184,16 +152,21 @@ ARIMA 的英文全称是 Auto Regressive Integrated Moving Average 模型，中�
 
 * __arma.aic: AIC 准则__ ，也叫作赤池消息准则，它是衡量统计模型拟合好坏的一个标准，数值越小代表模型拟合得越好。
 
+### `关于 ARIMA 参考链接：`
 
-### 实战案例为比特币走势预测
-https://github.com/OneStepAndTwoSteps/data_mining_analysis/tree/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E9%A2%84%E6%B5%8B%E6%AF%94%E7%89%B9%E5%B8%81%E8%B5%B0%E5%8A%BF
+* https://www.cnblogs.com/bradleon/p/6827109.html
+
+* https://www.cnblogs.com/bradleon/p/6832867.html
 
 
-## Prophet 模型介绍
+
+* 实战案例为比特币走势预测：https://github.com/OneStepAndTwoSteps/data_mining_analysis/tree/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B/%E9%A2%84%E6%B5%8B%E6%AF%94%E7%89%B9%E5%B8%81%E8%B5%B0%E5%8A%BF
+
+
+## `Prophet 模型介绍`
 
 从官网的介绍来看，`Facebook` 所提供的 `prophet` 算法不仅可以处理时间序列存在一些异常值的情况，也可以处理部分缺失值的情形，还能够几乎全自动地预测时间序列未来的走势。从论文上的描述来看，这个 `prophet` 算法是基于时间序列分解和机器学习的拟合来做的，其中在拟合模型的时候使用了 `pyStan` 这个开源工具，因此能够在较快的时间内得到需要预测的结果。除此之外，为了方便统计学家，机器学习从业者等人群的使用，`prophet` 同时提供了 `R` 语言和 `Python` 语言的接口。
 
-<<<<<<< HEAD
 
 `Prophet` 程序的核心是一个 `加性回归模型`，包含四个主要组成部分：
 
@@ -207,7 +180,7 @@ https://github.com/OneStepAndTwoSteps/data_mining_analysis/tree/master/%E6%95%B0
 
 
 
-参考链接：
+### `Prophet 相关参考链接`：
 
 * Prophet 模型使用介绍：https://zhuanlan.zhihu.com/p/52330017
 
@@ -219,20 +192,6 @@ https://github.com/OneStepAndTwoSteps/data_mining_analysis/tree/master/%E6%95%B0
 
 
 
-## 时间序列相关资料
-
-* [数据分析之时间序列分析](https://www.jianshu.com/p/ff6abad2514f)
-=======
-参考链接：
-
-* https://zhuanlan.zhihu.com/p/52330017
-
-* https://blog.csdn.net/anshuai_aw1/article/details/83412058
-
-
-
-
->>>>>>> 5a3cc648f76759c0544e82bcf74264888595ff98
 
 
 
