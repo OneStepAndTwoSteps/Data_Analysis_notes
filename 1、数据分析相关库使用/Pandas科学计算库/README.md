@@ -436,15 +436,33 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 
   __3. 去重复的值：__
-    数据采集可能存在重复的行，这时只要使用 drop_duplicates() 就会自动把重复的行去掉。
+
+  数据采集可能存在重复的行，这时只要使用 drop_duplicates() 就会自动把重复的行去掉。
   
-      df = df.drop_duplicates() # 去除重复行
+    df = df.drop_duplicates() # 去除重复行
+
+  去除某几列重复的行数据
+
+    data.drop_duplicates(subset=['A','B'],keep='first',inplace=True)
+
+
+    subset： 列名，可选，默认为None
+
+    keep： {‘first’, ‘last’, False}, 默认值 ‘first’
+             first： 保留第一次出现的重复行，删除后面的重复行。
+             last： 删除重复项，除了最后一次出现。
+             False： 删除所有重复项。
+
+    inplace：布尔值，是否在原数据中进行修改
+
+
 
   __4. 格式问题：__
-    这是个比较常用的操作，因为很多时候数据格式不规范，我们可以使用 astype 函数来规范数据格式，比如我们把 Chinese 字段的值改成 str 类型，或者 int64 可以这么写：
   
-      df2['Chinese'].astype('str') 
-      df2['Chinese'].astype(np.int64) 
+  这是个比较常用的操作，因为很多时候数据格式不规范，我们可以使用 astype 函数来规范数据格式，比如我们把 Chinese 字段的值改成 str 类型，或者 int64 可以这么写：
+  
+    df2['Chinese'].astype('str') 
+    df2['Chinese'].astype(np.int64) 
 
   
 ### 数据间的空格
@@ -2298,3 +2316,27 @@ https://www.kaggle.com/kk0105/everything-you-can-do-with-a-time-series
 * `dt.day `
 
       train_flattened['day']=train_flattened.date.dt.day 
+
+
+## `筛选某个时间段的数据：如 20130101 ~ 20130131 `
+
+    import datetime
+
+    s_date = datetime.datetime.strptime('20130101', '%Y%m%d').date()
+    e_date = datetime.datetime.strptime('20130131', '%Y%m%d').date()
+    
+    # 使用 to_datetime 转成的时间数据类型为 Timestamp,而使用datetime.date转成的是 datetime.date类型，无法直接比较，所以这里进行转化
+    s_date = pd.to_datetime(s_date)
+    e_date = pd.to_datetime(e_date)
+
+    
+    train['date'] = pd.to_datetime(train['date'],format='%Y-%m-%d') 
+    train[(train['date'] >= s_date) & (train['date'] <= e_date)]
+
+<div align=center><img width="550" height="270" src="./static/datetime筛选结果展示.png"/></div>
+
+
+
+
+
+

@@ -148,6 +148,14 @@
     df.diff(2) 实现二阶差分
 
 
+## 时间序列的滞后特征
+
+Lags appears when we think in our prediction like "today is the same that was yesterday". In this kernel lag1 - mean the value of itemcnt that was in previous block (yesterday block), lag2 - itemcnt from 2 day earlier block, lag3 - itemcnt 3 blocks earlier. Lags can help to catch the time trend of cnt variable. Itemcnt is the goal variable so to predict it we used values of item_cnt from the past in different configuration. The same idea for the price.
+
+当我们认为“今天和昨天一样”时，滞后就会出现。在这个内核中，lag-1 表示前一天（昨天）中的 itemcnt 的值，lag-2 来自2天前的块的 itemcnt，lag-3 itemcnt 3天之前的值。滞后有助于捕捉cnt变量的时间趋势。Itemcnt是目标变量，因此为了预测它，我们使用了过去在不同配置中item_cnt的值。价格也一样。
+
+
+
 
 ## `extend: 查看趋势的其他方法：`
 
