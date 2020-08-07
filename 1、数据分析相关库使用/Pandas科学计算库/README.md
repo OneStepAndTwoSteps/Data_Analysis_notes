@@ -842,9 +842,15 @@ __transform 和 apply的相同之处：__
   显示pd_content的前面三行(不包括列名字)  
      
      print(train_content.head(3)
-  
+
+
+
 ### `df.pivot_table 函数`
-    
+
+* https://www.cnblogs.com/onemorepoint/p/8425300.html
+
+* https://www.cnblogs.com/Yanjy-OnlyOne/p/11195621.html
+
 `pivot_table` 有四个最重要的参数 `index`、`values`、`columns`、`aggfunc`
 
 * `index`：`index` 代表索引，每个 `pivot_table` 必须拥有一个 `index` 。
@@ -869,6 +875,44 @@ __transform 和 apply的相同之处：__
     # 查看不同船舱人员的的人均年龄
     train_survived=train_content.pivot_table(index="Pclass",values="Age")
 
+### `droplevel()`
+
+    Series.droplevel(self, level, axis=0)
+`droplevel()` 方法用于返回已删除请求的索引/列级别的DataFrame
+
+案例：
+
+    sales_by_item_id = sale_train.pivot_table(index=['item_id'],values=['item_cnt_day'], 
+                                            columns='date_block_num', aggfunc=np.sum, fill_value=0).reset_index()
+
+    sales_by_item_id.head()
+
+
+<div align=center><img width="950" height="170" src="./static/pivot_table.jpg"/></div>
+
+
+droplevel 处理：可以用于去掉级别的名称或位置索引
+
+    sales_by_item_id.columns = sales_by_item_id.columns.droplevel().map(str)
+    sales_by_item_id.head()
+
+<div align=center><img width="950" height="170" src="./static/droplevel.jpg"/></div>
+
+
+常用的处理：
+
+
+    sales_by_item_id = sale_train.pivot_table(index=['item_id'],values=['item_cnt_day'], 
+                                          columns='date_block_num', aggfunc=np.sum, fill_value=0).reset_index()
+    sales_by_item_id.columns = sales_by_item_id.columns.droplevel().map(str)
+    sales_by_item_id = sales_by_item_id.reset_index(drop=True).rename_axis(None, axis=1)
+    sales_by_item_id.columns.values[0] = 'item_id'
+
+    sales_by_item_id.head()
+
+<div align=center><img width="950" height="170" src="./static/droplevel2.jpg"/></div>
+
+
 ### `df.pivot 函数`
 
     DataFrame.pivot(self, index=None, columns=None, values=None) → ’DataFrame’
@@ -884,7 +928,7 @@ __transform 和 apply的相同之处：__
 
 数据展示：
 
-<div align=center><img width="950" height="150" src="./static/3.jpg"/></div>
+<div align=center><img width="950" height="170" src="./static/3.jpg"/></div>
 
     train_group = train_flattened.groupby(["month", "weekday"])['Visits'].mean().reset_index()
     train_group = train_group.pivot('weekday','month','Visits')
