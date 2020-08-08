@@ -155,6 +155,27 @@ Lags appears when we think in our prediction like "today is the same that was ye
 当我们认为“今天和昨天一样”时，滞后就会出现。在这个内核中，lag-1 表示前一天（昨天）中的 itemcnt 的值，lag-2 来自2天前的块的 itemcnt，lag-3 itemcnt 3天之前的值。滞后有助于捕捉cnt变量的时间趋势。Itemcnt是目标变量，因此为了预测它，我们使用了过去在不同配置中item_cnt的值。价格也一样。
 
 
+模板：
+
+    def lag_feature(df, lags, col):
+        tmp = df[['date_block_num','shop_id','item_id',col]]
+        for i in lags:
+            shifted = tmp.copy()
+            shifted.columns = ['date_block_num','shop_id','item_id', col+'_lag_'+str(i)]
+            shifted['date_block_num'] += i
+            df = pd.merge(df, shifted, on=['date_block_num','shop_id','item_id'], how='left')
+        return df
+
+调用：
+
+    ts = time.time()
+    matrix = lag_feature(matrix, [1,2,3,6,12], 'item_cnt_month')
+    time.time() - ts
+
+
+<div align=center><img width="900" height="270" src="./static/lag_feature.jpg"/></div>
+
+
 
 
 ## `extend: 查看趋势的其他方法：`

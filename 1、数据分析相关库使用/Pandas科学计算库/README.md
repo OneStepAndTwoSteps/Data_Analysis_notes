@@ -146,7 +146,11 @@ __特殊用法：__
     array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]])
 
 
-### np.vstack() 和 np.hstack()
+### `pd 的一些读取操作`
+
+* https://www.jianshu.com/p/7764b6591cf5
+
+### `np.vstack() 和 np.hstack()`
 
 * `np.vstack` : 按垂直方向（`行顺序`）堆叠数组构成一个新的数组
 
@@ -155,7 +159,7 @@ __特殊用法：__
   [np.vstack() 和 np.hstack() 案例说明](https://www.jianshu.com/p/2469e0e2a1cf)
 
 
-### np.stack()
+### `np.stack()`
 
 numpy 和 tensorflow 都有 stack() 函数，该函数主要是用来提升维度。
 
