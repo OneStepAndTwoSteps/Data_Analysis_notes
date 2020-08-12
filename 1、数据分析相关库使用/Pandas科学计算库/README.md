@@ -669,7 +669,7 @@ __transform 和 apply的相同之处：__
         DBNOs	        0.658	1.146	0.000	0.000	0.000	1.000	53.000
 
 
-   __一、数据表合并 merge__
+### 一、数据表合并 merge
     
    有时候我们需要将多个渠道源的多个数据表进行合并，一个 DataFrame 相当于一个数据库的数据表，那么多个 DataFrame 数据表的合并就相当于多个数据库的表合并。
     
@@ -727,7 +727,7 @@ __transform 和 apply的相同之处：__
   ![Image text](./static/5.png)
   
 
-   __一、数据表合并 `join`__
+### 一、数据表合并 `join`
 
     join(self, other, on=None, how='left', lsuffix='', rsuffix='',sort=False):
 
@@ -750,6 +750,69 @@ __transform 和 apply的相同之处：__
     效果图：
 
       <div align=center><img width="550" height="250" src="./static/join.jpg"/></div>
+
+
+
+### `align 对齐`
+
+    df.align(df2,join='',axis=)
+
+
+使用指定的每个轴索引的连接方法，将轴上的两个对象对齐
+
+
+
+数据准备：
+
+    df1 = pd.DataFrame([[1,2,3,4], [6,7,8,9]], columns=['D', 'B', 'E', 'A'], index=[1,2])
+    df2 = pd.DataFrame([[10,20,30,40], [60,70,80,90], [600,700,800,900]], columns=['A', 'B', 'C', 'D'], index=[2,3,4])
+
+    print(df1)
+
+      D  B  E  A
+    1  1  2  3  4
+    2  6  7  8  9
+    print(df2)
+
+        A    B    C    D
+    2   10   20   30   40
+    3   60   70   80   90
+    4  600  700  800  900
+
+案例：
+
+    # 常用
+    a1, a2 = df1.align(df2, join='inner', axis=1)
+    print(a1)
+    print(a2)
+
+输出：
+
+      D  B  A
+    1  1  2  4
+    2  6  7  9
+
+        D    B    A
+    2   40   20   10
+    3   90   70   60
+    4  900  700  600
+
+`小结：`可以看到当 `join='inner'` ，`axis=1` 时就能筛选出两个数据中共同列的部分，可以用于匹配 `训练数据` 和 `测试数据` 的共同特征,如下：
+
+
+    # 先拿出目标列
+    train_labels = app_train['TARGET']
+
+    # Align the training and testing data, keep only columns present in both dataframes 
+    # 选出两个数据中共同拥有的列，不共有的列过滤出去
+    app_train, app_test = app_train.align(app_test, join = 'inner', axis = 1)
+
+    # Add the target back in
+    app_train['TARGET'] = train_labels
+
+    print('Training Features shape: ', app_train.shape)
+    print('Testing Features shape: ', app_test.shape)
+
 
 
 
