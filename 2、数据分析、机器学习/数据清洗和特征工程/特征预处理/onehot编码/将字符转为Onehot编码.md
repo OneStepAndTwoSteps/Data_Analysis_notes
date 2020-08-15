@@ -2,20 +2,21 @@
 
 我们在进行建模时，变量中经常会有一些变量为离散型变量，例如性别。这些变量我们一般无法直接放到模型中去训练模型。因此在使用之前，我们往往会对此类变量进行处理。一般是对离散变量进行one-hot编码。下面具体介绍通过python对离散变量进行one-hot的方法。
 
-## 初級：
+## `方法一`
 
-#### 方法一
+### `初級`：
+
 
 __pd.get_dummies(prefix=)__
 
-__参数：__
+__`参数：`__
 
     prefix : string, list of strings, or dict of strings, default None 
     get_dummies转换后，列名的前缀 
 
 pandas的get_dummies()可以直接对变量进行one-hot编码，其中prefix是为one-hot编码后的变量进行命名。
 
-__数据__
+__`数据`__
 
     df = pd.DataFrame({'A': ['a', 'b', 'a'], 'B': ['b', 'a', 'c'],
                      'C': [1, 2, 3]})
@@ -26,41 +27,62 @@ __数据__
     2	a	c	3
 
 
-__例子__
+__`例子`__
 
     pd.get_dummies(df)
 
-__out__
+__`out`__
 
         C	A_a	A_b	B_a	B_b	B_c
     0	1	1	0	0	1	0
     1	2	0	1	1	0	0
     2	3	1	0	0	0	1
 
-__例子2__
+__`例子2`__
 
     pd.get_dummies(df, prefix=['col1', 'col2'])
 
-__out__
+__`out`__
 
         C	col1_a	col1_b	col2_a	col2_b	col2_c
     0	1	1	    0	    0	    1	    0
     1	2	0	    1	    1	    0	    0
     2	3	1	    0	    0	    0	    1
 
+### `进阶`：
 
 
-#### 方法二
+__`例子3`__
 
-__LabelEncoder和OneHotEncoder__
+筛选出数据类型为 `object` 的数据进行 `onehot` 编码。
+
+    bureau = pd.read_csv('xxxxx')
+
+    categorical = pd.get_dummies(bureau.select_dtypes('object'))
+    
+    # SK_ID_CURR 是唯一标识 id，这里对新生成的 df 进行赋值
+    categorical['SK_ID_CURR'] = bureau['SK_ID_CURR']
+    categorical.head()
+
+__`效果图：`__
+
+<div align="center"><img width="800" height="150" src="./static/get_dummies.jpg"/></div>
+
+
+
+## `方法二`
+
+### `初级`
+
+__`LabelEncoder 和 OneHotEncoder`__
 
 我们也可以通过sklearn的模块实现对离散变量的one-hot编码，其中LabelEncoder是将离散变量替换为数字，OneHotEncoder则实现对替换为数字的离散变量进行one-hot编码。
 
 Label Encoder有助于检索和保留序数特征所隐含的信息
 
-__例子__
+__`例子`__
 
-__1、LabelEncoder()__
+__`1、LabelEncoder()`__
 
     # 简单来说 LabelEncoder 是对不连续的数字或者文本进行编号
     from sklearn.preprocessing import LabelEncoder
@@ -70,7 +92,7 @@ __1、LabelEncoder()__
     
     array([0,0,3,2,1])
 
-__2、OneHotEncoder()__
+__`2、OneHotEncoder()`__
 
     # OneHotEncoder 用于将表示分类的数据扩维：
     from sklearn.preprocessing import OneHotEncoder
@@ -81,11 +103,11 @@ __2、OneHotEncoder()__
     [[0,1,0,0], [0,0,1,0], [1,0,0,0], [0,0,0,1]]
 
 
-## 进阶
+## `进阶`
 
-### 保留有序特征的label，将无序特征进行onehot编码
+### `保留有序特征的label，将无序特征进行onehot编码`
 
-#### 例子：
+#### `例子：`
 
     import pandas as pd
     from sklearn.preprocessing import LabelEncoder
@@ -114,7 +136,7 @@ __2、OneHotEncoder()__
     dfOneHot = pd.DataFrame(Xm, columns=["Make" + str(int(i)) for i in range(X.shape[1])])
     df = pd.concat([df, dfOneHot], axis=1)
 
-#### 实战：
+#### `实战：`
 
 已经过处理之后的特征及其对应值
 
@@ -147,7 +169,7 @@ __2、OneHotEncoder()__
     df = pd.concat([train_data[['Pclass','Age','Fare']], Sex_ohe,Isalone_ohe,Embarked_ohe,Title_ohe], axis=1)
     df.head()
 
-#### 展示结果：
+#### `展示结果：`
 
         Pclass	Age	Fare	Sex0	Sex1	Isalone0	Isalone1	Embarked0	Embarked1	Embarked2	Title0	Title1	Title2	Title3	Title4
     0	3	    1	0	    0.0	    1.0	    1.0	        0.0	        0.0	        0.0	        1.0	        0.0	    0.0	    1.0	    0.0 	0.0
@@ -158,7 +180,7 @@ __2、OneHotEncoder()__
 
 
 
-#### 注意：
+#### `注意：`
 
-get_dummies()可以直接对字符型变量进行one-hot编码，但OneHotEncoder不能直接对字符型变量编码，因此我们需要先将字符型变量转换为数值型变量。这就是为什么在OneHotEncoder之前需要LabelEncoder的原因。
+`get_dummies()` 可以直接对字符型变量进行 `one-hot` 编码，但 `OneHotEncoder` 不能直接对字符型变量编码，因此我们需要先将字符型变量转换为数值型变量。这就是为什么在 `OneHotEncoder` 之前需要 `LabelEncoder` 的原因。
 
