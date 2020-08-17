@@ -1,7 +1,111 @@
 # 数据清洗
 
 
-## `计算特征与 Target 之间的相关系数`
+* [特征预处理](https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/tree/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E7%89%B9%E5%BE%81%E9%A2%84%E5%A4%84%E7%90%86)
+
+
+
+## `一、缺失值处理`
+
+### `1.1、检查缺失值`
+
+
+`模板：`
+
+    # Function to calculate missing values by column# Funct 
+    def missing_values_table(df):
+            # Total missing values
+            mis_val = df.isnull().sum()
+            
+            # Percentage of missing values
+            mis_val_percent = 100 * df.isnull().sum() / len(df)
+            
+            # Make a table with the results
+            mis_val_table = pd.concat([mis_val, mis_val_percent], axis=1)
+            
+            # Rename the columns
+            mis_val_table_ren_columns = mis_val_table.rename(
+            columns = {0 : 'Missing Values', 1 : '% of Total Values'})
+            
+            # Sort the table by percentage of missing descending
+            mis_val_table_ren_columns = mis_val_table_ren_columns[
+                mis_val_table_ren_columns.iloc[:,1] != 0].sort_values(
+            '% of Total Values', ascending=False).round(1)
+            
+            # Print some summary information
+            print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n"      
+                "There are " + str(mis_val_table_ren_columns.shape[0]) +
+                " columns that have missing values.")
+            
+            # Return the dataframe with missing information
+            return mis_val_table_ren_columns
+
+`案例：`
+
+    # Missing values statistics
+    missing_values = missing_values_table(app_train)  # app_train 是一个 dataframe
+    missing_values.head(20)
+
+`输出：`
+
+
+    Your selected dataframe has 122 columns.
+    There are 67 columns that have missing values.
+
+
+
+<div align=center><img width="400" height="500" src="./static/check_missing_values.jpg"/></div>
+
+
+### `1.2、缺失值处理`
+
+进一步的，我们可以对缺失值进行操作，一般来说，当某列数据的缺失值超过90%时，我们可以对其进行删除操作。
+
+`案例：`
+
+* `1、`获取 `训练数据` 中缺失值百分比大于 `90%` 的列名
+
+        missing_train_vars = list(missing_train.index[missing_train['% of Total Values'] > 90])
+        len(missing_train_vars)
+
+* `2、`我们需要对齐测试和训练数据框，这意味着要匹配各列，以便它们具有完全相同的列。 特别当我们进行热编码变量时，我们需要对齐数据框以确保它们具有相同的列。
+
+        train_labels = train['TARGET']
+
+        # Align the dataframes, this will remove the 'TARGET' column
+        train, test = train.align(test, join = 'inner', axis = 1)
+
+        train['TARGET'] = train_labels
+
+        print('Training Data Shape: ', train.shape)
+        print('Testing Data Shape: ', test.shape)
+
+* `3、`获取 `测试数据` 中缺失值百分比大于 `90%` 的列名
+
+        missing_test_vars = list(missing_test.index[missing_test['% of Total Values'] > 90])
+        len(missing_test_vars)
+
+* `4、`去重复的列名
+
+        missing_columns = list(set(missing_test_vars + missing_train_vars))
+        print('There are %d columns with more than 90%% missing in either the training or testing data.' % len(missing_columns))
+
+* `5、`删除缺失值
+
+        # Drop the missing columns
+        train = train.drop(columns = missing_columns)
+        test = test.drop(columns = missing_columns)
+
+* `6、`可以保存数据到新的文件中
+
+        train.to_csv('train_bureau_raw.csv', index = False)
+        test.to_csv('test_bureau_raw.csv', index = False)
+
+
+
+
+
+## `二、计算特征与 Target 之间的相关系数`
 
     df.corr() 方法可以用于计算相关性，返回的数据是 Dataframe
 
@@ -57,6 +161,7 @@
         DAYS_BIRTH                     0.078239
         TARGET                         1.000000
         Name: TARGET, dtype: float64
+
 
 
 
@@ -154,54 +259,6 @@
 
 
 
-
-## `检查缺失值`
-
-`模板：`
-
-    # Function to calculate missing values by column# Funct 
-    def missing_values_table(df):
-            # Total missing values
-            mis_val = df.isnull().sum()
-            
-            # Percentage of missing values
-            mis_val_percent = 100 * df.isnull().sum() / len(df)
-            
-            # Make a table with the results
-            mis_val_table = pd.concat([mis_val, mis_val_percent], axis=1)
-            
-            # Rename the columns
-            mis_val_table_ren_columns = mis_val_table.rename(
-            columns = {0 : 'Missing Values', 1 : '% of Total Values'})
-            
-            # Sort the table by percentage of missing descending
-            mis_val_table_ren_columns = mis_val_table_ren_columns[
-                mis_val_table_ren_columns.iloc[:,1] != 0].sort_values(
-            '% of Total Values', ascending=False).round(1)
-            
-            # Print some summary information
-            print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n"      
-                "There are " + str(mis_val_table_ren_columns.shape[0]) +
-                " columns that have missing values.")
-            
-            # Return the dataframe with missing information
-            return mis_val_table_ren_columns
-
-`案例：`
-
-    # Missing values statistics
-    missing_values = missing_values_table(app_train)  # app_train 是一个 dataframe
-    missing_values.head(20)
-
-`输出：`
-
-
-    Your selected dataframe has 122 columns.
-    There are 67 columns that have missing values.
-
-
-
-<div align=center><img width="400" height="500" src="./static/check_missing_values.jpg"/></div>
 
 ## `检查列类型`
 

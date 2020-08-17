@@ -13,7 +13,7 @@
 * `Domain knowledge features 领域知识特征`
 
 
-## Polynomial Features
+## `一、Polynomial Features：`
 
 一种简单的特征构造方法称为 `多项式特征`。在该方法中，我们生成的特征是现有特征的幂函数以及现有特征之间的交互项。
 
@@ -92,7 +92,7 @@
 * 共有35个特征，每个特征都被提升到3级幂和交互项。现在，我们可以看到这些新特性是否与目标相关。
 
 
-### `查看构造出的新特征之间的关联性`：
+### `查看构造出的新特征之间的关联性：`
 
 `案例：`
 
@@ -168,7 +168,7 @@
     Testing data with polynomial features shape:   (48744, 278)
 
 
-## `领域知识特征`
+## `二、领域知识特征：`
 
 
 也许称之为 `领域知识` 是不完全正确的，拿信用卡违约分析来说：因为我不是一个信用专家，但也许我们可以称之为 `尝试应用有限的金融知识`。在这种思路下，我们可以制作一些功能，试图捕捉我们认为对判断客户是否会拖欠贷款很重要的信息。在这里，我将使用五个功能，这些功能都是由Aguiar的脚本启发的：
@@ -184,7 +184,7 @@
 * `雇佣天数百分比：`雇佣天数相对于客户年龄的百分比
 
 
-案例：
+`案例：`
 
     app_train_domain = app_train.copy()
     app_test_domain = app_test.copy()
@@ -200,7 +200,7 @@
     app_test_domain['DAYS_EMPLOYED_PERCENT'] = app_test_domain['DAYS_EMPLOYED'] / app_test_domain['DAYS_BIRTH']
 
 
-### 可视化新变量
+### `可视化新变量：`
 
 我们应该在一个图形中可视化地探索这些领域知识变量。对于所有这些，我们将用目标值着色相同的KDE图。
 
@@ -226,9 +226,9 @@
 
 <div align=center><img width="600" height="990" src="./static/Visualize New Variables.jpg"/></div>
 
+## `三、其他：`
 
-
-## `Function for Numeric Aggregations (数值聚合函数)`
+### `3.1、Function for Numeric Aggregations (数值聚合函数)：`
 
 当想要获取某一 dataframe 中的数字信息，我们可以计算所有数字列的统计信息。 为此，我们可以针对数据的 `ID` 进行分组，对分组的数据框进行 `agg` 转换，然后将结果合并回训练数据中。 `agg` 函数将仅计算认为该操作有效的数字列的值。 我们将坚持使用 `mean`，`max`，`min`，`sum`，但是任何函数都可以在此处传递。 我们甚至可以编写我们自己的函数，并在`agg`调用中使用它。
 
@@ -289,12 +289,55 @@
     bureau_agg_new.head()
 
 
-展示图：
+`展示图：`
 
 
 
 <div align=center><img width="800" height="120" src="./static/Function for Numeric Aggregations.jpg"/></div>
 
+
+##  `删除共线特征：`
+
+对于 `共线变量`，我们不仅可以计算变量与目标值的相关性，还可以计算每个变量与其他每个变量的相关性。 这将使我们看到是否存在应该从数据中删除的高度共线变量。
+
+`案例：`
+
+* `1、`寻找与其他变量的相关性大于0.8的任何变量：
+
+
+        # 设置阈值
+        threshold = 0.8
+
+        # 创建一个空字典以容纳相关变量
+        above_threshold_vars = {}
+
+        # 对于每一列，记录高于阈值的变量
+        for col in corrs:
+            above_threshold_vars[col] = list(corrs.index[corrs[col] > threshold])
+
+* `2、`对于每对高度相关的变量，我们只想删除其中一个变量。 以下代码创建了一组变量，只需将每个变量对中的一个相加即可删除。
+
+
+        # 跟踪要删除的列和已检查的列
+        cols_to_remove = []
+        cols_seen = []
+        cols_to_remove_pair = []
+
+        # 遍历列和相关列
+        for key, value in above_threshold_vars.items():
+            # 跟踪已检查的列
+            cols_seen.append(key)
+            for x in value:
+                if x == key:
+                    next
+                else:
+                    # 只删除一对
+                    if x not in cols_seen:
+                        cols_to_remove.append(x)
+                        cols_to_remove_pair.append(key)
+                    
+        cols_to_remove = list(set(cols_to_remove))
+        print('Number of columns to remove: ', len(cols_to_remove))
 
 
 
