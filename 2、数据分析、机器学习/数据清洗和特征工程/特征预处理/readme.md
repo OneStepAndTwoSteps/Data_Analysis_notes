@@ -331,17 +331,22 @@
                 if x == key:
                     next
                 else:
-                    # 只删除一对
-                    if x not in cols_seen:
-                        cols_to_remove.append(x)
-                        cols_to_remove_pair.append(key)
+                    # 如果存在高相关的特征，只保留一个
+                    if x not in cols_seen:                  # 如果该特征在之前的 key 数据中没有出现过。
+                        cols_to_remove.append(x)            # 存在高度相关，将高度相关的特征放入 cols_to_remove 中。
+                        cols_to_remove_pair.append(key)     # cols_to_remove 和 cols_to_remove_pair 得到的结果一致。
                     
         cols_to_remove = list(set(cols_to_remove))
         print('Number of columns to remove: ', len(cols_to_remove))
 
+* `3、`删除高度相关特征
 
 
+        train_corrs_removed = train.drop(columns = cols_to_remove)
+        test_corrs_removed = test.drop(columns = cols_to_remove)
 
+        print('Training Corrs Removed Shape: ', train_corrs_removed.shape)
+        print('Testing Corrs Removed Shape: ', test_corrs_removed.shape)
 
 
 
