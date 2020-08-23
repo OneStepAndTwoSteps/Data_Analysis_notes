@@ -1,7 +1,7 @@
 
 ## classification_report
 
-sklearn中的classification_report函数用于显示主要分类指标的文本报告．在报告中显示每个类的精确度，召回率，F1值等信息。
+sklearn 中的 classification_report 函数用于显示主要分类指标的文本报告．在报告中显示每个类的精确度，召回率，F1值等信息。
 
 
 ### 导入包
