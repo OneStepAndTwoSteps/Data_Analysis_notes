@@ -3,6 +3,11 @@
 
 在信用卡诈骗案例中，我们将诈骗信息和正常交易信息进行可视化显示，我们可以发现正常交易的交易数远远大于诈骗交易的交易数。这样就会影响模型的输出。
 
+## `imblearn`
+
+* [imbalance-learn 文档](https://imbalanced-learn.readthedocs.io/en/stable/user_guide.html)
+
+
 ## `什么时候我们应该处理不平衡问题`
 
 * `1、`如果原数据分布你的理解应该是均衡的，但是你的训练数据不均衡，那么就要考虑不平衡样本处理。
@@ -81,9 +86,6 @@
 
 
 
-
-
-
 ## `下采样和过采样`
 
 这里我们先提出两种解决方案也是数据分析中最常用的两种方法，下采样和过采样！
@@ -116,8 +118,52 @@
     
     由于复制少数类事件，它加大了过拟合的可能性。
 
+## `一、欠采样`
 
-### `信息性过采样：合成少数类过采样技术（SMOTE）: `
+### `1.1、Tomek Links 欠采样`
+
+* `Imbalanced-learn` --> `imblearn` 提供的方法之一是 `Tomek Links`，指的是在两个不同类的样本中最近邻的对方。
+
+* 在这个算法中，最终要将多数类样本从 `Tomek Links` 中移除，这为分类器提供了一个更好的决策边界。
+
+    <div align=center><img width="650" height="200" src="./static/tomek_links.png"/></div>
+
+* 案例：
+
+        from imblearn.under_sampling import TomekLinks
+
+        tl = TomekLinks(return_indices=True, ratio='majority')
+        X_tl, y_tl, id_tl = tl.fit_sample(X, y)
+
+        print('Removed indexes:', id_tl)
+
+        plot_2d_space(X_tl, y_tl, 'Tomek links under-sampling')
+
+
+
+
+
+### `1.2 Cluster Centroids`
+
+* 该技术通过基于聚类方法生成质心来执行欠采样。 数据将按照相似性预先分组，以保留信息。
+
+* 在此示例中，我们将传递参数比率的{0：10}字典，以保留多数类（0）和所有少数类（1）中的10个元素。
+
+* 案例：
+
+
+        from imblearn.under_sampling import ClusterCentroids
+
+        cc = ClusterCentroids(ratio={0: 10})
+        X_cc, y_cc = cc.fit_sample(X, y)
+
+        plot_2d_space(X_cc, y_cc, 'Cluster Centroids under-sampling')
+
+
+
+## `二、过采样`
+
+### `2.1、信息性过采样：合成少数类 过采样技术（SMOTE）: `
  
  SMOTE（Synthetic minoritye over-sampling technique,SMOTE）是Chawla在2002年提出的过抽样的算法，一定程度上可以避免数据不平衡的问题。可以参考
     
@@ -139,30 +185,47 @@
     （2）将步骤（1）重复N次，就得到M个新样本（x(i)1,x(i)2.....x(i)N)
     
     （3）对M个样本全部执行（1）（2）操作，最后将总共得到M * N个新样本
+
+### `SMOTE 的使用`
+
+用于过采样
+
+    imblearn.over_sampling.SMOTE(sampling_strategy='auto', random_state=None, k_neighbors=5, m_neighbors='deprecated',
+     out_step='deprecated', kind='deprecated', svm_estimator='deprecated', n_jobs=1, ratio=None)
+
+
+* 版本问题：旧版本 `ratio` 参数改为 `sampling_strategy`
+
+* `sampling_strategy`: 
     
-### 改进的合成少数类过采样技术（MSMOTE）
+    用于指定重抽样的比例，如果指定 `str` 时，指重采样目标的类。不同类别中的样本数量将相等。可能的选择是：
+
+    * 可以是 `minority` ，仅对少数群体重新采样、`not majority`，重新采样除多数类外的所有类、`not minority` 对少数群体以外的所有阶层重新采样、`all`表示采用过采样方法，默认为`auto`，相当于 `not minority`;如果指定字典型的值，其中键为各个类别标签，值为类别下的样本量;
+
+    当为时 `dict`，键对应于目标类。该值对应于每个目标类别的所需样本数。
+
+* `random_state：`用于指定随机数生成器的种子，默认为None,表示使用默认的随机数生成器;
+
+* `k_neighbors：`指定近邻个数，默认为5个;
+
+* `m_neighbors：`指定从近邻样本中随机挑选的样本个数，默认为10个;
+
+* `kind：`用于指定SMOTE算法在生成新样本时所使用的选项，默认为’regular’，表示对少数类别的样本进行随机采样，也可以是’borderline1’、’borderline2’和’svm’;
+
+* `svm_estimator：`用于指定SVM分类器，默认为sklearn.svm.SVC，该参数的目的是利用支持向量机分类器生成支持向量，然后再生成新的少数类别的样本;
+
+* `n_jobs：`用于指定SMOTE算法在过采样时所需的CPU数量，默认为1表示仅使用1个CPU运行算法，即不使用并行运算功能;
+
+
+### `改进的合成少数类 过采样技术（MSMOTE）`
 
 之后补充
 
-## 算法集成技术
 
-上述部分涉及通过重采样原始数据提供平衡类来处理不平衡数据，在本节中，我们将研究一种替代方法：修改现有的分类算法，使其适用于不平衡数据集。
+## `可参考 kernel`
 
-集成方法的主要目的是提高单个分类器的性能。该方法从原始数据中构建几个两级分类器，然后整合它们的预测。
+* [不平衡数据集的重采样策略](https://www.kaggle.com/rafjaa/resampling-strategies-for-imbalanced-datasets/comments)
 
-###  基于 Bagging 的方法
-之后补充
-
-### 基于 Boosting 的方法
-之后补充
-
-### 自适应 boosting——AdaBoost
-之后补充
-
-### 梯度树 boosting
-之后补充
-
-### XGBoost
 
 
 
