@@ -3,6 +3,8 @@
 
 在信用卡诈骗案例中，我们将诈骗信息和正常交易信息进行可视化显示，我们可以发现正常交易的交易数远远大于诈骗交易的交易数。这样就会影响模型的输出。
 
+如果数据存在严重的不平衡，预测得出的结论往往也是有偏的，即分类结果会偏向于较多观测的类。
+
 ## `imblearn`
 
 * [imbalance-learn 文档](https://imbalanced-learn.readthedocs.io/en/stable/user_guide.html)
