@@ -186,6 +186,37 @@ LightGBM在很多方面会比XGBoost表现的更为优秀。它有以下优势�
         return submission, feature_importances, metrics
 
 
+## 评估方法
+
+和 `xgb` 一样，lgb也可以使用 `gini` 系数来对模型进行评估
+
+
+`1、定义基尼系数：`
+
+    def gini(y, pred):
+        g = np.asarray(np.c_[y, pred, np.arange(len(y)) ], dtype=np.float)
+        g = g[np.lexsort((g[:,2], -1*g[:,1]))]
+        gs = g[:,0].cumsum().sum() / g[:,0].sum()
+        gs -= (len(y) + 1) / 2.
+        return gs / len(y)
+
+`2、定义 lgb gini 系数：`
+
+    def gini_lgb(preds, dtrain):
+        y = list(dtrain.get_label())
+        score = gini(y, preds) / gini(y, y)
+        return 'gini', score, True
+
+`3、调用：`
+
+    # lgb.train 中的 feval 参数可以用于指定评估方法，这里我们使用自定义的 gini_lgb 使用gini系数来进行评估
+    lgb_model = lgb.train(params, lgb.Dataset(X_train, label=y_train), nrounds, 
+                  lgb.Dataset(X_eval, label=y_eval), verbose_eval=100, 
+                  feval=gini_lgb, early_stopping_rounds=100)
+
+
+
+
 
 
 

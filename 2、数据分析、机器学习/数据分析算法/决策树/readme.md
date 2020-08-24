@@ -43,4 +43,26 @@
     __缺失值处理：__ 支持
     
     __剪枝：__ 支持
-  
+
+### `gini 不纯度(Gini Impurity)`
+
+* 基尼不纯度：Gini Impurity，也被称为基尼指数（Gini Index），用来构造决策树中的CART分类树
+
+### `gini 系数(Gini Coefficient)`
+
+* 早用来衡量收入分配差异，后来也用作分类模型性能评估
+
+* [gini 系数和 auc 之间存在联系：Gini和AUC的关系](https://www.pianshen.com/article/675879763/)
+
+* 业界在实际计算Gini系数时往往用ROC曲线曲线和中线围成的面积与中线之上面积的比例，也就是Gini=2AUC-1。
+
+
+    <div align=center><img width="400" height="300" src="./static/gini_and_auc.png"/></div>
+
+* 也就是说用ROC曲线去计算Gini的前提是ROC曲线和Gini曲线时重合的，因此Gini coefficient与AUC可以互相转换：
+
+        gini = A / (A + B) = (AUC - C) / (A + B) = (AUC -0.5) / 0.5 = 2*AUC - 1
+
+* 那问题来了，ROC曲线与Gini的洛伦兹曲线到底是不是重合的呢？
+
+* 结论：当样本中坏样本极少时可用gini=2AUC-1近似计算，当坏样本较多，或者好坏样本接近1:1时，那就得对gini单独计算比较准确。
