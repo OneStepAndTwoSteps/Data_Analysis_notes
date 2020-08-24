@@ -302,7 +302,18 @@
 
 `案例：`
 
-* `1、`寻找与其他变量的相关性大于0.8的任何变量：
+* `1、`生成特征之间的相关性：
+
+        corrs = train.corr()
+        corrs = corrs.sort_values('TARGET', ascending = False)
+
+        # Ten most positive correlations
+        pd.DataFrame(corrs['TARGET'].head(10))
+
+
+
+* `2、`寻找与其他变量的相关性大于0.8的任何变量：
+
 
 
         # 设置阈值
@@ -315,7 +326,7 @@
         for col in corrs:
             above_threshold_vars[col] = list(corrs.index[corrs[col] > threshold])
 
-* `2、`对于每对高度相关的变量，我们只想删除其中一个变量。 以下代码创建了一组变量，只需将每个变量对中的一个相加即可删除。
+* `3、`对于每对高度相关的变量，我们只想删除其中一个变量。 以下代码创建了一组变量，只需将每个变量对中的一个相加即可删除。
 
 
         # 跟踪要删除的列和已检查的列
@@ -339,7 +350,7 @@
         cols_to_remove = list(set(cols_to_remove))
         print('Number of columns to remove: ', len(cols_to_remove))
 
-* `3、`删除高度相关特征
+* `4、`删除高度相关特征
 
 
         train_corrs_removed = train.drop(columns = cols_to_remove)
@@ -348,6 +359,8 @@
         print('Training Corrs Removed Shape: ', train_corrs_removed.shape)
         print('Testing Corrs Removed Shape: ', test_corrs_removed.shape)
 
+* `5、`将新数据进行保存
 
 
-
+        train_corrs_removed.to_csv('train_bureau_corrs_removed.csv', index = False)
+        test_corrs_removed.to_csv('test_bureau_corrs_removed.csv', index = False)

@@ -1846,7 +1846,11 @@ __例子：__
     print(train_data[['Survived','Age']])
     print("%s "%(new_user_data[new_user_data['节']==section][['名字','知识点']].values))
 
+  ### 筛选df中符合的index数据
 
+    # 筛选出 correlations 的index 中包含 ['ps_ind_10_bin','ps_ind_11_bin','ps_ind_12_bin','ps_ind_13_bin'] 的内容
+    correlations.loc[correlations.index.isin(['ps_ind_10_bin','ps_ind_11_bin','ps_ind_12_bin','ps_ind_13_bin'])]
+  
   ### 筛选出特定字符串的列
 
     [col for col in train.columns if 'str' in col]

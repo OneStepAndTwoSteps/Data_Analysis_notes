@@ -144,8 +144,8 @@
     correlations = df.corr()['TARGET'].sort_values()
 
     # Display correlations
-    print('Most Positive Correlations:\n', correlations.tail(15))
-    print('\nMost Negative Correlations:\n', correlations.head(15))
+    print('Most Positive Correlations:\n', correlations.head(15))
+    print('\nMost Negative Correlations:\n', correlations.tail(15))
 
 
 `展示：`
