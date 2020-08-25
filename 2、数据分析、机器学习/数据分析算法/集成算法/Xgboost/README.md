@@ -52,14 +52,14 @@ __举个例子:__
 
 我们要预测一家人对电子游戏的喜好程度，考虑到年轻和年老相比，年轻更可能喜欢电子游戏，以及男性和女性相比，男性更喜欢电子游戏，故先根据年龄大小区分小孩和大人，然后再通过性别区分开是男是女，逐一给各人在电子游戏喜好程度上打分，如下图所示。
 
-<div align=center><img  src="./stastic/1.png"/></div>
+<div align=center><img  src="./static/1.png"/></div>
 
 就这样，训练出了2棵树tree1和tree2，类似之前gbdt的原理，两棵树的结论累加起来便是最终的结论，所以小孩的预测分数就是两棵树中小孩所落到的结点的分数相加：2 + 0.9 = 2.9。爷爷的预测分数同理：-1 + （-0.9）= -1.9。
 
 
 __现在我们可以看出xgboost与gbdt有着异曲同工之妙，一样也是通过将所有弱分类器的结果相加得到最终的预测值，但两者并不完全相同，两者的目标函数不一样。xgboost的目标函数如下图所示：__
 
-<div align=center><img  src="./stastic/6.png"/></div>
+<div align=center><img  src="./static/6.png"/></div>
 
 
     一、1为我们t-1个模型的残差，2为我们的新加的树模型，整个l()就是我们的损失函数。
@@ -87,18 +87,18 @@ __现在我们可以看出xgboost与gbdt有着异曲同工之妙，一样也是�
 
 __下图是xgboost的预测算法模型：__
 
-<div align=center><img  src="./stastic/2.png"/></div>
+<div align=center><img  src="./static/2.png"/></div>
 
 __之前我们说过，我们会根据前面的树模型的残差作为下一个模型的训练值__
 
 那么我们如何选择每一轮加入什么 f(树) 呢？ 答案是非常直接的，我们想要的是选取一个f(树) 可以使得我们的目标函数尽量最大地降低。__下图是目标函数。__
 
-<div align=center><img  src="./stastic/5.png"/></div>
+<div align=center><img  src="./static/5.png"/></div>
 
 
 上面那个Obj的公式表达的可能有些过于抽象，我们可以考虑当是平方误差的情况（相当于 l(y^i,^y^i)=(^y^i-y^i)^2），这个时候我们的目标可以被写成下面这样的二次函数（图中画圈的部分表示的就是预测值和真实值之间的残差）：
 
-<div align=center><img  src="./stastic/5-1.png"/></div>
+<div align=center><img  src="./static/5-1.png"/></div>
 
 __其实这里我们要做的就是如何加入一个新的模型，能使得我们的整个模型更加优化，误差越来越小。__
 
@@ -116,13 +116,13 @@ __首先，梳理下几个规则__
 
 __我们也可以通过W_q(x)(叶子节点q的分数) 来代表一棵决策树模型，如下图所示：__
 
-<div align=center><img  src="./stastic/3.png"/></div>
+<div align=center><img  src="./static/3.png"/></div>
 
 
 
 __但是有一点是，当我们树模型变多时，可能会给我们带来过拟合的效果，这里我们引入正则化项：__
 
-<div align=center><img  src="./stastic/4.png"/></div>
+<div align=center><img  src="./static/4.png"/></div>
 
 
 T表示叶子节点的个数，w表示叶子节点的分数。直观上看，目标要求预测误差尽量小，且叶子节点T尽量少（γ控制叶子结点的个数），节点数值w尽量不极端（λ控制叶子节点的分数不会过大），防止过拟合。
@@ -133,7 +133,7 @@ T表示叶子节点的个数，w表示叶子节点的分数。直观上看，目
 
 __最后我们可以得到目标函数：__
 
-<div align=center><img  src="./stastic/8.png"/></div>
+<div align=center><img  src="./static/8.png"/></div>
 
 这里略过推导过程，具体可以参考下面的参考链接
 
@@ -153,7 +153,7 @@ __1）枚举所有不同树结构的贪心法__
 
 __目标函数中的G/(H+λ)部分，表示着每一个叶子节点对当前模型损失的贡献程度，融合一下，得到Gain的计算表达式，如下所示：__
 
-<div align=center><img  src="./stastic/7.png"/></div>
+<div align=center><img  src="./static/7.png"/></div>
 
 
 __第一个值得注意的地方__ 是“对于某个特征，先按照该特征里的值进行排序”，这里举个例子。
@@ -183,7 +183,7 @@ __第二个值得注意的地方__ 是引入分割不一定会使得情况变好
 
 相当于在我们发现“分”还不如“不分”的情况下后（得到的增益太小，小到小于阈值γ），会有2个叶子节点存在同一棵子树上的情况，就像下图这样。
 
-<div align=center><img  src="./stastic/9.png"/></div>
+<div align=center><img  src="./static/9.png"/></div>
 
 
 __2）近似算法__
