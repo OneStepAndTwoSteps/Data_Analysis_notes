@@ -196,47 +196,139 @@
 
 ## `查看数据的分布`
 
+* [Santander EDA and Prediction](https://www.kaggle.com/gpreda/santander-eda-and-prediction)
+
+
+`1、`查看不同目标值下某个特征的分布情况:`(单特征)`
+
+* `核密度函数估计` `traget = 1` 和 `target = 0` 数据之间的分布情况：
+
 * `kdeplot` 核密度估计(kernel density estimation)是在概率论中用来估计未知的密度函数，属于非参数检验方法之一。
 
     通过 `核密度估计图` 可以比较直观的看出数据样本本身的 `分布特征` 。具体用法如下:
 
-`模板：`查看不同目标值的 xx 特征的分布情况
+* `模板：`查看不同目标值的 xx 特征的分布情况
 
-    plt.figure(figsize = (10, 8))
+        plt.figure(figsize = (10, 8))
 
-    # 目标值为 0 的 xx 特征的分布情况
-    sns.kdeplot(df.loc[df['TARGET'] == 0, 'xx'] / 365, label = 'target == 0')
+        # 目标值为 0 的 xx 特征的分布情况
+        sns.kdeplot(df.loc[df['TARGET'] == 0, 'xx'] / 365, label = 'target == 0')
 
-    # 目标值为 1 的 xx 特征的分布情况
-    sns.kdeplot(df.loc[df['TARGET'] == 1, 'xx'] / 365, label = 'target == 1')
+        # 目标值为 1 的 xx 特征的分布情况
+        sns.kdeplot(df.loc[df['TARGET'] == 1, 'xx'] / 365, label = 'target == 1')
 
-    # Labeling of plot
-    plt.xlabel('Age (years)'); plt.ylabel('Density'); plt.title('Distribution of Ages');
+        # Labeling of plot
+        plt.xlabel('Age (years)'); plt.ylabel('Density'); plt.title('Distribution of Ages');
 
 
-`案例：`
+* `案例：`
 
-    plt.figure(figsize = (10, 8))
+        plt.figure(figsize = (10, 8))
 
-    # KDE plot of loans that were repaid on time
-    sns.kdeplot(app_train.loc[app_train['TARGET'] == 0, 'DAYS_BIRTH'] / 365, label = 'target == 0')
+        # KDE plot of loans that were repaid on time
+        sns.kdeplot(app_train.loc[app_train['TARGET'] == 0, 'DAYS_BIRTH'] / 365, label = 'target == 0')
+        
+        # KDE plot of loans which were not repaid on time
+        sns.kdeplot(app_train.loc[app_train['TARGET'] == 1, 'DAYS_BIRTH'] / 365, label = 'target == 1')
+
+        # Labeling of plot
+        plt.xlabel('Age (years)'); plt.ylabel('Density'); plt.title('Distribution of Ages');
+
+* `展示：`
+
+
+    <div align=center><img width="550" height="500" src="./static/kdeplot.jpg"/></div>
+
+    该图像展示了：不同年龄的人群，他们是否还款的单变量分布，从图中看，我们能得到这些信息：
+
+    * `target == 1` 曲线向范围较年轻的一端倾斜。虽然这不是一个显著的相关性，在之前计算与特征之间的相关性时，计算得出 Age 和 Target 的相关系数为：-0.07。
+
+    * 虽然从分布上分析有点背离相关系数，但这个变量在机器学习模型中可能会有用，因为它确实会影响目标。那么我们就可以从另一个角度来看待这种关系：按年龄段划分的平均还款失败率。
+
+
+`2、`查看不同目标值下制定特征的分布情况:`(多特征)`
+
+
+* 案例：
+
     
-    # KDE plot of loans which were not repaid on time
-    sns.kdeplot(app_train.loc[app_train['TARGET'] == 1, 'DAYS_BIRTH'] / 365, label = 'target == 1')
+        # Density plots of features function
+        def plot_feature_distribution(df1, df2, label1, label2, features):
+            i = 0
+            sns.set_style('whitegrid')
+            plt.figure()
+            fig, ax = plt.subplots(10,10,figsize=(18,22))
 
-    # Labeling of plot
-    plt.xlabel('Age (years)'); plt.ylabel('Density'); plt.title('Distribution of Ages');
+            for feature in features:
+                i += 1
+                plt.subplot(10,10,i)
+                sns.distplot(df1[feature], hist=False,label=label1)
+                sns.distplot(df2[feature], hist=False,label=label2)
+                plt.xlabel(feature, fontsize=9)
+                locs, labels = plt.xticks()
+                plt.tick_params(axis='x', which='major', labelsize=6, pad=-6)
+                plt.tick_params(axis='y', which='major', labelsize=6)
+            plt.show();
 
-`展示：`
+
+* 调用：
+
+    t0 = train_df.loc[train_df['target'] == 0]
+    t1 = train_df.loc[train_df['target'] == 1]
+    features = train_df.columns.values[2:102]
+    plot_feature_distribution(t0, t1, '0', '1', features)
 
 
-<div align=center><img width="550" height="500" src="./static/kdeplot.jpg"/></div>
 
-该图像展示了：不同年龄的人群，他们是否还款的单变量分布，从图中看，我们能得到这些信息：
 
-* `target == 1` 曲线向范围较年轻的一端倾斜。虽然这不是一个显著的相关性，在之前计算与特征之间的相关性时，计算得出 Age 和 Target 的相关系数为：-0.07。
+* 展示图：
 
-* 虽然从分布上分析有点背离相关系数，但这个变量在机器学习模型中可能会有用，因为它确实会影响目标。那么我们就可以从另一个角度来看待这种关系：按年龄段划分的平均还款失败率。
+    <div align=center><img width="750" height="500" src="./static/Density_plots_of_features_function.jpg"/></div>
+
+
+    可以看出目标值不同 var_0 var_1 var_2 var_5..... 这些特征的分布也不一致。
+
+
+
+`3、`查看训练数据和测试数据不同特征之间的分布情况:`(多特征)`
+
+* 案例：
+
+    
+        # Density plots of features function
+        def plot_feature_distribution(df1, df2, label1, label2, features):
+            i = 0
+            sns.set_style('whitegrid')
+            plt.figure()
+            fig, ax = plt.subplots(10,10,figsize=(18,22))
+
+            for feature in features:
+                i += 1
+                plt.subplot(10,10,i)
+                sns.distplot(df1[feature], hist=False,label=label1)
+                sns.distplot(df2[feature], hist=False,label=label2)
+                plt.xlabel(feature, fontsize=9)
+                locs, labels = plt.xticks()
+                plt.tick_params(axis='x', which='major', labelsize=6, pad=-6)
+                plt.tick_params(axis='y', which='major', labelsize=6)
+            plt.show();
+
+
+
+* 调用：
+
+        features = train_df.columns.values[2:102]
+        plot_feature_distribution(train_df, test_df, 'train', 'test', features)
+
+
+* 展示图：
+
+    <div align=center><img width="750" height="500" src="./static/Density_plots_of_features_function2.jpg"/></div>
+
+
+
+
+
 
 
 ## `连续数据离散化`

@@ -1,4 +1,4 @@
-# XGBClassifier
+# xgb
 
     import xgboost as xgb
     import lightgbm as lgb
