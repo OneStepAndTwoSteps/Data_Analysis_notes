@@ -150,6 +150,9 @@ __特殊用法：__
 
 * https://www.jianshu.com/p/7764b6591cf5
 
+
+
+
 ### `np.vstack() 和 np.hstack()`
 
 * `np.vstack` : 按垂直方向（`行顺序`）堆叠数组构成一个新的数组
@@ -390,7 +393,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 ### 将 object 类型转为 category 分类类型
 
-使用 .astype 方法进行转换。
+`1、`使用 .astype 方法进行转换。
 
 例如：
 
@@ -399,6 +402,21 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 当有很多特征中不同的数据太多时，使用单热编码相当于就是计算自杀。 我们可以将把它们变成类别代码。 这样我们仍然可以从随机森林算法中的组和匹配之间的相关性中受益。
 
 因为使用的是随机森林所以特征之间的大小对模型没有什么影响所以可以采用分类标签。__注意：还是针对于对距离没有影响的算法才推荐使用。__
+
+`2、`使用字典进行多特征转换：
+
+    types = {
+            'ip'            : 'uint32',
+            'app'           : 'uint16',
+            'device'        : 'uint16',
+            'os'            : 'uint16',
+            'channel'       : 'uint16',
+            'is_attributed' : 'uint8',
+            }
+
+    train = pd.read_csv('../input/train_sample.csv', dtype=dtypes)
+
+
 
 
 ### 数据清洗
