@@ -150,6 +150,89 @@ __特殊用法：__
 
 * https://www.jianshu.com/p/7764b6591cf5
 
+### pandas read_csv()
+
+* `a） 选择要导入的行数`
+
+  可以使用参数nrows指定要导入的行数。例如：
+
+      # 将只读取前10000行（包括标题）
+      train = pd.read_csv('../input/train.csv', nrows=10000, dtype=dtypes)
+      train.head()
+
+
+* `b） 简单行跳转（带或不带标题）`
+
+  还可以指定要跳过的行数（skiprows），例如，如果您希望在前500万行之后有100万行：
+
+      
+      train = pd.read_csv('../input/train.csv', skiprows=5000000, nrows=1000000, header = None, dtype=dtypes)
+      train.head()
+
+      
+      train = pd.read_csv('../input/train.csv', skiprows=range(1, 5000000), nrows=1000000, dtype=dtypes)
+      train.head()
+
+* `c） 挑选要跳过的行（列出你不想要的东西）`
+
+  因为“skiprows”可以接收要跳过的行的列表，所以可以创建一个要输入的随机行的列表。一、 你可以随意抽取你的数据！
+  
+  `1.1、`输出数据行数 Linux
+
+      import subprocess
+      #from https://stackoverflow.com/questions/845058/how-to-get-line-count-cheaply-in-python , Olafur's answer
+      def file_len(fname):
+          # wc方法可以用于查看行数 
+          p = subprocess.Popen(['wc', '-l', fname], stdout=subprocess.PIPE, 
+                                                    stderr=subprocess.PIPE)
+          result, err = p.communicate()
+          if p.returncode != 0:
+              raise IOError(err)
+          return int(result.strip().split()[0])
+
+      lines = file_len('../input/train.csv')
+      print('Number of lines in "train.csv" is:', lines)
+
+  `1.2、`输出数据行数
+
+      num_lines = sum(1 for line in open('myfile.txt'))
+
+  假设您想从整个数据集中随机抽取100万行数据。这意味着您需要一个从1到184903891的行-1-1000000个随机数的列表。
+  
+  `2、`生成要跳过的行列表
+
+      #generate list of lines to skip
+      skiplines = np.random.choice(np.arange(1, lines), size=lines-1-1000000, replace=False)
+
+      #sort the list
+      skiplines=np.sort(skiplines)
+
+  `3、`检查生成的名单
+
+      #check our list
+      print('lines to skip:', len(skiplines))
+      print('remaining lines in sample:', lines-len(skiplines), '(remember that it includes the heading!)')
+
+      ################### 健全性检查 ###################
+      # 通过检查每个连续行之间的差异来查找未跳过的行，如果diff不等于-1表示不连续，则出现跳行的现象
+      # 前10万行中有多少会被导入csv？
+      diff = skiplines[1:100000]-skiplines[2:100001]
+      remain = sum(diff!=-1)
+      print('Ratio of lines from first 100000 lines:',  '{0:.5f}'.format(remain/100000) ) 
+      print('Ratio imported from all lines:', '{0:.5f}'.format((lines-len(skiplines))/lines) )
+
+  输出案例：
+
+      lines to skip: 183903890
+      remaining lines in sample: 1000001 (remember that it includes the heading!)
+      Ratio of lines from first 100000 lines: 0.00560
+      Ratio imported from all lines: 0.00541
+
+
+  `4、`按照 skiplines 筛选
+
+      train = pd.read_csv('../input/train.csv', skiprows=skiplines, dtype=dtypes)
+      train.head()
 
 
 
