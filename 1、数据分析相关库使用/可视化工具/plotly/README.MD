@@ -909,4 +909,41 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 -《[可视化神器Plotly(5)](https://www.jianshu.com/p/4f4daf47cc85)》
 
+# 常用的绘图模板
+
+## 一、分类数据
+
+根据目标值来查看不同特征下的unique数据：
+
+        cols = train.columns.values[:-2]
+        unique_counts = [ len(train[col].unique()) for col in cols]  
+
+        unique_counts = pd.DataFrame(unique_counts,index=cols,columns=['counts'])
+        unique_counts.head()
+
+
+        fig = px.bar(unique_counts,x=unique_counts.index,y='counts',barmode='group',color='counts',text='counts') # text 可以标上数值
+        fig.update_traces(textposition='outside')
+        fig.update_layout(yaxis_title='counts',xaxis_title='Features',template='seaborn',title='unique (counts)')
+        fig.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

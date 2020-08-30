@@ -194,7 +194,7 @@
 
 
 
-## `查看数据的分布`
+## `查看数据的分布 --（分类）`
 
 * [Santander EDA and Prediction](https://www.kaggle.com/gpreda/santander-eda-and-prediction)
 

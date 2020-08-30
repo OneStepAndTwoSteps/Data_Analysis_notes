@@ -178,24 +178,38 @@ __特殊用法：__
   因为“skiprows”可以接收要跳过的行的列表，所以可以创建一个要输入的随机行的列表。一、 你可以随意抽取你的数据！
   
   `1.1、`输出数据行数 Linux
-
+      
+      %%time
       import subprocess
       #from https://stackoverflow.com/questions/845058/how-to-get-line-count-cheaply-in-python , Olafur's answer
       def file_len(fname):
           # wc方法可以用于查看行数 
           p = subprocess.Popen(['wc', '-l', fname], stdout=subprocess.PIPE, 
-                                                    stderr=subprocess.PIPE)
+                                                  stderr=subprocess.PIPE)
           result, err = p.communicate()
           if p.returncode != 0:
-              raise IOError(err)
+            raise IOError(err)
           return int(result.strip().split()[0])
 
       lines = file_len('../input/train.csv')
       print('Number of lines in "train.csv" is:', lines)
 
+  输出结果：性能较高
+
+      Number of lines in "train.csv" is: 184903891
+      CPU times: user 2.55 ms, sys: 8.21 ms, total: 10.8 ms
+      Wall time: 8.25 s
+
+
   `1.2、`输出数据行数
 
+      %%time
       num_lines = sum(1 for line in open('myfile.txt'))
+
+  输出结果：性能较差
+
+      CPU times: user 28.3 s, sys: 1.88 s, total: 30.1 s
+      Wall time: 30.1 s
 
   假设您想从整个数据集中随机抽取100万行数据。这意味着您需要一个从1到184903891的行-1-1000000个随机数的列表。
   
@@ -2531,7 +2545,16 @@ https://www.kaggle.com/kk0105/everything-you-can-do-with-a-time-series
 
 * `dt.day `
 
-      train_flattened['day']=train_flattened.date.dt.day 
+      train_flattened['day']=train_flattened['date'].dt.day 
+
+      pd.to_datetime(train['click_time']).dt.day
+
+* `dt.hour`
+
+      train['new_click_time'].dt.round('H')   # 只适用于数据类型为 datatime 的，.round 用于小时取整
+
+      pd.to_datetime(train['click_time']).dt.hour # 对于特征数据类型不为时间类型的
+      
 
 
 ## `筛选某个时间段的数据：如 20130101 ~ 20130131 `

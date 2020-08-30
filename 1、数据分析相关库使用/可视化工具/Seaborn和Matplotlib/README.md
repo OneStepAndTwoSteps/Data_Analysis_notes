@@ -131,7 +131,9 @@ plt.figure(2) 画板二中的图
     
  ## plt.subplots 创建一个图形和一组子图。
  
-  fig, ax = plt.subplots()
+ax和fig的关系：
+
+    fig, ax = plt.subplots()
 
  *  plt.subplots() 返回一个 Figure实例fig 和一个 AxesSubplot实例ax 。这个很好理解，fig代表整个图像，ax代表坐标轴和画的图。
 
@@ -217,10 +219,11 @@ __例4 效果图：__
     ts = pd.Series(np.random.randn(1000), index = pd.date_range("1/1/2000", periods = 1000))
     ts = ts.cumsum()
     ts.plot(kind = "line",
-            label = "heheheh", # Series需要Lable
+            label = "heheheh", # Series需要Label
             style = "go--",
             color = "red",
             alpha = 0.4,
+            secondary_y='prop_downloaded'，# 用于制作双坐标,也就是右侧的y轴
             use_index = True,
             rot = 45,
             grid = True,
@@ -1039,7 +1042,36 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="500" height="600" src="seaborn_and_Matplotlib/python可视化.png"/></div>
 
  
- 
+ # 常用的绘图模板
+
+## 一、分类数据：
+
+探索目标值与不同特征之间的关系：
+
+案例：
+
+    proportion  = train[['ip','is_attributed']].groupby('ip',as_index=False).mean().sort_values(by='is_attributed',ascending=False) 
+    counts = train[['ip','is_attributed']].groupby('ip',as_index=False).count().sort_values(by='is_attributed',ascending=False)
+
+    # merge 是按照点击率排序的
+    merge = counts.merge(proportion,on='ip',how='left')
+    merge.columns = ['ip', 'click_count', 'prop_downloaded']
+
+    # secondary_y 用于绘制双y轴
+    ax = merge.iloc[:300,1:].plot(kind = "line",secondary_y='prop_downloaded',figsize = (12,10),\
+                                  label = ["click_count",'prop_downloaded'],fontsize=10)
+    plt.title('Conversion Rates over Counts of 300 Most Popular IPs')
+    ax.set(ylabel='Count of clicks')
+    plt.ylabel('Proportion Downloaded')
+    plt.show()
+
+    print('Counversion Rates over Counts of Most Popular IPs')
+    print(merge[:20])
+
+输出：
+
+<div align=center><img width="750" height="500"  src="seaborn_and_Matplotlib/ips.jpg"/></div>
+
  
  
  
