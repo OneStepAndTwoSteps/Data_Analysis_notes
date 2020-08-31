@@ -243,7 +243,7 @@ __特殊用法：__
       Ratio imported from all lines: 0.00541
 
 
-  `4、`按照 skiplines 筛选
+  `4、`按照 skiplines 筛选 -- 如果跳过的数据量很大，使用 skiprows 非常耗时
 
       train = pd.read_csv('../input/train.csv', skiprows=skiplines, dtype=dtypes)
       train.head()
@@ -1026,6 +1026,24 @@ __transform 和 apply的相同之处：__
      print(train_content.head(3)
 
 
+### `pd.crosstab 交叉表`
+
+`原数据：`
+
+<div align=center><img width="350" height="270" src="./static/crosstab1.jpg"/></div>
+
+`交叉操作: `
+
+    pd.crosstab(df.Nationality, df.Handedness)
+
+`展示：`
+
+<div align=center><img width="200" height="170" src="./static/crosstab2.jpg"/></div>
+
+
+`更多：`
+
+* https://www.cnblogs.com/rachelross/p/10468589.html
 
 ### `df.pivot_table 函数`
 
@@ -2551,10 +2569,17 @@ https://www.kaggle.com/kk0105/everything-you-can-do-with-a-time-series
 
 * `dt.hour`
 
-      train['new_click_time'].dt.round('H')   # 只适用于数据类型为 datatime 的，.round 用于小时取整
-
       pd.to_datetime(train['click_time']).dt.hour # 对于特征数据类型不为时间类型的
+      # 14
+      # 15
+
+* `dt.round` 取整
+
+      train['new_click_time'].dt.round('H')   # 只适用于数据类型为 datatime 的，.round(H) 用于小时向下取整
       
+      # 2017-11-06 15:00:00
+      # 2017-11-06 16:00:00
+
 
 
 ## `筛选某个时间段的数据：如 20130101 ~ 20130131 `

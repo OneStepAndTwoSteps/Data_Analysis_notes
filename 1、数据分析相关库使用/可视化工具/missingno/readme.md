@@ -2,6 +2,8 @@
 
 缺失值可视化处理库 `missingno` 
 
+    import missingno as msno
+    
 ## 一、无效矩阵的数据密集显示
 
 <div align=center><img width="700" height="300" src="static/1.jpg"/></div>
