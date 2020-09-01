@@ -1067,9 +1067,78 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="950" height="600"src="seaborn_and_Matplotlib/6.jpg"/></div>
 
 
-### seaborn.countplot
+### [seaborn.countplot ⬅ ](https://seaborn.pydata.org/generated/seaborn.countplot.html?highlight=countplot)
 
-https://seaborn.pydata.org/generated/seaborn.countplot.html?highlight=countplot
+
+    seaborn.countplot(x=None, y=None, hue=None, data=None, order=None, hue_order=None, \
+                        orient=None, color=None, palette=None, saturation=0.75, dodge=True, ax=None, **kwargs)
+
+`参数：`
+
+* order：类别层级绘制的顺序，否则层级会从数据对象中推测。
+
+* ax.twinx()  ：添加辅助坐标轴x
+
+* ax.patches() :循环每个条形图中的每一条柱
+
+`案例：countplot + pointplot`
+
+绘制 addr1 特征下不同数值出现的 次数 和 不同数值下 欺诈的比例
+
+    # 数据
+    tmp = pd.crosstab(df[col], df['isFraud'], normalize='index') * 100
+    tmp = tmp.reset_index()
+    tmp.rename(columns={0:'NoFraud', 1:'Fraud'}, inplace=True)
+
+    数据类似如下情况：
+    
+    # isFraud	  card6	          NoFraud	      Fraud
+    # 0	      charge card	      100.000000	  0.000000
+    # 1	      credit	          93.321520	    6.678480
+    # 2	      debit	            97.573749	    2.426251
+    # 3	      debit or credit	  100.000000	  0.000000
+
+
+    # 绘图    
+    plt.figure(figsize=(16,14))    
+    plt.suptitle(f'{col} Distributions ', fontsize=24)                         # 大标题
+    
+    plt.subplot(211)
+    # order 类别层级绘制的顺序，否则层级会从数据对象中推测。
+    g = sns.countplot( x=col,  data=df, order=list(tmp[col].values))            # 计算某df值出现的次数
+    gt = g.twinx()      # 给gt添加辅助坐标轴x
+    gt = sns.pointplot(x=col, y='Fraud', data=tmp, order=list(tmp[col].values), # 计算欺骗率
+                       color='r', legend=False)
+
+    gt.set_ylim(0,tmp['Fraud'].max()*1.1)                         # 设置 y轴刻度范围
+    gt.set_ylabel("%Fraud Transactions", fontsize=16,color='r')   # y 轴label
+    gt.tick_params("y", colors='r')                               # 'y' 为 y轴：设置y轴的颜色为 r
+    g.set_title(f"Most Frequent {col} values and % Fraud Transactions", fontsize=20)
+    g.set_xlabel(f"{col} Category Names", fontsize=16)
+    g.set_ylabel("Count", fontsize=17)
+    g.set_xticklabels(g.get_xticklabels(),rotation=45)
+    sizes = []
+
+    # 用于添加某个特征下某个数值出现的百分比，并且指定一个合适的位置
+    for p in g.patches:
+        height = p.get_height()                 # 获取柱子的高度
+        sizes.append(height)
+
+        # 编写文本和设置文本生成的位置
+        g.text(p.get_x()+p.get_width()/2.,      # 将文字放在条形的中间位置
+                height + 3,                     # 高度为原来的基础上 + 3 个刻度
+                '{:1.2f}%'.format(height/total*100),
+                ha="center",fontsize=12) 
+        
+    g.set_ylim(0,max(sizes)*1.15)
+
+效果图：
+
+<div align=center><img width="650" height="300" src="seaborn_and_Matplotlib/countplot_pointplot.jpg"/></div>
+
+
+
+
 
  ## 可视化导图总结：
     
