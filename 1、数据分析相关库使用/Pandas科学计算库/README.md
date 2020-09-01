@@ -553,6 +553,16 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
     # 直接覆盖式重命名
     df.columns = ['Chinese','English']  
 
+  批量修改列名：
+
+    # 将列名中包含 `id-` 的列进行修改，修改后重新赋值给 columns
+    df_test.columns = df_test.columns.map(lambda x: x.split('-')[0]+ '_'+ x.split('-')[1] if 'id-' in x else x)
+
+    或者：
+
+    df_test.rename(lambda x: x.split('-')[0]+ '_'+ x.split('-')[1] if 'id-' in x else x, inplace=True)
+
+
 
   __3. 去重复的值：__
 

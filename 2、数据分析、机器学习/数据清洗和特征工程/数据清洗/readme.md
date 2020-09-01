@@ -197,7 +197,9 @@
 ## `查看数据的分布 --（分类）`
 
 * [Santander EDA and Prediction](https://www.kaggle.com/gpreda/santander-eda-and-prediction)
+* [Extensive EDA and Modeling XGB Hyperopt](https://www.kaggle.com/kabure/extensive-eda-and-modeling-xgb-hyperopt/comments)
 
+### 核函数绘制分布
 
 `1、`查看不同目标值下某个特征的分布情况:`(单特征)`
 
@@ -325,6 +327,8 @@
 
     <div align=center><img width="750" height="500" src="./static/Density_plots_of_features_function2.jpg"/></div>
 
+
+### sns 绘制
 
 
 

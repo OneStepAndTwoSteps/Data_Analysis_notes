@@ -911,7 +911,7 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 # 常用的绘图模板
 
-## 一、分类数据
+## `一、分类数据`
 
 根据目标值来查看不同特征下的unique数据：
 
@@ -927,10 +927,64 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
         fig.update_layout(yaxis_title='counts',xaxis_title='Features',template='seaborn',title='unique (counts)')
         fig.show()
 
+## `二、时间数据`
 
+绘制某一特征随着时间的变化曲线：
 
+`案例：` 绘制每日 (一个月 1~31天)下，不同 TransactionAmt 的计数变化，和 TransactionAmt 总金额的变化
 
+        # Calling the function to transform the date column in datetime pandas object
 
+        # 设置一些静态颜色选项
+        color_op = ['#5527A0', '#BB93D7', '#834CF7', '#6C941E', '#93EAEA', '#7425FF', '#F2098A', '#7E87AC', 
+                '#EBE36F', '#7FD394', '#49C35D', '#3058EE', '#44FDCF', '#A38F85', '#C4CEE0', '#B63A05', 
+                '#4856BF', '#F0DB1B', '#9FDBD9', '#B123AC']
+
+        # 将列重命名为适当的名称,统计 TransactionAmt(以美元为单位的交易支付金额) 特征下面不同数值的个数
+        dates_temp = df_trans.groupby(df_trans.Date.dt.date)['TransactionAmt'].count().reset_index()
+        
+
+        # 使用第一个必要的 trace 参数，opacity 表示透明度
+        trace = go.Scatter(x=dates_temp['Date'], y=dates_temp.TransactionAmt,
+                        opacity = 0.8, line = dict(color = color_op[7]), name= 'Total Transactions')
+
+        # 下面我们将得到销售总额 (具体案例具体分析)
+        dates_temp_sum = df_trans.groupby(df_trans.Date.dt.date)['TransactionAmt'].sum().reset_index()
+
+        # 使用新的 dates_temp_sum ，我们将创建第二个 trace 
+        trace1 = go.Scatter(x=dates_temp_sum.Date, line = dict(color = color_op[1]), name="Total Amount",
+                                y=dates_temp_sum['TransactionAmt'], opacity = 0.8, yaxis='y2')
+
+        # 创建布局将允许我们给出标题和给我们一些有趣的选项来处理图的输出
+        layout = dict(
+                title= "Total Transactions and Fraud Informations by Date",
+                xaxis=dict(
+                        rangeselector=dict(
+                        buttons=list([
+                                dict(count=1, label='1m', step='month', stepmode='backward'),
+                                dict(count=3, label='3m', step='month', stepmode='backward'),
+                                dict(count=6, label='6m', step='month', stepmode='backward'),
+                                dict(step='all')
+                        ])
+                        ),
+                        rangeslider=dict(visible = True), # 控制最下面的图
+                        type='date' ),
+                yaxis=dict(title='Total Transactions'), # 左侧的y轴
+                yaxis2=dict(overlaying='y',             # 右侧的y轴 side ='right'
+                                anchor='x', side='right',
+                                zeroline=False, showgrid=False,
+                                title='Total Transaction Amount')
+                )
+
+        # 创建既有 trace 又有 layout 的图形
+        fig = dict(data= [trace, trace1,], layout=layout)
+
+        #绘制图形
+        iplot(fig) #it's an equivalent to plt.show()
+
+`效果展示：`
+
+<div align=center><img width="800" height="320" src="./static/time_series.jpg"/></div>
 
 
 

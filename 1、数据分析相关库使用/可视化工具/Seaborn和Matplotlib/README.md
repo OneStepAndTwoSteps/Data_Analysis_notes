@@ -199,19 +199,54 @@ __例4 效果图：__
      >>> plot(x, y, color='green', marker='o', linestyle='dashed',
     ...      linewidth=2, markersize=12)
  
+
+### 方法一：
+
+`直接使用plt.plot方法后面跟数据`
  
- __例子1：直接使用plt.plot方法后面跟数据__
- 
-   #根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
-   plt.plot(data['Weighted_Price'],'-',label='按天')
-   
-     label -> 图例标签, Dataframe格式以列名为label
-     color -> 颜色, 有color指定的时候，以color颜色为准
-     alpha -> 透明度， 0-1
-     title -> 标题名
- 
- 
- __例子2: 基于前面的数据进行plot 不是直接使用plt.plot(会报错)__
+    根据数据画图data['Weighted_Price']是df格式，-为线条样式为实线
+
+    plt.plot(data['Weighted_Price'],'-',label='按天')
+
+    label -> 图例标签, Dataframe格式以列名为label
+    color -> 颜色, 有color指定的时候，以color颜色为准
+    alpha -> 透明度， 0-1
+    title -> 标题名
+
+#### plt.suptitle
+
+多幅图中指定大标题
+
+    plt.suptitle('ProductCD Distributions', fontsize=22) 
+
+
+#### `plt.subplots_adjust`
+
+调整子图布局，调用格式如下：
+
+    subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=None)
+
+有六个可选参数来控制子图布局。值均为0~1之间。其中left、bottom、right、top围成的区域就是子图的区域。wspace、hspace分别表示子图之间左右、上下的间距。实际的默认值由matplotlibrc文件控制的。
+
+    import matplotlib.pyplot as plt
+    
+    x=[1,2,3]
+    y=[4,5,6]
+    fig, axs = plt.subplots(2, 2)
+    axs[0, 0].plot(x,y)
+    axs[0, 1].plot(x,y)
+    axs[1, 0].plot(x,y)
+    axs[1, 1].plot(x,y)
+    
+    plt.subplots_adjust(left=0.1, bottom=0.5, right=0.8, wspace=0.01)
+    
+    plt.show()
+
+让子图之间有充分的间隔
+
+### 方法二：
+
+`基于前面的数据进行plot 不是直接使用plt.plot(会报错)`
     
     # 前面如果定义了子图和子图的大小，这里的figsize=[15,7]会失效，这里我们使用o标记，我们画出来的图也会像一个小圆点一样
     data['Weighted_Price'].plot(kind = "line",style='--ro',label='按天',figsize=[15,7])
@@ -1032,8 +1067,9 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="950" height="600"src="seaborn_and_Matplotlib/6.jpg"/></div>
 
 
+### seaborn.countplot
 
-
+https://seaborn.pydata.org/generated/seaborn.countplot.html?highlight=countplot
 
  ## 可视化导图总结：
     
