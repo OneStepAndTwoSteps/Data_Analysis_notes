@@ -1,11 +1,17 @@
 # xgb
 
+
     import xgboost as xgb
     import lightgbm as lgb
 
+
 ## `XGB 参考文章`
 
+* [XgBoost使用指南-中文](http://www.huaxiaozhuan.com/%E5%B7%A5%E5%85%B7/xgboost/chapters/xgboost_usage.html)
+
 * [Python机器学习笔记：XgBoost算法](https://www.cnblogs.com/wj-1314/p/9402324.html)
+
+* [xgb python api 和参数说明](https://xgboost.readthedocs.io/en/latest/python/python_api.html)
 
 ## `gini系数`
 
@@ -255,6 +261,236 @@ AUC 系数越高越好。AUC = 1 意味着这是一个完美的分类器，我�
         id	target
     0	0	0.060758
     1	1	0.065624
+
+
+## 使用 HyperOpt 对xgb进行调优
+
+`案例：`
+
+`1、构造函数`
+
+    from hyperopt import fmin, hp, tpe, Trials, space_eval, STATUS_OK, STATUS_RUNNING
+    from sklearn.model_selection import KFold,TimeSeriesSplit
+    from sklearn.metrics import roc_auc_score
+    from xgboost import plot_importance
+    from sklearn.metrics import make_scorer
+
+    import time
+
+    def objective(params):
+        time1 = time.time()
+        params = {
+            'max_depth': int(params['max_depth']),
+            'gamma': "{:.3f}".format(params['gamma']),
+            'subsample': "{:.2f}".format(params['subsample']),
+            'reg_alpha': "{:.3f}".format(params['reg_alpha']),
+            'reg_lambda': "{:.3f}".format(params['reg_lambda']),
+            'learning_rate': "{:.3f}".format(params['learning_rate']),
+            'num_leaves': '{:.3f}'.format(params['num_leaves']),
+            'colsample_bytree': '{:.3f}'.format(params['colsample_bytree']),
+            'min_child_samples': '{:.3f}'.format(params['min_child_samples']),
+            'feature_fraction': '{:.3f}'.format(params['feature_fraction']),
+            'bagging_fraction': '{:.3f}'.format(params['bagging_fraction'])
+        }
+
+        print("\n############## New Run ################")
+        print(f"params = {params}")
+        FOLDS = 7
+        count=1
+        skf = StratifiedKFold(n_splits=FOLDS, shuffle=True, random_state=42)
+
+        tss = TimeSeriesSplit(n_splits=FOLDS)
+        score_mean = 0
+        for tr_idx, val_idx in tss.split(X_train, y_train):
+            
+            # verbose：一个布尔值。如果为True，则打印验证集的评估结果。
+            # tree_method：指定了构建树的算法，gpu_hist为基于GPU 的histogram 算法分裂节点
+            clf = xgb.XGBClassifier(
+                n_estimators=600, random_state=4, verbose=True,  
+                tree_method='gpu_hist', 
+                **params
+            )
+
+            X_tr, X_vl = X_train.iloc[tr_idx, :], X_train.iloc[val_idx, :]
+            y_tr, y_vl = y_train.iloc[tr_idx], y_train.iloc[val_idx]
+            
+            clf.fit(X_tr, y_tr)
+            # y_pred_train = clf.predict_proba(X_vl)[:,1]
+            # print(y_pred_train)
+            score = make_scorer(roc_auc_score, needs_proba=True)(clf, X_vl, y_vl)
+            # plt.show()
+            score_mean += score
+            print(f'{count} CV - score: {round(score, 4)}')
+            count += 1
+        time2 = time.time() - time1
+        print(f"Total Time Run: {round(time2 / 60,2)}")
+        gc.collect()
+        print(f'Mean ROC_AUC: {score_mean / FOLDS}')
+        del X_tr, X_vl, y_tr, y_vl, clf, score
+        return -(score_mean / FOLDS)
+
+
+    space = {
+        # The maximum depth of a tree, same as GBM.
+        # Used to control over-fitting as higher depth will allow model 
+        # to learn relations very specific to a particular sample.
+        # Should be tuned using CV.
+        # Typical values: 3-10
+        'max_depth': hp.quniform('max_depth', 7, 23, 1),
+        
+        # reg_alpha: L1 regularization term. L1 regularization encourages sparsity 
+        # (meaning pulling weights to 0). It can be more useful when the objective
+        # is logistic regression since you might need help with feature selection.
+        'reg_alpha':  hp.uniform('reg_alpha', 0.01, 0.4),
+        
+        # reg_lambda: L2 regularization term. L2 encourages smaller weights, this
+        # approach can be more useful in tree-models where zeroing 
+        # features might not make much sense.
+        'reg_lambda': hp.uniform('reg_lambda', 0.01, .4),
+        
+        # eta: Analogous to learning rate in GBM
+        # Makes the model more robust by shrinking the weights on each step
+        # Typical final values to be used: 0.01-0.2
+        'learning_rate': hp.uniform('learning_rate', 0.01, 0.2),
+        
+        # colsample_bytree: Similar to max_features in GBM. Denotes the 
+        # fraction of columns to be randomly samples for each tree.
+        # Typical values: 0.5-1
+        'colsample_bytree': hp.uniform('colsample_bytree', 0.3, .9),
+        
+        # A node is split only when the resulting split gives a positive
+        # reduction in the loss function. Gamma specifies the 
+        # minimum loss reduction required to make a split.
+        # Makes the algorithm conservative. The values can vary depending on the loss function and should be tuned.
+        'gamma': hp.uniform('gamma', 0.01, .7),
+        
+        # more increases accuracy, but may lead to overfitting.
+        # num_leaves: the number of leaf nodes to use. Having a large number 
+        # of leaves will improve accuracy, but will also lead to overfitting.
+        'num_leaves': hp.choice('num_leaves', list(range(20, 250, 10))),
+        
+        # specifies the minimum samples per leaf node.
+        # the minimum number of samples (data) to group into a leaf. 
+        # The parameter can greatly assist with overfitting: larger sample
+        # sizes per leaf will reduce overfitting (but may lead to under-fitting).
+        'min_child_samples': hp.choice('min_child_samples', list(range(100, 250, 10))),
+        
+        # subsample: represents a fraction of the rows (observations) to be 
+        # considered when building each subtree. Tianqi Chen and Carlos Guestrin
+        # in their paper A Scalable Tree Boosting System recommend 
+        'subsample': hp.choice('subsample', [0.2, 0.4, 0.5, 0.6, 0.7, .8, .9]),
+        
+        # randomly select a fraction of the features.
+        # feature_fraction: controls the subsampling of features used
+        # for training (as opposed to subsampling the actual training data in 
+        # the case of bagging). Smaller fractions reduce overfitting.
+        'feature_fraction': hp.uniform('feature_fraction', 0.4, .8),
+        
+        # randomly bag or subsample training data.
+        'bagging_fraction': hp.uniform('bagging_fraction', 0.4, .9)
+        
+        # bagging_fraction and bagging_freq: enables bagging (subsampling) 
+        # of the training data. Both values need to be set for bagging to be used.
+        # The frequency controls how often (iteration) bagging is used. Smaller
+        # fractions and frequencies reduce overfitting.
+    }
+
+`2、Running the optimizer(调用)：`
+
+    # Set algoritm parameters
+    best = fmin(fn=objective,       
+                space=space,        # space：搜索空间，指定输入参数的范围
+                algo=tpe.suggest,   # algo：指定搜索算法
+                max_evals=27)       # max_evals：最大评估次数，相当于调优的轮数
+
+    # Print best parameters
+    best_params = space_eval(space, best) # space_eval 获取最优参数
+
+
+`输出结果：`
+
+    ############## New Run ################
+    params = {'max_depth': 20, 'gamma': '0.079', 'subsample': '0.20', 'reg_alpha': '0.034', 'reg_lambda': '0.308', 'learning_rate': '0.041', 'num_leaves': '110.000', 'colsample_bytree': '0.431', 'min_child_samples': '190.000', 'feature_fraction': '0.415', 'bagging_fraction': '0.801'}
+    1 CV - score: 0.8837
+    2 CV - score: 0.8874
+    3 CV - score: 0.9099
+    4 CV - score: 0.8845
+    5 CV - score: 0.9182
+    6 CV - score: 0.9083
+    7 CV - score: 0.9109
+    Total Time Run: 5.08
+    Mean ROC_AUC: 0.9004109131777308
+                                                                                    
+    ############## New Run ################
+    params = {'max_depth': 9, 'gamma': '0.176', 'subsample': '0.20', 'reg_alpha': '0.065', 'reg_lambda': '0.052', 'learning_rate': '0.033', 'num_leaves': '160.000', 'colsample_bytree': '0.326', 'min_child_samples': '210.000', 'feature_fraction': '0.711', 'bagging_fraction': '0.518'}
+    1 CV - score: 0.8867
+    2 CV - score: 0.8979
+    3 CV - score: 0.9157
+    4 CV - score: 0.8913
+    5 CV - score: 0.9222
+    6 CV - score: 0.9154
+    7 CV - score: 0.9085
+    Total Time Run: 1.98
+    Mean ROC_AUC: 0.9053951669032434
+                                                                                    
+    ############## New Run ################
+    params = {'max_depth': 13, 'gamma': '0.192', 'subsample': '0.40', 'reg_alpha': '0.196', 'reg_lambda': '0.336', 'learning_rate': '0.084', 'num_leaves': '80.000', 'colsample_bytree': '0.620', 'min_child_samples': '200.000', 'feature_fraction': '0.523', 'bagging_fraction': '0.850'}
+    1 CV - score: 0.8916
+    2 CV - score: 0.8861
+    3 CV - score: 0.9121
+    4 CV - score: 0.8845
+    5 CV - score: 0.9169
+    6 CV - score: 0.91
+    7 CV - score: 0.9129
+    Total Time Run: 3.32
+    Mean ROC_AUC: 0.9020184883488974
+                                                                                    
+    ############## New Run ################
+    params = {'max_depth': 19, 'gamma': '0.115', 'subsample': '0.90', 'reg_alpha': '0.301', 'reg_lambda': '0.170', 'learning_rate': '0.192', 'num_leaves': '140.000', 'colsample_bytree': '0.382', 'min_child_samples': '220.000', 'feature_fraction': '0.457', 'bagging_fraction': '0.767'}
+    1 CV - score: 0.8957
+    2 CV - score: 0.9003
+    3 CV - score: 0.9185
+    4 CV - score: 0.8869
+    5 CV - score: 0.9233
+    6 CV - score: 0.9186
+    7 CV - score: 0.9147
+    Total Time Run: 3.74
+    Mean ROC_AUC: 0.9082840282682104
+   
+    .............................................................................
+                                                                                    
+    ############## New Run ################
+    params = {'max_depth': 12, 'gamma': '0.478', 'subsample': '0.70', 'reg_alpha': '0.155', 'reg_lambda': '0.209', 'learning_rate': '0.102', 'num_leaves': '20.000', 'colsample_bytree': '0.807', 'min_child_samples': '130.000', 'feature_fraction': '0.669', 'bagging_fraction': '0.732'}
+    1 CV - score: 0.8947
+    2 CV - score: 0.8924
+    3 CV - score: 0.9168
+    4 CV - score: 0.89
+    5 CV - score: 0.9239
+    6 CV - score: 0.9194
+    7 CV - score: 0.9126
+    Total Time Run: 2.95
+    Mean ROC_AUC: 0.9071141806134698
+    100%|██████████| 27/27 [2:16:43<00:00, 476.29s/it, best loss: -0.918343461093427]
+
+`3、获取最优参数：`
+
+    print("BEST PARAMS: ", best_params)
+
+    best_params['max_depth'] = int(best_params['max_depth'])
+
+
+`4、预测数据：`
+
+
+    clf = xgb.XGBClassifier(
+        n_estimators=300,
+        **best_params,
+        tree_method='gpu_hist'
+    )
+
+    clf.fit(X_train, y_train)
+
+    y_preds = clf.predict_proba(X_test)[:,1] 
 
 
 ## 绘制 xgb 的 feature importance

@@ -1,4 +1,4 @@
-# Grid and Random Search
+# 超参数调整
 
 超参数调整有几种方法:
 
@@ -66,6 +66,17 @@
 
         return results 
 
+### `Hyperopt`
+
+Hyperopt 可以帮助快速进行机器学习模型参数调试。通常情况下有两种类型的参数调试方法，网格搜索（grid search）和随机搜索（random search）。网格搜索速度慢但是适用于需要随整个参数空间进行搜索的情况；随机搜索速度很快但是容易遗漏一些重要信息。幸运的是，我们有第三个选择：贝叶斯优化（Bayesian optimization）。这里我们关注贝叶斯优化在Python中的实现：Hyperopt模块。
+
+* [使用 Hyperopt 进行参数调优（译）](https://www.jianshu.com/p/35eed1567463)
+
+* [Hyperopt 参数优化](https://blog.csdn.net/klxmm68/article/details/82149780)
+
+* [Hyperopt中文文档:FMin](https://blog.csdn.net/FontThrone/article/details/78881419)
+
+* [Hyperopt: Distributed Asynchronous Hyper-parameter Optimization](https://hyperopt.github.io/hyperopt/)
 
 
 
