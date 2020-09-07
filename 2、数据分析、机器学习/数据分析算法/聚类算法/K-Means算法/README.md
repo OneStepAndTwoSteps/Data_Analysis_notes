@@ -8,7 +8,7 @@ K-Means是一种无监督学习，解决的是聚类的问题。K表示的是K�
 ### 在介绍K-Means之前我们先聊一聊监督学习和无监督学习还有什么是聚类:
 在一个典型的 __监督学习__ 中，我们有一个 __有标签__ 的训练集，我们的目标是找到能够区分正样本和负样本的决策边界，在这里的监督学习中，我们有一系列标签，我们需要据此拟合一个假设函数。与此不同的是，在 __非监督学习__ 中，我们的数据 __没有附带任何标签__ ，我们拿到的数据就是这样的： 
  
- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/K-Means/1.png)
+ ![Image_text](./K-Means/1.png)
 
 在这里我们有一系列点，却没有标签。因此，我们的训练集可以写成只有𝑥(1),𝑥(2)…..一直到𝑥(𝑚)。我们没有任何标签𝑦。因此，图上画的这些点没有标签信息。也就是说，在非监督学习中，我们需要将一系列无标签的训练数据，输入到一个算法中，然后我们告诉这个算法，快去为我们找找这个数据的内在结构给定数据。我们可能需要某种算法帮助我们寻找一种结构。图上的数据看起来可以分成两个分开的点集（称为簇）， __一个能够找到我圈出的这些点集的算法，就被称为聚类算法。__ 
 
@@ -28,11 +28,11 @@ __K-均值是最普及的聚类算法，算法接受一个未标记的数据集�
 
 下面是一个聚类的示例：
 <p align="center">第一次迭代</p>                                                        
-<div align=center><img width="400" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/K-Means/2.png"/></div>
+<div align=center><img width="400" height="300" src="./K-Means/2.png"/></div>
 <p align="center">第二次迭代</p>                                                        
-<div align=center><img width="400" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/K-Means/3.png"/></div>
+<div align=center><img width="400" height="300" src="./K-Means/3.png"/></div>
 <p align="center">第三次迭代</p>                                                        
-<div align=center><img width="400" height="300" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/K-Means/4.png"/></div>
+<div align=center><img width="400" height="300" src="./K-Means/4.png"/></div>
 
 __用𝜇1,𝜇2,...,𝜇𝑘 来表示聚类中心，用𝑐(1),𝑐(2),...,𝑐(𝑚)来存储与第𝑖个实例数据x^i最近的聚类中心的索引 c(1)=5 表示x^1属于第五簇__  。
           
@@ -62,12 +62,12 @@ __算法优化__
 K-均值最小化问题，是要最小化所有的数据点与其所关联的聚类中心点之间的距离之和，因此 K-均值的代价函数（又称失真函数 Distortion function）为：
 
 __公式表示为：1/m (每个样本的x^i到x^i所属的聚类中心的距离的平方)的累加__
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/K-Means/5.png"/></div>
+<div align=center><img src="./K-Means/5.png"/></div>
 
 假设我们现在只有两个变量x1和x2，根据我们上面的范数平方画出图的话就是下图：
     
 <p align="center">假如x^i属于第5簇，该图表示x^i到第五簇距离的平方</p>                                                        
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/K-Means/7.png"/></div>
+<div align=center><img src="./K-Means/7.png"/></div>
 
 其中𝜇𝑐(𝑖)代表与𝑥(𝑖)最近的聚类中心点。 我们的的优化目标便是找出使得代价函数最小的 𝑐(1),𝑐(2),...,𝑐(𝑚)和𝜇1,𝜇2,...,𝜇𝑘： 
 
