@@ -43,26 +43,26 @@ __欧氏距离__:
             
 是我们最常用的距离公式，也叫做欧几里得距离。在二维空间中，两点的欧式距离就是：
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/KNN/1.png)
+![Image_text](./KNN/1.png)
 
 
 __注意：__ 因为我们以后可能涉及到N维的空间，所以为了方便我们将这里的两个点定义为(x1,x2,x3……,xn)和(y1,y2,y3……,yn) 所以这样我们两个点之间的距离就是按照上面这个式子来计算了。
 
 __同理，我们也可以求得两点在 n 维空间中的距离：__
 
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/KNN/5.png)
+![Image_text](./KNN/5.png)
 
 
 __曼哈顿距离__ 
          
 在几何空间中用的比较多。以下图为例，绿色的直线代表两点之间的欧式距离，而红色和黄色的线为两点的曼哈顿距离。所以曼哈顿距离等于两个点在坐标系上绝对轴距总和。用公式表示就是：
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/KNN/2.png)
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/KNN/3.png)
+![Image_text](./KNN/2.png)
+![Image_text](./KNN/3.png)
 
 __闵可夫斯基距离__:
           
 闵可夫斯基距离不是一个距离，而是一组距离的定义。对于 n 维空间中的两个点 x(x1,x2,…,xn) 和 y(y1,y2,…,yn) ， x 和 y 两点之间的闵可夫斯基距离为：   
-![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/KNN/4.png)
+![Image_text](./KNN/4.png)
 
 __其中 p 代表空间的维数，当 p=1 时，就是曼哈顿距离；当 p=2 时，就是欧氏距离；当 p→∞时，就是切比雪夫距离。__
 
