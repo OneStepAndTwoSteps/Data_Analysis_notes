@@ -6,7 +6,7 @@
 
 但是当数据分布发生变化候，箱型图不一定可以描述出变化(即箱型图 图像保持不变) __如下图__：
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/box%20plot/v2-244720b667952f72b74eb4d196989b56_b.gif"/></div>
+<div align=center><img src="./static/v2-244720b667952f72b74eb4d196989b56_b.gif"/></div>
 
 __7组不同数据，无论其分布怎么改变，用boxplot做出来，都是一模一样的。__
 
@@ -16,7 +16,7 @@ __7组不同数据，无论其分布怎么改变，用boxplot做出来，都是�
 
 ### 箱型图图解
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/static/%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A7%A3/box%20plot/2.png"/></div>
+<div align=center><img src="./static/box%20plot/2.png"/></div>
 
 
 *   __我们一组序列数为例__ 12，15，17，19，20，23，25，28，30，33，34，35，36，37
