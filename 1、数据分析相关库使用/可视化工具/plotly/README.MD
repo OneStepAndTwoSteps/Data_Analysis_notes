@@ -911,6 +911,12 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 # 常用的绘图模板
 
+## 参考链接：
+
+* https://www.kaggle.com/kabure/exploring-the-consumer-patterns-ml-pipeline
+
+* https://www.kaggle.com/kabure/predicting-credit-risk-model-pipeline
+
 ## `一、分类数据`
 
 根据目标值来查看不同特征下的unique数据：
@@ -988,13 +994,58 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 
 
+## 饼状图
+
+绘制不同特征下，
+
+    def PieChart(df_colum, title, limit=15):
+        """
+        此功能有助于按类别调查访问比例和交易收入总额
+        """
+        
+        # 默认获取传入的 df_colum 列中，计数排名最靠前的15个不同值
+        count_trace = df_train[df_colum].value_counts()[:limit].to_frame().reset_index()
+        # 按照 传入的 df_colum 查看 df_colum 特征中不同值下，收入的多少，nlargest 获取前10个排名
+        rev_trace = df_train.groupby(df_colum)["totals.transactionRevenue"].sum().nlargest(10).to_frame().reset_index()
+
+        # df_colum 中，不同值的出现 count 计数占 所有计数数据中的比例
+        trace1 = go.Pie(labels=count_trace['index'], values=count_trace[df_colum], name= "% Acesses", hole= .5, 
+                        hoverinfo="label+percent+name", showlegend=True,domain= {'x': [0, .48]}, 
+                        marker=dict(colors=color))
+
+        # df_colum 中，不同值占收入的比例
+        trace2 = go.Pie(labels=rev_trace[df_colum], 
+                        values=rev_trace['totals.transactionRevenue'], name="% Revenue", hole= .5, 
+                        hoverinfo="label+percent+name", showlegend=False, domain= {'x': [.52, 1]})
+
+        layout = dict(title= title, height=450, font=dict(size=15),
+                        # Add annotations in the center of the donut pies.
+                        annotations = [
+                        dict(
+                                x=.25, y=.5,
+                                text='Visits', 
+                                showarrow=False,
+                                font=dict(size=20)
+                        ),
+                        dict(
+                                x=.80, y=.5,
+                                text='Revenue', 
+                                showarrow=False,
+                                font=dict(size=20)
+                        )
+                ])
+
+        fig = dict(data=[trace1, trace2], layout=layout)
+        iplot(fig)
+
+调用：
+    
+    PieChart("device.deviceCategory", "Device Category")
 
 
+展示：
 
-
-
-
-
+<div align=center><img width="800" height="320" src="./static/pie.jpg"/></div>
 
 
 
