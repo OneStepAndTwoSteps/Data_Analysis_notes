@@ -4,6 +4,42 @@
 * [特征预处理](https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/tree/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/%E7%89%B9%E5%BE%81%E9%A2%84%E5%A4%84%E7%90%86)
 
 
+## `数据统一检查：`
+
+`模板：`
+
+    train = pd.read_csv('.....')
+
+    stats = []
+    for col in train.columns:
+        stats.append((col, train[col].nunique(), train[col].isnull().sum() * 100 / train.shape[0], train[col].value_counts(normalize=True, dropna=False).values[0] * 100, train[col].dtype))
+    
+    # 列分别为 特征名、该特征独立值数量、该特征缺失值比例、该特征下出现最多的值占所有值的比例、数据类型
+    stats_df = pd.DataFrame(stats, columns=['Feature', 'Unique_values', 'Percentage of missing values', 'Percentage of values in the biggest category', 'type'])
+    stats_df.sort_values('Percentage of missing values', ascending=False)
+
+`展示：`
+
+<div align=center><img width="600" height="300" src="./static/data_info.jpg"/></div>
+
+
+针对性处理：
+
+对于 `Percentage of values in the biggest category` 比例越大的数值表示该特征所带来的价值越小，所以对于比例很大的特征，我们可以丢弃：
+
+模板:
+
+    good_cols = list(train.columns)
+    for col in train.columns:
+        rate = train[col].value_counts(normalize=True, dropna=False).values[0]
+        # 比例超过 90% 进行丢弃
+        if rate > 0.9:
+            good_cols.remove(col)
+
+
+
+
+
 
 ## `一、缺失值处理`
 

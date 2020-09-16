@@ -919,7 +919,9 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 ## `一、分类数据`
 
-根据目标值来查看不同特征下的unique数据：
+### `unique 数据绘图`
+
+根据目标值来查看不同特征下的 unique 数据：
 
         cols = train.columns.values[:-2]
         unique_counts = [ len(train[col].unique()) for col in cols]  
@@ -932,6 +934,142 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
         fig.update_traces(textposition='outside')
         fig.update_layout(yaxis_title='counts',xaxis_title='Features',template='seaborn',title='unique (counts)')
         fig.show()
+
+
+### `二分类绘图模板：`
+
+train 为 pd 读取后的数据
+
+`1、`绘制 `某特征值(col)` 下 `目标值` 的计数(count) 情况
+
+`2、`绘制 `某特征值(col)` 的计数(count) 和 `目标值为 1 的计数(count) 占比`
+
+`3、`自定义分类，`先按照指定特征进行划分数据`，对划分后的数据绘制 `某特征(col)` 的计数(count) 和 `目标值为1的计数(count)占比`
+
+    # function to plot data
+    # https://www.kaggle.com/artgor/is-this-malware-eda-fe-and-lgb-updated
+
+    # 绘图模板：其中 HasDetections 为是否遭受攻击的二分类值，Census_IsTouchEnabled 为是设备否支持触屏功能
+
+    def plot_categorical_feature(col, only_bars=False, top_n=10, by_touch=False):
+        '''
+        
+        only_bars: 如果为 True 则只绘制 柱状图，默认绘制 柱状图 + 折线图。
+                指定为 True 时用于绘制 目标值(HasDetections) 下 某特征(col) 的计数(count)情况。
+                默认时，用于绘制 某特征(col) 的计数(count) 和 特征下(col) 某个值中，目标值为1的占比(HasDetections) 适合用于二分类(因为按照均值计算)。
+                        
+        top_n：默认获取某特征的前 10 个出现次数最多的值。
+        
+        by_touch：自定义是否为触屏软件，该例子引入了一个新的特征进行分类，对分后的数据进行绘图探索。
+                当为 True 时，会先按照 是否为触屏软件(Census_IsTouchEnabled) 进行划分数据，然后根据划分后的数据 绘制 某特征(col) 和 目标值(HasDetections) 的关系图 
+                
+        '''
+        top_n = top_n if train[col].nunique() > top_n else train[col].nunique()
+        print(f"{col} has {train[col].nunique()} unique values and type: {train[col].dtype}.")
+        print(train[col].value_counts(normalize=True, dropna=False).head())
+        
+        if not by_touch:
+                # 默认执行
+                if not only_bars:
+                # 因为是 HasDetections 是二分类，那么按照 col 划分数据之后，进行agg操作，可以得到特征下不同值的 count 和 mean (也就是 1 占其中的比例 (0 的数量 + 1的数量/2)) 
+                df = train.groupby([col]).agg({'HasDetections': ['count', 'mean']})
+                df = df.sort_values(('HasDetections', 'count'), ascending=False).head(top_n).sort_index()
+                data = [go.Bar(x=df.index, y=df['HasDetections']['count'].values, name='counts'),
+                        go.Scatter(x=df.index, y=df['HasDetections']['mean'], name='Detections rate', yaxis='y2')]
+
+                layout = go.Layout(dict(title = f"Counts of {col} by top-{top_n} categories and mean target value",
+                                        xaxis = dict(title = f'{col}',
+                                                showgrid=False,
+                                                zeroline=False,
+                                                showline=False,),
+                                        yaxis = dict(title = 'Counts',
+                                                showgrid=False,
+                                                zeroline=False,
+                                                showline=False,),
+                                        yaxis2=dict(title='Detections rate', overlaying='y', side='right')),
+                                legend=dict(orientation="v"))
+                # 如果 only_bars 为 True
+                else:
+                top_cat = list(train[col].value_counts(dropna=False).index[:top_n])
+                df0 = train.loc[(train[col].isin(top_cat)) & (train['HasDetections'] == 1), col].value_counts().head(10).sort_index()
+                df1 = train.loc[(train[col].isin(top_cat)) & (train['HasDetections'] == 0), col].value_counts().head(10).sort_index()
+                data = [go.Bar(x=df0.index, y=df0.values, name='Has Detections'),
+                        go.Bar(x=df1.index, y=df1.values, name='No Detections')]
+
+                layout = go.Layout(dict(title = f"Counts of {col} by top-{top_n} categories",
+                                        xaxis = dict(title = f'{col}',
+                                                showgrid=False,
+                                                zeroline=False,
+                                                showline=False,),
+                                        yaxis = dict(title = 'Counts',
+                                                showgrid=False,
+                                                zeroline=False,
+                                                showline=False,),
+                                        ),
+                                legend=dict(orientation="v"), barmode='group')
+                
+                py.iplot(dict(data=data, layout=layout))
+                
+        # 如果 by_touch 为 True
+        else:
+                top_n = 10
+                top_cat = list(train[col].value_counts(dropna=False).index[:top_n])
+                df = train.loc[train[col].isin(top_cat)]
+
+                df1 = train.loc[train['Census_IsTouchEnabled'] == 1] # 支持触屏
+                df0 = train.loc[train['Census_IsTouchEnabled'] == 0] # 不支持触屏
+
+                df0_ = df0.groupby([col]).agg({'HasDetections': ['count', 'mean']})
+                df0_ = df0_.sort_values(('HasDetections', 'count'), ascending=False).head(top_n).sort_index()
+                df1_ = df1.groupby([col]).agg({'HasDetections': ['count', 'mean']})
+                df1_ = df1_.sort_values(('HasDetections', 'count'), ascending=False).head(top_n).sort_index()
+                data1 = [go.Bar(x=df0_.index, y=df0_['HasDetections']['count'].values, name='Nontouch device counts'),
+                        go.Scatter(x=df0_.index, y=df0_['HasDetections']['mean'], name='Detections rate for nontouch devices', yaxis='y2')]
+                data2 = [go.Bar(x=df1_.index, y=df1_['HasDetections']['count'].values, name='Touch device counts'),
+                        go.Scatter(x=df1_.index, y=df1_['HasDetections']['mean'], name='Detections rate for touch devices', yaxis='y2')]
+
+                layout = go.Layout(dict(title = f"Counts of {col} by top-{top_n} categories for nontouch devices",
+                                xaxis = dict(title = f'{col}',
+                                                showgrid=False,
+                                                zeroline=False,
+                                                showline=False,
+                                                type='category'),
+                                yaxis = dict(title = 'Counts',
+                                                showgrid=False,
+                                                zeroline=False,
+                                                showline=False,),
+                                        yaxis2=dict(title='Detections rate', overlaying='y', side='right'),
+                                ),
+                        legend=dict(orientation="v"), barmode='group')
+
+                py.iplot(dict(data=data1, layout=layout))
+                layout['title'] = f"Counts of {col} by top-{top_n} categories for touch devices"
+                py.iplot(dict(data=data2, layout=layout))
+
+
+`效果展示：`
+
+`情况 1：` 
+        
+    plot_categorical_feature('AppVersion')
+
+<div align=center><img width="500" height="320" src="./static/plot_categorical_feature1.jpg"/></div>
+
+`情况 2：` 
+        
+    plot_categorical_feature('Census_IsTouchEnabled', only_bars=True)
+
+<div align=center><img width="600" height="480" src="./static/plot_categorical_feature2.jpg"/></div>
+
+`情况 3：` 
+        
+    plot_categorical_feature('EngineVersion', by_touch=True)
+
+<div align=center><img width="600" height="980" src="./static/plot_categorical_feature3.jpg"/></div>
+
+
+
+
 
 ## `二、时间数据`
 
@@ -1045,7 +1183,7 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 展示：
 
-<div align=center><img width="800" height="320" src="./static/pie.jpg"/></div>
+<div align=center><img width="800" height="450" src="./static/pie.jpg"/></div>
 
 
 
