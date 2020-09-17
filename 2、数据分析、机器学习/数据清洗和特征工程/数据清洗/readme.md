@@ -38,9 +38,6 @@
 
 
 
-
-
-
 ## `一、缺失值处理`
 
 ### `1.1、检查缺失值`
@@ -500,5 +497,48 @@
     print('%d columns were label encoded.' % le_count)
 
 
+## `特征编码2`
+
+`对于具有大基数的变量，有效的编码在于根据类别的频率对类别进行排名。然后将这些变量视为数字。`
 
 
+* 使用 `values_counts()` 得到每个特征的计数，然后根据计数来获取从小到大的编码值，通过编码值的对应关系来替换原数据中的值： 
+
+* 通过 `frequency_encoding` 能获取某个特征值的 `values_counts` 通过 `values_counts` 排序特征，最终得到类似于 `{a:1,b:2,c:3}` 的返回值，根据返回值，可以对原数据中 `a，b，c` 特征值进行编码成 `1，2，3`。
+
+`值得注意的是：`最后会将 `values_counts` 所得计数为 `1` 的数据都匹配成一个最大的`相同`编码：`max_label = t['level_0'].max() + 1`
+
+    # 自定义一个 cat_col 分类列，最后将分类转化成编码之后，再将 cat_col 列中原特征删除。
+    cat_cols = [col for col in train.columns if col not in ['MachineIdentifier', 'Census_SystemVolumeTotalCapacity', 'HasDetections'] and str(train[col].dtype) == 'category']
+    len(cat_cols)
+
+
+    from tqdm import tqdm_notebook
+
+    def frequency_encoding(variable):
+        t = pd.concat([train[variable], test[variable]]).value_counts().reset_index()
+        t = t.reset_index()
+        t.loc[t[variable] == 1, 'level_0'] = np.nan
+        t.set_index('index', inplace=True)
+        max_label = t['level_0'].max() + 1
+        t.fillna(max_label, inplace=True)
+        return t.to_dict()['level_0']
+
+    # 需要进行编码的特征
+    frequency_encoded_col = [
+        'Census_OEMModelIdentifier',
+        'CityIdentifier',
+        'Census_FirmwareVersionIdentifier',
+        'AvSigVersion',
+        'Census_ProcessorModelIdentifier',
+        'Census_OEMNameIdentifier',
+        'DefaultBrowsersIdentifier'
+    ]
+
+    通过 frequency_encoding 最终得到特征值和其匹配编号 freq_enc_dict 进行编码
+    for col in tqdm(frequency_encoded_col):
+        freq_enc_dict = frequency_encoding(col)
+        train[col] = train[col].map(lambda x: freq_enc_dict.get(x, np.nan))
+        test[col] = test[col].map(lambda x: freq_enc_dict.get(x, np.nan))
+
+        cat_cols.remove(col)
