@@ -1179,11 +1179,16 @@ from  matplotlib.gridspec import GridSpec
 
  
  
- 
- 
- 
+ ## `二、连续性数据`
+
+查看数据对数化之后是否符合正态分布：
+
+    plt.hist(np.log1p(train.loc[train['totals.transactionRevenue'].isna() == False, 'totals.transactionRevenue']));
+    plt.title('Distribution of revenue');
+    
+<div align=center><img width="300" height="250"  src="seaborn_and_Matplotlib/Distribution_of_revenue.jpg"/></div>
   
-  
+ 
   
   
   

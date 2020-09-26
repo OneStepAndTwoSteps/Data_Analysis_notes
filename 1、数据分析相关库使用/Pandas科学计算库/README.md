@@ -46,8 +46,9 @@
       7 8 9
       ...
       100 101 102    
-      
-## 数据结构Series 和 Dataframe
+
+
+## `数据结构Series 和 Dataframe`
 
 ### Series 
   __Series 是个定长的字典序列__ 。说是定长是因为在存储的时候，相当于两个 ndarray，这也是和字典结构最大的不同。因为在字典的结构里，元素的个数是不固定的。
@@ -146,11 +147,14 @@ __特殊用法：__
     array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]])
 
 
-### `pd 的一些读取操作`
+## `关于文件的读取操作：`
 
 * https://www.jianshu.com/p/7764b6591cf5
 
-### pandas read_csv()
+* https://www.cnblogs.com/datablog/p/6127000.html
+
+
+### `pandas read_csv()`
 
 * `a） 选择要导入的行数`
 
@@ -247,6 +251,57 @@ __特殊用法：__
 
       train = pd.read_csv('../input/train.csv', skiprows=skiplines, dtype=dtypes)
       train.head()
+
+### `文件的存储格式`
+
+`feather 格式`
+
+在参加各种机器学习比赛的时候，有时候要读取几百M甚至几个G 的表格数据，为了使读取速度加快，使用一种新的方法，把.csv格式格式的文件转存为.feather格式，再用read_feather读取，速度可以大大提升。
+
+* `将Dataframe格式的数据以feather格式储存：`
+
+      train_data.to_feather("train.feather")
+
+* `读取 feather 文件：`
+
+      # load the same dataframe next time directly, without reading the csv file again!
+      train_df_new = pd.read_feather('train.feather')
+
+### `Using Dask`
+
+    import dask.dataframe as dd
+
+使用 Dask 及其 dataframe 构造，您必须像在 pandas 中一样设置数据框，而不是将数据加载到 pandas 中，这种方法将数据框作为数据文件的“指针”，并且不会加载任何内容，直到你专门告诉它这样做。
+
+`相当于只是加载了 dataframe 的结构框`
+
+`读取：`
+
+    %%time
+
+    # dask's read_csv takes no time at all!
+    ddf = dd.read_csv(TRAIN_PATH, usecols=cols, dtype=traintypes)
+
+`耗时：`
+
+    CPU times: user 148 ms, sys: 12 ms, total: 160 ms
+    Wall time: 159 ms
+
+`查看信息：`
+
+    # no info?
+    ddf.info()
+
+`输出结果：`
+
+    <class 'dask.dataframe.core.DataFrame'>
+    Columns: 7 entries, fare_amount to passenger_count
+    dtypes: object(1), float32(5), uint8(1)
+
+
+对于 ddf 数据你可以使用 .head 或者 .describe 等方法，但是像 .describe 方法他计算的时间是高于 read_csv 读取的数据的。
+
+
 
 
 

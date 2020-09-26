@@ -923,18 +923,20 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 根据目标值来查看不同特征下的 unique 数据：
 
-        cols = train.columns.values[:-2]
-        unique_counts = [ len(train[col].unique()) for col in cols]  
+        plt.figure(figsize=(38, 8))
+        v_features = list(train_transaction.columns[320:390])
+        uniques = [len(train_transaction[col].unique()) for col in v_features]
+        sns.set(font_scale=1.2)
+        ax = sns.barplot(v_features, uniques, log=True)
+        ax.set(xlabel='Feature', ylabel='log(unique count)', title='Number of unique values per feature')
+        for p, uniq in zip(ax.patches, uniques):
+        height = p.get_height()
+        ax.text(p.get_x()+p.get_width()/2.,
+                height + 10,
+                uniq,
+                ha="center") 
 
-        unique_counts = pd.DataFrame(unique_counts,index=cols,columns=['counts'])
-        unique_counts.head()
-
-
-        fig = px.bar(unique_counts,x=unique_counts.index,y='counts',barmode='group',color='counts',text='counts') # text 可以标上数值
-        fig.update_traces(textposition='outside')
-        fig.update_layout(yaxis_title='counts',xaxis_title='Features',template='seaborn',title='unique (counts)')
-        fig.show()
-
+<div align=center><img  width="780" height="180" src="./static/unique_plot.jpg"/></div>
 
 ### `二分类绘图模板：`
 
@@ -1068,10 +1070,57 @@ train 为 pd 读取后的数据
 <div align=center><img width="600" height="980" src="./static/plot_categorical_feature3.jpg"/></div>
 
 
+## `二、连续性数据`
+
+查看数据的分布情况：
+
+        fig, ax = plt.subplots(1, 2, figsize=(18,4))
+
+        time_val = train_transaction['TransactionAmt'].values
+
+        sns.distplot(time_val, ax=ax[0], color='r')
+        ax[0].set_title('Distribution of TransactionAmt', fontsize=14)
+        ax[1].set_xlim([min(time_val), max(time_val)])
+
+        sns.distplot(np.log(time_val), ax=ax[1], color='b')
+        ax[1].set_title('Distribution of LOG TransactionAmt', fontsize=14)
+        ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+        plt.show()
+
+
+<div align=center><img  width="580" height="180" src="./static/distplot.jpg"/></div>
 
 
 
-## `二、时间数据`
+查看目标值为 0 和 1 的数据，对数化之后，各自的分布情况：
+
+
+        fig, ax = plt.subplots(1, 2, figsize=(18,4))
+
+        time_val = train_transaction.loc[train_transaction['isFraud'] == 1]['TransactionAmt'].values
+
+        sns.distplot(np.log(time_val), ax=ax[0], color='r')
+        ax[0].set_title('Distribution of LOG TransactionAmt, isFraud=1', fontsize=14)
+        ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+        time_val = train_transaction.loc[train_transaction['isFraud'] == 0]['TransactionAmt'].values
+
+        sns.distplot(np.log(time_val), ax=ax[1], color='b')
+        ax[1].set_title('Distribution of LOG TransactionAmt, isFraud=0', fontsize=14)
+        ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+
+plt.show()
+
+
+<div align=center><img width="580" height="180" src="./static/distplot2.jpg"/></div>
+
+
+
+
+
+## `EXTEND、时间数据`
 
 绘制某一特征随着时间的变化曲线：
 
