@@ -1124,6 +1124,8 @@ plt.show()
 
 绘制某一特征随着时间的变化曲线：
 
+双 y 轴：
+
 `案例：` 绘制每日 (一个月 1~31天)下，不同 TransactionAmt 的计数变化，和 TransactionAmt 总金额的变化
 
         # Calling the function to transform the date column in datetime pandas object
@@ -1178,6 +1180,69 @@ plt.show()
 `效果展示：`
 
 <div align=center><img width="800" height="320" src="./static/time_series.jpg"/></div>
+
+
+单 y 轴：
+
+
+        # I saw and take a lot of inspiration to this interactive plots in kernel: 
+        # https://www.kaggle.com/jsaguiar/complete-exploratory-analysis-all-columns
+        # I learned a lot in this kernel and I will implement and adapted some ideas
+
+        #seting some static color options
+        color_op = ['#5527A0', '#BB93D7', '#834CF7', '#6C941E', '#93EAEA', '#7425FF', '#F2098A', '#7E87AC', 
+                '#EBE36F', '#7FD394', '#49C35D', '#3058EE', '#44FDCF', '#A38F85', '#C4CEE0', '#B63A05', 
+                '#4856BF', '#F0DB1B', '#9FDBD9', '#B123AC']
+
+        # Visits by time train
+
+        # couting all entries by date to get number of visits by each date
+        dates_temp = df_train['date'].value_counts().to_frame().reset_index().sort_values('index') 
+        # renaming the columns to apropriate names
+        dates_temp = dates_temp.rename(columns = {"date" : "visits"}).rename(columns = {"index" : "date"})
+
+        # creating the first trace with the necessary parameters
+        trace = go.Scatter(x=dates_temp.date.astype(str), y=dates_temp.visits,
+                        opacity = 0.8, line = dict(color = color_op[3]), name= 'Visits by day')
+
+        # Below we will get the total values by Transaction Revenue Log by date
+        dates_temp_sum = df_train.groupby('date')['totals.transactionRevenue'].sum().to_frame().reset_index()
+
+        # using the new dates_temp_sum we will create the second trace
+        trace1 = go.Scatter(x=dates_temp_sum.date.astype(str), line = dict(color = color_op[1]), name="RevenueLog by day",
+                                y=dates_temp_sum['totals.transactionRevenue'], opacity = 0.8)
+
+        # Getting the total values by Transactions by each date
+        dates_temp_count = df_train[df_train['totals.transactionRevenue'] > 0].groupby('date')['totals.transactionRevenue'].count().to_frame().reset_index()
+
+        # using the new dates_temp_count we will create the third trace
+        trace2 = go.Scatter(x=dates_temp_count.date.astype(str), line = dict(color = color_op[5]), name="Sellings by day",
+                                y=dates_temp_count['totals.transactionRevenue'], opacity = 0.8)
+
+        #creating the layout the will allow us to give an title and 
+        # give us some interesting options to handle with the outputs of graphs
+        layout = dict(
+        title= "Informations by Date",
+        xaxis=dict(
+                rangeselector=dict(
+                buttons=list([
+                        dict(count=1, label='1m', step='month', stepmode='backward'),
+                        dict(count=3, label='3m', step='month', stepmode='backward'),
+                        dict(count=6, label='6m', step='month', stepmode='backward'),
+                        dict(step='all')
+                ])
+                ),
+                rangeslider=dict(visible = True),
+                type='date'
+        )
+        )
+
+# creating figure with the both traces and layout
+fig = dict(data= [trace, trace1, trace2], layout=layout)
+
+#rendering the graphs
+iplot(fig) #it's an equivalent to plt.show()
+
 
 
 

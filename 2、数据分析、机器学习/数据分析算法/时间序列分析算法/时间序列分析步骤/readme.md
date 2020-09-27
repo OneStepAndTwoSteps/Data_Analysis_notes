@@ -75,6 +75,26 @@
 
 `seasonal_decompose` 使用模板：
 
+    from matplotlib.pylab import rcParams
+    rcParams['figure.figsize'] = 28, 18
+
+导入数据：
+
+    store_sum = sales_train_validation.groupby(['store_id']).sum().T.reset_index(drop = True)
+    store_sum.head()
+
+    output：
+
+    store_id	CA_1	CA_2	CA_3	CA_4	TX_1	TX_2	TX_3	WI_1	WI_2	WI_3
+        0	    4337.0	3494.0	4739.0	1625.0	2556.0	3852.0	3030.0	2704.0	2256.0	4038.0
+        1	    4155.0	3046.0	4827.0	1777.0	2687.0	3937.0	3006.0	2194.0	1922.0	4198.0
+        2	    2816.0	2121.0	3785.0	1386.0	1822.0	2731.0	2225.0	1562.0	2018.0	3317.0
+        3	    3051.0	2324.0	4232.0	1440.0	2258.0	2954.0	2169.0	1251.0	2522.0	3211.0
+        4	    2630.0	1942.0	3817.0	1536.0	1694.0	2492.0	1726.0	2.0	    1175.0	2132.0
+
+
+绘图：
+
     from statsmodels.tsa.seasonal import seasonal_decompose
 
     weeks_per_year = 365

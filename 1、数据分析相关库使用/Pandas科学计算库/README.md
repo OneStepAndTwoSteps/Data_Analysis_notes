@@ -1140,7 +1140,7 @@ __transform 和 apply的相同之处：__
     # 查看不同船舱人员的的人均年龄
     train_survived=train_content.pivot_table(index="Pclass",values="Age")
 
-### `droplevel()`
+### `droplevel() 删除列标题`
 
     Series.droplevel(self, level, axis=0)
 `droplevel()` 方法用于返回已删除请求的索引/列级别的DataFrame
