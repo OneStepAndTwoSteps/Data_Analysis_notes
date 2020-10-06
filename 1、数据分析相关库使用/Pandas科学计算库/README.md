@@ -2664,6 +2664,40 @@ https://www.kaggle.com/kk0105/everything-you-can-do-with-a-time-series
 
 <div align=center><img width="550" height="270" src="./static/datetime筛选结果展示.png"/></div>
 
+## `resample` 时间重采样
+
+resample 可以对时间进行重采样：
+
+`数据展示：`
+
+    index = pd.date_range('1/1/2000', periods=9, freq='D')
+    df = pd.DataFrame(range(9), index=index,columns=['count'])
+    df
+
+
+                count
+    2000-01-01	  0
+    2000-01-02	  1
+    2000-01-03	  2
+    2000-01-04	  3
+    2000-01-05	  4
+    2000-01-06	  5
+    2000-01-07	  6
+    2000-01-08  	7
+    2000-01-09	  8
+
+`重采样：`
+
+按照 `resample` 指定的时间，比如说 `3D (3天)` ，划分之后对数据 `count` 做加法，有点 `groupby` 的味道
+
+    series.resample('3D').sum()
+
+    2000-01-01     3
+    2000-01-04    12
+    2000-01-07    21
+    Freq: 3D, dtype: int64
+
+
 
 
 

@@ -333,6 +333,44 @@ __例4 效果图：__
     '|'	vline标记
     '_'	hline标记
 
+
+## ax
+
+### ax.legend
+
+* `legend.loc`
+
+      使用 .loc 来控图例的位置
+
+
+      loc : str or pair of floats, default: rcParams["legend.loc"] = 'best' ('best' for axes, 'upper right' for figures)
+
+
+      # 使用 str 来指定图例位置
+      The strings 'upper left', 'upper right', 'lower left', 'lower right' place the legend at the corresponding corner of the axes/figure.
+
+      # 使用 code 来指定图例位置
+      Location String	Location Code
+
+      'best'	0
+      'upper right'	1
+      'upper left'	2
+      'lower left'	3
+      'lower right'	4
+      'right'	5
+      'center left'	6
+      'center right'	7
+      'lower center'	8
+      'upper center'	9
+      'center'	10
+
+
+
+
+
+
+
+
     
 ## plt 设置图像的相关方法
    
@@ -1149,11 +1187,11 @@ from  matplotlib.gridspec import GridSpec
  
  # 常用的绘图模板
 
-## 一、分类数据：
+## `一、分类数据：`
 
-探索目标值与不同特征之间的关系：
+探索 `目标值` 与 `不同特征` 之间的关系：
 
-案例：
+`案例：`
 
     proportion  = train[['ip','is_attributed']].groupby('ip',as_index=False).mean().sort_values(by='is_attributed',ascending=False) 
     counts = train[['ip','is_attributed']].groupby('ip',as_index=False).count().sort_values(by='is_attributed',ascending=False)
@@ -1173,12 +1211,105 @@ from  matplotlib.gridspec import GridSpec
     print('Counversion Rates over Counts of Most Popular IPs')
     print(merge[:20])
 
-输出：
+`输出：`
 
 <div align=center><img width="750" height="500"  src="seaborn_and_Matplotlib/ips.jpg"/></div>
 
  
- 
+### 绘制 `分类特征` 与 `连续traget` 的关系图：
+
+查看 `训练数据` 和 `测试数据` 中，`site_id`中不同值的 `count (计数)`  和  `meter_reading (目标值)` 在不同 `site_id` 中的占比情况：
+
+`案例：`
+
+    train_data = train['site_id'].value_counts(dropna=False, normalize=True).sort_index().values
+    ind = np.arange(len(train_data))
+    width = 0.35
+
+    fig, axes = plt.subplots(1,1,figsize=(14, 6), dpi=100)
+    tr = axes.bar(ind, train_data, width, color='royalblue')
+
+    test_data = test['site_id'].value_counts(dropna=False, normalize=True).sort_index().values
+    tt = axes.bar(ind+width, test_data, width, color='seagreen')
+
+    axes.set_ylabel('Normalized number of observations');
+    axes.set_xlabel('site_id');
+    axes.set_xticks(ind + width / 2)
+    axes.set_xticklabels(train['site_id'].value_counts().sort_index().index, rotation=0)
+    axes2 = axes.twinx()
+    mr = axes2.plot(ind, train[['site_id', 'meter_reading']].groupby('site_id')['meter_reading'].mean().sort_index().values, 'D-', color='tab:orange', label='Mean meter reading');
+    axes2.grid(False);
+    axes2.tick_params(axis='y', labelcolor='tab:orange');
+    axes2.set_ylabel('Mean meter reading by site_id', color='tab:orange');
+    axes.legend([tr, tt], ['Train', 'Test'], facecolor='white');
+    axes2.legend(loc=2, facecolor='white');
+
+`封装成函数：`
+
+    def Classification_features_and_continuous_targets_func(col,target='meter_reading',rotation=0,loc=2):
+        '''
+        
+        rotation:用于控制x轴标签的方向
+        loc:用于控制 legend 的位置
+
+        '''
+        # 训练数据
+        train_data = train_df[col].value_counts(dropna=False, normalize=True).sort_index().values
+        ind = np.arange(len(train_data))
+        width = 0.35
+
+        fig, axes = plt.subplots(1,1,figsize=(14, 6), dpi=100)
+        tr = axes.bar(ind, train_data, width, color='royalblue')
+        
+        # 测试数据
+        test_data = test_df[col].value_counts(dropna=False, normalize=True).sort_index().values
+        tt = axes.bar(ind+width, test_data, width, color='seagreen')
+
+        axes.set_ylabel('Normalized number of observations');
+        axes.set_xlabel(col);
+        axes.set_xticks(ind + width / 2)
+        axes.set_xticklabels(train_df[col].value_counts().sort_index().index, rotation=rotation)
+        axes2 = axes.twinx()
+        mr = axes2.plot(ind, train_df[[col, target]].groupby(col)[target].mean().sort_index().values, 'D-', color='tab:orange', label='Mean {}'.format(target));
+        axes2.grid(False);
+        axes2.tick_params(axis='y', labelcolor='tab:orange');
+        axes2.set_ylabel('Mean {} by {}'.format(target,col), color='tab:orange');
+        axes.legend([tr, tt], ['Train', 'Test'], facecolor='white');
+        axes2.legend(loc=loc, facecolor='white');
+
+`调用:`
+
+    Classification_features_and_continuous_targets_func('primary_use',rotation=90,loc=5)
+      
+
+`展示：`
+
+
+  <div align=center><img width="800" height="450"  src="seaborn_and_Matplotlib/primary_use.jpg"/></div>
+
+### `箱型图：`
+
+案例：分类特征 `meter` 和连续目标值 `meter_reading` 之间的关系，箱型图：
+
+    plt.figure(figsize=(13,6)) #figure size
+
+    #It's another way to plot our data. using a variable that contains the plot parameters
+    g1 = sns.boxplot(x='meter', y='meter_reading', 
+                      data=train_df[(train_df['meter'].isin((train_df['meter'].value_counts()[:10].index.values))) &
+                                      train_df['meter_reading'] > 0]
+                      ,showfliers=False)
+    g1.set_title('Meter by meter_reading', fontsize=20) # title and fontsize
+    g1.set_xticklabels(g1.get_xticklabels(),rotation=45) # It's the way to rotate the xticks when we use variable to our graphs
+    g1.set_xlabel('Meter', fontsize=18) # Xlabel
+    g1.set_ylabel('Trans meter_reading(log) Dist', fontsize=18) #Ylabel
+
+    plt.show()
+
+`展示：`
+
+  <div align=center><img width="800" height="450"  src="seaborn_and_Matplotlib/boxplot_meter.jpg"/></div>
+
+
  ## `二、连续性数据`
 
 查看数据对数化之后是否符合正态分布：
@@ -1187,10 +1318,62 @@ from  matplotlib.gridspec import GridSpec
     plt.title('Distribution of revenue');
     
 <div align=center><img width="300" height="250"  src="seaborn_and_Matplotlib/Distribution_of_revenue.jpg"/></div>
-  
+
+
+### xx 特征 随 xx 特征变化的关系变化图：
+
+
+    fig, axes = plt.subplots(1,1,figsize=(14, 6))
+    train.groupby('year_built')['meter_reading'].mean().plot().set_ylabel('Mean meter reading');
+    axes.set_title('Mean meter reading by year_built of the building', fontsize=16);
+
+<div align=center><img width="700" height="350"  src="seaborn_and_Matplotlib/year_built.jpg"/></div>
+
+
+### 训练数据和测试数据的特征分布图、箱型图和缺失值柱形图的统计
+
+
+    fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+    sns.kdeplot(train_df['year_built'], ax=axes[0][0], label='Train');
+    sns.kdeplot(test_df['year_built'], ax=axes[0][0], label='Test');
+    sns.boxplot(x=train_df['year_built'], ax=axes[1][0]);
+    sns.boxplot(x=test_df['year_built'], ax=axes[1][1]);
+    pd.DataFrame({'train': [train_df['year_built'].isnull().sum()], 'test': [test_df['year_built'].isnull().sum()]},index=['year_built']).plot(kind='bar', rot=0, ax=axes[0][1]);
+    axes[0][0].legend();
+    axes[0][0].set_title('Train/Test KDE distribution',fontsize=10);
+    axes[0][1].set_title('Number of NaNs',fontsize=10);
+    axes[1][0].set_title('Boxplot for train',fontsize=10);
+    axes[1][1].set_title('Boxplot for test',fontsize=10);
+    gc.collect();
+
+<div align=center><img width="700" height="500"  src="seaborn_and_Matplotlib/kdeplot_year_built2.jpg"/></div>
  
+
+### 查看 xx id 下 xx特征 随时间 hour day 变化的曲线
+
+案例中 `timestamp` 是 `datetime` 类型
+
+    fig, axes = plt.subplots(8,2,figsize=(14, 30), dpi=100)
+    for i in range(train['site_id'].nunique()):
+        train[train['site_id'] == i][['timestamp', 'sea_level_pressure']].set_index('timestamp').resample('H').mean()['sea_level_pressure'].plot(ax=axes[i%8][i//8], alpha=0.8, label='By hour', color='tab:blue').set_ylabel('Mean sea_level_pressure', fontsize=13);
+        test[test['site_id'] == i][['timestamp', 'sea_level_pressure']].set_index('timestamp').resample('H').mean()['sea_level_pressure'].plot(ax=axes[i%8][i//8], alpha=0.8, color='tab:blue', label='').set_xlabel('')
+        train[train['site_id'] == i][['timestamp', 'sea_level_pressure']].set_index('timestamp').resample('D').mean()['sea_level_pressure'].plot(ax=axes[i%8][i//8], alpha=1, label='By day', color='tab:orange')
+        test[test['site_id'] == i][['timestamp', 'sea_level_pressure']].set_index('timestamp').resample('D').mean()['sea_level_pressure'].plot(ax=axes[i%8][i//8], alpha=1, color='tab:orange', label='').set_xlabel('')
+        axes[i%8][i//8].legend();
+        axes[i%8][i//8].set_title('site_id {}'.format(i), fontsize=13);
+        axes[i%8][i//8].axvspan(test['timestamp'].min(), test['timestamp'].max(), facecolor='green', alpha=0.2);
+        plt.subplots_adjust(hspace=0.45)
+
+<div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/site_id_and_timestamp.jpg"/></div>
+
+
+
+
   
-  
+## `绘图参考：`
+
+
+* [EDA for ASHRAE](https://www.kaggle.com/nroman/eda-for-ashrae)
   
   
   

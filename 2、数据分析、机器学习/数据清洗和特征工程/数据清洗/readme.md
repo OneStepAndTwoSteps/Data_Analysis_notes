@@ -286,6 +286,7 @@
 
 * 案例：
 
+绘制 kde 可能存在绘制失败的情况 
     
         # Density plots of features function
         def plot_feature_distribution(df1, df2, label1, label2, features):
@@ -293,25 +294,33 @@
             sns.set_style('whitegrid')
             plt.figure()
             fig, ax = plt.subplots(10,10,figsize=(18,22))
-
+            
+            failed_features = []
+            
             for feature in features:
-                i += 1
-                plt.subplot(10,10,i)
-                sns.distplot(df1[feature], hist=False,label=label1)
-                sns.distplot(df2[feature], hist=False,label=label2)
-                plt.xlabel(feature, fontsize=9)
-                locs, labels = plt.xticks()
-                plt.tick_params(axis='x', which='major', labelsize=6, pad=-6)
-                plt.tick_params(axis='y', which='major', labelsize=6)
+                try:
+                    i += 1
+                    plt.subplot(5,2,i)
+                    sns.distplot(df1[feature], hist=False,label=label1)
+                    sns.distplot(df2[feature], hist=False,label=label2)
+                    plt.xlabel(feature, fontsize=9)
+                    locs, labels = plt.xticks()
+                    plt.tick_params(axis='x', which='major', labelsize=6, pad=-6)
+                    plt.tick_params(axis='y', which='major', labelsize=6)
+                except:
+                    print(feature + 'KDE failed')
+                    failed_features.append(feature)
+                    continue
             plt.show();
-
+            
+            return failed_features
 
 * 调用：
 
-    t0 = train_df.loc[train_df['target'] == 0]
-    t1 = train_df.loc[train_df['target'] == 1]
-    features = train_df.columns.values[2:102]
-    plot_feature_distribution(t0, t1, '0', '1', features)
+        t0 = train_df.loc[train_df['target'] == 0]
+        t1 = train_df.loc[train_df['target'] == 1]
+        features = train_df.columns.values[2:102]
+        plot_feature_distribution(t0, t1, '0', '1', features)
 
 
 
