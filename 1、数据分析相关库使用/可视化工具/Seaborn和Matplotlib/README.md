@@ -1310,9 +1310,9 @@ from  matplotlib.gridspec import GridSpec
   <div align=center><img width="800" height="450"  src="seaborn_and_Matplotlib/boxplot_meter.jpg"/></div>
 
 
- ## `二、连续性数据`
+## `二、连续性数据`
 
-查看数据对数化之后是否符合正态分布：
+### 查看数据 `对数化` 之后是否符合正态分布：
 
     plt.hist(np.log1p(train.loc[train['totals.transactionRevenue'].isna() == False, 'totals.transactionRevenue']));
     plt.title('Distribution of revenue');
@@ -1320,7 +1320,7 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="300" height="250"  src="seaborn_and_Matplotlib/Distribution_of_revenue.jpg"/></div>
 
 
-### xx 特征 随 xx 特征变化的关系变化图：
+### `xx 特征 随 xx 特征变化的关系变化图：`
 
 
     fig, axes = plt.subplots(1,1,figsize=(14, 6))
@@ -1330,7 +1330,7 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="700" height="350"  src="seaborn_and_Matplotlib/year_built.jpg"/></div>
 
 
-### 训练数据和测试数据的特征分布图、箱型图和缺失值柱形图的统计
+### `训练数据 和 测试数据 的 特征分布图、箱型图 和 缺失值柱形图 的统计`
 
 
     fig, axes = plt.subplots(2, 2, figsize=(10, 8))
@@ -1349,7 +1349,9 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="700" height="500"  src="seaborn_and_Matplotlib/kdeplot_year_built2.jpg"/></div>
  
 
-### 查看 xx id 下 xx特征 随时间 hour day 变化的曲线
+### `查看 某某id 下 某某特征 随时间如： hour/day 变化的曲线`
+
+`resample` 是针对时间特征的数据进行 `resample` 的，需要注意。
 
 案例中 `timestamp` 是 `datetime` 类型
 
