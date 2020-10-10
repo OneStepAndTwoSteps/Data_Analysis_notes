@@ -32,6 +32,18 @@ plotly本身是基于javascript开发的，但是提供了大量与其他主流�
 
 graph_objs 和 express 之间的关系相当于，matplotlib 和 seaborn，express的封装更高级些
 
+### 设置背景
+
+设置：
+
+    import plotly.io as pio
+    pio.templates.default = "plotly_dark"
+
+展示图：
+
+<div align=center><img width="800" height="450" src="./static/plotly_dark.jpg"/></div>
+
+
 
 
 ## 二、图表类型
@@ -923,20 +935,35 @@ Plotly绘图模块库中，设置坐标的参数有：xaxis(x轴参数)、yaxis(
 
 根据目标值来查看不同特征下的 unique 数据：
 
-        plt.figure(figsize=(38, 8))
-        v_features = list(train_transaction.columns[320:390])
-        uniques = [len(train_transaction[col].unique()) for col in v_features]
-        sns.set(font_scale=1.2)
-        ax = sns.barplot(v_features, uniques, log=True)
-        ax.set(xlabel='Feature', ylabel='log(unique count)', title='Number of unique values per feature')
-        for p, uniq in zip(ax.patches, uniques):
-        height = p.get_height()
-        ax.text(p.get_x()+p.get_width()/2.,
-                height + 10,
-                uniq,
-                ha="center") 
+    plt.figure(figsize=(38, 8))
+    v_features = list(train_transaction.columns[320:390])
+    uniques = [len(train_transaction[col].unique()) for col in v_features]
+    sns.set(font_scale=1.2)
+    ax = sns.barplot(v_features, uniques, log=True)
+    ax.set(xlabel='Feature', ylabel='log(unique count)', title='Number of unique values per feature')
+    for p, uniq in zip(ax.patches, uniques):
+    height = p.get_height()
+    ax.text(p.get_x()+p.get_width()/2.,
+        height + 10,
+        uniq,
+        ha="center") 
 
 <div align=center><img  width="780" height="180" src="./static/unique_plot.jpg"/></div>
+
+
+### `条形图：`
+
+案例：
+
+    fig = px.bar(latest_grouped.sort_values('confirmed', ascending=False)[:20][::-1], x='confirmed', y='country',
+        title='Confirmed Cases Worldwide', text='confirmed', height=1000, orientation='h')
+    fig.show()
+
+
+<div align=center><img  width="580" height="680" src="./static/bar1.jpg"/></div>
+
+
+
 
 ### `二分类绘图模板：`
 
@@ -1072,7 +1099,7 @@ train 为 pd 读取后的数据
 
 ## `二、连续性数据`
 
-查看数据的分布情况：
+`查看 xx 数据的分布情况：`
 
         fig, ax = plt.subplots(1, 2, figsize=(18,4))
 
@@ -1093,7 +1120,7 @@ train 为 pd 读取后的数据
 
 
 
-查看目标值为 0 和 1 的数据，对数化之后，各自的分布情况：
+`查看目标值为 0 和 1 的数据，对数化之后，各自的分布情况：`
 
 
         fig, ax = plt.subplots(1, 2, figsize=(18,4))
@@ -1110,13 +1137,29 @@ train 为 pd 读取后的数据
         ax[1].set_title('Distribution of LOG TransactionAmt, isFraud=0', fontsize=14)
         ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
 
-
-plt.show()
+        plt.show()
 
 
 <div align=center><img width="580" height="180" src="./static/distplot2.jpg"/></div>
 
 
+`xx 特征随着 时间 的变化曲线：`
+
+        grouped = data.groupby('date')['date', 'confirmed', 'deaths'].sum().reset_index()
+
+        fig = px.line(grouped, x="date", y="confirmed", 
+                title="Worldwide Confirmed Cases Over Time")
+        fig.show()
+
+        fig = px.line(grouped, x="date", y="confirmed", 
+                title="Worldwide Confirmed Cases (Logarithmic Scale) Over Time", 
+                log_y=True)
+        fig.show()
+
+<div align=center><img width="580" height="380" src="./static/plotly_dark.jpg"/></div>
+
+
+<div align=center><img width="580" height="380" src="./static/confirmed.jpg"/></div>
 
 
 
@@ -1124,7 +1167,7 @@ plt.show()
 
 绘制某一特征随着时间的变化曲线：
 
-双 y 轴：
+`双 y 轴：`
 
 `案例：` 绘制每日 (一个月 1~31天)下，不同 TransactionAmt 的计数变化，和 TransactionAmt 总金额的变化
 
@@ -1182,7 +1225,7 @@ plt.show()
 <div align=center><img width="800" height="320" src="./static/time_series.jpg"/></div>
 
 
-单 y 轴：
+`单 y 轴：`
 
 
         # I saw and take a lot of inspiration to this interactive plots in kernel: 
@@ -1237,11 +1280,11 @@ plt.show()
         )
         )
 
-# creating figure with the both traces and layout
-fig = dict(data= [trace, trace1, trace2], layout=layout)
+        # creating figure with the both traces and layout
+        fig = dict(data= [trace, trace1, trace2], layout=layout)
 
-#rendering the graphs
-iplot(fig) #it's an equivalent to plt.show()
+        #rendering the graphs
+        iplot(fig) #it's an equivalent to plt.show()
 
 
 
@@ -1299,6 +1342,13 @@ iplot(fig) #it's an equivalent to plt.show()
 
 <div align=center><img width="800" height="450" src="./static/pie.jpg"/></div>
 
+
+## 绘制地图：
+
+
+### xx 地区，xx 目标随着时间的变化：
+
+参考：https://www.kaggle.com/abhinand05/covid-19-digging-a-bit-deeper
 
 
 

@@ -1215,7 +1215,30 @@ from  matplotlib.gridspec import GridSpec
 
 <div align=center><img width="750" height="500"  src="seaborn_and_Matplotlib/ips.jpg"/></div>
 
- 
+
+### `查看目标值为 0 和 1 的数据，对数化之后，各自的分布情况：`
+
+
+    fig, ax = plt.subplots(1, 2, figsize=(18,4))
+
+    time_val = train_transaction.loc[train_transaction['isFraud'] == 1]['TransactionAmt'].values
+
+    sns.distplot(np.log(time_val), ax=ax[0], color='r')
+    ax[0].set_title('Distribution of LOG TransactionAmt, isFraud=1', fontsize=14)
+    ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+    time_val = train_transaction.loc[train_transaction['isFraud'] == 0]['TransactionAmt'].values
+
+    sns.distplot(np.log(time_val), ax=ax[1], color='b')
+    ax[1].set_title('Distribution of LOG TransactionAmt, isFraud=0', fontsize=14)
+    ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+    plt.show()
+
+
+<div align=center><img width="580" height="180" src="./seaborn_and_Matplotlib/distplot2.jpg"/></div>
+
+
 ### 绘制 `分类特征` 与 `连续traget` 的关系图：
 
 查看 `训练数据` 和 `测试数据` 中，`site_id`中不同值的 `count (计数)`  和  `meter_reading (目标值)` 在不同 `site_id` 中的占比情况：
@@ -1310,9 +1333,35 @@ from  matplotlib.gridspec import GridSpec
   <div align=center><img width="800" height="450"  src="seaborn_and_Matplotlib/boxplot_meter.jpg"/></div>
 
 
+
+
+
+
+
 ## `二、连续性数据`
 
-### 查看数据 `对数化` 之后是否符合正态分布：
+### `查看 xx 数据的分布情况：`
+
+        fig, ax = plt.subplots(1, 2, figsize=(18,4))
+
+        time_val = train_transaction['TransactionAmt'].values
+
+        sns.distplot(time_val, ax=ax[0], color='r')
+        ax[0].set_title('Distribution of TransactionAmt', fontsize=14)
+        ax[1].set_xlim([min(time_val), max(time_val)])
+
+        sns.distplot(np.log(time_val), ax=ax[1], color='b')
+        ax[1].set_title('Distribution of LOG TransactionAmt', fontsize=14)
+        ax[1].set_xlim([min(np.log(time_val)), max(np.log(time_val))])
+
+        plt.show()
+
+
+<div align=center><img  width="580" height="180" src="./seaborn_and_Matplotlib/distplot.jpg"/></div>
+
+
+
+### `查看数据 对数化 之后是否符合正态分布：`
 
     plt.hist(np.log1p(train.loc[train['totals.transactionRevenue'].isna() == False, 'totals.transactionRevenue']));
     plt.title('Distribution of revenue');
