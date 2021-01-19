@@ -2,7 +2,7 @@
 
 学习机器学习时，最好使用真实数据，而不是人工数据集。幸运的是，有上千个开源数据集 可以进行选择，涵盖多个领域。以下是一些可以查找的数据的地方：
 
-*   __流行的开源数据仓库：__ 
+*   __流行的开源数据仓库：__  
     
     *   [UC	Irvine	Machine	Learning Repository](https://link.jianshu.com/?t=http%3A%2F%2Farchive.ics.uci.edu%2Fml%2F)
     
