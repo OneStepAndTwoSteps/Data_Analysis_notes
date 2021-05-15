@@ -200,12 +200,22 @@ __第四幅图:__ 如果你得到的是第四幅图的情况，表示你需要�
 写法：就是将随机梯度下降中每次只迭代一个值改成迭代随机的一段训练集。
 
 
-### 梯度下降过程和推导
+## ` 梯度下降过程和推导 - 参考资料`
+
+* 梯度下降（Gradient Descent）小结：https://www.cnblogs.com/pinard/p/5970503.html#!comments
+
+<div align=center><img src="./static/2.jpg"/></div>
+
+
+<div align=center><img wight= height=250 src="./static/1.jpg"/></div>
+
 
 *   https://www.cnblogs.com/solong1989/p/9900867.html 梯度下降算法过程详细解读
 
 *   https://blog.csdn.net/qq_41800366/article/details/86583789 梯度下降算法原理讲解——机器学习
 
+
+* `最小二乘法和梯度下降法求解最优参数θ之间的区别：`https://www.zhihu.com/question/20822481/answer/576692537
 
 ### 总结：
 
