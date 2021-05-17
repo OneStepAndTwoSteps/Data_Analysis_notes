@@ -1,6 +1,10 @@
-## StratifiedKFold和KFold的主要区别
+## StratifiedKFold 和 KFold 的主要区别
 
-StratifiedKFold用法类似Kfold，但是他是分层采样，确保训练集，测试集中各类别样本的比例与原始数据集中相同。
+`StratifiedKFold` 用法类似 `Kfold` ，但是他是分层采样，确保训练集，测试集中各类别样本的比例与原始数据集中相同。
+
+### 其实
+
+`StratifiedKFold` 并不一定优于 `KFold` 还是要看数据的分布，如果训练集和测试集里类别比例差异不是大的离谱，两者几乎训练的效果没有什么差异。
 
 __举个例子：__
 
@@ -24,9 +28,10 @@ __举个例子：__
 __KFold:__
 
     #按顺序分别取第1-2、3-4、5-6和7-8的数据。
+
     kfolder = KFold(n_splits=4,random_state=1)
     for train, test in kfolder.split(X,y):
-    print('Train: %s | test: %s' % (train, test),'\n')
+        print('Train: %s | test: %s' % (train, test),'\n')
 
 __out__
 
@@ -43,9 +48,10 @@ __StratifiedKFold:__
 
     #依照标签的比例来抽取数据，本案例集标签0和1的比例是1：1
     #因此在抽取数据时也是按照标签比例1：1来提取的
+
     sfolder = StratifiedKFold(n_splits=4,random_state=1)
     for train, test in sfolder.split(X,y):
-    print('Train: %s | test: %s' % (train, test))
+        print('Train: %s | test: %s' % (train, test))
 
 __out__
 
