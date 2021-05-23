@@ -80,7 +80,7 @@ __在 logisticregression 和 SVC 中有有一个方法 .decision_function 可以
 #### 展示图
 
 
-<div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/Data_Analysis/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/static/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/roc%E6%9B%B2%E7%BA%BF/5-1.png"/></div>
+<div align=center><img src="./static/5-1.png"/></div>
 
 
 
