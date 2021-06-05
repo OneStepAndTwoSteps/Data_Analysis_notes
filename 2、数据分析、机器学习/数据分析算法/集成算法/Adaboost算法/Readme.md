@@ -134,6 +134,19 @@ __假设我们只进行 3 轮的训练，选择 3 个弱分类器，组合成一
 
 实际上 AdaBoost 算法是一个框架，我们可以指定任意的分类器，通常我们可以采用 CART 分类器作为弱分类器。
 
+
+## `案例：`
+
+### 一、
+
+<div align=center><img width="600" height="800" src="./static/1.jpg"/></div>
+
+### 二、
+
+<div align=center><img width="600" height="800" src="./static/2.jpg"/></div>
+
+
+
 ## 总结：
 
 ### Adaboost训练流程：
