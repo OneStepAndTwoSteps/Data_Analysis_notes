@@ -148,6 +148,8 @@ GBDT使用的就是CART算法，所以GBDT建树的过程和CART一致。 只是
 
 
 
+<div align=center><img width="800" height="500" src="./static/gbdt/二元GBDT分类算法.jpg"/></div>
+
 
 
 
