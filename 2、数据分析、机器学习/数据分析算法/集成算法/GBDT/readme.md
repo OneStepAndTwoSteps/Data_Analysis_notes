@@ -87,7 +87,7 @@
 
 
 
-## `二、GBDT 回归树`
+## `二、GBDT回归树`
 
 `和提升树差不多，只不过拟合的不是残差，而是负梯度。`
 
@@ -106,9 +106,7 @@
 
 ### `GBDT 拟合负梯度：`
 
-
 <div align=center><img  src="./static/gbdt/gbdt的负梯度拟合.jpg"/></div>
-
 
 `公式介绍：`
 
