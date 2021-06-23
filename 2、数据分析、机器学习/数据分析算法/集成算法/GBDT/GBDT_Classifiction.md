@@ -5,22 +5,39 @@
 
 <div align=center><img  src="./static/GBDT_Classifiction/data.png"/></div>
 
+## `多元GBDT分类算法 - 损失函数`
 
-## `损失函数`
+假设类别数为N，则此时我们的 `对数似然损失函数` 为：
 
-假设类别数为N，则此时我们的对数似然损失函数为：
+<div align=center><img  src="./static/GBDT_Classifiction/likelihood.png"/></div>
 
-<div align=center><img  src="./static/GBDT_Classifiction/loss_function.png"/></div>
+最小化 `损失函数` 其实就是在 `似然函数` 前面加一个 `负号` 可得：
 
-### 公式介绍：
+<div align=center><img width="600" height="120"  src="./static/GBDT_Classifiction/loss_function.jpg"/></div>
+
+
+可以将 `预测概率为 p ` 的函数转化成，预测 `对数赔率` 函数
+
+<div align=center><img  width="800" height="400"  src="./static/GBDT_Classifiction/loss_function_transform.jpg"/></div>
+
+
+
+### 损失函数 - 公式介绍：
 
 * `yi：`对于二分类，正例即为1，负例即为 0。
 
-* `p：`预测概率，从上面的数据中可以看出喜欢 `Loves Troll 2` 的概率为:
+* `p：`预测概率，计算步骤如下：
 
-<div align=center><img  src="./static/GBDT_Classifiction/probability.png"/></div>
-   
-    log(odds) = log(2/1) 
+    <div align=center><img  src="./static/GBDT_Classifiction/probability.png"/></div>
+    
+    `注意：`公式中的 `log` 是以 `e` 为底的 `ln`:
+
+    喜欢 `Loves Troll 2` 的人数为 `2`，不喜欢的人数为 `1` ，则有： 
+
+        log(odds) = log(2/1) = ln(2) ≈ 0.7
+
+        p = e ^ 0.7 / (1+ e ^ 0.7) ≈ 0.67 
+
 
 
 对于上述的数据则有：
@@ -30,10 +47,19 @@
     log(0.67) + log(0.67) + log(1 - 0.67) 
 
 
+## 流程：
 
+### `Step 1：`
 
+* 初始化模型 `F0(x)`：
 
+    <div align=center><img width="800" height="200" src="./static/GBDT_Classifiction/步骤1.jpg"/></div>
 
+    因为要 `最小化损失函数`，所以求导为 `0` 可得，p = 2/3:
+
+    <div align=center><img width="800" height="250" src="./static/GBDT_Classifiction/步骤1-2.jpg"/></div>
+
+    
 
 
 
