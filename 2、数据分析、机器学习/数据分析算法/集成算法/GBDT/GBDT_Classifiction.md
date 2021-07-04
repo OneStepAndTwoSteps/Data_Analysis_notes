@@ -52,6 +52,8 @@
 
 ## 流程：
 
+### `第一次迭代：`
+
 ### `Step 1：`
 
 * 初始化模型 `F0(x)`：
@@ -86,14 +88,14 @@
     <div align=center><img width="800" height="500" src="./static/GBDT_Classifiction/step2.jpg"/></div>
 
 
-* 第一步：`计算负梯度`，简化得到结果为：`Observed - p`
+* `第一步 A) `：`计算负梯度`，简化得到结果为：`Observed - p`
 
     <div align=center><img width="800" height="410" src="./static/GBDT_Classifiction/step2-1.jpg"/></div>
 
 
     通过 step 1 我们可以得到 p = 2/3 = 0.67
 
-    那么我们可以得到 负梯度的值 rim 为：`Observed - p` ： 
+    那么我们可以得到 负梯度的值 `rim` 为：`Observed - p` ： 
 
         r11 = 1 - 0.67 = 0.33
 
@@ -105,12 +107,12 @@
 
     <div align=center><img  src="./static/GBDT_Classifiction/step2-1残差.jpg"/></div>
 
-* 第二步：`分配叶子节点`，Rjm。
+* `第二步 B)` ：`分配叶子节点`，`Rjm` 。
 
     <div align=center><img  src="./static/GBDT_Classifiction/step2-2.jpg"/></div>
 
 
-* 第三步：`对每个叶子节点计算最小损失值`,其中yjm：
+* `第三步 C)` ：`对每个叶子节点计算最小损失值`, 其中 `yjm` ：
 
 
     * `m：`为索引，表示地几棵树
@@ -128,12 +130,12 @@
 
         <div align=center><img  src="./static/GBDT_Classifiction/step2-3-3.jpg"/></div>
 
-    * 接下来我们要计算 γ 的最佳值，其中我们可以通过求导的方法来得到，但是这样计算比较复杂，所以我们采用梯度提升回归方法：
+    * 接下来我们要计算 `γ` 的最佳值，其中我们可以通过直接求导为0的方法来得到，但是这样计算比较复杂，所以我们采用 `gbdt_regression` 方法，首先 `损失函数` 等于该式子：
 
     
         <div align=center><img  src="./static/GBDT_Classifiction/step2-3-4.jpg"/></div>
 
-    * 通过直接求导方式得到最优 γ 比较难，所以我们可以通过近似的方式，通过泰勒二项展开进行近似：
+    * 因为直接求导方式得到最优 `γ` 比较难，所以我们可以通过近似的方式，把 `损失函数` 进行 `泰勒二项展开` 进行近似：
 
         <div align=center><img  src="./static/GBDT_Classifiction/step2-3-5.jpg"/></div>
 
@@ -141,10 +143,109 @@
 
         <div align=center><img  src="./static/GBDT_Classifiction/step2-3-6.jpg"/></div>
 
-    * 此时我们就得到了 `γ` 的表达式
+    * 将导数设为0，此时我们就得到了 `γ` 的表达式
 
         <div align=center><img  src="./static/GBDT_Classifiction/step2-3-7.jpg"/></div>
 
+
+    * `γ` 表达式中的分子，其实就是我们之前求解的损失函数的负梯度，`observed - p`
+
+    * `γ` 表达式中的分母，其实就是我们之前求解的损失函数的负梯度，再次求导：
+
+        <div align=center><img  src="./static/GBDT_Classifiction/step2-3-8.jpg"/></div>
+
+        <div align=center><img  src="./static/GBDT_Classifiction/step2-3-9.jpg"/></div>
+
+        在前面的计算中，我们已经得到 log(1-p) 的值，这里可以直接拿来引用。
+
+        <div align=center><img  src="./static/GBDT_Classifiction/step2-3-10.jpg"/></div>
+
+        最后我们得到：`γ` 的分母为：`p * (1-p)`
+
+        <div align=center><img  src="./static/GBDT_Classifiction/step2-3-11.jpg"/></div>
+
+        其中 `Residual(残差)` 就是 `observed - p`
+
+    * 得到 `γ` 的表达式之后，我们就可以计算 `步骤c`：
+
+        `γ1,1:`
+        <div align=center><img  src="./static/GBDT_Classifiction/step2-3-12.jpg"/></div>
+
+
+        [γ2,1 计算步骤，可点击:](https://www.youtube.com/watch?v=StWY5QWMXCw&t=1567s)
+        <div align=center><img  src="./static/GBDT_Classifiction/step2-3-13.jpg"/></div>
+
+
+* `第四步 D) `：添加学习率，更新模型，得到 `F1(x)` 的结果：
+
+    <div align=center><img  src="./static/GBDT_Classifiction/step2-4.jpg"/></div>
+
+
+
+### `接下来进行，第二次迭代：`
+
+
+* 比如，按照年龄是否 `大于 65 `来划分：
+
+    <div align=center><img  src="./static/GBDT_Classifiction/第二次迭代.jpg"/></div>
+
+
+`第一步`：计算 `ri,2 （负梯度）` ：
+
+*  其实在之前我们就已经得到了 负梯度的公式为 `observed - p `
+
+        p = e ^ log(odds) / (1+ e ^ log(odds))
+
+    `样本1： `
+    
+        不满足 > 65 岁，并且喜欢 Troll 2，那么他的 observed = 1
+    
+        log(odds) 的值其实就是之前模型 F1(X) 得到的结果，即 1.89
+
+        p 通过计算可得：e^1.89 / (1 + e^1.89) ≈ 0.87 
+
+        所以 observed - p = 1 - 0.87 = 0.13
+
+    `样本2：`
+
+        满足 > 65 岁，所以在分叶子节点的时候他会在另一侧，并且喜欢 Troll 2，那么他的 observed = 1
+    
+        log(odds) 的值其实就是之前模型 F1(X) 得到的结果，即 0.07
+
+        p 通过计算可得：e^0.07 / (1 + e^0.07) ≈ 0.52
+
+        所以 observed - p = 1 - 0.52 = 0.48
+
+    `样本3：`
+
+        不满足 > 65 岁，并且不喜欢 Troll 2，那么他的 observed = 0
+
+        log(odds) 的值其实就是之前模型 F1(X) 得到的结果，即 0.07
+
+        p 通过计算可得：e^0.07 / (1 + e^0.07) ≈ 0.52
+
+        所以 observed - p = 0 - 0.52 = -0.52
+            
+
+`第二步`：负梯度计算完成之后 `划分叶子节点`：
+
+
+`第三步`：最优化 `γ`，得到 `γ` 的值：
+
+`第四步`：添加学习率，更新模型：
+
+
+
+<div align=center><img  src="./static/GBDT_Classifiction/第二次迭代2.jpg"/></div>
+
+### `预测：`
+
+因为是分类预测，所以最后我们都希望得到的结果是一个概率形式，首先经过 `m` 次迭代，我们得到模型 `Fm(x)` 的值，这个值就是 `log(odds) 对数赔率`，然后根据 `p` 的计算公式计算出最后的概率，然后根据划分的阈值进行分类。
+
+<div align=center><img  src="./static/GBDT_Classifiction/预测.jpg"/></div>
+
+最后的到的结果为 0.97 > 0.05 所以预测为 喜欢 Troll2 。
+ 
 
 ## 要点说明：
 
@@ -159,6 +260,6 @@
 
 
 
-
+* https://www.youtube.com/watch?v=StWY5QWMXCw&t=1567s
 
 
