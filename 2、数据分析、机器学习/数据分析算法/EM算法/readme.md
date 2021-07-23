@@ -60,13 +60,14 @@ EM 算法的核心思想非常简单，分为两步：
 * 紧接着我们通过 `q(z) = 1/c * p(x,z|θ)` 推出 `q(z)` 其实就是一个 `后验概率`。
 
 
-### 广义 EM
+### `广义 EM`
 
 
 <div align=center><img width="800" height="400" src="./static/广义em.jpg"/></div>
 
+补充说明：
 
-
+* 关于 `Eq[logp]` 为什么等于 `H[q]` (`熵`) ：https://zhuanlan.zhihu.com/p/74075915
 
 
 ## `EM 资料`
