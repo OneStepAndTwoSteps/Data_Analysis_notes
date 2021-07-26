@@ -72,6 +72,9 @@ EM 算法的核心思想非常简单，分为两步：
 
 ## `EM 资料`
 
+* https://zhuanlan.zhihu.com/p/85236423
+
+
 * https://zhuanlan.zhihu.com/p/343353302
 
 
