@@ -30,6 +30,13 @@
         * `随机近似`：`MCMC` 
 
 
+## 资料：
+
+
+
+* 机器学习-白板推导系列(十二)-变分推断（Variational Inference）笔记：https://zhuanlan.zhihu.com/p/345597656
+
+
 
 
 
