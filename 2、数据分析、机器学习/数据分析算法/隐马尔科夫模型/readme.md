@@ -74,6 +74,10 @@
    <div align=center><img  src="./static/马尔科夫状态转移矩阵.jpg"/></div>
 
 
+* `周期性：`https://www.zhihu.com/question/366011083
+
+
+
 
 
 ## `参考：`

@@ -20,6 +20,10 @@
 
     <div align=center><img  src="./static/接受和拒绝条件.jpg"/></div>
 
+    * 因为 U 是随机取的，那我们采到的样本即使满足这个条件 f(Y) / C*g(Y) >= U 也可能不在 f(Y) 分布中的，这里就是一种采样的近似模拟，不是100%的等价于采样原分布。但是这个近似的分布很多时候也可以满足我们的需求。
+
+
+
 
 
 ### `接受拒绝 - 采样存在的问题：`
@@ -43,8 +47,12 @@
 
 * 马尔科夫链就是帮助找到这些复杂概率分布的对应的采样样本集的白衣骑士。
 
+* 为什么可以通过 `马尔科夫链` 来进行采样，因为初始任意简单概率分布比如 `高斯分布π0(x)` 采样得到 `状态值x0` ，基于 `条件概率分布P(x|x0)` 采样 `状态值x1` ，一直进行下去，当状态转移进行到一定的次数时，比如到 `n次` 时，我们认为此时的 `采样集(xn,xn+1,xn+2,...)` 即是符合我们的`平稳分布` 的 `对应样本集` ，可以用来做蒙特卡罗模拟求和了。
+
 
 * `M-H的确没有选择的函数比目标分布要大的要求，因为他的采样方式是通过马尔科夫链转移，而不是直接的拒绝采样。`关于选择转移矩阵技巧，如果是离散的转移矩阵，其实随机选择一个也行，关于条件概率，则一般喜欢使用正态分布，因为对于的算法库API功能丰富，方便采样。
+
+更多内容：https://github.com/OneStepAndTwoSteps/Data_Analysis_notes/blob/master/2%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/readme.md
 
 
 ## `HM`
@@ -93,6 +101,69 @@
 
     * `12`、当然 `t > T` 时刻之后，也需要进行拒绝采样的判断，还是要进行 `u < α` 的比较的。
 
+## `吉布斯采样`
+
+比如，现在对概率分布 π(x,y) 进行采样：
+
+
+<div align=center><img src="./static/吉布斯采样/图.jpg"/></div>
+
+
+* 假设现在在概率分布 π(x,y) 中随意取两点 A(x1,y1) 和 B(x1,y2)，则有公式：
+
+    <div align=center><img src="./static/吉布斯采样/1.jpg"/></div>
+
+* 如果在 π(A) 左右两边分别乘以 π(y2|x1),则有：
+
+    <div align=center><img src="./static/吉布斯采样/2.jpg"/></div>
+
+* 则形成了一个 `细致平衡条件 π(i)P(i,j) = π(j)P(j,i)`
+
+    <div align=center><img src="./static/吉布斯采样/3.jpg"/></div>
+
+* `既然满足细致平衡条件，那么就可以使用马尔科夫链进行采样`
+
+
+* 接下来我们就可以将 `π(y2|x1) 称为状态转移概率 P(A -> B)`,则有：
+
+    <div align=center><img src="./static/吉布斯采样/4.jpg"/></div>
+
+推广：
+
+* 同样，如果有一个点 C(x2,y1) ,我们同样可以使用刚刚的方法，则有：
+
+    <div align=center><img src="./static/吉布斯采样/5.jpg"/></div>
+
+* 意味着：
+
+    <div align=center><img src="./static/吉布斯采样/6.jpg"/></div>
+
+
+和 MH 不一样的地方在于：
+
+* MH 的公式为：
+
+    <div align=center><img src="./static/吉布斯采样/MH细致平衡条件.jpg"/></div>
+
+    在 MH 中并不是所有的样本都会被接受，他是会根据 α 来做一定概率上的拒绝的。
+
+* Gibbs 采样：
+
+    吉布斯采样不一样，他的 `P(A -> B) = π(y2|x1)`，其中这个 `π(y2|x1)` 是已知的，这意味着这他不拒绝，会接受全部样本。
+
+但是 `Gibbs 采样` 还是存在缺陷，`只允许在平行坐标轴方向进行采样`(要么平行 X 轴采样，要么平行 Y 轴采样)：
+
+* 比如现在有一点 D ，已知 A B 的情况下不能对它采样，因为对于 A 和 B 来说 D 的 x坐标 或者 y坐标 和它们没有一个一样。
+
+    <div align=center><img src="./static/吉布斯采样/图2.jpg"/></div>
+
+    <div align=center><img src="./static/吉布斯采样/7.jpg"/></div>
+
+### `Gibbs 采样的基本步骤：`
+
+
+
+<div align=center><img src="./static/吉布斯采样/Gibbs采样步骤.jpg"/></div>
 
 
 ## 参考：
@@ -108,8 +179,14 @@
 
 * `MCMC(三)MCMC采样和M-H采样: `https://www.cnblogs.com/pinard/p/6638955.html#!comments
 
-* `蒙特卡洛（Monte Carlo, MCMC）方法的原理和应用: `https://www.bilibili.com/video/BV17D4y1o7J2
 
+* `MCMC(四)Gibbs采样:` https://www.cnblogs.com/pinard/p/6645766.html
+
+
+* `Video - 蒙特卡洛（Monte Carlo, MCMC）方法的原理和应用: `https://www.bilibili.com/video/BV17D4y1o7J2
+
+
+* `Video - Gibbs采样:` https://www.bilibili.com/video/BV1ey4y1t7Jb
 
 
 
