@@ -164,10 +164,10 @@
     但是算法存在问题，当复杂度高的时候求解难度大。
 
 
-前向和后相算法：
+`前向和后相算法：`
 
 
-* 前向概率：
+* `前向概率：`
 
     在前向算法中，通过定义 `“前向概率”` 来定义动态规划的这个局部状态。什么是前向概率呢, 其实定义很简单，记为：
 
@@ -175,24 +175,30 @@
 
     即为在 λ 模型给定的情况下，定义时刻t时隐藏状态为 `qi`, 观测状态的序列为 `o1,o2,...ot` 的概率为前向概率。
 
-    前向算法公式：
+    `前向算法公式：`
 
     <div align=center><img  src="./static/隐马尔科夫模型/前向算法1.jpg"/></div>
 
-    中括号意思就是当前层的所有N个隐状态与下一层的第i个状态的连接，里面的 α 是到时刻t部分观测序列为 `o1,o2,...ot` ，且在 t 时刻处于状态 j 的概率，a是 t 时刻第 j 个状态到 t+1 时刻第 i 个状态的转移情况（转移矩阵给出）；
+    中括号意思就是当前层的所有 `N个隐状态` 与下一层的 `第i个状态` 的连接，里面的 `α` 是到 `时刻t` 部分 `观测序列为 o1,o2,...ot` ，且在 `t 时刻` 处于 `状态 j` 的概率，`a` 是 `t 时刻` 第 `j 个状态` 到 `t+1 时刻` 第 `i 个状态` 的转移情况（转移矩阵给出）；
     
-    中括号外面乘以的b是当前状态下，对应观测情况发生的概率，比如当前是牛市，那么牛市对应上涨的概率是什么呢? 就是b。
+    `中括号` 外面乘以的 `b` 是当前状态下，`对应观测情况发生的概率`，比如当前是牛市，那么牛市对应上涨的概率是什么呢? 就是b。
 
 
     <div align=center><img width="400" height="200"  src="./static/隐马尔科夫模型/前向算法2.jpg"/></div>
 
-    总结得到：
+    `总结得到：`
 
     <div align=center><img  src="./static/隐马尔科夫模型/前向算法3.jpg"/></div>
 
+    `案例：`
+
+    <div align=center><img  src="./static/隐马尔科夫模型/前向算法5.jpg"/></div>
 
 
-* 后向概率：
+    <div align=center><img  src="./static/隐马尔科夫模型/前向算法4.jpg"/></div>
+
+
+* `后向概率：`
 
 
 
@@ -200,12 +206,12 @@
 ## `参考：`
 
 
-* MCMC(二)马尔科夫链：https://www.cnblogs.com/pinard/p/6632399.html
+* `MCMC(二)马尔科夫链：`https://www.cnblogs.com/pinard/p/6632399.html
 
 
-* 隐马尔科夫模型HMM（二）前向后向算法评估观察序列概率：https://www.cnblogs.com/pinard/p/6955871.html#!comments
+* `第一个问题：隐马尔科夫模型HMM（二）前向后向算法评估观察序列概率：`https://www.cnblogs.com/pinard/p/6955871.html#!comments
 
 
-* 隐马尔科夫模型详解：https://www.bilibili.com/video/BV13C4y1W7iB
+* `Video - 隐马尔科夫模型详解：`https://www.bilibili.com/video/BV13C4y1W7iB
 
 
