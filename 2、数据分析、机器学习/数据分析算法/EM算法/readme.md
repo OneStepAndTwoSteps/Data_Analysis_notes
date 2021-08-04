@@ -38,6 +38,9 @@ EM 算法的核心思想非常简单，分为两步：
 
 ## `EM 公式推导：`
 
+
+
+
 ### `推导一：`
 
 <div align=center><img width="800" height="400" src="./static/EM公式推导.jpg"/></div>
@@ -70,6 +73,14 @@ EM 算法的核心思想非常简单，分为两步：
 * 关于 `Eq[logp]` 为什么等于 `H[q]` (`熵`) ：https://zhuanlan.zhihu.com/p/74075915
 
 
+### `EM 算法为什么需要通过求解下界，来求最大值，而不能直接求解析解：`
+
+* `EM算法理解:` https://blog.csdn.net/u013488563/article/details/74330461
+
+<div align=center><img  src="./static/为什么无法直接对含隐变量的式子求解析解.jpg"/></div>
+
+
+
 ## `EM 资料`
 
 * https://zhuanlan.zhihu.com/p/85236423
@@ -100,6 +111,7 @@ EM 算法的核心思想非常简单，分为两步：
     [关于联合概率分布和边缘分布 👆](https://www.zybuluo.com/blueband21c/note/1790855)
 
 
-* https://www.cnblogs.com/jerrylead/archive/2011/04/06/2006936.html
+* `（EM算法）The EM Algorithm: `: https://www.cnblogs.com/jerrylead/archive/2011/04/06/2006936.html
 
  
+* `EM算法理解:` https://blog.csdn.net/u013488563/article/details/74330461
