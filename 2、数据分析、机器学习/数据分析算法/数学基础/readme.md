@@ -14,7 +14,7 @@
 
 * 概率统计中期望就是积分，拿 EM算法 举例，表示方式可以：
 
-<div align=center><img width="850" height="250"  src="./static/期望的性质.jpg"/></div>
+<div align=center><img width="850" height="280"  src="./static/期望的性质.jpg"/></div>
 
 
 <div align=center><img src="./static/期望和积分.jpg"/></div>
@@ -22,7 +22,11 @@
 
 `积分` 转换 `期望` 的时候，需要将其中的 `某个乘子` 作为概率分布，因此用了这种巧妙转换把 `q(Φ)` 拿出来，然后转换为他的 `期望` 。
 
+## 概率分布和概率密度函数：
 
+* 如何简单理解概率分布函数和概率密度函数？：https://blog.csdn.net/anshuai_aw1/article/details/82626468
+
+* 概率密度函数：https://zh.wikipedia.org/wiki/%E6%A9%9F%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B8
 
 
 ## `矩阵求导：`
