@@ -1,5 +1,14 @@
  # EM 期望最大算法
 
+## `公式:` 
+
+* `EM 公式: `
+    
+    <div align=center><img src="./static/公式.png"/></div>
+
+
+## `介绍：`
+
 主要用于解决包含 `隐变量` 的混合模型的参数估计（极大似然问题）
 
 EM 算法的核心思想非常简单，分为两步：
@@ -77,7 +86,7 @@ EM 算法的核心思想非常简单，分为两步：
 
 * `EM算法理解:` https://blog.csdn.net/u013488563/article/details/74330461
 
-<div align=center><img  src="./static/为什么无法直接对含隐变量的式子求解析解.jpg"/></div>
+    <div align=center><img  src="./static/为什么无法直接对含隐变量的式子求解析解.jpg"/></div>
 
 
 
