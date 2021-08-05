@@ -200,12 +200,21 @@
 
 * `后向概率：`
 
+    `文字说明：`
+
+    <div align=center><img  src="./static/隐马尔科夫模型/后向概率1-1.jpg"/></div>
+
+    `后向概率推导：`
+
+    <div align=center><img  src="./static/隐马尔科夫模型/后向概率推导.jpg"/></div>
+
+
 
     `隐马尔科夫模型HMM（二）前向后向算法评估观察序列概率：`https://www.cnblogs.com/pinard/p/6955871.html#!comments
 
+    `HMM模型 - 前后向算法：`http://www.armigo.fun/2020/02/23/HMM/
 
-
-### 第二个问题：鲍姆-韦尔奇算法求解 HMM 参数
+### `第二个问题：鲍姆-韦尔奇算法求解 HMM 参数`
 
 
 
@@ -219,6 +228,8 @@
 
 
 * `MCMC(二)马尔科夫链：`https://www.cnblogs.com/pinard/p/6632399.html
+
+* `HMM模型：`http://www.armigo.fun/2020/02/23/HMM/
 
 
 * `第一个问题：隐马尔科夫模型HMM（二）前向后向算法评估观察序列概率：`https://www.cnblogs.com/pinard/p/6955871.html#!comments
