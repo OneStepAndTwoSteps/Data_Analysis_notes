@@ -232,7 +232,11 @@ __2）近似算法__
 所以在训练之前的确并不知道子树的样本集合，但是在父节点特征分裂处理完毕后是知道的，这时候就可以并行选择了。
 
 
-## 参考：
+## 资料：
 
 
--《[笔记参考来源](https://blog.csdn.net/v_july_v/article/details/81410574)》
+* `【机器学习】决策树（下）——XGBoost、LightGBM（非常详细）：`https://zhuanlan.zhihu.com/p/87885678
+
+* `XGBoost算法原理小结: ` https://www.cnblogs.com/pinard/p/10979808.html#!comments
+
+* 《[笔记参考来源](https://blog.csdn.net/v_july_v/article/details/81410574)》

@@ -4,17 +4,27 @@
 
 在数学中的最优化问题中，`拉格朗日乘数法`（以数学家Joseph-Louis Lagrange命名）是一种  `寻找多元函数在其变量受到一个或多个条件的约束时的极值` 的方法。
 
+<div align=center><img src="./static/拉格朗日求最优化.jpg"/></div>
+
+
+
+
+
 ## `KKT `
 
 `Karush-Kuhn-Tucker (KKT) ` 条件是 `非线性规划(nonlinear programming)` 最佳解的必要条件。`KKT` 条件将 `Lagrange乘数法(Lagrange multipliers)` 所处理涉及等式的约束优化问题推广至 `不等式` 。
 
 ## `svm的前置数学知识`
 
-![Image_text](../static/lagrange_dual.JPG)
+![Image_text](./static/lagrange_dual.JPG)
 
 
 
 ## 参考资料：
+
+
+
+* `拉格朗日函数和KKT：`https://www.cnblogs.com/mo-wang/p/4775548.html
 
 
 * [拉格朗日乘数法理解](https://zhuanlan.zhihu.com/p/39354973)
