@@ -14,6 +14,24 @@
 
 * `第一部分：`
 
+    <div align=center><img  src="./static/哈达玛乘积.jpg"/></div>
+
+    可以根据线性关系的链式求导结论：
+
+    <div align=center><img  src="./static/线性链式求导.jpg"/></div>
+
+    得到：
+
+    * `da/dz * aT` 其中的 `da/dz` 就是哈达玛乘积中的两项
+
+    根据逐元素求导：
+
+    <div align=center><img  src="./static/逐元素求导.jpg"/></div>
+
+
+
+* `第二部分：`
+
     <div align=center><img  src="./static/2.jpg"/></div>
 
     <div align=center><img  src="./static/1.jpg"/></div>
@@ -28,14 +46,15 @@
 
     `根据公式可以表示成：`
 
-        da/dz * aT  , 其中：da/dz = δl 
-    `
-    则有：`
+    *    `da/dz * aT`  , 其中：`da/dz = δl `
+
+    
+    `则有：`
 
     <div align=center><img  src="./static/3.jpg"/></div>
 
 
-* `第二部分：`
+* `第三部分：`
 
 
     <div align=center><img  src="./static/4.jpg"/></div>
