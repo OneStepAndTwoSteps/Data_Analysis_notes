@@ -78,7 +78,7 @@
 
     <div align=center><img  src="./static/1.jpg"/></div>
 
-    可以根据线性关系的链式求导结论直接得到：
+    可以根据线性关系的链式求导结论直接得到,或者按上面 `chain rule` 推也可以：
 
     <div align=center><img  src="./static/线性关系的链式求导结论.jpg"/></div>
 
@@ -134,3 +134,6 @@
 
 
 `详解反向传播算法(下):` https://zhuanlan.zhihu.com/p/25416673
+
+
+`神经网络BP反向传播算法原理和详细推导流程`: https://www.huaweicloud.com/zhishi/arc-11963114.html
