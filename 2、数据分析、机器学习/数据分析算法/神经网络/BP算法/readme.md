@@ -65,10 +65,11 @@
 
     * `da/dz * aT` 其中的 `da/dz` 就是哈达玛乘积中的两项
 
-    根据 chain rule ,C 为损失函数：
+    根据 `chain rule` , `C` 为`损失函数`：
 
     <div align=center><img  src="./static/6.jpg"/></div>
 
+    <div align=center><img  src="./static/7.jpg"/></div>
 
 
 * `第二部分：`
