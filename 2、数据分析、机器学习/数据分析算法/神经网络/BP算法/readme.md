@@ -65,9 +65,9 @@
 
     * `da/dz * aT` 其中的 `da/dz` 就是哈达玛乘积中的两项
 
-    根据逐元素求导：
+    根据 chain rule ,C 为损失函数：
 
-    <div align=center><img  src="./static/逐元素求导.jpg"/></div>
+    <div align=center><img  src="./static/6.jpg"/></div>
 
 
 
@@ -132,4 +132,4 @@
 
 
 
-
+`详解反向传播算法(下):` https://zhuanlan.zhihu.com/p/25416673
