@@ -57,15 +57,14 @@
 
     <div align=center><img  src="./static/哈达玛乘积.jpg"/></div>
 
-    可以根据线性关系的链式求导结论：
+    可以根据线性关系的链式求导结论直接得到：
 
     <div align=center><img  src="./static/线性链式求导.jpg"/></div>
 
-    得到：
 
-    * `da/dz * aT` 其中的 `da/dz` 就是哈达玛乘积中的两项
+    或者根据 `chain rule` , `C` 为`损失函数`：
 
-    根据 `chain rule` , `C` 为`损失函数`：
+    图1 上部分是对一个标量求导（z向量中的第j个标量），对标量求导自然不需要种哈达玛乘积，转成向量的表示形式对应元素相乘就使用哈达玛乘积。
 
     <div align=center><img  src="./static/6.jpg"/></div>
 
