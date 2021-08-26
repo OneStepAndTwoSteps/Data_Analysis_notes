@@ -10,7 +10,7 @@
   下面主要给你讲下Series 和 DataFrame 这两个核心数据结构，他们分别代表着一维的序列和二维的表结构。基于这两种数据结构，Pandas 可以对数据进行导入、清洗、处理、统计和输出。
 
 ## pandas.set_option 选项设置
-  __可以设置pandas的属性，比如打印出来数据时显示多少列，显示多宽等等，可以一次性设置多个格式如下__
+  `可以设置pandas的属性，比如打印出来数据时显示多少列，显示多宽等等，可以一次性设置多个格式如下`
    
   设置pandas保留小数位数为三位
   
@@ -28,7 +28,7 @@
 
     pd.set_option('display.max_columns', None)
     
-  __解决如下问题：__
+  `解决如下问题：`
 
       11 12 13 ... 19 20
       21 22 23 ... 29 30
@@ -39,7 +39,7 @@
   
     pd.set_option('display.max_rows', None)
 
-  __解决如下问题：__
+  `解决如下问题：`
 
       1 2 3
       4 5 6
@@ -51,11 +51,11 @@
 ## `数据结构Series 和 Dataframe`
 
 ### Series 
-  __Series 是个定长的字典序列__ 。说是定长是因为在存储的时候，相当于两个 ndarray，这也是和字典结构最大的不同。因为在字典的结构里，元素的个数是不固定的。
+  `Series 是个定长的字典序列` 。说是定长是因为在存储的时候，相当于两个 ndarray，这也是和字典结构最大的不同。因为在字典的结构里，元素的个数是不固定的。
   
-  __Series 的两个基本属性__ 有两个基本属性：index 和 values。在 Series 结构中，index 默认是 0,1,2,……递增的整数序列，当然我们也可以自己来指定索引，比如 index=[‘a’, ‘b’, ‘c’, ‘d’]。
+  `Series 的两个基本属性` 有两个基本属性：index 和 values。在 Series 结构中，index 默认是 0,1,2,……递增的整数序列，当然我们也可以自己来指定索引，比如 index=[‘a’, ‘b’, ‘c’, ‘d’]。
   
-  __例子：__
+  `例子：`
   
     import pandas as pd
     from pandas import Series, DataFrame
@@ -65,7 +65,7 @@
     print x2
 
   
-  __运行结果：__
+  `运行结果：`
   
     0    1
     1    2
@@ -80,13 +80,13 @@
     
 这个例子中，x1 中的 index 采用的是默认值，x2 中 index 进行了指定。我们也可以采用字典的方式来创建 Series，比如：
 
-__例子：__
+`例子：`
 
     d = {'a':1, 'b':2, 'c':3, 'd':4}
     x3 = Series(d)
     print x3 
 
-__运行结果：__
+`运行结果：`
   
     a    1
     b    2
@@ -98,7 +98,7 @@ __运行结果：__
 
 用于调整数据的shape
 
-__如：__
+`如：`
 
     #生成16个自然数，以2行8列的形式显示
     np.arange(16).reshape(2,8) 
@@ -108,7 +108,7 @@ __如：__
     array([[ 0,  1,  2,  3,  4,  5,  6,  7],
           [ 8,  9, 10, 11, 12, 13, 14, 15]])
 
-__特殊用法：__
+`特殊用法：`
 
   `df.reshape(-1,1)` 将其转换成1列的格式，行的话为-1，表示将整个数据转为一列，其中行数不限制。
 
@@ -441,9 +441,9 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 ### Dataframe 和 Series 的坑
 
-*   ___场景：在一段df数据中我们进行取值__
+*   `_场景：在一段df数据中我们进行取值`
 
-    *   __数据：__
+    *   `数据：`
   
             train_data.head()
 
@@ -457,22 +457,22 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
             4	  0	      3	      1	  2	  0	    2	        2	    1
 
 
-*   __双括号和单括号之间的区别：__
+*   `双括号和单括号之间的区别：`
 
-    *   __双括号取出的 Survived 是 DataFrame 格式__
+    *   `双括号取出的 Survived 是 DataFrame 格式`
 
             type(train_data[['Survived']].head())
 
             pandas.core.frame.DataFrame
 
-    *   __单括号取出的 Survived 是 Series 格式__
+    *   `单括号取出的 Survived 是 Series 格式`
 
             type(train_data['Survived'].head())
             pandas.core.series.Series
 
         取出来为 Series 格式，但是你没有发觉，此后如果想赋值一个新的列，那么无法成功，因为Series中只能有一列。
 
-*   __为列进行赋值后，数据全为NaN：__
+*   `为列进行赋值后，数据全为NaN：`
 
     *   那是因为df赋值时是按照索引意义对应进行赋值，如果两个df之间的索引对不上，那么数据全为NaN
 
@@ -484,9 +484,9 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
             data['car_hours'] = carshare['car_hours'][0:len(data['centroid_lon'])].values
 
 
-*   __df中已存在index或者columns如果需要改名需要使用rename，不可以直接进行替换：__
+*   `df中已存在index或者columns如果需要改名需要使用rename，不可以直接进行替换：`
 
-    *   __数据展示__
+    *   `数据展示`
 
             data = pd.DataFrame(geoCoord).T
             data
@@ -503,7 +503,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
         我们可以看到原先的列中就存在列名，其列名为 0 和 1。现在我们想要对其进行改名
 
 
-    *   __错误做法：__
+    *   `错误做法：`
 
             data = pd.DataFrame(geoCoord).T
             data.columns={'centroid_lon','centroid_lat'}
@@ -519,7 +519,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
         这里我们发现，即使我们在定义列名的时候先指定定义 centroid_lon 再 定义 centroid_lat 也是无用的，他会优先将字符串顺序高的列替换原先的 0 列，优先级低的替换 1 列。
 
-    *   __正确做法：__
+    *   `正确做法：`
 
             data = pd.DataFrame(geoCoord).T
             data.rename(columns={0:'centroid_lon',1:'centroid_lat'},inplace=True)
@@ -538,7 +538,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 ### pandas 数据类型
 
-<!-- Pandas __dtype__ 映射： -->
+<!-- Pandas `dtype` 映射： -->
 
 <!-- <div align=center><img width="700" height="430" src="./static/pandas/3.png"/></div> -->
 
@@ -553,7 +553,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 当有很多特征中不同的数据太多时，使用单热编码相当于就是计算自杀。 我们可以将把它们变成类别代码。 这样我们仍然可以从随机森林算法中的组和匹配之间的相关性中受益。
 
-因为使用的是随机森林所以特征之间的大小对模型没有什么影响所以可以采用分类标签。__注意：还是针对于对距离没有影响的算法才推荐使用。__
+因为使用的是随机森林所以特征之间的大小对模型没有什么影响所以可以采用分类标签。`注意：还是针对于对距离没有影响的算法才推荐使用。`
 
 `2、`使用字典进行多特征转换：
 
@@ -581,7 +581,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
   在数据清洗过程中，一般都会遇到以下这几种情况，下面我来简单介绍一下。
   
-  __1. 删除 DataFrame 中的不必要的列或行：__
+  `1. 删除 DataFrame 中的不必要的列或行：`
   
   Pandas 提供了一个便捷的方法 drop() 函数来删除我们不想要的列或行。比如我们想把“语文”这列删掉。
     
@@ -596,7 +596,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
     coeff_df = pd.DataFrame(train_data.columns.delete(0))
 
 
-  __2. 重命名列名 columns，让列表名更容易识别：__
+  `2. 重命名列名 columns，让列表名更容易识别：`
   
   如果你想对 DataFrame 中的 columns 进行重命名，可以直接使用 rename(columns=new_names, inplace=True) 函数，比如我把列名 Chinese 改成 YuWen，English 改成 YingYu。
   
@@ -619,7 +619,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 
 
-  __3. 去重复的值：__
+  `3. 去重复的值：`
 
   数据采集可能存在重复的行，这时只要使用 drop_duplicates() 就会自动把重复的行去掉。
   
@@ -641,7 +641,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
 
 
-  __4. 格式问题：__
+  `4. 格式问题：`
   
   这是个比较常用的操作，因为很多时候数据格式不规范，我们可以使用 astype 函数来规范数据格式，比如我们把 Chinese 字段的值改成 str 类型，或者 int64 可以这么写：
   
@@ -665,7 +665,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
     df2['Chinese']=df2['Chinese'].str.strip('$')
 
 
-__大小写转换：__
+`大小写转换：`
   
   大小写是个比较常见的操作，比如人名、城市名等的统一都可能用到大小写的转换，在 Python 里直接使用 upper(), lower(), title() 函数，方法如下：
   
@@ -677,9 +677,9 @@ __大小写转换：__
     df2.columns = df2.columns.str.title()
 
   
-__查找空值：__
+`查找空值：`
 
-  数据量大的情况下，有些字段存在空值 NaN 的可能，这时就需要使用 Pandas 中的 __isnull__ 函数进行查找。比如，我们输入一个数据表如下：
+  数据量大的情况下，有些字段存在空值 NaN 的可能，这时就需要使用 Pandas 中的 `isnull` 函数进行查找。比如，我们输入一个数据表如下：
     
     姓名     语文     英语     数学
     
@@ -695,7 +695,7 @@ __查找空值：__
   
   
   
-  如果我们想看下哪个地方存在空值 NaN，可以针对数据表 df进行 __df.isnull()__ :结果如下
+  如果我们想看下哪个地方存在空值 NaN，可以针对数据表 df进行 `df.isnull()` :结果如下
 
         姓名      语文     英语     数学
      0  False    False    False    True   
@@ -705,14 +705,14 @@ __查找空值：__
      4  False    False    False    False   
 
   
-  如果我想知道哪列存在空值，可以使用 __df.isnull().any()__ ，结果如下：
+  如果我想知道哪列存在空值，可以使用 `df.isnull().any()` ，结果如下：
   
     姓名     False
     语文     False
     英语     False
     数学     True
   
-  __直接查看那个列存在空值：__
+  `直接查看那个列存在空值：`
 
     train.isnull().any()[train.isnull().any().values==True]
 
@@ -724,7 +724,7 @@ __查找空值：__
     dtype: bool
 
   
-  __使用 apply 函数对数据进行清洗：__
+  `使用 apply 函数对数据进行清洗：`
   
     apply 函数是 Pandas 中自由度非常高的函数，使用频率也非常高。
     比如我们想对 name 列的数值都进行大写转化可以用：
@@ -747,7 +747,7 @@ __查找空值：__
 
     其中 axis=1 代表按照列为轴进行操作，axis=0 代表按照行为轴进行操作，args 是传递的两个参数，即 n=2, m=3，在 plus 函数中使用到了 n 和 m，从而生成新的 df。
   
-  __使用 apply 函数对数据进行清洗 (进阶) ：__
+  `使用 apply 函数对数据进行清洗 (进阶) ：`
     
     # 将 train['production_companies'] 中的数据作为 x 传给apply函数，在apply中做处理
     # (取得的 production_companies 特征中的所有数据 [该数据是一个字典] 然后做if else判断)
@@ -755,7 +755,7 @@ __查找空值：__
     train['production_companies'].apply(lambda x: [i['name'] for i in x] if x != {} else []).values
 
 
-__自定义函数apply__
+`自定义函数apply`
  
       def search_hundredth(train_content):
           hundredth=train_content.loc[99]
@@ -768,20 +768,20 @@ __自定义函数apply__
 
       2.apply隐式地将group 上所有的列作为自定义函数
 
-__自定义函数 transfrom__
+`自定义函数 transfrom`
 
   apply()里面可以跟自定义的函数，包括简单的求和函数以及复杂的特征间的差值函数等（注：apply不能直接使用agg()方法 / transform()中的python内置函数，例如sum、max、min、'count‘等方法）
 
   transform() 里面不能跟自定义的特征交互函数，因为transform是真针对每一元素（即每一列特征操作）进行计算，也就是说在使用 transform() 方法时，需要记得三点：
 
-  1、__它只能对每一列进行计算__，所以在groupby()之后，.transform()之前是要指定要操作的列，这点也与apply有很大的不同。
+  1、`它只能对每一列进行计算`，所以在groupby()之后，.transform()之前是要指定要操作的列，这点也与apply有很大的不同。
 
   2、由于是只能对每一列计算，所以方法的通用性相比apply()就局限了很多，例如只能求列的最大/最小/均值/方差/分箱等操作
 
   3、transform还有什么用呢?最简单的情况是试图将函数的结果分配回原始的dataframe。也就是说返回的shape是 (len(df)，1)。注：如果与groupby()方法联合使用，需要对值进行去重。
 
 
-__transform 和 apply的相同之处：__
+`transform 和 apply的相同之处：`
 
   都能针对dataframe完成特征的计算，并且常常与groupby()方法一起使用。
 
@@ -858,51 +858,51 @@ __transform 和 apply的相同之处：__
       df1 = DataFrame({'name':['ZhangFei', 'GuanYu', 'a', 'b', 'c'], 'data1':range(5)})
       df2 = DataFrame({'name':['ZhangFei', 'GuanYu', 'A', 'B', 'C'], 'data2':range(5)})
 
-   __1. 基于指定列进行连接__
+   `1. 基于指定列进行连接`
       
    比如我们可以基于 name 这列进行连接。
     
         df3 = pd.merge(df1, df2, on='name')
 
-   __运行结果:__ 
+   `运行结果:` 
    
    ![Image text](./static/1.png)
     
     
-   __2. inner 内连接__
+   `2. inner 内连接`
         
    inner 内链接是 merge 合并的默认情况，inner 内连接其实也就是键的交集，在这里 df1, df2 相同的键是 name，所以是基于 name 字段做的连接：
      
         df3 = pd.merge(df1, df2, how='inner')
-   __运行结果:__ 
+   `运行结果:` 
    
    ![Image text](./static/2-1.png)
     
-   __3. left 左连接__
+   `3. left 左连接`
     
    左连接是以第一个 DataFrame 为主进行的连接，第二个 DataFrame 作为补充。
         
           df3 = pd.merge(df1, df2, how='left')
-   __运行结果:__
+   `运行结果:`
    
   ![Image text](./static/3.png)
 
-   __4. right 右连接__
+   `4. right 右连接`
         
    右连接是以第二个 DataFrame 为主进行的连接，第一个 DataFrame 作为补充。
       
         df3 = pd.merge(df1, df2, how='right')
-   __运行结果:__
+   `运行结果:`
    
   ![Image text](./static/4.png)
 
-   __5. outer 外连接__
+   `5. outer 外连接`
 
    外连接相当于求两个 DataFrame 的并集。
         
         df3 = pd.merge(df1, df2, how='outer'，on= '指定列进行对应合并')
 
-   __运行结果:__
+   `运行结果:`
    
   ![Image text](./static/5.png)
   
@@ -1043,11 +1043,11 @@ __transform 和 apply的相同之处：__
     
  事实上，在 Python 里可以直接使用 SQL 语句来操作 Pandas。
     
- __这里给你介绍个工具：pandasql。__
+ `这里给你介绍个工具：pandasql。`
     
  pandasql 中的主要函数是 sqldf，它接收两个参数：一个 SQL 查询语句，还有一组环境变量 globals() 或 locals()。这样我们就可以在 Python 里，直接用 SQL 语句中对 DataFrame 进行操作，举个例子：import pandas as pd
      
-  __例子：__
+  `例子：`
     
       from pandas import DataFrame
       from pandasql import sqldf, load_meat, load_births
@@ -1057,7 +1057,7 @@ __transform 和 apply的相同之处：__
       print pysqldf(sql)
 
     
-  __运行结果：__
+  `运行结果：`
   
       data1      name
       0      0  ZhangFei
@@ -1245,11 +1245,11 @@ droplevel 处理：可以用于去掉级别的名称或位置索引
 
 ### pandas.mode() 
 
-__返回出现频率最高的值 默认 axis=0，即每一特征中出现最高的值 默认忽略NA值，如果想将NA值计算进去可以使用 dropna=False__
+`返回出现频率最高的值 默认 axis=0，即每一特征中出现最高的值 默认忽略NA值，如果想将NA值计算进去可以使用 dropna=False`
 
-__注意：如果存在频率相同的值会返回两个值__
+`注意：如果存在频率相同的值会返回两个值`
 
-__数据:__
+`数据:`
 
     >>> df = pd.DataFrame([('bird', 2, 2),
     ...                    ('mammal', 4, np.nan),
@@ -1264,14 +1264,14 @@ __数据:__
     spider   arthropod     8    0.0
     ostrich       bird     2    NaN  
 
-__例子1__
+`例子1`
 
     >>> df.mode()
       species  legs  wings
     0    bird   2.0    0.0
     1     NaN   NaN    2.0
 
-__例子2__
+`例子2`
 
     >>> df.mode(dropna=False)
       species  legs  wings
@@ -1292,7 +1292,7 @@ __例子2__
     1    Batman  Batmobile 1940-04-25
     2  Catwoman   Bullwhip        NaT
 
-__删除至少缺少一个元素的行__
+`删除至少缺少一个元素的行`
 
     df.dropna()
 
@@ -1300,7 +1300,7 @@ __删除至少缺少一个元素的行__
     1  Batman  Batmobile 1940-04-25
 
 
-__删除至少缺少一个元素的列。__
+`删除至少缺少一个元素的列。`
 
     df.dropna(axis='columns')
 
@@ -1309,7 +1309,7 @@ __删除至少缺少一个元素的列。__
     1    Batman
     2  Catwoman
 
-__删除缺少所有元素的行。__
+`删除缺少所有元素的行。`
 
     >>> df.dropna(how='all')
 
@@ -1318,7 +1318,7 @@ __删除缺少所有元素的行。__
     1    Batman  Batmobile 1940-04-25
     2  Catwoman   Bullwhip        NaT
 
-__仅保留至少包含2个非NA值的行。__
+`仅保留至少包含2个非NA值的行。`
 
     >>> df.dropna(thresh=2)
 
@@ -1326,7 +1326,7 @@ __仅保留至少包含2个非NA值的行。__
     1    Batman  Batmobile 1940-04-25
     2  Catwoman   Bullwhip        NaT
 
-__删除某列中缺失值：__
+`删除某列中缺失值：`
 
     df['toy'].dropna()
 
@@ -1382,7 +1382,7 @@ __删除某列中缺失值：__
 
 ### pandas.DataFrame.fillna 用指定的方法填充NA/NaN
 
-__DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）__
+`DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）`
         
   value ： 标量，字典，系列或DataFrame用于填充孔的值（例如0），或者用于指定每个索引（对于Series）或列（对于DataFrame）使用哪个值的Dict /Series / DataFrame。（不会填写dict / Series / DataFrame中的值）。该值不能是列表。
                  
@@ -1404,7 +1404,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       2  NaN  NaN NaN  5
       3  NaN  3.0 NaN  4
 
-   __用0替换所有NaN元素__
+   `用0替换所有NaN元素`
    
       >>> df.fillna(0)
           A   B   C   D
@@ -1413,7 +1413,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
       3   0.0 3.0 0.0 4
       1   3.0 4.0 0.0 1
 
-   __我们还可以向前或向后传播非空值。__
+   `我们还可以向前或向后传播非空值。`
 
     >>> df.fillna(method='ffill')
         A   B   C   D
@@ -1422,7 +1422,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     2   3.0 4.0 NaN 5
     3   3.0 3.0 NaN 4
 
-   __将“A”，“B”，“C”和“D”列中的所有NaN元素分别替换为0,1,2和3。__
+   `将“A”，“B”，“C”和“D”列中的所有NaN元素分别替换为0,1,2和3。`
 
     >>> values = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
     >>> df.fillna(value=values)
@@ -1432,7 +1432,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
     2   0.0 1.0 2.0 5
     3   0.0 3.0 2.0 4
     
-  __只替换第一个NaN元素。__
+  `只替换第一个NaN元素。`
 
     >>> df.fillna(value=values, limit=1)
         A   B   C   D
@@ -1446,7 +1446,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
   
   DataFrame.groupby(by=None, axis=0, level=None, as_index=True, sort=True, group_keys=True, squeeze=False, observed=False, **kwargs)[source]
 
-*   __参数介绍：__
+*   `参数介绍：`
     
       as_index:为True时会将第一列数据设置为index，为False时则会新建一个数字索引。默认为True
 
@@ -1488,7 +1488,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
           1	bk2	  30
           2	bk3	  17
     
-    *   __使用 as_index 时的注意事项：__
+    *   `使用 as_index 时的注意事项：`
 
             1、df.groupby('books', as_index=False).agg('sum') 
 
@@ -1502,14 +1502,14 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
             
             *** 但是在最后加上reset_index()能达到和上面代码相同的效果，因为会重新设置index ***
 
-    __groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。__
+    `groupby操作涉及拆分对象，应用函数和组合结果的某种组合。这可用于对这些组上的大量数据和计算操作进行分组。`
     
-    __使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：__
+    `使用groupby进行切片之后，我们如果进行操作其实是在那个切片(split)中进行的操作，计算完成之后返回合并结果(Combine) 如图：`
 
 
 <div align=center><img width="650" height="300" src="./static/2.png"/></div>
 
-*   __groupby函数 例子1__
+*   `groupby函数 例子1`
 
         import pandas as pd
         import numpy as np
@@ -1523,7 +1523,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         df_obj = pd.DataFrame(dict_obj)
         print(df_obj)
 
-    __out：__
+    `out：`
 
         key1   key2     data1     data2
         0    a    one -0.109110  0.528666
@@ -1536,7 +1536,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         7    a  three -0.958547 -2.016811
 
 
-*   __dataframe根据key1进行分组__                          
+*   `dataframe根据key1进行分组`                          
                                                                                      
        grouped1=df_obj.groupby('key1')
 
@@ -1553,15 +1553,15 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
           3       b  three  0.546663 -0.970285
           5       b    two -0.347244  0.146132)]
 
-*   __使用groupby指定字段内容进行运算__
+*   `使用groupby指定字段内容进行运算`
 
-    __如：__
+    `如：`
 
         # 按照 key1 进行分组从上面的数据中我们可以发现分为a,b两组
         grouped = df.groupby(df['key1'])
         grouped.mean()
 
-    __out：__
+    `out：`
 
         # 这里使用 df['key1'] 做了分组键，即按 a 和 b 进行分组。下例中没有显示 key2 列，是因为其值不是数字类型，被 mean() 方法自动忽视了
             data1	data2
@@ -1569,26 +1569,26 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         a	0.202560	0.010185
         b	-0.182211	0.390136
         
-    __如：__ 
+    `如：` 
 
         # 以key1进行分组，将data2字段中的内容进行求和
         grouped1=df_obj.groupby(['key1'])['data2'].sum()
         grouped1
 
-    __out：__
+    `out：`
 
         key1
         a    0.050927
         b    1.170409
         Name: data2, dtype: float64
 
-    __如：__ 注意使用groupby进行多列的组合时，顺序会影响我们的分组效果 如groupby(['key1','key2']) 和groupby(['key2','key1'])展示出来的效果就会不同
+    `如：` 注意使用groupby进行多列的组合时，顺序会影响我们的分组效果 如groupby(['key1','key2']) 和groupby(['key2','key1'])展示出来的效果就会不同
 
         # 以key1，和key2 进行分组，将data2字段中的内容进行求和
         grouped1=df_obj.groupby(['key1','key2'])['data2'].sum()
         grouped1
 
-    __out：__
+    `out：`
 
         key1  key2 
         a     one      1.359537
@@ -1599,7 +1599,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
               two      0.146132
 
 
-    __如：__
+    `如：`
 
         # 以Pclass进行分组，将字段中'Pclass','Survived'的内容进行求和
         print(train_data.groupby(['Pclass'])['Pclass','Survived'].mean())
@@ -1619,7 +1619,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         3          3.0      0.242363      26.403259
 
 
-*   __分层索引__
+*   `分层索引`
 
         我们可以使用level参数对不同级别的层次索引进行分组：
 
@@ -1648,60 +1648,60 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         Capitve      210.0
         Wild         185.0
 
-*   __groupby 函数的两个方法 .size() .count()__
+*   `groupby 函数的两个方法 .size() .count()`
 
     可以使用 GroupBy 对象（不论是 DataFrameGroupBy 还是 SeriesGroupBy）的 .size() 方法查看分组大小：
 
-    __.size 如:__
+    `.size 如:`
 
         grouped.size()
 
-    __out：__
+    `out：`
 
         key1
         a       3
         b       2
 
-    __.count 如：__
+    `.count 如：`
 
         grouped.count()
 
-    __out：__
+    `out：`
 
             key2	data1	data2
         key1			
         a	  5	    5	    5
         b	  3	    3	    3
 
-    __.size 和 .count的区别：__
+    `.size 和 .count的区别：`
     
-    __1、size计数时包含NaN值，而count不包含NaN值__
+    `1、size计数时包含NaN值，而count不包含NaN值`
 
-    __2、使用 .size 的数据 和 使用 .count() 的数据 产生的输出结果数据的shape不一样__
+    `2、使用 .size 的数据 和 使用 .count() 的数据 产生的输出结果数据的shape不一样`
 
             count会保留所有特征 同时特征中的值是结算结果(所有值相同 类型：DataFrame)，但是size不会，size之后保留一列特征(就是计算结果 类型：Series)
 
-    *   __例子__
+    *   `例子`
 
             train.groupby(['matchType','matchId']).size().shape
 
             train.groupby(['matchType','matchId']).count().shape
       
-        __out__
+        `out`
 
             (47965,)
 
             (47965, 27)
 
-*   __groupby.first()__
+*   `groupby.first()`
 
     首先计算每组中的值(如果某一个分组下有多个不同的值，取第一个值)
 
-    __例子：__
+    `例子：`
 
         train.groupby('matchId')['matchType'].value_counts()
 
-    __out__
+    `out`
 
         matchId         matchType       
         0000a43bce5eec  squad-fpp            95
@@ -1712,17 +1712,17 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         00077604e50a63  squad-fpp            98
 
 
-    __例子：__
+    `例子：`
 
     首先使用 groupby('matchId') ,将 matchId 作为索引，后面接 matchType。
     
-    __first__ 的作用在于，因为 某一个 matchId 下面可能有多个 matchType。
+    `first` 的作用在于，因为 某一个 matchId 下面可能有多个 matchType。
 
-    __first()__ 只取第一个 matchType的值 。
+    `first()` 只取第一个 matchType的值 。
 
         train.groupby('matchId')['matchType'].first().value_counts()
 
-    __out__
+    `out`
 
         squad-fpp           18576
         duo-fpp             10620
@@ -1743,11 +1743,11 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         Name: matchType, dtype: int64
 
 
-*   __pandas.groupby 进阶 groupby.apply().groupby__
+*   `pandas.groupby 进阶 groupby.apply().groupby`
 
     这里注意了，groupby 的后面是不能直接跟 .groupby 的，第一个 groupby 需要经过函数运算，才可以后面接 .groupby
 
-    __例子__
+    `例子`
 
         match = train.groupby(['matchType','matchId']).size().to_frame('players in match')
 
@@ -1758,7 +1758,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         pd.concat([match.groupby('matchType').describe()[toTapleList(['players in match'],['min','mean','max'])], 
                   group.groupby('matchType').describe()[toTapleList(['players in group'],['min','mean','max'])]], axis=1)
 
-    __解释：__
+    `解释：`
 
         解释 groupby.groupby的计算方法：
         
@@ -1773,12 +1773,12 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
         所以说两个 groupby 第一个先进行计算，后面的groupby是通过指定分组条件的基础上计算 第一个 groupby 分组计算后 得到的数据。
 
-    __例子2__
+    `例子2`
 
           desc2 = train.groupby(['matchType','matchId','groupId']).count().groupby(['matchType','matchId']).size()\
           .to_frame('groups in match')
 
-    __解释2：__
+    `解释2：`
 
         首先 我们想得到每个 groupId 在每个 matchId 下出现的次数
         
@@ -1793,13 +1793,13 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         我们统计的是 matchId 下不同类别出现的次数，可能包含相同的 groupId。
 
 
-*   __pandas.groupby 进阶 groupby.agg()__
+*   `pandas.groupby 进阶 groupby.agg()`
 
     使用 groupby + agg 对某个分组下的数据做统计
 
-    __需求：__ 现在我有一组某鞋子的历史购买记录，现在想要筛选出某一个时间段下，花费的最高价格是多少。
+    `需求：` 现在我有一组某鞋子的历史购买记录，现在想要筛选出某一个时间段下，花费的最高价格是多少。
 
-    __例子：__
+    `例子：`
 
           购买人	码数	        购买时间	         成交价格
 
@@ -1812,7 +1812,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         6607	xx	40⅔码	2020-01-08 00:00:00.000000	3899.0
         6609	xx	40⅔码	2020-01-08 00:00:00.000000	3899.0
 
-    __代码：__
+    `代码：`
 
         # 1、表示按照 '购买时间' 这一列来做聚合，'成交价格' 这一列来做统计。
         d1.groupby(['购买时间'],as_index=False)['成交价格'].agg('max') 
@@ -1820,7 +1820,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         # 上面这句代码的结果等同于这句代码
         d2 = d2.pivot_table(index="购买时间",values=["成交价格"],aggfunc='max')
 
-    __效果：__
+    `效果：`
 
               购买时间	                max
         0	2020-01-18 03:10:06.812429	3539.0
@@ -1829,9 +1829,9 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         3	2020-01-18 09:10:06.812429	3539.0
         4	2020-01-18 10:10:06.812429	3609.0
 
-    __**注意事项**__
+    `**注意事项**`
 
-    __1、__ 对于agg函数来说，函数中的参数多个和单个是有差别的，如果函数中的参数是 __单个__ 比如 agg('max') ,那么最后统计出来的那列数据的列名就是原来的列名，比如为 "购买价格"，但是如果函数中的参数为 __一个列表__ ,比如 agg(['max']) ,那么最后统计出来的那列数据的列名就是 'max' 。
+    `1、` 对于agg函数来说，函数中的参数多个和单个是有差别的，如果函数中的参数是 `单个` 比如 agg('max') ,那么最后统计出来的那列数据的列名就是原来的列名，比如为 "购买价格"，但是如果函数中的参数为 `一个列表` ,比如 agg(['max']) ,那么最后统计出来的那列数据的列名就是 'max' 。
 
         * d1.groupby(['购买时间'])['成交价格'].agg('max') 
 
@@ -1848,7 +1848,7 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
         2020-01-08 00:00:00.000000	5999.0
         2020-01-09 00:00:00.000000	3829.0
 
-    __2、__ 同时对于agg(['max']), as_index 的效果会失效，也就是说即使你指定了 as_index=False，那么结果仍然会将分组列作为索引。当然可以通过 __reset_index__ 的方法进行解决。
+    `2、` 同时对于agg(['max']), as_index 的效果会失效，也就是说即使你指定了 as_index=False，那么结果仍然会将分组列作为索引。当然可以通过 `reset_index` 的方法进行解决。
 
         d1.groupby(['购买时间'])['成交价格'].agg(['max']).reset_index() 
 
@@ -1856,14 +1856,14 @@ __DataFrame.fillna（value = None，method = None，axis = None，inplace = Fals
 
 pd.to_frame 将 Series 转化为 dataframe
 
-*   __例子__
+*   `例子`
 
         x2 = pd.Series(data=[1,2,3,4], index=['a', 'b', 'c', 'd'])
         display(x2)
         print('***********')
         x2.to_frame('hehe')
         x2
-    __out__
+    `out`
 
         a    1
         b    2
@@ -1880,7 +1880,7 @@ pd.to_frame 将 Series 转化为 dataframe
         d	  4
     
 
-*   __例子__
+*   `例子`
 
         train.groupby(['matchType','matchId']).count().groupby(['matchType','matchId']).size().shape
       
@@ -1888,7 +1888,7 @@ pd.to_frame 将 Series 转化为 dataframe
         print(group)
 
         group.shape
-    __out__
+    `out`
 
         (47965,)
 
@@ -1904,21 +1904,21 @@ pd.to_frame 将 Series 转化为 dataframe
 
 ### pd.concat 合并 DataFrame
 
-*   __主要说明一下 axis=0 和 axis=1 时的区别：__
+*   `主要说明一下 axis=0 和 axis=1 时的区别：`
 
         axis = 1，表示按行合并
         axis = 0，表示按列合并
 
 
-    __使用方法：__
+    `使用方法：`
 
         pd.concat([df1,df2],axis=num)
 
-    __例子：__
+    `例子：`
 
         pd.concat([desc1,desc2],axis=1) 按行合并，就是向右延伸
 
-    __out：__
+    `out：`
 
         	      numGroups	                 maxPlace	            groups in match
               min	mean	max	            min	mean	max	         min	mean	max
@@ -1927,11 +1927,11 @@ pd.to_frame 将 Series 转化为 dataframe
         solo	1.0	91.115157	100.0	    1.0	93.908771	100.0	    1.0	85.669426	100.0
         squad	2.0	27.039389	37.0	    2.0	27.982982	37.0	    2.0	26.834984	37.0
 
-    __例子：__
+    `例子：`
 
         pd.concat([desc1,desc2],axis=0) 按列合并，就是向下延伸(默认axis=0)
 
-    __out：__
+    `out：`
 
               groups in match	              maxPlace	        numGroups
                   max	mean	min	        max	mean	min	    max	mean	min
@@ -1952,7 +1952,7 @@ pd.to_frame 将 Series 转化为 dataframe
 
   pandas.cut（x，bins，right = True，labels = None，retbins = False，precision = 3，include_lowest = False，duplicates ='raise' ）
 
-__参数介绍：__
+`参数介绍：`
     
     x: 数据
     
@@ -1974,7 +1974,7 @@ __参数介绍：__
 
     include_lowest:是否包含左端点
 
-__例子：__
+`例子：`
 
 *   当bins为整数时：将数据分为三份等间距的区间
 
@@ -2002,7 +2002,7 @@ __例子：__
 
 上面我们将的是用pd.cut来个连续数据分段，但是有时候不好使呀固定宽度来进行分组，我们可以使用qcut，表示使用分数位进行切分数据
 
-*   __按分位数分箱计数 定义数据：__
+*   `按分位数分箱计数 定义数据：`
 
         large_counts = [
             296, 8286, 64011, 80, 3, 725, 867, 2215, 7689, 11495, 91897, 44, 28, 7971,
@@ -2010,7 +2010,7 @@ __例子：__
         ]
 
 
-*   __按分位数分箱计数 例子1：__
+*   `按分位数分箱计数 例子1：`
 
         ### Continue example Example 2-3 with large_counts
         import pandas as pd
@@ -2020,7 +2020,7 @@ __例子：__
         Out:
           array([1, 2, 3, 0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 2, 1, 0, 3], dtype=int64)
 
-*   __按分位数分箱计数 例子2：__
+*   `按分位数分箱计数 例子2：`
 
         ### Compute the quantiles themselves
         large_counts_series = pd.Series(large_counts)
@@ -2064,7 +2064,7 @@ __例子：__
 
     用于将系列中的每个值替换为另一个值，该值可以从函数，a dict或a 派生Series。
   
-  __例子：__
+  `例子：`
   
       >>> s = pd.Series(['cat', 'dog', np.nan, 'rabbit'])
       >>> s
@@ -2083,7 +2083,7 @@ __例子：__
       3      NaN
       dtype: object
       
-  __它还接受一个功能：__
+  `它还接受一个功能：`
 
     >>> s.map('I am a {}'.format)
     0       I am a cat
@@ -2103,7 +2103,7 @@ __例子：__
 
   ### pandas to_dict
 
-  __例子：__
+  `例子：`
     
     train_feature=vec.fit_transform(data.to_dict(orient='record'))
 
@@ -2122,14 +2122,14 @@ __例子：__
 
   ### python dataframe 当读取csv文件，但csv数据中无列名时进行赋值列名
 
-  __错误示范：__
+  `错误示范：`
 
     data=pd.read_csv('filepath')
     # 为数据增加一行列名
     column=['user_id','名字','知识点','节','课程','course_id']
     data.columns=column
 
-  __正确示范：__
+  `正确示范：`
 
     data=pd.read_csv('filepath'，header=None)
     # 为数据增加一行列名
@@ -2191,7 +2191,7 @@ __例子：__
 
 ### 构造DataFrame
 
-   __例子：__ 如果想要构造这样的dataframe：
+   `例子：` 如果想要构造这样的dataframe：
 
    <div align=center><img src="./static/1.jpg"/></div> 
 
@@ -2214,25 +2214,25 @@ __例子：__
 
       pandas.errors.ParserError: Error tokenizing data. C error: Expected 20 fields in line 4, saw 21
 
-  __解决方案1：__ 确保特征列(第一行)数据最长，包含下面所有的特征
+  `解决方案1：` 确保特征列(第一行)数据最长，包含下面所有的特征
 
       row1: column1,column2
       row2: column1,column2,column3,column4
       
       第一行是作为我们的特征名称，必须要大于等于第二行
 
-  __解决方案2：__ 加上分隔符 sep 
+  `解决方案2：` 加上分隔符 sep 
 
       data=pd.read_csv(file_path,sep='\t')
 
-  __解决方案3：__ 忽略错误的行
+  `解决方案3：` 忽略错误的行
 
       data=pd.read_csv(file_path,error_bad_lines=False)
 
 
   ### 数据的偏度和峰度
 
-  __df.skew()  偏度__
+  `df.skew()  偏度`
 
     Definition:是描述数据分布形态的统计量，其描述的是某总体取值分布的对称性，简单来说就是数据的不对称程度。
     偏度是三阶中心距计算出来的。
@@ -2242,7 +2242,7 @@ __例子：__
     （4）数值的绝对值越大，表明数据分布越不对称，偏斜程度大。
 
 
-  __df.kurt()  峰度__
+  `df.kurt()  峰度`
 
     Definition:偏度是描述某变量所有取值分布形态陡缓程度的统计量，简单来说就是数据分布顶的尖锐程度。
     峰度是四阶标准矩计算出来的。
@@ -2254,14 +2254,14 @@ __例子：__
 
   使用.corr() 可以用于计算矩阵关系系数，可以使用得到的关系系数绘制热力图
     
-  __举例：__
+  `举例：`
 
     现在我们有一些数据，我们要计算这些特征之间的关系
     
     corrmat = train_data.drop('Id',axis=1).corr()   # train_data 是read_cav()读取进来的数据
     corrmat
 
-  __out__
+  `out`
 
     	            MSSubClass	LotFrontage	  LotArea	 OverallQual  OverallCond
 
@@ -2271,7 +2271,7 @@ __例子：__
     OverallQual	  0.032628	  0.251646  	0.105806	  1.000000	  -0.091932	
     OverallCond   -0.059316	  -0.059213	  -0.005636 	-0.091932	  1.000000	
 
-  __绘制热力图__
+  `绘制热力图`
 
     fig,ax=plt.subplots(figsize=(20,16))
     sns.heatmap(corrmat,annot=True,fmt ='.1')
@@ -2282,7 +2282,7 @@ __例子：__
 
   将df数据写入数据库
 
-__案例：__
+`案例：`
 
     import MySQLdb
     import pandas as pd
@@ -2303,7 +2303,7 @@ __案例：__
     except Exception as e:
         print(e)
 
-__df.to_sql暂时还不支持我们设置主键__
+`df.to_sql暂时还不支持我们设置主键`
 
     如果想要设置主键：加上 标记为 <---- 的两句
 
@@ -2330,7 +2330,7 @@ __df.to_sql暂时还不支持我们设置主键__
         print(e)
 
 
-__df.to_sql if_exists='append' 时防止主键冲突__
+`df.to_sql if_exists='append' 时防止主键冲突`
   
   为了防止主键重复，于是我们修改原先的数据中的index，让其接着数据库中最大index往下排序
 
@@ -2426,13 +2426,13 @@ __df.to_sql if_exists='append' 时防止主键冲突__
 
 ### df.copy()
 
-  __复制此对象的索引和数据。__
+  `复制此对象的索引和数据。`
 
   当deep=True（默认）时，将使用调用对象的数据和索引的副本创建新对象。对副本的数据或索引的修改不会反映在原始对象中（请参阅下面的注释）。
 
   何时deep=False，将创建一个新对象而不复制调用对象的数据或索引（仅复制对数据和索引的引用）。对原始数据的任何更改都将反映在浅层副本中（反之亦然）。
 
-  __例子：__
+  `例子：`
 
     a=train_data['Survived']
     b=train_data['Survived']
@@ -2448,7 +2448,7 @@ __df.to_sql if_exists='append' 时防止主键冲突__
     890    0                      890    0
     Name: Survived, dtype: int64  Name: Survived, dtype: int64
     
-__现在我们没有进行deepcopy，我们修改b的数据，a的数据也会发生修改，所以我们如果要保持a和b数据独立，我们必须deepcopy__
+`现在我们没有进行deepcopy，我们修改b的数据，a的数据也会发生修改，所以我们如果要保持a和b数据独立，我们必须deepcopy`
 
     b['haha']=1           
     b.tail(1)
@@ -2461,12 +2461,12 @@ __现在我们没有进行deepcopy，我们修改b的数据，a的数据也会�
     haha    1
     Name: Survived, dtype: int64
       
-__如果要使用deepcopy，使用df.copy(deep=True)即可__
+`如果要使用deepcopy，使用df.copy(deep=True)即可`
 
 
 ### df 追加数据
 
-__例子：__
+`例子：`
 
     df = df.append(df2)
     
@@ -2475,19 +2475,19 @@ __例子：__
 ### df.quantile
 ####  分位数解释
 
-__四分位数__
+`四分位数`
 
-__概念：__ 把给定的乱序数值由小到大排列并分成四等份，处于三个分割点位置的数值就是四分位数。
+`概念：` 把给定的乱序数值由小到大排列并分成四等份，处于三个分割点位置的数值就是四分位数。
 
-__第1四分位数 (Q1)__， 又称“较小四分位数”，等于该样本中所有数值由小到大排列后第25%的数字。
+`第1四分位数 (Q1)`， 又称“较小四分位数”，等于该样本中所有数值由小到大排列后第25%的数字。
 
-__第2四分位数 (Q2)__，又称“中位数”，等于该样本中所有数值由小到大排列后第50%的数字。
+`第2四分位数 (Q2)`，又称“中位数”，等于该样本中所有数值由小到大排列后第50%的数字。
 
-__第3四分位数 (Q3)__，又称“较大四分位数”，等于该样本中所有数值由小到大排列后第75%的数字。
+`第3四分位数 (Q3)`，又称“较大四分位数”，等于该样本中所有数值由小到大排列后第75%的数字。
 
-__四分位距__（InterQuartile Range, IQR）= 第3四分位数与第1四分位数的差距
+`四分位距`（InterQuartile Range, IQR）= 第3四分位数与第1四分位数的差距
 
-*   __确定p分位数位置的两种方法__
+*   `确定p分位数位置的两种方法`
 
     position = (n+1)*p    - 箱型图采用的计算方法
 
@@ -2495,9 +2495,9 @@ __四分位距__（InterQuartile Range, IQR）= 第3四分位数与第1四分位
 
     其中 n 表示序列中包含的项数。也就是有多少个数。
 
-在python中计算分位数位置的方案采用 __position=1+(n-1)*p__
+在python中计算分位数位置的方案采用 `position=1+(n-1)*p`
 
-__案例1__
+`案例1`
 
     import pandas as pd
     import numpy as np
@@ -2507,7 +2507,7 @@ __案例1__
     print("计算p=0.1时，a列和b列的分位数")
     print(df.quantile(.1))
 
-__data:__
+`data:`
 
     序号	a	   b
     0	    1	  2
@@ -2515,14 +2515,14 @@ __data:__
     2	    3	  100
     3	    4	  100
 
-__程序计算结果：__
+`程序计算结果：`
 
     计算p=0.1时，a列和b列的分位数
     a 1.3
     b 3.7
     Name: 0.1, dtype: float64
 
-__手算计算结果：__
+`手算计算结果：`
 
     计算a列
     pos = 1 + (4 - 1)*0.1 = 1.3
@@ -2532,7 +2532,7 @@ __手算计算结果：__
     pos = 1.3
     ret = 2 + (10 - 2)* 0.3 = 4.4
 
-__解释：__
+`解释：`
 
 1、首先根据公式 <position=1+(n-1)*p> ，因为a列有 4个项数，所以我们可以得到 pos = 1 + (4 - 1)*0.1 = 1.3 。
 
@@ -2546,7 +2546,7 @@ __解释：__
 
 6、然后我们就可以返回 .1分位数的值，也就是 i + (j-i) * fraction = ret = 2 + (10 - 2)* 0.3 = 4.4 ，也就是前 10% 的数据。
 
-__案例2__
+`案例2`
 
     import pandas as pd
     import numpy as np
@@ -2557,7 +2557,7 @@ __案例2__
     print('Q2:', df.quantile(.5))
     print('Q3:', df.quantile(.75))
 
-__计算结果__
+`计算结果`
 
     Q1: 25.5
     Q2: 40.0
@@ -2575,17 +2575,17 @@ __计算结果__
 Pandas dataframe.memory_usage()函数返回每列的内存使用情况（以字节为单位）。内存使用情况可以选择包括索引和对象dtype元素的贡献。默认情况下，此值显示在DataFrame.info中。
 
 
--   __参数：__
+-   `参数：`
   
       index：指定是否在返回的Series中包括DataFrame索引的内存使用情况。如果index = True（默认），则索引的内存使用量将是输出中的第一项。
 
       deep：如果为True，则通过查询对象dtype进行系统级内存消耗来深入检查数据，并将其包含在返回值中。
 
--   __返回：__
+-   `返回：`
   
-      一个系列，其索引是原始列名，其值是每列的内存使用量 __（以字节为单位）__
+      一个系列，其索引是原始列名，其值是每列的内存使用量 `（以字节为单位）`
 
--   __代码示例：__
+-   `代码示例：`
 
         >>> df.memory_usage()
         Index           128
