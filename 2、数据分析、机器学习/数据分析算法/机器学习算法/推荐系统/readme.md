@@ -40,18 +40,18 @@
 
 以alice对第三部电影的评分为例，我们从右侧的特征向量中我们可以看到𝑥(3)第一部电影的特征向量 [1,0.99 0]，同时我们假设我们我们通过一个学习算法得到了他的参数值θ1为[0,5,0]，根据预测用户j对电影i的评分公式我们可以得到θ5的转置乘以x(3)得到的评分为4.95。 我们从得到的结果来看，结果还是比较合理的。
 
-__在本案例中我们使用符号对应表示一些内容:__
+`在本案例中我们使用符号对应表示一些内容:`
 
 <div align=center><img src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/3.png"/></div>
 
-__代价函数:__
+`代价函数:`
 
 <div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/4.png"/></div>
 
 其中 𝑖:𝑟(𝑖,𝑗)表示我们只计算那些用户 𝑗 评过分的电影。(𝜃(𝑗))𝑇𝑥(𝑖)表示我们的预测评分，y(𝑖,j)是真实评分。 相减表示我们的误差，在一般的线性回归模型中，误差项和正则项应该都是乘以1/2𝑚，在这里我们将𝑚去掉，因为m是一个常数，删除他队结果没有影响。并且我们不对方差项𝜃0进行正则化处理(k从1开始到n)。 
 
 
-__优化目标:__
+`优化目标:`
 
 <div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/5.png"/></div>
 
@@ -59,7 +59,7 @@ __优化目标:__
 
 在多用户的参数求解中我们需要求θ(1)到θ(nu) nu表示我们用户的个数。
 
-__总结：__
+`总结：`
 
 <div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/6.png"/></div>
 
@@ -91,7 +91,7 @@ __总结：__
 
 在数学上我们可以表示成(θ(1))Tx(1)约等于5，(θ(2))Tx(1)约等于5，(θ(3))Tx(1)约等于0，(θ(4))Tx(1)约等于0，此时我们得到我们的x(1)的特征向量为[1，1，0]，这样我们就得到了这些特征值，则又可以用于预测我们的分数。
 
-__优化目标:__
+`优化目标:`
 
 <div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/8.png"/></div>
 
@@ -99,7 +99,7 @@ __优化目标:__
 
 但是我们要做的是我们要学习出所有电影的所有特征(第二个式子)，所以我们现在要做的是，在上面两处箭头处加上了两个求和项，因为我要对所有电影进行求和，nu个电影，然后最小化上边这个目标函数，如果将其最小化，此时我们就可以得到合适的所有电影的特征。
 
-__总结：__
+`总结：`
 
 在上面我们讲到如果你有所有电影评分的集合，即θ(i,j)和y(i,j)你有这些评分数据。
 
@@ -120,7 +120,7 @@ __总结：__
 
 第二如果给你用户参数，你可以用它来学习电影的特征。
 
-__接下来我们会将这两个概念进行结合，得到一个新的协同过滤算法__
+`接下来我们会将这两个概念进行结合，得到一个新的协同过滤算法`
 
 <div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/9-1.png"/></div>
 
@@ -141,7 +141,7 @@ __接下来我们会将这两个概念进行结合，得到一个新的协同过
 
 同样的因为参数θ具有相同的维度，所有θ也是n维的，因为如果没有x0，那么θ0也不再需要，我们放弃这一惯例的理由是，我们现在是在学习所有的特征，我们没有必要将一个特征值硬编码为1，因为如果算法真的需要一个特征永远为1，它可以选择靠自己去获取1这个数值，如果算法需要的话，它可以将x1设置为1，所以没有必要将这个特征定为1定死，现在算法可以灵活的自行学习。
 
-__小结:__
+`小结:`
 
 <div align=center><img width="800" height="400" src="https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/10.png"/></div>
 
@@ -219,5 +219,5 @@ __小结:__
 
 这里补充一下，这里我们讲了均值归一化，我们归一化了y的每一行，每行的均值都是0，如果有些电影没有评分，这种情况类似于没有进行过评价的用户，但是如果你有些电影是没有评分的你可以尝试这个算法的其他版本，你可以对不同的列，进行归一化使得他们的均值为0，而不是把均值归一化，说实话，如果你这些电影没有被评分你就不应该对其进行一个推荐，所以关注没有评价电影的用户比那些没有评价的电影来的更重要
 
-__最后总结一下，这就是均值归一化的实现，它作为协同过滤算法的预处理步骤根据不同的数据集，他有时能让你的算法表现的更好些__
+`最后总结一下，这就是均值归一化的实现，它作为协同过滤算法的预处理步骤根据不同的数据集，他有时能让你的算法表现的更好些`
 
