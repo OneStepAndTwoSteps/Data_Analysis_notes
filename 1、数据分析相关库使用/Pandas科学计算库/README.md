@@ -1793,6 +1793,20 @@ droplevel 处理：可以用于去掉级别的名称或位置索引
         我们统计的是 matchId 下不同类别出现的次数，可能包含相同的 groupId。
 
 
+
+### `agg 和 aggregate`
+
+* `agg` 是 `aggregate` 的别名：
+
+  代码，下面两行代码做的事情相同，`agg` 中可以使用字典的形式传参：
+  
+    都是通过：`ProductName` 进行 `groupby` 然后对 `MachineIdentifier` 计算 `count`
+
+      train.groupby(['ProductName']).aggregate({'MachineIdentifier':'count'})
+
+      train.groupby(['ProductName'])['MachineIdentifier'].agg('count')
+
+
 *   `pandas.groupby 进阶 groupby.agg()`
 
     使用 groupby + agg 对某个分组下的数据做统计
