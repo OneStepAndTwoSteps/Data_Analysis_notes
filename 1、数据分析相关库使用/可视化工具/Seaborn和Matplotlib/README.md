@@ -20,7 +20,7 @@
         sns.set_style('darkgrid') # 背景
         sns.set_palette('Reds')   # 线条
 
-  __sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )__
+  `sns.set(context ='notebook'，style ='darkgrid'，palette ='deep'，font ='sans-serif'，font_scale = 1，color_codes = True，rc = None )`
         
         context：string或dict  控制绘图的比例有四个预置的环境，按大小从小到大排列分别为：paper, notebook, talk, poster。其中，notebook是默认的。
         相当于 sns.set_context()  就是控制图的比例，paper比例最小，poster比例最大
@@ -90,13 +90,13 @@
     
     style.use('bmh')
     
-  __- 《[查看不同样式的展示图](https://matplotlib.org/3.1.0/gallery/style_sheets/style_sheets_reference.html)》__
+  `- 《[查看不同样式的展示图](https://matplotlib.org/3.1.0/gallery/style_sheets/style_sheets_reference.html)》`
   
     
     
     
  ## plt.subplot方法：
-   __subplot(nrows, ncols, index, **kwargs)__
+   `subplot(nrows, ncols, index, **kwargs)`
    
    一个3位整数或三个独立的整数，用于描述子图的位置。其中第一个数字是行数(nrows)，第二个是列数(ncols)，第三个是子图的索引(index)。
    代码示例：
@@ -127,7 +127,7 @@ plt.figure(2) 画板二中的图
 
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/2.png)
     
- __注意：plt.subplot(211)=plt.subplot(2,1,1)__   
+ `注意：plt.subplot(211)=plt.subplot(2,1,1)`   
     
  ## plt.subplots 创建一个图形和一组子图。
  
@@ -140,19 +140,19 @@ ax和fig的关系：
 * [ax 的相关方法 <-- 点击跳转](https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes)
 
 
- __例子1：__
+ `例子1：`
  
 * f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
     
 * ax1和ax2分别表示为一个子图。
     
- __例子2：__   
+ `例子2：`   
     
 * fig, ax = plt.subplots(2,3) # 创建2行三列个子图(6个子图)
     
-* __此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图__
+* `此时如果想要定义子图中的内容，可以通过索引定位子图 如：ax[0][0]表示第0行第0个子图`
     
-__例子3:__
+`例子3:`
 
       sharex 控制x(sharex)或y(sharey)轴之间的属性共享：
           1.True或者'all'：x或y轴属性将在所有子图(subplots)中共享.
@@ -162,7 +162,7 @@ __例子3:__
 
     f, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(15, 8))
     
-__例子4:__
+`例子4:`
 
     f, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 6))
 
@@ -183,16 +183,16 @@ __例子4:__
     # 展示图
     plt.show()
 
-__例4 效果图：__
+`例4 效果图：`
 
 <div align=center><img width="800" height="250" src="seaborn_and_Matplotlib/subplots1.jpg"/></div>
 
 
     
  ## plt.plot方法：
- __matplotlib.pyplot.plot（* args，scalex = True，scaley = True，data = None，** kwargs ）__ 
+ `matplotlib.pyplot.plot（* args，scalex = True，scaley = True，data = None，** kwargs ）` 
  
- __使用Line2D属性作为关键字参数来更好地控制外观。行属性和fmt可以混合使用。以下两个调用产生相同的结果：__
+ `使用Line2D属性作为关键字参数来更好地控制外观。行属性和fmt可以混合使用。以下两个调用产生相同的结果：`
          
          # go--表示綠色线条，圆圈标记，线条样式为虚线
      >>> plot(x, y, 'go--', linewidth=2, markersize=12)
@@ -287,7 +287,7 @@ __例4 效果图：__
     # 也可以 → plt.plot()
 
 ### fmt:格式化字符串 格式字符串由颜色，标记和线条的部分组成： 就是上面说的style
-   __颜色__
+   `颜色`
    
      字符	颜色
     'b'	蓝色
@@ -299,7 +299,7 @@ __例4 效果图：__
     'k'	黑色
     'w'	白色
     
-   __线条样式__
+   `线条样式`
 
     字符	描述
     '-'	实线风格
@@ -307,7 +307,7 @@ __例4 效果图：__
     '-.'	点划线样式
     ':'	虚线样式
     
-   __标记__ 
+   `标记` 
 
     字符	描述
     '.'	点标记
@@ -374,27 +374,27 @@ __例4 效果图：__
     
 ## plt 设置图像的相关方法
    
-*   __plt.xlim plt.ylim__
+*   `plt.xlim plt.ylim`
     
     * 获取或设置当前轴的x限制。如
 
             plt.ylim(0,100)
  
 
-*   __plt.xlabel()__
+*   `plt.xlabel()`
 
     * 设置x轴上的标题 如 
       
             plt.xlabel('国家名称',fontsize=16)
 
 
-*   __plt.title()__
+*   `plt.title()`
 
     * 设置标题 
     
             plt.title('各国商品贸易（占GDP的百分比%）',fontsize=26)
 
-*   __plt.xticks()__
+*   `plt.xticks()`
 
     * 设置x轴上的刻度。如
 
@@ -450,7 +450,7 @@ __例4 效果图：__
     
 在引用 seaborn 工具包之后，就可以使用 seaborn 工具包的函数了。如果想要做散点图，可以直接使用 sns.jointplot(x, y, data=None, kind=‘scatter’) 函数。其中 x、y 是 data 中的下标。data 就是我们要传入的数据，一般是 DataFrame 类型。kind 这类我们取 scatter，代表散点的意思。当然 kind 还可以取其他值，这个我在后面的视图中会讲到，不同的 kind 代表不同的视图绘制方式。
 
-__例子：__
+`例子：`
     
     import numpy as np
     import pandas as pd
@@ -469,15 +469,15 @@ __例子：__
     #sns还是要借助pyplot来打印图的 其自身无show方法
     plt.show    
     
-__运行结果：__
+`运行结果：`
   
-__Matplotlib:__ 
+`Matplotlib:` 
   
   <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/M%E6%95%A3%E7%82%B9%E5%9B%BE.png) -->
   
 <div align=center><img src="seaborn_and_Matplotlib/M散点图.png"/></div>
   
-__seaborn:__    
+`seaborn:`    
   
 <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/S%E6%95%A3%E7%82%B9%E5%9B%BE.png) -->
 
@@ -493,7 +493,7 @@ __seaborn:__
   
   在 Seaborn 中，我们使用 sns.lineplot (x, y, data=None) 函数。其中 x、y 是 data 中的下标。data 就是我们要传入的数据，一般是 DataFrame 类型。
   
-__例子：__
+`例子：`
   
     import pandas as pd
     import matplotlib.pyplot as plt
@@ -509,7 +509,7 @@ __例子：__
     sns.lineplot(x="年", y="月", data=df)
     plt.show()
 
-__运行结果：__
+`运行结果：`
   
 M:  
   
@@ -543,7 +543,7 @@ S:
 
 在 Seaborn 中，我们使用 sns.distplot(x, bins=10, kde=True) 函数。其中参数 x 是一维数组，bins 代表直方图中的箱子数量，kde 代表显示核密度估计，默认是 True，我们也可以把 kde 设置为 False，不进行显示。核密度估计是通过核函数帮我们来估计概率密度的方法。
 
-__例子：__
+`例子：`
     
     import numpy as np
     import pandas as pd
@@ -562,7 +562,7 @@ __例子：__
     plt.show()
 
 
-__运行结果：__
+`运行结果：`
   
 M:
   
@@ -593,9 +593,9 @@ S:
   
 在 Seaborn 中，我们使用 sns.barplot(x=None, y=None, data=None) 函数。其中参数 data 为 DataFrame 类型，x、y 是 data 中的变量。
 
-__最简单的方式：__ train_data[['Sex','Survived']].groupby(['Sex']).mean().plot.bar()
+`最简单的方式：` train_data[['Sex','Survived']].groupby(['Sex']).mean().plot.bar()
   
-__例子：__
+`例子：`
     
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -610,7 +610,7 @@ __例子：__
     plt.show()
 
   
-__运行结果：__
+`运行结果：`
   
 M:  
    
@@ -626,14 +626,14 @@ S:
 <div align=center><img src="seaborn_and_Matplotlib/S条形图.png"/></div>
 
 
-* __补充：__
+* `补充：`
 
   * 如果想要绘制横向的条形图 使用 plt.barh() 函数
 
   * 可以通过对生成的 bar = plt.bar() 对象进行 set_height 或者 set_width 对数据进行重新设置。
 
 
-__例子2：__
+`例子2：`
 
   通过 groupby 分析分组数据，通过.value_counts()统计数量 .sort_index() 让 index 的值从小到大排序。最后通过.bar 绘图
 
@@ -648,7 +648,7 @@ __例子2：__
         ax.set_xlabel(mt)
         group[group['matchType']==mt]['players'].value_counts().sort_index().plot.bar(ax=ax)
 
-__运行结果：__
+`运行结果：`
 
 <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/5.png) -->
 
@@ -666,7 +666,7 @@ __运行结果：__
   在 Seaborn 中，我们使用 sns.boxplot(x=None, y=None, data=None) 函数。其中参数 data 为 DataFrame 类型，x、y 是 data 中的变量。
   
   
-__例子：__
+`例子：`
   
     # 数据准备
     # 生成 0-1 之间的 10*4 维度数据
@@ -680,7 +680,7 @@ __例子：__
     sns.boxplot(data=df)
     plt.show()
 
-__运行结果：__
+`运行结果：`
   
 M:   
   
@@ -705,7 +705,7 @@ S:
   这里我设置了 lables 数组，分别代表高中、本科、硕士、博士和其他几种学历的分类标签。nums 代表这些学历对应的人数。
   
   
-__例子：__
+`例子：`
       
       import matplotlib.pyplot as plt
       # 数据准备
@@ -715,7 +715,7 @@ __例子：__
       plt.pie(x = nums, labels=labels)
       plt.show()
 
-__运行结果：__
+`运行结果：`
   
 S:    
    
@@ -727,7 +727,7 @@ S:
     
  ## 热力图：
   
- *   __注意：__ 如果某个特征中存在缺失值，那么这个特征的相关性系数不会被体现出来(保证数据无缺失值)
+ *   `注意：` 如果某个特征中存在缺失值，那么这个特征的相关性系数不会被体现出来(保证数据无缺失值)
   
      热力图是一种非常直观的多元变量分析方法。通过热力图我们可以发现特征之间的相关性。
 
@@ -737,7 +737,7 @@ S:
 
      这里我们使用 Seaborn 中自带的数据集 flights，该数据集记录了 1949 年到 1960 年期间，每个月的航班乘客的数量。
 
-  __热力图参数说明：__
+  `热力图参数说明：`
 
     ax = sns.heatmap(data,vmin=0, vmax=1, cmap = 'GnBu', center=0.5, 
                  robust=False,annot=True,cbar=True)
@@ -793,7 +793,7 @@ S:
         plt.title('Pearson Correlation of Features', y=1.05, size=15)
 
 
-__例子1__
+`例子1`
  
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -804,7 +804,7 @@ __例子1__
     sns.heatmap(data)
     plt.show()
 
-__运行结果__
+`运行结果`
     
     通过 seaborn 的 heatmap 函数，我们可以观察到不同年份，不同月份的乘客数量变化情况，其中颜色越浅的代表乘客数量越多，如下图所示：
   
@@ -815,7 +815,7 @@ S:
 <div align=center><img src="seaborn_and_Matplotlib/S热力图.png"/></div>
 
 
-__例子2__
+`例子2`
 
     corrmat = train_data.drop('Id',axis=1).corr()
     fig,ax=plt.subplots(figsize=(20,16))
@@ -823,7 +823,7 @@ __例子2__
     plt.show()
  
 
-__运行结果__
+`运行结果`
 
 S:    
 
@@ -844,7 +844,7 @@ S:
   因为需要计算角度，所以我们要准备 angles 数组；又因为需要设定统计结果的数值，所以我们要设定 stats 数组。并且需要在原有 angles 和 stats 数组上增加一位，也就是添加数组的第一个元素。
   
   
-__例子：__
+`例子：`
     
     import numpy as np
     import matplotlib.pyplot as plt
@@ -872,7 +872,7 @@ __例子：__
     
 代码中 flt.figure 是创建一个空白的 figure 对象，这样做的目的相当于画画前先准备一个空白的画板。然后 add_subplot(111) 可以把画板划分成 1 行 1 列。再用 ax.plot 和 ax.fill 进行连线以及给图形上色。最后我们在相应的位置上显示出属性名。这里需要用到中文，Matplotlib 对中文的显示不是很友好，因此我设置了中文的字体 font，这个需要在调用前进行定义。最后我们可以得到下面的蜘蛛图，看起来是不是很酷？
 
-__运行结果：__
+`运行结果：`
      
 M：     
   
@@ -889,7 +889,7 @@ M：
 
 这里我们使用 Seaborn 中自带的数据集 tips，这个数据集记录了不同顾客在餐厅的消费账单及小费情况。代码中 total_bill 保存了客户的账单金额，tip 是该客户给出的小费金额。我们可以用 Seaborn 中的 jointplot 来探索这两个变量之间的关系。
 
-__例子：__
+`例子：`
   
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -902,11 +902,11 @@ __例子：__
     sns.jointplot(x="total_bill", y="tip", data=tips, kind='hex')
     plt.show()
 
-__运行结果：__
+`运行结果：`
 
 代码中我用 kind 分别显示了他们的散点图、核密度图和 Hexbin 图，如下图所示。
   
-__散点图：__  
+`散点图：`  
   
   <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%95%A3%E7%82%B9%E5%9B%BE.png) -->
 <div align=center><img src="seaborn_and_Matplotlib/二元S散点图.png"/></div>
@@ -917,7 +917,7 @@ __散点图：__
   <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83S%E6%A0%B8%E5%9B%BE.png) -->
 <div align=center><img src="seaborn_and_Matplotlib/二元S核图.png"/></div>
  
- __Hexbin图：__    
+ `Hexbin图：`    
  
  <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E4%BA%8C%E5%85%83hexbin%E5%9B%BE.png) -->
   
@@ -932,7 +932,7 @@ __散点图：__
  
  这里我们使用 Seaborn 中自带的 iris 数据集，这个数据集也叫鸢尾花数据集。鸢尾花可以分成 Setosa、Versicolour 和 Virginica 三个品种，在这个数据集中，针对每一个品种，都有 50 个数据，每个数据中包括了 4 个属性，分别是花萼长度、花萼宽度、花瓣长度和花瓣宽度。通过这些数据，需要你来预测鸢尾花卉属于三个品种中的哪一种。
  
- __例子：__
+ `例子：`
     
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -946,7 +946,7 @@ __散点图：__
 这里我们用 Seaborn 中的 pairplot 函数来对数据集中的多个双变量的关系进行探索，如下图所示。从图上你能看出，一共有 sepal_length、sepal_width、petal_length 和 petal_width4 个变量，它们分别是花萼长度、花萼宽度、花瓣长度和花瓣宽度。
   
   
-__下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中的第一张图代表的就是花萼长度自身的分布图，它右侧的这张图代表的是花萼长度与花萼宽度这两个变量之间的关系。__    
+`下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中的第一张图代表的就是花萼长度自身的分布图，它右侧的这张图代表的是花萼长度与花萼宽度这两个变量之间的关系。`    
 
 <!-- ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/seaborn_and_Matplotlib/%E6%88%90%E5%AF%B9%E5%85%B3%E7%B3%BB.png) -->
  
@@ -962,19 +962,19 @@ __下面这张图相当于这 4 个变量两两之间的关系。比如矩阵中
 
  ## FacetGrid
     
-  __当您想要在数据集的子集内可视化变量的分布或多个变量之间的关系时，FacetGrid类很有用。 FacetGrid可以绘制最多三个维度：row，col和hue。前两者与所得轴数有明显的对应关系;将hue变量视为沿着深度轴的第三维，其中不同的级别用不同的颜色绘制。__
+  `当您想要在数据集的子集内可视化变量的分布或多个变量之间的关系时，FacetGrid类很有用。 FacetGrid可以绘制最多三个维度：row，col和hue。前两者与所得轴数有明显的对应关系;将hue变量视为沿着深度轴的第三维，其中不同的级别用不同的颜色绘制。`
     
 第一个参数可以是plt.hist, plt.scatter, sns.regplot, sns.barplot, sns.distplot, sns.pointplot等。
     
-__数据集传进来sns.FacetGrid(data,col=””)col表示我们按照什么进行分图__
+`数据集传进来sns.FacetGrid(data,col=””)col表示我们按照什么进行分图`
     
 通过map, g.map(plt.hist,””)—plt.hist表示画条形图
     
 alpha=.7透明程度
     
-__bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bins指明40时，我们两条年龄的柱状图会进行合并显示，bins指定80则每条柱状图表示一个年龄)__
+`bins表示条形图中的条数，坑：(比如我的年龄是0-80，我们bins指明40时，我们两条年龄的柱状图会进行合并显示，bins指定80则每条柱状图表示一个年龄)`
 
-__两个特征进行可视化展示：__
+`两个特征进行可视化展示：`
 
     # 此时纵坐标表示满足条件的数据的数量
     g = sns.FacetGrid(train_data, col='Survived',height=5)
@@ -986,7 +986,7 @@ __两个特征进行可视化展示：__
 
 <div align=center><img src="seaborn_and_Matplotlib/FacetGrid.png"/></div>
 
-__三个特征进行可视化展示：__
+`三个特征进行可视化展示：`
 
     # 此时纵坐标表示满足条件的数据的数量 
     # aspect 每个刻面的宽高比，使每个刻面的宽度以英寸为单位 ，是宽和高的比
@@ -999,7 +999,7 @@ __三个特征进行可视化展示：__
 <div align=center><img src="seaborn_and_Matplotlib/FacetGrid3.png"/></div>
 
 
-__四个特征进行可视化展示：__
+`四个特征进行可视化展示：`
 
     # row行特征(特征是二分类，所以行方向有两个子图) col表示列特征(列方向是三分类，所以有三个子图) hue是第三个变量的级别，该参数绘制不同颜色的不同数据子集
     # size 定义图的大小
@@ -1047,7 +1047,7 @@ __四个特征进行可视化展示：__
     clear ： bool，可选，默认值：False
     如果为True并且该图已经存在，那么它将被清除。
 
-__例子：__
+`例子：`
 
     # 热力图可视化特征之间的关系 corr函数建立content[features_mean]特征中的关系值
     corr=content[features_mean].corr()
