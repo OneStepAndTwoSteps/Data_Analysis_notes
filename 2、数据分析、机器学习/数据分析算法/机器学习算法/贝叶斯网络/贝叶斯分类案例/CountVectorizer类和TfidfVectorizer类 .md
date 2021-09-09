@@ -1,9 +1,9 @@
 
 ## 从文本中提取特征信息    CountVectorizer类和TfidfVectorizer类 
  
-__CountVectorizer和TfidfVectorizer方法的不同:__
+`CountVectorizer和TfidfVectorizer方法的不同:`
 
-__CountVectorizer__ 和 __TfidfVectorizer__ 是 __文本特征提取__ 的两种方法。两者的主要区别在于，CountVectorizer仅仅通过计算词语词频，没有考虑该词语是否有代表性。而TfidfVectorizer可以更加精准的表征一个词语对某个话题的代表性。
+`CountVectorizer` 和 `TfidfVectorizer` 是 `文本特征提取` 的两种方法。两者的主要区别在于，CountVectorizer仅仅通过计算词语词频，没有考虑该词语是否有代表性。而TfidfVectorizer可以更加精准的表征一个词语对某个话题的代表性。
 
  
         
@@ -21,7 +21,7 @@ scikit库的CountVectorize类就是这种思路。
 
      cv = CountVectorizer()
 
-__使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有词语，进而构建出text词典。__
+`使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有词语，进而构建出text词典。`
 
     text=["Hey hey hey lets go get lunch today :)",
            "Did you go home?",
@@ -29,7 +29,7 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
     
     text相当于三篇文章
 
- __fit学会语料中的所有词语，构建词典__
+ `fit学会语料中的所有词语，构建词典`
  
     cv.fit(text)
     CountVectorizer(analyzer='word', binary=False, decode_error='strict',
@@ -39,7 +39,7 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
             strip_accents=None, token_pattern='(?u)\\b\\w\\w+\\b',
             tokenizer=None, vocabulary=None)
             
-  __这里我们查看下“词典”，也就是特征集(11个特征词)__
+  `这里我们查看下“词典”，也就是特征集(11个特征词)`
   
     cv.get_feature_names()
     
@@ -57,7 +57,7 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
        'today',
        'you']
        
-  __注意feature_name的返回结果，我们可以发现这几条规律：__
+  `注意feature_name的返回结果，我们可以发现这几条规律：`
     
     一、所有的单词都是小写
 
@@ -101,29 +101,29 @@ __使用fit方法，CountVectorizer()类的会从corpus语料中学习到所有�
 
 
 ## 注意: 
-   此时我们已经构建完成了我们的词频矩阵， __如果我们还想加入新的文档此时我们需要注意了。__
+   此时我们已经构建完成了我们的词频矩阵， `如果我们还想加入新的文档此时我们需要注意了。`
    
-   __举个例子：__
+   `举个例子：`
          
          new_document = ['Hello girl lets go get a drink tonight']
          new_dtm = cv.transform(new_document)
          print(new_dtm.toarray())
          pd.DataFrame(new_dtm.toarray(), columns=cv.get_feature_names())
          
-   __Out:__ new_dtm.toarray()的输出
+   `Out:` new_dtm.toarray()的输出
    
          [[0 0 1 1 0 0 1 0 0 0 0]]
          
 显示如下图：
 ![Image_text](https://raw.githubusercontent.com/OneStepAndTwoSteps/data_mining_analysis/master/static/sklearn%E6%96%87%E6%9C%AC%E6%8F%90%E5%8F%96%E7%89%B9%E5%BE%81%E5%80%BC/2.jpg)
 
-__小结：__
+`小结：`
 
-即使new_document含有8个单词，但是在上面的dataframe表中只有3个特征词被有效编码，Hello,girl,drink和tonight词未被表征。 __这是因为我们初识的text语料所构建的词典并未含有这些词。但是对文本进行特征表征时，使用的确实text所生产的词典。__
+即使new_document含有8个单词，但是在上面的dataframe表中只有3个特征词被有效编码，Hello,girl,drink和tonight词未被表征。 `这是因为我们初识的text语料所构建的词典并未含有这些词。但是对文本进行特征表征时，使用的确实text所生产的词典。`
 
 我们机器学习所用的数据，一般被分成训练集和测试集。训练集是为了让机器学习数据的规律（拟合模型），测试集是为了验证规律的有效性。训练集本质上代表的是过去及现在已知的数据，测试集本质上代表的是未来的未知数据（现在不存在的数据），我们是用已知的数据预测未来。
 
-__所以我们只能让fit方法操作于训练集，构建基于过去或已知数据的特征集。__
+`所以我们只能让fit方法操作于训练集，构建基于过去或已知数据的特征集。`
 
                   
                             
