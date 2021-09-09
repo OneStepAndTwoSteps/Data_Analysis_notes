@@ -1,4 +1,4 @@
-# 数学基础
+# `机器学习数学基础`
 
 
 ## `泰勒公式推导：`
@@ -22,11 +22,17 @@
 
 `积分` 转换 `期望` 的时候，需要将其中的 `某个乘子` 作为概率分布，因此用了这种巧妙转换把 `q(Φ)` 拿出来，然后转换为他的 `期望` 。
 
-## 概率分布和概率密度函数：
 
-* 如何简单理解概率分布函数和概率密度函数？：https://blog.csdn.net/anshuai_aw1/article/details/82626468
+## `经验风险、期望风险、结构风险`
 
-* 概率密度函数：https://zh.wikipedia.org/wiki/%E6%A9%9F%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B8
+* `经验风险、期望风险、结构风险：`https://www.jianshu.com/p/903e35e1c95a
+
+
+## `概率分布和概率密度函数：`
+
+* `如何简单理解概率分布函数和概率密度函数？：`https://blog.csdn.net/anshuai_aw1/article/details/82626468
+
+* `概率密度函数：`https://zh.wikipedia.org/wiki/%E6%A9%9F%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B8
 
 
 ## `矩阵求导：`
