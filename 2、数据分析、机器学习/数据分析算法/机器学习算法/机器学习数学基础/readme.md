@@ -37,12 +37,20 @@
 
 
 
+
 ### `经验风险、期望风险、结构风险`
 
 * `经验风险、期望风险、结构风险：`https://www.jianshu.com/p/903e35e1c95a
 
 
+## `函数间隔和几何间隔`
 
+
+* 函数间隔和几何间隔：
+
+    <div align=center><img  height="730"  src="./static/函数间隔和几何间隔.jpg"/></div>
+
+* 关于SVM数学细节逻辑的个人理解（一） ：得到最大间隔分类器的基本形式：https://www.cnblogs.com/xxrxxr/p/7535587.html
 
 ## `概率分布和概率密度函数：`
 
