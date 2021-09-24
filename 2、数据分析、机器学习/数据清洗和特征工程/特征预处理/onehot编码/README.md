@@ -102,4 +102,6 @@ __注意⚠️：__
 * 基于树的方法是不需要进行特征的归一化，例如随机森林，bagging 和 boosting等。
 
 
+## `扩展：`
 
+* Python 机器学习：https://ljalphabeta.gitbooks.io/python-/content/categorical_data.html
