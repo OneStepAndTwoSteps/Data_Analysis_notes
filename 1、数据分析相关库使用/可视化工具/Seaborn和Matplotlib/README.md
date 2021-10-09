@@ -220,6 +220,12 @@ ax和fig的关系：
     plt.suptitle('ProductCD Distributions', fontsize=22) 
 
 
+#### 子图间距
+
+自动调整子图之间的间距，对齐
+
+  plt.tight_layout()
+
 #### `plt.subplots_adjust`
 
 调整子图布局，调用格式如下：
