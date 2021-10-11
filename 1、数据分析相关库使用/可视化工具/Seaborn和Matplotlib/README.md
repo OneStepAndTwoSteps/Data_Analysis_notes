@@ -283,7 +283,7 @@ ax和fig的关系：
     # color → 颜色，有color指定时候，以color颜色为准
     # alpha → 透明度，0-1
     # use_index → 将索引用为刻度标签，默认为True
-    # rot → 旋转刻度标签，0-360
+    # rot → 旋转刻度标签，0-360  或者使用  plt.xticks(rotation =0)
     # grid → 显示网格，一般直接用plt.grid
     # xlim,ylim → x,y轴界限
     # xticks,yticks → x,y轴刻度值
