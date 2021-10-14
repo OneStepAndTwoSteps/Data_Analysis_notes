@@ -414,6 +414,8 @@ output:
 
     23.000000000000004
 
+* `log1p和expm1：`https://www.cnblogs.com/wqbin/p/10346292.html
+
 
 ## numpy log 和 exp
 
