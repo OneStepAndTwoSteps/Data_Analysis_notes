@@ -1,368 +1,217 @@
-# `特征预处理`
+#  数据的预处理(标准化、归一化)
 
-`在经过特征选择之后就可以对这些特征进行预处理了(先选择，再处理)`。
+通过特征提取，我们能得到未经处理的特征，这时的特征可能有以下问题：
 
-机器学习的模式之一：`特征工程` 比模型构建和超参数调整有更大的投资回报。正如 `Andrew Ng` 喜欢说的：“应用机器学习基本上是特征工程。”
+* `1、不属于同一量纲：` 即特征的规格不一样，不能够放在一起比较。无量纲化可以解决这一问题。
 
-虽然选择正确的模型和最佳设置很重要，但是模型只能从给定的数据中学习。确保这些数据尽可能与任务相关是数据科学家的工作（也许还有一些自动化工具可以帮助我们）。
+* `2、信息冗余：` 对于某些定量特征，其包含的有效信息为区间划分，例如学习成绩，假若只关心“及格”或不“及格”，那么需要将定量的考分，转换成“1”和“0”表示及格和未及格。二值化可以解决这一问题。
 
-`特征工程` 指的是一个遗传过程，可以包括特征构造：从现有数据中添加新的特征，以及特征选择：只选择最重要的特征或其他降维方法。我们可以使用许多技术来创建特性和选择特性。
+* `3、定性特征不能直接使用：` 某些机器学习算法和模型只能接受定量特征的输入，那么需要将定性特征转换为定量特征。最简单的方式是为每一种定性值指定一个定量值，但是这种方式过于灵活，增加了调参的工作。通常使用哑编码的方式将定性特征转换为定量特征：假设有N种定性值，则将这一个特征扩展为N种特征，当原始特征值为第i种定性值时，第i个扩展特征赋值为1，其他扩展特征赋值为0。哑编码的方式相比直接指定的方式，不用增加调参的工作，对于线性模型来说，使用哑编码后的特征可达到非线性的效果。
 
-当我们开始使用其他数据源时，我们将进行大量的特征工程，比如我们可以尝试以下两种简单的特征构造方法：
+* `4、存在缺失值：` 缺失值需要补充。
 
-* `Polynomial Features 多项式特征`
+* `5、信息利用率低：` 不同的机器学习算法和模型对数据中信息的利用是不同的，之前提到在线性模型中，使用对定性特征哑编码可以达到非线性的效果。类似地，对定量变量多项式化，或者进行其他的转换，都能达到非线性的效果。
 
-* `Domain knowledge features 领域知识特征`
+我们 `使用sklearn中的preproccessing库` 来进行数据预处理，可以覆盖以上问题的解决方案。
 
+## 一、无量钢化 
 
-## `一、Polynomial Features：`
+无量纲化使不同规格的数据转换到同一规格。常见的无量纲化方法有标准化和区间缩放法。标准化的前提是特征值服从正态分布，标准化后，其转换成标准正态分布。区间缩放法利用了边界值信息，将特征的取值区间缩放到某个特点的范围，例如[0, 1]等。
 
-一种简单的特征构造方法称为 `多项式特征`。在该方法中，我们生成的特征是现有特征的幂函数以及现有特征之间的交互项。
+## `标准化`
 
-例如，我们可以创建变量 `EXT_SOURCE_1的二次方` 和 `EXT_SOURCE_2的二次方`，也可以创建变量 `EXT_SOURCE_1 x EXT_SOURCE_2^2`，`EXT_SOURCE_1^2 x EXT_SOURCE_2^2`，依此类推。这些由多个独立变量组合而成的特征称为 [交互项](https://en.wikipedia.org/wiki/Interaction（统计学）) 因为它们捕捉变量之间的相互作用。换言之，虽然两个变量本身可能不会对目标产生强烈的影响，但将它们组合成一个单独的交互变量可能会显示出与目标的关系。交互项在统计模型中常用来捕捉多个变量的影响，但我不认为它们在机器学习中经常使用。尽管如此，我们可以尝试一些，看看它们是否有助于我们的模型来预测是否会有帮助。
+### `1.1、z-score标准化：`
 
+默认情况下，推荐使用zscore标准化。(主要原因是max-min标准化有一个问题，就是如果测试集里的数据特征的值出现比训练集的特征值最大值还大，或者比训练集的特征值最小值还小的情况，需要特殊处理。)
 
-在下面的代码中，我们使用 `EXT_SOURCE` 和 `DAYS_BIRTH` 变量创建多项式特征。`Scikit Learn` 有一个很有用的类，叫做 `PolynomialFeatures` ，它创建多项式和交互项，达到指定的程度。我们可以使用3度来查看结果（当我们创建多项式特征时，我们希望避免使用太高的次数，这既因为 `特征的数量与次数成指数关系` ，也因为我们可能会遇到 `过拟合` 的问题）。
+          
+这是最常见的特征预处理方式，基本所有的线性模型在拟合的时候都会做 `z-score标准化`。具体的方法是求出样本 特征x 的 `均值mean` 和 `标准差std` ，然后用`（x-mean)/std` 来代替原特征。这样特征就变成了 `均值为0`，`方差为1` 了，[这不意味着数据分布被转成标准正态分布](https://blog.csdn.net/weixin_36604953/article/details/102652160)。 
 
-`案例：`
+在 sklearn 中，我们 `可以用StandardScaler来做z-score标准化` 。当然，如果我们是用 pandas 做数据预处理，可以自己在数据框里面减去均值，再除以方差，自己做 z-score标准化。    
 
-    # 为多项式特征生成一个新的数据帧，筛选出 app_train 的一些特征，然后生成一个新的数据帧
-    poly_features = app_train[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'DAYS_BIRTH', 'TARGET']]
-    poly_features_test = app_test[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'DAYS_BIRTH']]
+`如：当只有一个特征时，我们进行标准化也要用双 [],即[[]]`
 
-    # 用于处理缺失值的填充器
-    from sklearn.preprocessing import Imputer
-    imputer = Imputer(strategy = 'median')
+      ss=StandardScaler()
+      train_x=data[['False']]
+      train_x=ss.fit_transform(train_x)
 
-    poly_target = poly_features['TARGET']
+*    `其实就是对数据中的每一项 都做了 标准分。`
+      
+          标准分公式：z = (x- μ)/σ
 
-    poly_features = poly_features.drop(columns = ['TARGET'])
+     需要注意的是在测试的时候。我将列表中的数据进行标准化，标准化后结果为0 好像是没有标准化成功。但是使用dataframe时成功标准化。
 
-    #需要插补缺失值
-    poly_features = imputer.fit_transform(poly_features)
-    poly_features_test = imputer.transform(poly_features_test)
 
-    from sklearn.preprocessing import PolynomialFeatures
-                                    
-    # 创建具有指定次数的多项式对象
-    poly_transformer = PolynomialFeatures(degree = 3)
+#### 关于 `z-score标准化` 后应该注意    `<------- 重点`
 
+* 如果训练模型时需要对 `训练集特征进行Z-score标准化` ，那么测试的时候你需要使用训练集的标准化对应参数 `对测试集进行标准化。`
 
-    # 多项式特征的训练
-    poly_transformer.fit(poly_features)
+`比如：`
 
-    # 转换特征
-    poly_features = poly_transformer.transform(poly_features)
-    poly_features_test = poly_transformer.transform(poly_features_test)
-    print('Polynomial Features shape: ', poly_features.shape)
+* 训练集某特征的均值是3， 标准差是4， 你做了z-score标准化，变成了均值0， 标准差1的数据，最后训练了模型。对于你的测试集的该特征，你需要减3再除以4，这样标准化后再去做预测。
 
-`输出：`
 
-    Polynomial Features shape:  (307511, 35)
+* `训练集的 mean 和 std 对测试集进行标准化的主要原因是: 使测试集和训练集的数据保持独立同分布的的情况。`
 
+* `独立同分布` 这意味着 `X1` 和 `X2` 具有相同的分布形状和相同的分布参数，对离随机变量具有相同的分布律，对连续随机变量具有相同的概率密度函数，有着 `相同的分布函数`，相同的 `期望`、`方差`。
 
+#### 参考案例
 
-### `查看构造出的新特征：`
+* 《[Z-score训练集标准化后，测试集使用相同标准标准化：案例中里面的第9部分](https://github.com/ljpzzz/machinelearning/blob/master/classic-machine-learning/regression_production_example.ipynb)》
 
-* `get_feature_names` 可以用于获取 `PolynomialFeatures` 中的相关特征
+* `注意：` 如果不是使用 z-score 做的标准化，我们那么预测集并不需要减训练集均值，除训练集标准差。
 
+### `1.2、max-min区间缩放法：`
 
-`案例：`
+* 也称为离差标准化，预处理后使特征值映射到[0,1]之间。具体的方法是求出样本特征x的最大值max和最小值min，然后用(x-min)/(max-min)来代替原特征。如果我们希望将数据映射到任意一个区间[a,b]，而不是[0,1]，那么也很简单。用(x-min)(b-a)/(max-min)+a来代替原特征即可。
 
-    poly_transformer.get_feature_names(input_features = ['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'DAYS_BIRTH'])[:15]
+* 在sklearn中，我们可以用MinMaxScaler来做max-min标准化。 `这种方法的问题就是如果测试集或者预测数据里的特征有小于min，或者大于max的数据，会导致max和min发生变化，需要重新计算。`
 
-`输出: `
+``所以实际算法中， 除非你对特征的取值区间有需求，否则max-min标准化没有 z-score标准化好用。``
 
-    ['1',
-    'EXT_SOURCE_1',
-    'EXT_SOURCE_2',
-    'EXT_SOURCE_3',
-    'DAYS_BIRTH',
-    'EXT_SOURCE_1^2',
-    'EXT_SOURCE_1 EXT_SOURCE_2',
-    'EXT_SOURCE_1 EXT_SOURCE_3',
-    'EXT_SOURCE_1 DAYS_BIRTH',
-    'EXT_SOURCE_2^2',
-    'EXT_SOURCE_2 EXT_SOURCE_3',
-    'EXT_SOURCE_2 DAYS_BIRTH',
-    'EXT_SOURCE_3^2',
-    'EXT_SOURCE_3 DAYS_BIRTH',
-    'DAYS_BIRTH^2']
 
+### `1.3、RobustScaler标准化`
 
+* 如果数据 `有离群点`，上述StandardScaler效果可能不好，这种情况可以使用RobustScaler，它有对数据中心化和数据的缩放鲁棒性更强的参数。
 
-* 共有35个特征，每个特征都被提升到3级幂和交互项。现在，我们可以看到这些新特性是否与目标相关。
+* RobustScaler根据分位数范围（默认为IQR：Interquartile Range）删除中位数并缩放数据。IQR是第1四分位数（第25个分位数）和第3个四分位数（第75个分位数）之间的范围。
 
+* 通过计算训练集中样本的相关统计数据，对每个特征独立地进行居中和缩放。然后存储中间和四分位数范围以使用该transform方法用于以后的数据。
 
-### `查看构造出的新特征之间的关联性：`
+* 数据集的标准化是许多机器学习估计器的常见要求。通常，这通过去除均值和缩放到单位方差来完成。但是，异常值通常会以负面方式影响样本均值/方差。在这种情况下，中位数和四分位数范围通常会产生更好的结果。
 
-`案例：`
+## 归一化
 
-    # Create a dataframe of the features 
-    poly_features = pd.DataFrame(poly_features, 
-                                columns = poly_transformer.get_feature_names(['EXT_SOURCE_1', 'EXT_SOURCE_2', 
-                                                                            'EXT_SOURCE_3', 'DAYS_BIRTH']))
+### 1.1、Normalizer归一化：
 
-    # Add in the target
-    poly_features['TARGET'] = poly_target
+* 归一化依照特征矩阵的行处理数据，其目的在于样本向量在点乘运算或其他核函数计算相似性时，拥有统一的标准，也就是说都转化为“单位向量”。 
 
-    # Find the correlations with the target
-    poly_corrs = poly_features.corr()['TARGET'].sort_values()
 
-    # Display most negative and most positive
-    print(poly_corrs.head(10))
-    print(poly_corrs.tail(5))
+## 标准化和归一化的异同
 
+### 归一化方法：
 
-`输出：`
+      1、把数变为（0，1）之间的小数
+      主要是为了数据处理方便提出来的，把数据映射到0～1范围之内处理，更加便捷快速。
 
-    EXT_SOURCE_2 EXT_SOURCE_3                -0.193939
-    EXT_SOURCE_1 EXT_SOURCE_2 EXT_SOURCE_3   -0.189605
-    EXT_SOURCE_2 EXT_SOURCE_3 DAYS_BIRTH     -0.181283
-    EXT_SOURCE_2^2 EXT_SOURCE_3              -0.176428
-    EXT_SOURCE_2 EXT_SOURCE_3^2              -0.172282
-    EXT_SOURCE_1 EXT_SOURCE_2                -0.166625
-    EXT_SOURCE_1 EXT_SOURCE_3                -0.164065
-    EXT_SOURCE_2                             -0.160295
-    EXT_SOURCE_2 DAYS_BIRTH                  -0.156873
-    EXT_SOURCE_1 EXT_SOURCE_2^2              -0.156867
-    Name: TARGET, dtype: float64
-    DAYS_BIRTH     -0.078239
-    DAYS_BIRTH^2   -0.076672
-    DAYS_BIRTH^3   -0.074273
-    TARGET          1.000000
-    1                    NaN
-    Name: TARGET, dtype: float64
+      2、把有量纲表达式变为无量纲表达式
+      归一化是一种简化计算的方式，即将有量纲的表达式，经过变换，化为无量纲的表达式，成为纯量。
 
 
-* 一些新的变量与目标的相关性比原始特征更大（就绝对大小而言）。当我们构建机器学习模型时，我们可以尝试使用或不使用这些特性来确定它们是否真的有助于模型学习。
+### 归一化带来的好处
 
+      1.提升模型的收敛速度
+      2.提升模型的精度，数据归一化后，最优解的寻优过程明显会变得平缓，更容易正确的收敛到最优解。  
+      3.深度学习中数据归一化可以防止模型梯度爆炸。
 
-* 我们将把这些特性添加到训练和测试数据的副本中，然后评估有无这些特性的模型。很多时候在机器学习中，要知道一种方法是否有效，唯一的方法就是尝试一下！
+*    `《[归一化带来的好处 - 原理参考链接一](https://zhuanlan.zhihu.com/p/27627299)》`
 
-### `将构造好的新特征加入到数据中：`
+### 标准化方法：
 
-`案例：`
+      1、标准化是通过特征的平均值和标准差，将特征缩放成一个均值为0，方差为1的分布。
 
-    # 将测试特征放入数据帧
-    poly_features_test = pd.DataFrame(poly_features_test, 
-                                    columns = poly_transformer.get_feature_names(['EXT_SOURCE_1', 'EXT_SOURCE_2', 
-                                                                                    'EXT_SOURCE_3', 'DAYS_BIRTH']))
+      2、标准化是为了方便数据的下一步处理，而进行的数据缩放等变换，不同于归一化，并不是为了方便与其他数据一同处理或比较。
+      
+### 标准化和归一化的区别：
 
-    # 将多项式特征合并到训练数据帧中，SK_ID_CURR 是数据的标识符，这里先将原始的 SK_ID_CURR 加入到新特征中。
-    poly_features['SK_ID_CURR'] = app_train['SK_ID_CURR']
-    app_train_poly = app_train.merge(poly_features, on = 'SK_ID_CURR', how = 'left') # 合并数据
+简单介绍：归一化的缩放是“拍扁”统一到区间（仅由极值决定），而标准化的缩放是更加“弹性”和“动态”的，和整体样本的分布有很大的关系
 
-    # 将多项式特征合并到测试数据帧中
-    poly_features_test['SK_ID_CURR'] = app_test['SK_ID_CURR']
-    app_test_poly = app_test.merge(poly_features_test, on = 'SK_ID_CURR', how = 'left')
+*    归一化：缩放仅仅跟最大、最小值的差别有关。
+*    标准化：缩放和每个点都有关系，通过方差（variance）体现出来。
 
-    # 对齐数据帧
-    app_train_poly, app_test_poly = app_train_poly.align(app_test_poly, join = 'inner', axis = 1)
+*    `《[参考：标准化和归一化说明](https://www.zhihu.com/question/20455227)》`
 
-    # Print out the new shapes
-    print('Training data with polynomial features shape: ', app_train_poly.shape)
-    print('Testing data with polynomial features shape:  ', app_test_poly.shape)
+但是我们不需要过度区分标准化和归一化，因为这块目前没有共识。所以我们只需要讨论具体的标准化或者归一化方法，比如z-score，max-min等。
 
-`输出：`
 
-    Training data with polynomial features shape:  (307511, 278)
-    Testing data with polynomial features shape:   (48744, 278)
+## 数据规范化
 
+-《[sklearn 中数据规范化库的使用](https://github.com/OneStepAndTwoSteps/Data_Analysis/blob/master/Sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%93/metrics/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/preprocessing/%E6%95%B0%E6%8D%AE%E8%A7%84%E8%8C%83%E5%8C%96.md)》
 
-## `二、领域知识特征：`
 
+         
+### Sklearn的数据预处理模块：
 
-也许称之为 `领域知识` 是不完全正确的，拿信用卡违约分析来说：因为我不是一个信用专家，但也许我们可以称之为 `尝试应用有限的金融知识`。在这种思路下，我们可以制作一些功能，试图捕捉我们认为对判断客户是否会拖欠贷款很重要的信息。在这里，我将使用五个功能，这些功能都是由Aguiar的脚本启发的：
 
+      类                  功能                                   说明
+    StandardScaler      无量纲化              标准化，基于特征矩阵的列，将特征值转换至服从标准正态分布
 
+    MinMaxScaler        无量纲化              区间缩放，基于最大最小值，将特征值转换到[0, 1]区间上
 
-* `信贷收入百分比：`信贷金额相对于客户收入的百分比
+    Normalizer          归一化                基于特征矩阵的行，将样本向量转换为“单位向量”
 
-* `年金收入百分比：`贷款年金相对于客户收入的百分比
+    Binarizer           二值化                基于给定阈值，将定量特征按阈值划分
 
-* `信用期限：`按月支付的期限（因为年金是每月到期的金额
+    OneHotEncoder       哑编码                将定性数据编码为定量数据
 
-* `雇佣天数百分比：`雇佣天数相对于客户年龄的百分比
+    Imputer             缺失值计算             计算缺失值，缺失值可填充为均值等
 
+    PolynomialFeatures  多项式数据转换         多项式数据转换
 
-`案例：`
+    FunctionTransformer 自定义单元数据转换      使用单变元的函数来转换数据函数来转换数据
 
-    app_train_domain = app_train.copy()
-    app_test_domain = app_test.copy()
 
-    app_train_domain['CREDIT_INCOME_PERCENT'] = app_train_domain['AMT_CREDIT'] / app_train_domain['AMT_INCOME_TOTAL']
-    app_train_domain['ANNUITY_INCOME_PERCENT'] = app_train_domain['AMT_ANNUITY'] / app_train_domain['AMT_INCOME_TOTAL']
-app_train_domain['CREDIT_TERM'] = app_train_domain['AMT_ANNUITY'] / app_train_domain['AMT_CREDIT']
-    app_train_domain['DAYS_EMPLOYED_PERCENT'] = app_train_domain['DAYS_EMPLOYED'] / app_train_domain['DAYS_BIRTH']
+## 注意
 
-    app_test_domain['CREDIT_INCOME_PERCENT'] = app_test_domain['AMT_CREDIT'] / app_test_domain['AMT_INCOME_TOTAL']
-    app_test_domain['ANNUITY_INCOME_PERCENT'] = app_test_domain['AMT_ANNUITY'] / app_test_domain['AMT_INCOME_TOTAL']
-    app_test_domain['CREDIT_TERM'] = app_test_domain['AMT_ANNUITY'] / app_test_domain['AMT_CREDIT']
-    app_test_domain['DAYS_EMPLOYED_PERCENT'] = app_test_domain['DAYS_EMPLOYED'] / app_test_domain['DAYS_BIRTH']
+`是否进行标准化，可能会影响模型的预测分数,模型的分数可能会偏高也可能会偏低`
 
+虽然大部分机器学习模型都需要做标准化和归一化，也有不少模型可以不做做标准化和归一化，主要是基于概率分布的模型，比如决策树大家族的CART，随机森林等。当然此时使用标准化也是可以的，大多数情况下对模型的泛化能力也有改进。
 
-### `可视化新变量：`
 
-我们应该在一个图形中可视化地探索这些领域知识变量。对于所有这些，我们将用目标值着色相同的KDE图。
+## Z-socre 补充
 
-案例：
+### 问：
 
-    plt.figure(figsize = (12, 20))
-    # iterate through the new features
-    for i, feature in enumerate(['CREDIT_INCOME_PERCENT', 'ANNUITY_INCOME_PERCENT', 'CREDIT_TERM', 'DAYS_EMPLOYED_PERCENT']):
-        
-        # create a new subplot for each source
-        plt.subplot(4, 1, i + 1)
-        # plot repaid loans
-        sns.kdeplot(app_train_domain.loc[app_train_domain['TARGET'] == 0, feature], label = 'target == 0')
-        # plot loans that were not repaid
-        sns.kdeplot(app_train_domain.loc[app_train_domain['TARGET'] == 1, feature], label = 'target == 1')
-        
-        # Label the plots
-        plt.title('Distribution of %s by Target Value' % feature)
-        plt.xlabel('%s' % feature); plt.ylabel('Density');
-        
-    plt.tight_layout(h_pad = 2.5)
+在kaggle中的一些kernel中存在，直接使用 Z-score 标准化 训练集 和 测试集 的操作，这样的做法正确吗？
 
+### 答：
 
-<div align=center><img width="600" height="990" src="./static/Visualize New Variables.jpg"/></div>
+kaggle里这么做，是因为他们比赛的数据集是确定的，这样做可以求出最优的均值和方差。实际生产项目里，未知数据很多，是不能这么做的。因此只能以训练集的均值和方差为准。
 
-## `三、其他：`
 
-### `3.1、Function for Numeric Aggregations (数值聚合函数)：`
+### 问：
 
-当想要获取某一 dataframe 中的数字信息，我们可以计算所有数字列的统计信息。 为此，我们可以针对数据的 `ID` 进行分组，对分组的数据框进行 `agg` 转换，然后将结果合并回训练数据中。 `agg` 函数将仅计算认为该操作有效的数字列的值。 我们将坚持使用 `mean`，`max`，`min`，`sum`，但是任何函数都可以在此处传递。 我们甚至可以编写我们自己的函数，并在`agg`调用中使用它。
+为什么比赛数据集是确定的就可以将训练集和测试集直接进行Z-score标准化，而不需要对测试集进行训练集训练集相同标准化的处理呢？
 
-`模板：`
+在实际生产项目中，我们如果要进行分析了，我们数据不应该已经收集好了吗？那老师您说的未知数据到底是指什么呢？可以举个例子吗？
 
-    def agg_numeric(df, group_var, df_name):
-        """Aggregates the numeric values in a dataframe. This can
-        be used to create features for each instance of the grouping variable.
-        
-        Parameters
-        --------
-            df (dataframe): 
-                要进行统计的df数据
-            group_var (string): 
-                分组 df 的变量，也就是按照哪一列进行 groupby 分组统计
-            df_name (string): 
-                用于重命名列的变量，在新生成的 统计变量前加上 df_name
-            
-        Return
-        --------
-            agg (dataframe): 
-                a dataframe with the statistics aggregated for 
-                all numeric columns. Each instance of the grouping variable will have 
-                the statistics (mean, min, max, sum; currently supported) calculated. 
-                The columns are also renamed to keep track of features created.
-        
-        """
-        # 删除除分组变量以外的 id 变量,看情况决定是否定义
-        for col in df:
-            # if col != group_var and 'SK_ID' in col: # 列名中不包含 group_var 并且包含 SK_ID 的列进行删除            
-                df = df.drop(columns = col)
-                
-        group_ids = df[group_var]                   # 将数据的唯一标识 id 列数据赋值于 group_ids
-        numeric_df = df.select_dtypes('number')     # 找出数据中类型为数字的列，赋值给新的 df
-        numeric_df[group_var] = group_ids           # 将唯一标识 id 赋予给新的 df
+为什么未知数据多的时候，不可以直接标准化，而需要将测试集减去训练集标准化之前的均值，然后除以标准差呢？
 
-        # 按指定变量分组并计算统计信息，计算的到的新 agg 是一个有阶层的 groupby 对象，需要经过下面步骤进行过滤
-        agg = numeric_df.groupby(group_var).agg(['count', 'mean', 'max', 'min', 'sum']).reset_index() # 进行 agg 操作
+### 答：
 
-        # Need to create new column names
-        columns = [group_var]
+算法比赛的目的是为了在给定的数据集（绝大多数数据已知）上达到最大准确度。而生产项目是为了在给定的+海量未知的数据集上达到最大准确度。因此生产项目的算法泛化能力（对未知数据的预测能力）一定要强。也就是尽量不要过于依赖于已知数据集。所以我们一般只拿训练集的均值方差做zscore标准化。
 
-        # 遍历变量名称，整理上面生成的 agg 对象
-        for var in agg.columns.levels[0]:
-            # Skip the grouping variable
-            if var != group_var:
-                # Iterate through the stat names
-                for stat in agg.columns.levels[1][:-1]:
-                    # Make a new column name for the variable and stat
-                    columns.append('%s_%s_%s' % (df_name, var, stat))
+算法比赛，是为了追求极限，因此可以使用一些非常规的方法达到好的比赛成绩。虽然算法比赛也会有一些未知的给定数据用于评判选手的成绩，但是这个测试数据量很小，因此影响也会小。而生产环境里未知的数据量极大，这样做并没有太多好处。
 
-        agg.columns = columns
-        return agg
 
-`调用：`
-    
-    bureau_agg_new = agg_numeric(bureau.drop(columns = ['SK_ID_BUREAU']), group_var = 'SK_ID_CURR', df_name = 'bureau')
-    bureau_agg_new.head()
+## `为什么要做归一化或标准化`
 
 
-`展示图：`
+* 1、[为什么要对数据进行归一化处理？](https://zhuanlan.zhihu.com/p/27627299)：数据归一化后，最优解的寻优过程明显会变得平缓，更容易正确的收敛到最优解。
 
 
+* 2、[王赟 Maigo：特征工程中的「归一化」有什么作用？](https://www.zhihu.com/question/20455227)
 
-<div align=center><img width="800" height="120" src="./static/Function for Numeric Aggregations.jpg"/></div>
+* 2.1、[微调：线性变换有很多良好的性质，这些性质决定了为什么对数据进行改变后竟然不会造成“失效”，反而还能提高数据的表现](https://www.zhihu.com/question/20455227)
 
+### `重点：`
 
-##  `删除共线特征：`
+* 3、对于原始数据不希望提供给对方，但是又得以某种形式呈现，归一化和标准化都是可行的方案。
 
-对于 `共线变量`，我们不仅可以计算变量与目标值的相关性，还可以计算每个变量与其他每个变量的相关性。 这将使我们看到是否存在应该从数据中删除的高度共线变量。
+* 4、[为什么 feature scaling 会使 gradient descent 的收敛更好?](https://www.zhihu.com/question/37129350/answer/70592743)：如果不进行归一化或者标准化，特征之间差异过大，那么目标函数就是呈椭圆状，`因为梯度方向是圆的切线方向`，那么椭圆的目标函数就可能走很多弯路，因为此时的梯度不是最优的下坡路（下降最快的路）。
 
-`案例：`
 
-* `1、`生成特征之间的相关性：
+* 5、不进行标准化可能会让某一个特征的权重非常大，比如预测房屋价格，我们现在有卧室数量和面积两个特征，现在有 y = θ1x1 + θ2x2 ，x1 = 3 ，x2 = 300，那么稍微修改θ2就会对结果造成很大的影响，那么x2他就具有更高的权重，但是很多时候不一定正确，所以进行标准化。
 
-        corrs = train.corr()
-        corrs = corrs.sort_values('TARGET', ascending = False)
+* 6、[为什么要对特征做归一化/标准化](https://www.cnblogs.com/MiQing4in/p/13954517.html
+)
 
-        # Ten most positive correlations
-        pd.DataFrame(corrs['TARGET'].head(10))
+## 注意：
 
 
+对于已经进行 onehot 化的数据
 
-* `2、`寻找与其他变量的相关性大于0.8的任何变量：
 
 
 
-        # 设置阈值
-        threshold = 0.8
 
-        # 创建一个空字典以容纳相关变量
-        above_threshold_vars = {}
-
-        # 对于每一列，记录高于阈值的变量
-        for col in corrs:
-            above_threshold_vars[col] = list(corrs.index[corrs[col] > threshold])
-
-* `3、`对于每对高度相关的变量，我们只想删除其中一个变量。 以下代码创建了一组变量，只需将每个变量对中的一个相加即可删除。
-
-
-        # 跟踪要删除的列和已检查的列
-        cols_to_remove = []
-        cols_seen = []
-        cols_to_remove_pair = []
-
-        # 遍历列和相关列
-        for key, value in above_threshold_vars.items():
-            # 跟踪已检查的列
-            cols_seen.append(key)
-            for x in value:
-                if x == key:
-                    next
-                else:
-                    # 如果存在高相关的特征，只保留一个
-                    if x not in cols_seen:                  # 如果该特征在之前的 key 数据中没有出现过。
-                        cols_to_remove.append(x)            # 存在高度相关，将高度相关的特征放入 cols_to_remove 中。
-                        cols_to_remove_pair.append(key)     # cols_to_remove 和 cols_to_remove_pair 得到的结果一致。
-                    
-        cols_to_remove = list(set(cols_to_remove))
-        print('Number of columns to remove: ', len(cols_to_remove))
-
-* `4、`删除高度相关特征
-
-
-        train_corrs_removed = train.drop(columns = cols_to_remove)
-        test_corrs_removed = test.drop(columns = cols_to_remove)
-
-        print('Training Corrs Removed Shape: ', train_corrs_removed.shape)
-        print('Testing Corrs Removed Shape: ', test_corrs_removed.shape)
-
-* `5、`将新数据进行保存
-
-
-        train_corrs_removed.to_csv('train_bureau_corrs_removed.csv', index = False)
-        test_corrs_removed.to_csv('test_bureau_corrs_removed.csv', index = False)

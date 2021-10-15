@@ -174,7 +174,7 @@
 `模板:`
 
     # Find correlations with the target and sort
-    correlations = df.corr()['TARGET'].sort_values()
+    correlations = df.corr()['TARGET'].sort_values(ascending=False)
 
     # Display correlations
     print('Most Positive Correlations:\n', correlations.head(15))

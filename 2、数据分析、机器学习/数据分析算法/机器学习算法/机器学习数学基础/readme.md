@@ -65,3 +65,13 @@
 
 * https://fei-wang.github.io/matrix.html
 
+
+## `求偏导：`
+
+<div align=center><img src="./static/偏导公式.jpg"/></div>
+
+
+<div align=center><img src="./static/求偏导1.jpg"/></div>
+
+
+<div align=center><img src="./static/求偏导2.jpg"/></div>
