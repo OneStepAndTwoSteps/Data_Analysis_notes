@@ -2,6 +2,17 @@
 
 sklearn 精确率，召回率，F1-Means 函数使用说明
 
+## <font color = red> 特别注意：</font>
+
+
+<font color = orange>在使用下面计算方法时，参数的顺序不要搞反了！！！
+
+* precision_score 举例：</font>
+
+<div align='center'><img src='./static/顺序.jpg'> </div>
+
+
+* <font color = red>参数填写：</font><font color = orange>顺序不一致，最后计算出来的结果也是不一样的，先是真实值，再是预测值，顺序别搞反了！！！</font>
 
 
 ## `一、准确率(accuracy_score)`
@@ -17,6 +28,11 @@ sklearn 精确率，召回率，F1-Means 函数使用说明
     精确率是 `tp / (tp + fp)` 的比例，其中 tp 是真正性的数量，fp是假正性的数量. 精确率直观地可以说是分类器不将负样本标记为正样本的能力.
  
     精确率最好的值是1，最差的值是0.
+
+* <font color = red>参数填写：</font><font color = orange>先是真实值，再是预测值，顺序别搞反了！！！</font>
+
+
+        sklearn.metrics.precision_score(y_true, y_pred,...)
 
 *  `micro、macro、weighted 参数`
 
