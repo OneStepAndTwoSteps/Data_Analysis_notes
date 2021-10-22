@@ -1,93 +1,101 @@
-# 模型评估
+# `模型评估`
 
 sklearn 精确率，召回率，F1-Means 函数使用说明
 
-### `micro、macro、weighted 参数`
 
-* [详解sklearn的多分类模型评价指标](https://zhuanlan.zhihu.com/p/59862986)
 
-* [多分类算法的评估指标](https://www.jianshu.com/p/103b3015802f)
+## `一、准确率(accuracy_score)`
 
-## `准确率(precision_score)`
+<div align='center'><img src='./static/acc.jpg'> </div>
 
-### `计算精确率`
- 
-精确率是 tp / (tp + fp)的比例，其中tp是真正性的数量，fp是假正性的数量. 精确率直观地可以说是分类器不将负样本标记为正样本的能力.
- 
-精确率最好的值是1，最差的值是0.
 
-### `Examples`
+## `二、精确率(precision_score)`
 
-    from sklearn.metrics import precision_score
-
-    y_true = [0, 1, 2, 0, 1, 2]
-    y_pred = [0, 2, 1, 0, 0, 1]
-    print(precision_score(y_true, y_pred, average='macro'))  
-    # 0.2222222222222222
-
-    print(precision_score(y_true, y_pred, average='micro'))  
-    # 0.3333333333333333
-
-    print(precision_score(y_true, y_pred, average='weighted'))  
-    # 0.2222222222222222
-
-    print(precision_score(y_true, y_pred, average=None))  
-    # [0.66666667 0.         0.        ]
-
+* `计算精确率`
  
 
+    精确率是 `tp / (tp + fp)` 的比例，其中 tp 是真正性的数量，fp是假正性的数量. 精确率直观地可以说是分类器不将负样本标记为正样本的能力.
+ 
+    精确率最好的值是1，最差的值是0.
 
-## `召回率(recall_score)`
+*  `micro、macro、weighted 参数`
 
-### `计算召回率`
+    * [详解sklearn的多分类模型评价指标](https://zhuanlan.zhihu.com/p/59862986)
+
+    * [多分类算法的评估指标](https://www.jianshu.com/p/103b3015802f)
+
+* `Examples`
+
+        from sklearn.metrics import precision_score
+
+        y_true = [0, 1, 2, 0, 1, 2]
+        y_pred = [0, 2, 1, 0, 0, 1]
+        print(precision_score(y_true, y_pred, average='macro'))  
+        # 0.2222222222222222
+
+        print(precision_score(y_true, y_pred, average='micro'))  
+        # 0.3333333333333333
+
+        print(precision_score(y_true, y_pred, average='weighted'))  
+        # 0.2222222222222222
+
+        print(precision_score(y_true, y_pred, average=None))  
+        # [0.66666667 0.         0.        ]
+
+ 
+
+
+## `三、召回率(recall_score)`
+
+* `计算召回率`
  
-召回率是比率 `tp / (tp + fn)`，其中tp是真正性的数量，fn是假负性的数量. 召回率直观地说是分类器找到所有正样本的能力.
-召回率最好的值是1，最差的值是0.
+    召回率是比率 `tp / (tp + fn)`，其中tp是真正性的数量，fn是假负性的数量. 召回率直观地说是分类器找到所有正样本的能力.
+    召回率最好的值是1，最差的值是0.
 
-### `Examples`
+* `Examples`
 
-    from sklearn.metrics import recall_score
+        from sklearn.metrics import recall_score
 
-    y_true = [0, 1, 2, 0, 1, 2]
-    y_pred = [0, 2, 1, 0, 0, 1]
-    print(recall_score(y_true, y_pred, average='macro'))  # 0.3333333333333333
-    print(recall_score(y_true, y_pred, average='micro'))  # 0.3333333333333333
-    print(recall_score(y_true, y_pred, average='weighted'))  # 0.3333333333333333
-    print(recall_score(y_true, y_pred, average=None))  # [1. 0. 0.]
-
-
+        y_true = [0, 1, 2, 0, 1, 2]
+        y_pred = [0, 2, 1, 0, 0, 1]
+        print(recall_score(y_true, y_pred, average='macro'))  # 0.3333333333333333
+        print(recall_score(y_true, y_pred, average='micro'))  # 0.3333333333333333
+        print(recall_score(y_true, y_pred, average='weighted'))  # 0.3333333333333333
+        print(recall_score(y_true, y_pred, average=None))  # [1. 0. 0.]
 
 
 
-##  `f1-means`
 
 
-### `计算F1 score`
-
-`F1 score` 它也被叫做 `F-score` 或 `F-measure.`
-
-F1 score 可以解释为精确率和召回率的加权平均值. F1 score的最好值为1，最差值为0. 精确率和召回率对F1 score的相对贡献是相等的. F1 score的计算公式为：
-F1 = 2 * (precision * recall) / (precision + recall)
+##  `四、f1-means`
 
 
-### `Examples`
+* `计算F1 score`
 
-    >>>
-    >>> from sklearn.metrics import f1_score
-    >>> y_true = [0, 1, 2, 0, 1, 2]
-    >>> y_pred = [0, 2, 1, 0, 0, 1]
-    >>> f1_score(y_true, y_pred, average='macro')  
-    0.26...
-    >>> f1_score(y_true, y_pred, average='micro')  
-    0.33...
-    >>> f1_score(y_true, y_pred, average='weighted')  
-    0.26...
-    >>> f1_score(y_true, y_pred, average=None)
-    array([0.8, 0. , 0. ])
+    `F1 score` 它也被叫做 `F-score` 或 `F-measure.`
+
+    F1 score 可以解释为精确率和召回率的加权平均值. F1 score的最好值为1，最差值为0. 精确率和召回率对F1 score的相对贡献是相等的. F1 score的计算公式为：
+    F1 = 2 * (precision * recall) / (precision + recall)
 
 
+* `Examples`
 
-## `参数介绍：`
+        >>>
+        >>> from sklearn.metrics import f1_score
+        >>> y_true = [0, 1, 2, 0, 1, 2]
+        >>> y_pred = [0, 2, 1, 0, 0, 1]
+        >>> f1_score(y_true, y_pred, average='macro')  
+        0.26...
+        >>> f1_score(y_true, y_pred, average='micro')  
+        0.33...
+        >>> f1_score(y_true, y_pred, average='weighted')  
+        0.26...
+        >>> f1_score(y_true, y_pred, average=None)
+        array([0.8, 0. , 0. ])
+
+
+
+## `五、参数介绍：`
 
 ### `参数：`
 
@@ -113,8 +121,8 @@ F1 = 2 * (precision * recall) / (precision + recall)
 
 * `sample_weight` : 形状为[样本数量]的数组，可选参数. 样本权重.
 
-#### 返回值：
+#### `返回值：`
 
-precision : 浮点数(如果average不是None) 或浮点数数组, shape =[唯一标签的数量]
-二分类中正类的精确率或者在多分类任务中每个类的精确率的加权平均.
+* precision : 浮点数(如果average不是None) 或浮点数数组, shape =[唯一标签的数量]
+    二分类中正类的精确率或者在多分类任务中每个类的精确率的加权平均.
 
