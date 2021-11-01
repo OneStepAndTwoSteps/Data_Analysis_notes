@@ -7,7 +7,7 @@
 
 #### 调优随机森林：
 
-*   __code：__
+*   `code：`
 
         from sklearn.model_selection import GridSearchCV
 
@@ -20,7 +20,7 @@
         grid_search = GridSearchCV(forest_reg,params_grid,cv=5,scoring='neg_mean_squared_error')
         grid_search.fit(housing_prepared,housing_labels)
 
-*   __out：__
+*   `out：`
 
         GridSearchCV(cv=5, error_score='raise-deprecating',
                     estimator=RandomForestRegressor(bootstrap=True, criterion='mse',
@@ -46,14 +46,14 @@
 
 #### 获取调优数据：
 
-*   __获取指定的参数在模型中的最优参数__
+*   `获取指定的参数在模型中的最优参数`
     
         grid_search.best_params_
 
         {'max_features': 6, 'n_estimators': 30}
 
 
-*   __获取指定的参数在模型中的最优估计量__
+*   `获取指定的参数在模型中的最优估计量`
 
         grid_search.best_estimator_
 
@@ -66,7 +66,7 @@
                                 n_jobs=None, oob_score=False, random_state=None,
                                 verbose=0, warm_start=False)
 
-*   __获取不同参数的评估得分__
+*   `获取不同参数的评估得分`
 
         cvres = grid_search.cv_results_
         for mean_score,params in zip(cvres['mean_test_score'],cvres['params']):

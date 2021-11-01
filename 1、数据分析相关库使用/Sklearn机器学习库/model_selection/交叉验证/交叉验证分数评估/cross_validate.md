@@ -6,9 +6,9 @@ cross_validate(estimator, X, y=None, groups=None, scoring=None, cv=’warn’, n
 
 
 
-__如：__ base_results=model_selection.cross_validate(dtree,x_train,y_train,cv=cv_split)
+`如：` base_results=model_selection.cross_validate(dtree,x_train,y_train,cv=cv_split)
 
-__cross_validate 通过交叉验证评估指标，并记录适合度/得分时间。比如我们可以得到在交叉训练中训练集的模型测试分数，验证集的模型册数分数等__
+`cross_validate 通过交叉验证评估指标，并记录适合度/得分时间。比如我们可以得到在交叉训练中训练集的模型测试分数，验证集的模型册数分数等`
 
 
 -《[sklearn - cross_validate](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html)》
