@@ -100,7 +100,9 @@ scikit库的CountVectorize类就是这种思路。
 同时在我们pandas显示出来的图片中每一行代表一个文章，每一列代表一个特征，在第0行的hey特征下面的数字为3，表示hey在该文章里面出现了3次。
 
 
-## `案例：`
+## `案例：CountVectorizer 提取文本信息`
+
+`代码：`
 
     # CountVectorizer仅仅通过计算词语词频，没有考虑该词语是否有代表性
     from sklearn.feature_extraction.text import CountVectorizer
@@ -121,7 +123,7 @@ scikit库的CountVectorize类就是这种思路。
     print('\nget_feature_names:\n\n',cv.get_feature_names())
     print('\ntoarray：\n',cv_fit.toarray())
 
-out:
+`out:`
 
     cv_fit:
       (0, 9)	1
@@ -167,7 +169,35 @@ out:
     [1 0 0 1 0 1 0 0 0 0 1]
     [0 1 0 0 1 0 0 0 1 0 0]]
 
-## 注意: 
+## `案例：TfidfVectorizer 提取文本信息`
+
+
+`代码：`
+
+    from sklearn.feature_extraction.text import TfidfVectorizer
+
+    tv = TfidfVectorizer(use_idf=True, smooth_idf=True, norm=None)
+
+    texts=["dog cat fish","dog cat cat","fish bird", 'bird']
+
+
+    tv_fit = tv.fit_transform(texts)
+
+    # 查看一下构建的词汇表
+    display(tv.get_feature_names())
+
+    # 查看输入文本列表的VSM矩阵
+    display(pd.DataFrame(tv_fit.toarray(),columns=tv.get_feature_names()))
+
+`out:`
+
+<div align=center><img src="./static/1.jpg"/></div>
+
+
+
+
+
+## `注意: `
    此时我们已经构建完成了我们的词频矩阵， `如果我们还想加入新的文档此时我们需要注意了。`
    
    `举个例子：`
