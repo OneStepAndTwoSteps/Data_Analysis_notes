@@ -1,5 +1,9 @@
 # 拉格朗日乘数法（Lagrange multiplier）和 KKT
 
+
+
+在求解最优化问题中，拉格朗日乘子法（Lagrange Multiplier）和KKT（Karush Kuhn Tucker）条件是两种最常用的方法。在有等式约束时使用拉格朗日乘子法，在有不等约束时使用KKT条件。
+
 ## `拉格朗日乘数法`
 
 在数学中的最优化问题中，`拉格朗日乘数法`（以数学家Joseph-Louis Lagrange命名）是一种  `寻找多元函数在其变量受到一个或多个条件的约束时的极值` 的方法。
