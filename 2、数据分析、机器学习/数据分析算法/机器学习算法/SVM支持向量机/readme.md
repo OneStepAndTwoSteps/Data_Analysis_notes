@@ -412,3 +412,10 @@ __下面是一些普遍使用的准则：__
  
 
 
+## 可参考：
+
+
+* `零基础学SVM—Support Vector Machine(一)：`https://zhuanlan.zhihu.com/p/24638007
+
+
+* `整理,深入理解拉格朗日乘子法（Lagrange Multiplier) 和KKT条件：`https://www.cnblogs.com/mo-wang/p/4775548.html
