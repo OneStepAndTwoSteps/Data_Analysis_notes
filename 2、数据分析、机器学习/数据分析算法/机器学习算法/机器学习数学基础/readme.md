@@ -9,6 +9,11 @@
 * 泰勒公式和 hessian 矩阵：https://www.zhongxiaoping.cn/2019/02/26/%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F%E4%B8%8EHessian%E7%9F%A9%E9%98%B5/
 
 
+## `导数、偏导数、方向导数、梯度：`
+
+* 直观理解梯度，以及偏导数、方向导数和法向量等：https://www.cnblogs.com/shine-lee/p/11715033.html
+
+
 ## `期望：`
 
 
