@@ -122,7 +122,15 @@
 
 ## `三、线性代数：`
 
+### 3.1、基础知识：
+
 * 编程学习线性代数：https://zihengcat.github.io/2018/03/27/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B003-%E5%90%91%E9%87%8F%E9%95%BF%E5%BA%A6%E4%B8%8E%E5%8D%95%E4%BD%8D%E5%90%91%E9%87%8F/
 
 
 * 编程学习线性代数：https://zihengcat.github.io/2018/03/28/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B004-%E5%90%91%E9%87%8F%E6%95%B0%E9%87%8F%E7%A7%AF%E4%B8%8E%E5%A4%B9%E8%A7%92/
+
+
+### 3.2、格拉姆矩阵（Gram matrix）详细解读
+
+
+格拉姆矩阵（Gram matrix）详细解读：https://www.cnblogs.com/yifanrensheng/p/12862174.html
