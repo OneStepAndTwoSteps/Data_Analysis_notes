@@ -31,7 +31,7 @@
 
     <div align=center><img  src="./static/均方误差损失.png"/></div>
 
-* 5、简化成拟合残差
+* 5、r 就是当前母校拟合数据的残差：
 
     <div align=center><img  src="./static/残差.png"/></div>
 
