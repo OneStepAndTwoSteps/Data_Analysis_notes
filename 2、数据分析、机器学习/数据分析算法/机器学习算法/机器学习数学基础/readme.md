@@ -67,7 +67,7 @@
 
     <div align=center><img  height="250" src="./static/偏导公式.jpg"/></div>
 
-
+    <div align=center><img height="250" src="./static/求偏导1-1.png"/></div>
     <div align=center><img height="400" src="./static/求偏导1.jpg"/></div>
 
 
