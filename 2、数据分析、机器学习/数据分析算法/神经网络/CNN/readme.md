@@ -57,7 +57,13 @@
 
 ## `参考：`
 
+
+`如何通俗易懂地解释卷积：`https://www.zhihu.com/question/22298352
+
 `卷积的本质及物理意义（全面理解卷积）：`https://www.zdaiot.com/MachineLearning/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8F%8A%E7%89%A9%E7%90%86%E6%84%8F%E4%B9%89%EF%BC%88%E5%85%A8%E9%9D%A2%E7%90%86%E8%A7%A3%E5%8D%B7%E7%A7%AF%EF%BC%89/
 
 
 `卷积神经网络(CNN)模型结构：`https://www.cnblogs.com/pinard/p/6483207.html
+
+
+
