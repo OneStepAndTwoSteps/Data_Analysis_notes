@@ -68,6 +68,9 @@
 
     <div align=center><img  src="./static/6.jpg"/></div>
 
+    <div align=center><img  src="./static/哈达玛乘积2.jpg"/></div>
+
+
     <div align=center><img  src="./static/7.jpg"/></div>
 
 
