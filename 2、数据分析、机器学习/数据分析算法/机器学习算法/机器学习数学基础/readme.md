@@ -61,6 +61,9 @@
 * https://fei-wang.github.io/matrix.html
 
 
+
+* 标量对向量求导：https://www.cnblogs.com/yanghh/p/13756471.html
+
 ### `1.5、求偏导：`
 
 * 求偏导
