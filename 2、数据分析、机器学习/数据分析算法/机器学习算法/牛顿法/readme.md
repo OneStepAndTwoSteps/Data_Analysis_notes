@@ -61,6 +61,9 @@
 
 * 不断的往复最终得到的切线和x轴的交点会是否逼近 `根值` 。
 
+    <div align=center><img src="./static/readme/NewtonIteration_Ani.gif"/></div>
+
+
 
 
 
