@@ -23,11 +23,18 @@
 
 <div align=center><img  width="800" height="400"  src="./static/GBDT_Classifiction/loss_function_transform.jpg"/></div>
 
-* `3) 中` `log(p) - log(1-p)` 等于 `log(p/(1-p))` = `log(odds)`，`log(odds)` 表示 `对数赔率`，进而到了 `4)` 。
+* `3) 中` <font color ='yellow'>$log(p) - log(1-p)= log(\frac{p}{(1-p)}) = log(odds)$ `其中`  $log(odds)$  </font> 表示 `对数赔率`，进而到了 `4)` 。
 
-* `4)` 到 `5)` 如下所示，将包含 `p` 的函数转成包含 `log(odds)` 的函数：
+* `4)` 到 `5)` 如下所示:
 
     <div align=center><img  src="./static/GBDT_Classifiction/4）到5）.jpg"/></div>
+
+
+    其中 p 为: 
+    $$\frac{e^{log(odds)}}{1+e^{log(odds)}}$$
+    
+    是根据二元逻辑回归的极大似然估计得到的，将包含 `p` 的函数转成包含 `log(odds)` 的函数。
+
 
 
 此时：这个包含 `对数赔率` 的函数 `5)` ，就是 `损失函数`。
