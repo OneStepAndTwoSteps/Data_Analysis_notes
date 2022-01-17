@@ -2,11 +2,13 @@
 
 ## 一、关于 `channels` (通道)：
 
-* `1、`对于最初输入图片样本的通道数 `in_channels` 取决于图片的类型，如果是彩色的，即 `RGB` 类型，这时候通道数固定为 `3` ，如果是灰色的，通道数为 `1` 。
+`channels` 分为三种：
 
-* `2、`卷积完成之后，输出的通道数 `out_channels` 取决于卷积核的数量。从这个方向理解，这里的 `out_channels` 设置的就是卷积核的数目。
+1、最初输入的图片样本的 `channels` ，取决于图片类型，比如 `RGB` ；
 
-* `3、`对于第二层或者更多层的卷积，此时的 `in_channels` 就是上一层的 `out_channels` ， `out_channels` 还是取决于卷积核数目。
+2、卷积操作完成后输出的 `out_channels` ，取决于卷积核的数量。此时的 `out_channels` 也会作为下一次卷积时的卷积核的 `in_channels` ；
+
+3、卷积核中的 `in_channels` ，刚刚2中已经说了，就是上一次卷积的 `out_channels` ，如果是第一次做卷积，就是1中样本图片的 `channels` 。
 
 
 ## 二、关于 `cnn` 中的 `shape：`
