@@ -91,3 +91,34 @@
         print(mlpc)
 
 
+
+## `二、神经网络中的训练(model.train)和评估(model.eval)：`
+
+
+在你定义的神经网络中存在 `BN`  和 `Dropout` ，那么你需要使用 `model.train` 和 `model.eval` 。
+
+* <font color='red' >__model.train()__</font> ：作用是启用 `Batch Normalization` 和 `Dropout。`，`model.train()` 默认情况是开启的，也就是默认情况下是训练模式。
+
+    * `1) BN` ：`model.train()` 保证 `BN` 层能够用到每一批数据的均值和方差。
+    
+    * `2) Dropout` ：`model.train()` 是随机取一部分网络连接来训练更新参数。
+
+
+* <font color='red' >__model.eval()__</font> ：作用是不启用 `Batch Normalization` 和 `Dropout。`
+
+    * `1) BN` ：`model.eval()` 保证 `BN` 层能够用全部训练数据的均值和方差，保证 `BN` 层的均值和方差不变。
+    
+    * `2) Dropout` ：`model.eval()` 是利用到了所有网络连接，即不进行随机舍弃神经元。
+
+
+### `2.1、model.eval() 和 torch.no_grad()`
+
+* `eval()` 模式，梯度会反向传播求导计算出每层的梯度，但是不会更新该层的参数；
+
+* `with torch.no_grad()` 则主要是用于停止 `autograd` 模块的工作，以起到加速和节省显存的作用。它的作用是将该 `with` 语句包裹起来的部分停止梯度的更新，从而节省了 `GPU` 算力和显存，但是并不会影响 `dropout` 和 `BN` 层的行为。
+
+
+## `参考：`
+
+
+* `Pytorch：model.train()和model.eval()用法和区别，以及model.eval()和torch.no_grad()的区别：`https://zhuanlan.zhihu.com/p/357075502
