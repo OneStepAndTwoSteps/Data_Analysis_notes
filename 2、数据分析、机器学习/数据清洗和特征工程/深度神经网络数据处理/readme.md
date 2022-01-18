@@ -95,7 +95,19 @@
 
     <div align=center><img width="300" src="./static/plt3.jpg"/></div>
 
-## `神经网络中的一些问题：`
+
+* `4、四通道(RGBA) 转 三通道(RGB) ：`
+
+        import PIL.Image
+
+        rgba_image = PIL.Image.open(path_to_image)  ## 4 通道图片
+        rgb_image = rgba_image.convert('RGB')       ## 3 通道图片
+
+
+
+
+
+## `三、神经网络中的一些问题：`
 
 
 * `1、为什么很多神经网络在处理图片之前都将图片裁剪成224*224：`
