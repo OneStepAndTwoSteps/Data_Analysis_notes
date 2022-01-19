@@ -5,9 +5,17 @@
 
 * `卷积的重要的物理意义是：`一个函数（如：单位响应）在另一个函数（如：输入信号）上的加权叠加。
 
-    <div align=center><img width="600" height="550" src="./static/1.jpg"/></div>
+    <div align=center><img width="600" height="550" src="./static/卷积1.jpg"/></div>
 
     `注意`：这里的 `*` 表示`卷积`。
+
+* `卷积：`
+
+    <div align=center><img src="./static/卷积2.jpg"/></div>
+
+    <div align=center><img height = '300' src="./static/卷积3.jpg"/></div>
+
+
 
 * `卷积和互相关：`
 
