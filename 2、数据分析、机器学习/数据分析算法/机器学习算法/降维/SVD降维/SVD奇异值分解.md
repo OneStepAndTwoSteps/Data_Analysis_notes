@@ -4,20 +4,41 @@
 
 ## `一、特征值和特征向量：`
 
-* `特征向量` 和 `特征值` 的定义：
+* `1.1、`如果说一个向量 `v` 是方阵 `A` 的特征向量，将一定可以表示成下面的形式：
 
-  <div align=center><img src="./static/特征值和特征向量.jpg"/></div>
+  <div align=center><img src="./static/特征值和特征向量2.jpg"/></div>
 
 
-  其中 `A` 是一个 `n×n` 的实对称矩阵（是一个方阵），`x` 是一个 `n` 维向量，则我们说 `λ` 是矩阵 `A` 的一个 `特征值` ，而 `x` 是矩阵 `A` 的特征值 `λ` 所对应的 `特征向量`。
+  其中 `A` 是一个 `n×n` 的实对称矩阵（是一个方阵），`V` 是一个 `n` 维向量，则我们说 `λ` 是矩阵 `A` 的一个 `特征值(标量)` ，而 `V` 是矩阵 `A` 的特征值 `λ` 所对应的 `特征向量`。
 
-* 如果求出了 `特征值` 和 `特征向量` ，那么对于 A 我们可以通过特征值和特征向量进行表示，则有 `特征分解：`
+  <font color='yellow'>这种形式在数学上的含义：</font>描述的是矩阵 A 对向量 v 的变换效果只有拉伸，没有旋转。(因为 $\lambda$ 这个值是一个数值)
 
+
+* 也可以看成矩阵 <font color='yellow'>$A$</font> ，向量 <font color='yellow'>$V$</font> ，系数 <font color='yellow'>$\lambda$</font> 这三者建立了一种联系，但显然我们无法直接通过上式 <font color='yellow'>$Ax=\lambda x$</font> 来用 <font color='yellow'>$v$</font> 和 <font color='yellow'>$\lambda$</font> 表示 <font color='yellow'>$A$</font> ，因为这个式子不是完备的，对于一个秩为 <font color='yellow'>$m$</font> 的矩阵 <font color='yellow'>$A$</font> ，应该存在 <font color='yellow'>$m$</font> 个这样的式子，完备式子应该是：
+
+
+
+
+  <div align=center><img height = "100" src="./static/特征分解公式.jpg"/></div>
+
+    现在有表达式：
+
+    $$AV = V\Sigma $$
+
+
+* `1.2、`根据上面定义，如果求出了 `特征值` 和 `特征向量` ，那么对于 A 我们可以通过特征值和特征向量进行表示，则有 `特征分解：`
+
+
+    $$AW = W\Sigma \rightarrow A=W\Sigma W^{-1}$$  
+
+     <font color='yellow' ><div align=center >$其中，W 为特征向量，\Sigma为特征值$</div></font>
+
+    `得到：`
   <div align=center><img src="./static/特征分解.jpg"/></div>
 
-    通常我们会将W进行标准化，因为 A 是实对称矩阵，那么他们得到的特征向量是正交向量，进行标准化之后变成标准正交基，W 是由标准正交基组成的矩阵，有这一特性： `W^T = W^-1` ,我们也将满足此式子的矩阵称为 `酉矩阵`。
+    通常我们会将 `W` 进行标准化，因为 `A` 是实对称矩阵，那么他们得到的特征向量是正交向量，进行标准化之后变成标准正交基，`W` 是由标准正交基组成的矩阵，有这一特性： <font color='yellow'>$W^T = W^{-1}$ </font>,我们也将满足此式子的矩阵称为 `酉矩阵`。
 
-* 从而有：
+* `从而有：`
 
 
   <div align=center><img src="./static/特征分解2.jpg"/></div>
@@ -29,23 +50,31 @@
 
 <div align=center><img src="./static/1.jpg"/></div>
 
-其中 `U` 为一个 `m×m` 的方阵，`V` 为一个 `n×n` 的方阵， `U` 和 `V` 都是 [酉矩阵](#酉矩阵) （ `U` 和 `V` 特征向量为 `标准正交基`，满足 `U^T = U^-1`）
+其中 `U` 为一个 `m×m` 的方阵，`V` 为一个 `n×n` 的方阵， `U` 和 `V` 都是 [酉矩阵](#酉矩阵) （ `U` 和 `V` 特征向量为 `标准正交基`，满足  <font color='yellow'>$U^T = U^{-1}$</font>）
 
 
 `U` 又被称为 `左奇异矩阵`，`V` 又被称为 `右奇异矩阵`。
 
 ### `1、如何求解得到 V ?`
 
-*   其实通过：
+*   其实通过下式可以求得 `V：` 
 
 <div align=center><img src="./static/2.jpg"/></div>
 
-*   我们可以发现 关于 `ATA` 的所有特征向量所张成的矩阵是 `n×n` 矩阵 `V` 。
+*   我们可以发现 关于 <font color='yellow'>$A^TA$</font> 的所有特征向量所张成的矩阵是 `n×n` 矩阵 `V` 。
 
 *  `为什么呢？可以通过下面公式：`
 
 
     <div align=center><img src="./static/4.jpg"/></div>
+
+    
+
+    $$ A^TA = V\Sigma ^2V^T  \longrightarrow (A^TA)V = V\Sigma^2 V^TV \longrightarrow  (A^TA)V = V\Sigma^2 $$
+
+    可以看到 $V$ 就是 $A^TA$的特征向量。
+
+    <font color='red'>__注意：__</font>上式的 $\Sigma$ 是一个 $m*n$ 的对角矩阵，严格意义上说是不能直接写成平方形式的，不过假设 $m>n$，最后的 $m−n$ 行的值全部都是0，那么忽略这些捣乱的0，那么 $Σ$ 就是一个方阵,就可以写成平方。
 
 
 * 根据第一节 `特征值` 和 `特征向量` 的式子：
@@ -53,7 +82,7 @@
   <div align=center><img src="./static/特征分解2.jpg"/></div>
 
 
-*   可以发现：`V` 就是 `特征向量组成的矩阵` ，`∑` 就是 `特征值组成的矩阵`(对角阵，对角线为特征值)。
+*   可以发现：`V` 就是 `特征向量组成的矩阵` ，`∑` 就是 `特征值组成的矩阵` (对角阵，对角线为特征值)。
 
 
 ### `2、如何求解得到 U ?`
