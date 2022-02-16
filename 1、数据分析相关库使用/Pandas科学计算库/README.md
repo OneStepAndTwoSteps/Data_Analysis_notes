@@ -153,8 +153,14 @@
 
 * https://www.cnblogs.com/datablog/p/6127000.html
 
-
 ### `pandas read_csv()`
+
+* `read_csv参数介绍：`gairuo.com/p/pandas-read-csv
+
+
+
+
+
 
 * `a） 选择要导入的行数`
 
