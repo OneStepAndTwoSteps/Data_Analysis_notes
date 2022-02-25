@@ -119,6 +119,8 @@
     最终，我们的输入 `4x4` 的矩阵在`池化后`变成了 `2x2` 的矩阵。进行了`压缩`。
 
 
+* <font color='red' >__池化层后的数据形状，公式和卷积层一样。__</font>
+
 
 ## `问题：`
 
@@ -156,3 +158,7 @@
 
 
 * `CNN基础知识——卷积（Convolution）、填充（Padding）、步长(Stride)：`https://zhuanlan.zhihu.com/p/77471866
+
+
+
+* `Deep Learning CNN：`http://zh.d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html
