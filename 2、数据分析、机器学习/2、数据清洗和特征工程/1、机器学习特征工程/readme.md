@@ -2,6 +2,15 @@
 
 * `包含：数据统一检查、缺失值处理、相关性检查、数据类型检查、数据分布可视化、特征编码。`
 
+* [数据统一检查](##数据统一检查)
+* [缺失值处理](##一、缺失值处理)
+* [相关性检查](##二、计算特征与Target之间的相关系数)
+* [数据类型检查](##检查列类型)
+* [数据分布可视化](##数据分布可视化)
+* [特征编码](##特征编码)
+
+
+
 ## `数据统一检查：`
 
 `模板：`
@@ -225,7 +234,7 @@
 
 
 
-## `查看数据的分布 --（分类）`
+## `数据分布可视化`
 
 * [Santander EDA and Prediction](https://www.kaggle.com/gpreda/santander-eda-and-prediction)
 * [Extensive EDA and Modeling XGB Hyperopt](https://www.kaggle.com/kabure/extensive-eda-and-modeling-xgb-hyperopt/comments)
@@ -467,7 +476,7 @@
     dtype: int64
 
 
-## 特征编码：
+## `特征编码：`
 
 * 标签编码：对于具有2个唯一类别的任何类别变量（dtype==object），我们将使用标签编码；
 
