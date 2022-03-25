@@ -683,7 +683,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
     df2.columns = df2.columns.str.title()
 
   
-`查找空值：`
+`查找缺失值：`
 
   数据量大的情况下，有些字段存在空值 NaN 的可能，这时就需要使用 Pandas 中的 `isnull` 函数进行查找。比如，我们输入一个数据表如下：
     
@@ -718,7 +718,7 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
     英语     False
     数学     True
   
-  `直接查看那个列存在空值：`
+  `直接查看哪个列存在空值：`
 
     train.isnull().any()[train.isnull().any().values==True]
 
@@ -728,6 +728,11 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
     runtime     True
     tagline     True
     dtype: bool
+
+  `直接查看哪个行存在空值：`
+
+    train[train.isnull().values==True]
+
 
   
   `使用 apply 函数对数据进行清洗：`
