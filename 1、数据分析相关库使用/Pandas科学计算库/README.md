@@ -2085,6 +2085,9 @@ pd.to_frame 将 Series 转化为 dataframe
 
     [col for col in train.columns if 'str' in col]
 
+
+    train.iloc[:,-1].str.contains('etc')
+
   ### 过滤出包含某个字符串的列信息 df.filter()
 
     #过滤出包含 matchType 字符串的所有列
