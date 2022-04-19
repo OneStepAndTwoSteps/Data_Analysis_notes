@@ -733,6 +733,11 @@ Pandas 允许直接从 xlsx，csv 等文件中导入数据，也可以输出到 
 
     train[train.isnull().values==True]
 
+  `直接查看不存在空值的xx列：`
+
+    data = data[data['攻击标签'].isnull()==False]
+
+
 
   
   `使用 apply 函数对数据进行清洗：`
