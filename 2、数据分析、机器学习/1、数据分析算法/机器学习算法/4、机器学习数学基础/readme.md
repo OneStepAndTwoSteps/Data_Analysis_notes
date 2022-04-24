@@ -152,7 +152,11 @@
 * 编程学习线性代数：https://zihengcat.github.io/2018/03/28/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B004-%E5%90%91%E9%87%8F%E6%95%B0%E9%87%8F%E7%A7%AF%E4%B8%8E%E5%A4%B9%E8%A7%92/
 
 
-### 3.2、格拉姆矩阵（Gram matrix）详细解读
+### 3.2、超平面公式推导
+
+* 超平面公式推导：https://www.cnblogs.com/yanghh/p/13617129.html
+
+### 3.3、格拉姆矩阵（Gram matrix）详细解读
 
 
-格拉姆矩阵（Gram matrix）详细解读：https://www.cnblogs.com/yifanrensheng/p/12862174.html
+* 格拉姆矩阵（Gram matrix）详细解读：https://www.cnblogs.com/yifanrensheng/p/12862174.html
