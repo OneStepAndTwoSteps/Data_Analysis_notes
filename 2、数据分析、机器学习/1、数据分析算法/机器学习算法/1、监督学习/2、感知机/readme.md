@@ -10,6 +10,14 @@
 
 <div align=center><img src="./static/感知机模型.jpg"/></div>
 
+<font color ='red'>需要注意的是：</font>公式中的 `w` 的本质是`向量`（`法向量`），并不是`线性回归`中的`斜率`（不是`常数`了）。
+
+
+
+<div align=center><img src="./static/图.jpg"/></div>
+
+
+具体可以参考`超平面的公式推导`：https://www.cnblogs.com/yanghh/p/13617129.html
 
 ## `二、感知机损失函数：`
 
