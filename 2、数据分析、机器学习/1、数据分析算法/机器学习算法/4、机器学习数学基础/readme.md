@@ -36,9 +36,9 @@
 
 * 如何直观形象地理解方向导数与梯度以及它们之间的关系？：https://www.zhihu.com/question/36301367/answer/142096153
 
+#### `凸集和凸函数`：
 
-
-
+* 机器学习概念篇：一文详解凸函数和凸优化，干货满满：https://cloud.tencent.com/developer/news/335461
 
 
 
