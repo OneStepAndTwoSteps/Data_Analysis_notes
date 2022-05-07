@@ -26,6 +26,9 @@
 
     $$ \bigtriangledown f(x) + \lambda \bigtriangledown(y-g(x)) = 0 \ \ $$
 
+    `为什么黄线的梯度向上，可以做一条垂直于x轴的线，往上 y 变大 g(x) 不变，z 变大，所以梯度向上`。
+
+
     对应 `拉格朗日乘子公式` ：
 
     <div align=center><img  src="./static/重新推导/3.jpg"/></div>
