@@ -85,7 +85,7 @@
 * 公式中的 $\frac{\alpha}{2}=\lambda$ 这里为了好化简，替代了 $\lambda$。
     
 
-    <div align=center><img height ="250" src="./static/L1和L2.jpg"/></div>
+    <div align=center><img height ="350" src="./static/权重衰减角度1.jpg"/></div>
 
     可以看到，和原先的权重更新相比，每一次更新 W ，W都会先减少一点点，然后再进行更新，这就是权重衰减。
 
