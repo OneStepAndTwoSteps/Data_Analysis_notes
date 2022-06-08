@@ -196,7 +196,7 @@
 
 ## `RMSprop 方法`
 
-* 对 `AdaGrad` 进行植树加权的优化，我们可以得到 `RMSprop` 方法：
+* 对 `AdaGrad` 进行指数加权的优化，我们可以得到 `RMSprop` 方法：
 
     <div align=center><img src="./static/RMSprop.jpg"/></div>
 
@@ -215,7 +215,7 @@
 * `Adam` =  `RMSprop` + `动量法`
 
 
-    <div align=center><img src="./static/RMSprop.jpg"/></div>
+    <div align=center><img src="./static/Adam.jpg"/></div>
 
 ## `NAdam 方法`
 
