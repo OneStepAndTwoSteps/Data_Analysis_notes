@@ -176,8 +176,9 @@
 
 
 
-* `CNN 的平移不变性是什么：`https://blog.csdn.net/ytusdc/article/details/107666902
+* `CNN 与 平移不变性：`https://zhuanlan.zhihu.com/p/42747793
 
+* `卷积的参数共享：`https://www.plob.org/article/18105.html
 
 
 * `CNN基础知识——卷积（Convolution）、填充（Padding）、步长(Stride)：`https://zhuanlan.zhihu.com/p/77471866
