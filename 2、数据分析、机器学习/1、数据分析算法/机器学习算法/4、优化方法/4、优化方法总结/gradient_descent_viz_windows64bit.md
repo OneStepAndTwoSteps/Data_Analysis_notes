@@ -1,3 +1,3 @@
 # gradient_descent_viz_windows64bit
 
-是一个梯度计算可视化工具
+是一个不同优化方法的优化流程可视化工具
