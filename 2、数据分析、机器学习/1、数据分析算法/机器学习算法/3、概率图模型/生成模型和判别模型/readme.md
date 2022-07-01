@@ -2,9 +2,9 @@
 
 维基百科上 Generative 条目里面有个经典的案例：
 
-`假设有四个samples：`
+* `假设有四个samples：`
 
-<div align=center><img  src="./static/1.jpg"/></div>
+    <div align=center><img  src="./static/1.jpg"/></div>
 
 ### `生成式模型：`
 
