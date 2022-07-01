@@ -322,7 +322,7 @@
 
     <div align=center><img  src="./static/隐马尔科夫模型/第三个问题/5.jpg"/></div>
 
-* 3、计算现在这个状态，可能成为的下一个隐状态的概率，计算出所有可能的状态转移概率之后，将状态转移概率最大路径概率的记为 `P*` ，将概率最大的隐状态节点记为 `i*T`。
+* 3、计算现在这个状态，可能成为的下一个隐状态的概率，计算出所有可能的状态转移概率之后，将状态转移概率最大路径概率的记为 `P*` ，将概率最大的隐状态节点记为 $i^*_T$。
 
     <div align=center><img  src="./static/隐马尔科夫模型/第三个问题/6.jpg"/></div>
 
@@ -392,9 +392,12 @@
 
 
 
+### `维特比小结：`
+
+* `维比特算法` 是通过计算出从 `初始状态` 开始，到生成 `当前观测序列O的最大概率值` ，然后 `记录中间的隐藏层状态` ，这个过程中的隐藏状态序列就是最有可能的隐状态序列。
 
 
-`隐马尔科夫模型HMM（四）维特比算法解码隐藏状态序列: `https://www.cnblogs.com/pinard/p/6991852.html
+
 
 ## `参考：`
 
@@ -404,8 +407,12 @@
 * `HMM模型：`http://www.armigo.fun/2020/02/23/HMM/
 
 
-* `第一个问题：隐马尔科夫模型HMM（二）前向后向算法评估观察序列概率：`https://www.cnblogs.com/pinard/p/6955871.html#!comments
+* `隐马尔科夫模型HMM（二）前向后向算法评估观察序列概率：`https://www.cnblogs.com/pinard/p/6955871.html#!comments
 
+* `隐马尔科夫模型HMM（三）鲍姆-韦尔奇算法求解HMM参数: `https://www.cnblogs.com/pinard/p/6972299.html#!comments
+  
+
+* `隐马尔科夫模型HMM（四）维特比算法解码隐藏状态序列: `https://www.cnblogs.com/pinard/p/6991852.html
 
 
 * `机器学习-白板推导系列(十四)-隐马尔可夫模型HMM（Hidden Markov Model）笔记：`https://zhuanlan.zhihu.com/p/380298879
