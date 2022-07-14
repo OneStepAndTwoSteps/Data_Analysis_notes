@@ -2,31 +2,6 @@
 
 ​          ——Self-Attention机制和Transformer详解
 
-![transformer-movie](pic/transformer-movie.jpeg)
-
-* [返回上层目录](../self-attention-and-transformer.md)
-* [模型的思想](#模型的思想)
-  * [RNN的缺陷](#RNN的缺陷)
-  * [Transformer为何优于RNN](#Transformer为何优于RNN)
-* [Transformer模型架构](#Transformer模型架构)
-* [Encoder模块](#Encoder模块)
-  * [Self-Attention机制](#Self-Attention机制)
-  * [multi-headed-Attention](#multi-headed-Attention)
-  * [词向量Embedding输入](#词向量Embedding输入)
-  * [位置编码](#位置编码)
-  * [skip-connection和Layer-Normalization](#skip-connection和Layer-Normalization)
-  * [Encoder模块汇总](#Encoder模块汇总)
-* [Decoder模块](#Decoder模块)
-  * [Decoder的Mask-Multi-Head-Attention输入端](#Decoder的Mask-Multi-Head-Attention输入端)
-  * [Decoder的Encode-Decode注意力层](#Decoder的Encode-Decode注意力层)
-  * [Decoder的输出](#Decoder的输出)
-* [Transformer动态流程图](#Transformer动态流程图)
-* [Transformer特点](#Transformer特点)
-* [代码实现](#代码实现)
-
-
-
-![paper](pic/paper.jpg)
 
 pdf: [*Attention Is All You Need*](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf)
 
@@ -36,33 +11,37 @@ pdf: [*Attention Is All You Need*](https://papers.nips.cc/paper/7181-attention-i
 
 > Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution。
 
-# 模型的思想
 
-## RNN的缺陷
+# `模型的思想`
 
-在没有Transformer以前，大家做神经机器翻译用的最多的是基于RNN的Encoder-Decoder模型：
+## `RNN的缺陷`
 
-![encoder-decoder](pic/encoder-decoder.jpg)
+* 在没有Transformer以前，大家做神经机器翻译用的最多的是基于RNN的Encoder-Decoder模型：
 
-Encoder-Decoder模型当然很成功，在2018年以前用它是用的很多的。而且也有很强的能力。但是RNN天生有缺陷，只要是RNN，就会有梯度消失问题，核心原因是有递归的方式，作用在同一个权值矩阵上，使得如果这个矩阵满足条件的话，其最大的特征值要是小于1的话，那就一定会出现梯度消失问题。后来的LSTM和GRU也仅仅能缓解这个问题
+  ![encoder-decoder](pic/encoder-decoder.jpg)
 
-![rnn-vanishing-gradient](pic/rnn-vanishing-gradient.png)
+  Encoder-Decoder模型当然很成功，在2018年以前用它是用的很多的。而且也有很强的能力。但是RNN天生有缺陷，只要是RNN，就会有梯度消失问题，核心原因是有递归的方式，作用在同一个权值矩阵上，使得如果这个矩阵满足条件的话，其最大的特征值要是小于1的话，那就一定会出现梯度消失问题。后来的LSTM和GRU也仅仅能缓解这个问题
 
-## Transformer为何优于RNN
+  ![rnn-vanishing-gradient](pic/rnn-vanishing-gradient.png)
 
-那如果要获得比RNN更进一步能力的提升，那怎么办呢？Transformer给了我们一种答案。
+## `Transformer为何优于RNN`
 
-Transformer中抛弃了传统的CNN和RNN，整个网络结构完全是由Attention机制组成。 作者采用Attention机制的原因是考虑到RNN（或者LSTM，GRU等）的计算限制为是顺序的，也就是说RNN相关算法只能从左向右依次计算或者从右向左依次计算，这种机制带来了两个问题：
+* 那如果要获得比RNN更进一步能力的提升，那怎么办呢？Transformer给了我们一种答案。
 
-1. **时间片 $t$ 的计算依赖 $t-1$ 时刻的计算结果，这样限制了模型的并行能力**
+  Transformer中抛弃了传统的CNN和RNN，整个网络结构完全是由Attention机制组成。 Transformer架构的优点在于它完全摈弃了传统的循环结构，取而代之的是只 `通过注意力机制来计算模型输入与输出的隐含表示` ，而这种注意力的名字就是大名鼎鼎的自注意力机制（self-attention）
 
-2. 顺序计算的过程中信息会丢失，尽管LSTM等门机制的结构一定程度上缓解了长期依赖的问题，但是对于特别**长期的依赖现象，LSTM依旧无能为力**。
 
-Transformer的提出解决了上面两个问题：
+  作者采用Attention机制的原因是考虑到RNN（或者LSTM，GRU等）的计算限制为是顺序的，也就是说RNN相关算法只能从左向右依次计算或者从右向左依次计算，这种机制带来了两个问题：
 
-1. 首先它使用了**Attention机制**，将序列中的任意两个位置之间的距离缩小为一个常量；
+  * 1. **时间片 $t$ 的计算依赖 $t-1$ 时刻的计算结果，这样限制了模型的并行能力**
 
-2. 其次它不是类似RNN的顺序结构，因此具有**更好的并行性，符合现有的GPU框架**。
+  * 2. 顺序计算的过程中信息会丢失，尽管LSTM等门机制的结构一定程度上缓解了长期依赖的问题，但是对于特别**长期的依赖现象，LSTM依旧无能为力**。
+
+* Transformer的提出解决了上面两个问题：
+
+  * 1. 首先它使用了**Attention机制**，将序列中的任意两个位置之间的距离缩小为一个常量；
+
+  * 2. 其次它不是类似RNN的顺序结构，因此具有**更好的并行性，符合现有的GPU框架**。
 
 # Transformer模型架构
 
