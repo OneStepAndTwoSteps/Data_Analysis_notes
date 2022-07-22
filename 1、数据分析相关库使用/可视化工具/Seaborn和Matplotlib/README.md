@@ -292,7 +292,21 @@ ax和fig的关系：
     # legend → 是否显示图例，一般直接用plt.legend() 不带参数调用 legend 会自动获取图例句柄及相关标签，这里加上legend表示显示label
     # 也可以 → plt.plot()
 
-### fmt:格式化字符串 格式字符串由颜色，标记和线条的部分组成： 就是上面说的style
+
+## `注意`
+
+需要注意的是 plt 绘图和 df.bar 绘图是两种绘图方式，也急速 plt.figure 创建出来的画框或者是 plt.subplot 创建出来的子框，都不可以给 df.bar 使用，但是如果你的数据是 series 数据，那么两者是可以通用的：
+
+<div align=center><img height = 500 src="seaborn_and_Matplotlib/注意1.jpg"/></div>
+
+<div align=center><img height = 300 src="seaborn_and_Matplotlib/注意1-1.jpg"/></div>
+
+
+
+
+### `fmt:格式化字符串 `
+
+格式字符串由颜色，标记和线条的部分组成： 就是上面说的style
    `颜色`
    
      字符	颜色
@@ -1424,7 +1438,37 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/site_id_and_timestamp.jpg"/></div>
 
 
+#### sns 绘制不同标签之间相同特征的分布对比图(bar)
+    
+    def plotCorrBetweenMB(df,columns,counts=30):
+        ncols = min(3,len(columns))             ## 设置为每行3个图
+        nrows = int(float(len(columns))//3.1+1) ## 这里除以3.1，而不是3的原因是能被3整除的数，比如9/3+1=4 的情况
+        nGraphRow = (ncols + nrows) /2          ## nGraphRow 设置一个比例动态调整 figsize 大小
+        print(nrows,ncols)
+        ## figsize(宽，高)
+        fig, axes = plt.subplots(nrows,ncols,figsize=(8*ncols, 8*nGraphRow), dpi=100)
+        for i, column in enumerate(columns):
+            dd = pd.DataFrame(df.groupby([column,'Label'])[column].count()).rename(columns={column:'counts'}).reset_index() # 用 groupby 提取
+            
+            if len(dd.values) >=counts:
+                dd = dd.sort_values(by=['counts'],ascending=False)[:30]
+            else:
+                dd = dd.sort_values(by=['counts'],ascending=False)
+                
+            if nrows > 1:
+                ax = sns.barplot(x=dd[column], y=dd.counts,hue='Label', data =dd,ax=axes[i//ncols][i%ncols])
+            elif ncols > 1:
+                ax = sns.barplot(x=dd[column], y=dd.counts,hue='Label', data =dd,ax=axes[i])
+            else:
+                ax = sns.barplot(x=dd[column], y=dd.counts,hue='Label', data =dd)
+            
+            ax.set_xticklabels(dd[column].drop_duplicates(),rotation = 90) # grouby 排序后转df后，dd[column]会出现重复数据，这里需要进行去重，防止图中x轴出现重复值
+        
+        plt.tight_layout()
+        plt.show()
 
+
+<div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/plotCorrBetweenMB.jpg"/></div>
 
   
 ## `绘图参考：`
