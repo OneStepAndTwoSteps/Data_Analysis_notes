@@ -555,13 +555,28 @@ S:
 <div align=center><img src="seaborn_and_Matplotlib/S折线图2.png"/></div>
   
   
-## 直方图：
+## `直方图 和 KDE`：
 
 直方图是比较常见的视图，它是把横坐标等分成了一定数量的小区间，这个小区间也叫作“箱子”，然后在每个“箱子”内用矩形条（bars）展示该箱子的箱子数（也就是 y 值），这样就完成了对数据集的直方图分布的可视化。
 
 在 Matplotlib 中，我们使用 plt.hist(x, bins=10) 函数，其中参数 x 是一维数组，bins 代表直方图中的箱子数量，默认是 10。
 
 在 Seaborn 中，我们使用 sns.distplot(x, bins=10, kde=True) 函数。其中参数 x 是一维数组，bins 代表直方图中的箱子数量，kde 代表显示核密度估计，默认是 True，我们也可以把 kde 设置为 False，不进行显示。核密度估计是通过核函数帮我们来估计概率密度的方法。
+
+`当KDE失败提示为`：`RuntimeError: Selected KDE bandwidth is 0. Cannot estiamte density` 原因是：Seaborn库(它依赖的scipy或statmodels库来计算kde)没有办法计算出“bandwidth”，kdeplot函数中的bw参数，是一个缩放参数，当然也可以自定义。
+
+`解决方法：`
+
+    try:
+      sns.distplot(df)
+    except RuntimeError as re:
+        if str(re).startswith("Selected KDE bandwidth is 0. Cannot estimate density."):
+            sns.distplot(df, kde_kws={'bw': 0.1})
+        else:
+            raise re
+  
+  ​
+
 
 `例子：`
     
