@@ -303,6 +303,13 @@ ax和fig的关系：
 
 
 
+### `两图简单可视化：`
+
+* `加一个透明度即可：`
+
+<div align=center><img height = 300 src="seaborn_and_Matplotlib/两图可视化.jpg"/></div>
+
+
 
 ### `fmt:格式化字符串 `
 
@@ -1453,15 +1460,54 @@ from  matplotlib.gridspec import GridSpec
 <div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/site_id_and_timestamp.jpg"/></div>
 
 
-#### sns 绘制不同标签之间相同特征的分布对比图(bar)
+#### `单个特征分布图，离散-bar，连续-hist`
+
+
+    # nGraphShown 用于控制绘制子图数量，nGraphPerRow用于指定每行显示几个子图
+    def plotPerColumnDistribution(df, nGraphShown , nGraphPerRow):
+        nunique = df.nunique()
+    #     df = df[[col for col in df if nunique[col] > 1 and nunique[col] < 80]] # 筛选出每一列中unique 大于1小于50的特征，赋值给df
+        df = df[[col for col in df if nunique[col] > 1 ]] # 筛选出每一列中unique 大于1小于50的特征，赋值给df
+
+        nRow, nCol = df.shape
+        columnNames = list(df) ## 获取 df 的特征名
+        print(columnNames)
+        nGraphRow = (nCol + nGraphPerRow - 1) / nGraphPerRow
+        plt.figure(num = None, figsize = (6 * nGraphPerRow, 5 * nGraphRow), dpi = 80, facecolor = 'w', edgecolor = 'k')
+        for i in range(min(nCol, nGraphShown)):
+            plt.subplot(nGraphRow, nGraphPerRow, i + 1)
+            columnDf = df.iloc[:, i]
+            ## 如果不是数字类型的特征，这里需要先使用value_counts来进行计数，然后绘图
+            if (not np.issubdtype(type(columnDf.iloc[0]), np.number)):
+                valueCounts = columnDf.value_counts()[:30] ## 当unique数据过多，那么绘制出来的x轴列会很多，这里进行限制，取排在前面的30个
+                valueCounts.plot.bar()
+            else:
+                columnDf.hist()
+
+                
+            plt.ylabel('counts')
+            plt.xticks(rotation = 90)
+            plt.title(f'{columnNames[i]} (column {i})')
+        plt.tight_layout(pad = 1.0, w_pad = 1.0, h_pad = 1.0)
+        plt.show()
+
+<div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/plotPerColumnDistribution.jpg"/></div>
+
+
+
+#### `不同标签值的离散特征分布对比图 (bar)`
     
-    def plotCorrBetweenMB(df,columns,counts=30):
-        ncols = min(3,len(columns))             ## 设置为每行3个图
-        nrows = int(float(len(columns))//3.1+1) ## 这里除以3.1，而不是3的原因是能被3整除的数，比如9/3+1=4 的情况
-        nGraphRow = (ncols + nrows) /2          ## nGraphRow 设置一个比例动态调整 figsize 大小
+    def plotCorrBetweenMB(df,columns, nGraphPerRow=3,counts=30,size='L'):
+        ncols = min(nGraphPerRow,len(columns))                 ## 设置为每行nGraphPerRow个图
+        nrows = int(float(len(columns))//(nGraphPerRow+0.1)+1) ## 这里除以nGraphPerRow+0.1，而不是nGraphPerRow的原因是，避免能被nGraphPerRow整除的数，比如9/3+1=4 的情况只用3行解决却plot了4行。
+        nGraphRow = (ncols + nrows) /2                         ## nGraphRow 设置一个比例动态调整 figsize 大小
         print(nrows,ncols)
+        if size == 'L':
+            base_size = 8
+        else:
+            base_size = 6
         ## figsize(宽，高)
-        fig, axes = plt.subplots(nrows,ncols,figsize=(8*ncols, 8*nGraphRow), dpi=100)
+        fig, axes = plt.subplots(nrows,ncols,figsize=(base_size*ncols, (base_size-3)*nGraphRow), dpi=100)
         for i, column in enumerate(columns):
             dd = pd.DataFrame(df.groupby([column,'Label'])[column].count()).rename(columns={column:'counts'}).reset_index() # 用 groupby 提取
             
@@ -1469,21 +1515,54 @@ from  matplotlib.gridspec import GridSpec
                 dd = dd.sort_values(by=['counts'],ascending=False)[:30]
             else:
                 dd = dd.sort_values(by=['counts'],ascending=False)
-                
             if nrows > 1:
                 ax = sns.barplot(x=dd[column], y=dd.counts,hue='Label', data =dd,ax=axes[i//ncols][i%ncols])
             elif ncols > 1:
                 ax = sns.barplot(x=dd[column], y=dd.counts,hue='Label', data =dd,ax=axes[i])
             else:
                 ax = sns.barplot(x=dd[column], y=dd.counts,hue='Label', data =dd)
-            
+
             ax.set_xticklabels(dd[column].drop_duplicates(),rotation = 90) # grouby 排序后转df后，dd[column]会出现重复数据，这里需要进行去重，防止图中x轴出现重复值
         
         plt.tight_layout()
         plt.show()
 
 
-<div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/plotCorrBetweenMB.jpg"/></div>
+<div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/离散bar.jpg"/></div>
+
+
+#### `两个数据之间相同特征分布对比图 - 连续数据KDE图`
+
+
+    # Density plots of features function
+    # 一般用来观察数据的分布形态，横坐标代表观测数据的数值密度,纵坐标代表了观测的数据
+    def plot_feature_distribution(df1, df2, label1, label2, features):
+        i = 0
+        sns.set_style('whitegrid')
+        plt.figure()
+        fig, ax = plt.subplots(10,10,figsize=(22,28))
+        
+        failed_features = []
+        
+        for feature in features:
+            try:
+                i += 1
+                plt.subplot(10,3,i)
+                sns.distplot(df1[feature],label=label1,hist=False, kde_kws={'bw': 0.1})
+                sns.distplot(df2[feature],label=label2,hist=False, kde_kws={'bw': 0.1})
+                plt.xlabel(feature, fontsize=9)
+                locs, labels = plt.xticks()
+                plt.tick_params(axis='x', which='major', labelsize=8, pad=-1)
+                plt.tick_params(axis='y', which='major', labelsize=6)
+            except:
+                print(feature + 'KDE failed')
+                failed_features.append(feature)
+                continue
+                
+        plt.show();
+        return failed_features
+
+  <div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/kde.jpg"/></div>
 
   
 ## `绘图参考：`

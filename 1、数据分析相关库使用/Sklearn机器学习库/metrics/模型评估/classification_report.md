@@ -1,15 +1,18 @@
 
-## classification_report
+## `classification_report`
 
-sklearn 中的 classification_report 函数用于显示主要分类指标的文本报告．在报告中显示每个类的精确度，召回率，F1值等信息。
+* `sklearn` 中的 `classification_report` 函数用于显示主要分类指标的文本报告．在报告中显示每个类的精确度，召回率，F1值等信息。
 
 
-### 导入包
+### `导入包`
 
     from sklearn.metrics import classification_report
 
+* <font color = red>使用方法：</font><font color = orange>先是真实值，再是预测值，顺序别搞反了！！！</font>
 
-### 参数讲解
+    `classification_report(y_test,pred)`
+
+### `参数讲解`
 
     y_true：1维数组，或标签指示器数组/稀疏矩阵，目标值。 
 
@@ -24,7 +27,7 @@ sklearn 中的 classification_report 函数用于显示主要分类指标的文�
     digits：int，输出浮点值的位数．
 
 
-### 输出结果
+### `输出结果`
 
     y_true 为样本真实标记，y_pred 为样本预测标记
 
@@ -40,12 +43,12 @@ sklearn 中的 classification_report 函数用于显示主要分类指标的文�
 
 
 
-### 输出结果说明
+### `输出结果说明`
 
 以下面例子为例
 
 
-#### 例子1
+#### `例子1`
 
     1、标签labels 和 target_name
 
