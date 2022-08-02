@@ -1351,7 +1351,10 @@ droplevel 处理：可以用于去掉级别的名称或位置索引
     Name: toy, dtype: object
 
 
-### 删除包含某个值的行
+需要注意的是：使用 `dropna` 之后，包含 `NaN` 的行会被删除，所以索引中会缺失那几个索引值，如果想要用 `iloc` 定位索引，那么最好使用 `reset_index(drop=True)` 来对索引重新进行排序。
+
+
+### `删除包含某个值的行`
 
 比如现在有如下数据：
 
@@ -1379,7 +1382,7 @@ droplevel 处理：可以用于去掉级别的名称或位置索引
     5   42379     小红     ...    正常      NaN
 
 
-### 修改 dataframe 中的数据，保留其中部分内容 
+### `修改 dataframe 中的数据，保留其中部分内容` 
 
 只保留 qiandao['姓名'] 名字中的汉字，其他字符去除。
 
@@ -1396,15 +1399,15 @@ droplevel 处理：可以用于去掉级别的名称或位置索引
 
 `[^\u4e00-\u9fff]+` 用于匹配汉字。
 
-### pandas.DataFrame.fillna 用指定的方法填充NA/NaN
+### `pandas.DataFrame.fillna` 用指定的方法填充 `NA/NaN`
 
-`DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）`
-        
-  value ： 标量，字典，系列或DataFrame用于填充孔的值（例如0），或者用于指定每个索引（对于Series）或列（对于DataFrame）使用哪个值的Dict /Series / DataFrame。（不会填写dict / Series / DataFrame中的值）。该值不能是列表。
-                 
-  method :  {'backfill'，'bfill'，'pad'，'ffill'，None}，默认无   用于填充重新索引的填充孔的方法系列填充/填充
-              
-  axis : {0或'索引'，1或'列'}
+    DataFrame.fillna（value = None，method = None，axis = None，inplace = False，limit = None，downcast = None，** kwargs ）
+            
+    value ： 标量，字典，系列或DataFrame用于填充孔的值（例如0），或者用于指定每个索引（对于Series）或列（对于DataFrame）使用哪个值的Dict /Series / DataFrame。（不会填写dict / Series / DataFrame中的值）。该值不能是列表。
+                  
+    method :  {'backfill'，'bfill'，'pad'，'ffill'，None}，默认无   用于填充重新索引的填充孔的方法系列填充/填充
+                
+    axis : {0或'索引'，1或'列'}
   
   例子：
   
