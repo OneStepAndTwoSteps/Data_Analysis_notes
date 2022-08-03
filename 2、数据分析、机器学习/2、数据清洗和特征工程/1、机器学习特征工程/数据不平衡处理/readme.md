@@ -236,6 +236,61 @@
 
 * `n_jobs：`用于指定SMOTE算法在过采样时所需的CPU数量，默认为1表示仅使用1个CPU运行算法，即不使用并行运算功能;
 
+### `案例：`
+
+* `1、默认模式`：`not minority`：重采样除少数类以外的所有类
+
+        features = df.iloc[:, Thursday.columns != 'Label']
+        labels = df.iloc[:, Thursday.columns == 'Label']
+
+        from imblearn.over_sampling import SMOTE
+
+        oversampler=SMOTE(random_state=0)
+        X_oversampler,y_oversampler=oversampler.fit_resample(features,labels)
+
+    此时过采样后，label中的所有标签都会和标签中最多的类别数量一致。
+
+
+* `2、指定每个类别重采样后的数量：`
+
+        ## 指定多类和少类数据集
+        minor = pd.DataFrame(df[(df[' Label']!=4) & (df[' Label']!=2)])
+        major = pd.DataFrame(df[(df[' Label']==4) | (df[' Label']==2)])
+        minor[' Label'].value_counts()
+
+            out:
+
+                1    1966
+                5    1507
+                7     652
+                3      36
+                6      21
+                0      21
+                Name:  Label, dtype: int64
+
+
+        ## 划分特征和类别
+        from imblearn.over_sampling import SMOTE
+        y_rus_ =  minor[' Label']
+        X_rus_ =  minor.drop([' Label'],axis=1)
+
+        ## 通过指定字典的方式进行过采样
+        strategy = {1:2000, 5:1600, 7:800, 3:300, 6:200, 0:200}
+        sm = SMOTE(sampling_strategy=strategy)
+        X_sm, y_sm = sm.fit_sample(X_rus_, y_rus_)
+
+        pd.DataFrame(y_min).value_counts()
+
+            out:
+
+                Label
+                1         2000
+                5         1600
+                7          800
+                3          300
+                6          200
+                0          200
+                dtype: int64
 
 ### `改进的合成少数类 过采样技术（MSMOTE）`
 
