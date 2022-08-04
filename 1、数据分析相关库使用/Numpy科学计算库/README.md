@@ -529,8 +529,30 @@ output:
                 [35, 36, 37, 38, 39],
                 [40, 41, 42, 43, 44]]])
 
+## `ndarray.resize()`
 
-## numpy 索引切片
+* resize 可以用于重塑数据的形状，不足的元素用0填充，不过需要要求数据在内存中连续。
+
+
+      #a = np.arange(10)
+      
+      a = dd.iloc[0].values       ## ndarray
+      ## 让a在内存中连续，不使用下面方法，有的时候会报错
+      a = np.ascontiguousarray(a)
+      a.resize(9,9)
+      display(a)
+
+      plt.imshow(a,cmap="gray")
+
+
+
+<div align=center><img width="350" height="300" src="./static/resize.jpg"/></div>
+
+
+
+
+
+## `numpy 索引切片`
 
 *   `案例`
 
