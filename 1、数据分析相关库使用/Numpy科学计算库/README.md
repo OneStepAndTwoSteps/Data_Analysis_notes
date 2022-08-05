@@ -1147,11 +1147,8 @@ axis=0 的排序结果，axis=0 代表的是跨行（跨行就是按照列），
           0.391452  , 0.28198586, 0.46827079, 0.09558913, 1.        ]])
 
 
-## 
 
-
-
-##  NumPy自然指数计算函数
+##  `NumPy自然指数计算函数`
 
 NumPy中以自然数为底的指数计算方法为exp 也就是e的多少次方，expm1用来计算exp(x) - 1
 
@@ -1173,6 +1170,107 @@ NumPy中以自然数为底的指数计算方法为exp 也就是e的多少次方�
 
 
 
-## 总结：
+## `将 ndarray 转成 image`
+
+
+* 单一 numpy 
+
+      ## 将数据保存为 ndarray（向量）
+      ## dd 为 dataframe ，a 为 ndarray 
+      a = dd.iloc[326].values
+      a = np.ascontiguousarray(a)
+      a.resize(9,9)
+      plt.imshow(a)
+
+
+      ## 保存文件
+      import imageio
+      output_filename = './class1/1.png'
+      imageio.imwrite(output_filename,a)
+
+
+      ## 读取文件并展示
+      path_to_image = "./class1/1.png"
+
+      image = PIL.Image.open(path_to_image)
+      display(np.array(image).shape)
+
+      # jpg 有压缩损失，不太好用，像素值有偏离
+      # imarray = np.asarray(image)   
+      # plt.figure()
+      # plt.imshow(imarray)
+      # plt.show()
+
+      # png
+      imarray = np.asarray(image)   
+      plt.figure()
+      plt.imshow(imarray)
+      # plt.imshow(imarray,cmap="gray")
+
+      plt.show()
+
+* 最后结果：
+
+  <div align=center><img src="./static/save_image.jpg"/></div>
+
+
+* 批量numpy：
+
+      ## 1、定义 numpy 到 image 函数
+      import imageio
+      def ndarray_to_image(nd,i,output_dir):
+
+          nd = np.ascontiguousarray(nd)
+          nd.resize(9,9)
+      #     print(nd)
+          
+          imageio.imwrite(output_dir+"{}.png".format(i),nd)
+          
+
+
+
+
+      ## 2、定义要进行标准化的特征，最后输出为 ss_cut_df
+      ## 数据中有两个 Label，这里以先分析 Label.1 为例。
+      retain_columns = df.drop(["Label",'Label.1','Flow ID','Timestamp'],axis=1).columns
+      retain_columns
+      
+      ## app df
+      cut_df = df.drop(['Label',"Label.1",'Flow ID','Timestamp'],axis=1)
+
+      ss_y1 = df[['Label']]
+      ss_y2 = df[['Label.1']]
+
+      ss_cut_df = pd.concat([pd.DataFrame(ss.fit_transform(cut_df),columns=retain_columns),ss_y2],axis=1)
+
+
+
+
+
+      ## 3、给每一个类别创建一个文件夹，将数据中的不同类别数据单独取出，每一个类别为一个元素，存放在total_list 中。
+      import os
+      total_list = []
+      app_output_dir=['./class0/','./class1/','./class2/','./class3/','./class4/','./class5/','./class6/','./class7/']
+
+      for dirname in app_output_dir:
+          os.makedirs(dirname)
+
+      for i in range(8):
+          class_dir_name = 'app_class'+ str(i)
+          class_dir_name = ss_cut_df[ss_cut_df['Label.1'] == i]
+          total_list.append(class_dir_name)
+
+
+
+
+      ## 4、开始进行保存
+      for i,single_df in enumerate(total_list):
+      rows = single_df.shape[0]
+      output_dir = app_output_dir[i]
+      for row in range(rows):
+          ndarray_to_image(single_df.values[row],row,output_dir)
+
+
+## `总结：`
   在 NumPy 学习中，你重点要掌握的就是对数组的使用，因为这是 NumPy 和标准 Python 最大的区别。在 NumPy 中重新对数组进行了定义，同时提供了算术和统计运算，你也可以使用 NumPy 自带的排序功能，一句话就搞定各种排序算法。
 
