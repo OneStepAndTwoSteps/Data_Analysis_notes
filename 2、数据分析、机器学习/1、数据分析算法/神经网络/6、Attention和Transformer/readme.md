@@ -84,11 +84,7 @@
 
 * `Self attention` 是 `Google` 在 `"Attention is all you need"` 论文中提出的 `"The transformer"` 模型中主要的概念之一。
 
-
-
-
-
-
+不过在 transformer 中用的大多是下面这种 `多头注意力` 模式。
 
 
 ## `5、多头注意力：`
