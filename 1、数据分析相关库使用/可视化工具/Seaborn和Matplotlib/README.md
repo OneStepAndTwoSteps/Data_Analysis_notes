@@ -1558,7 +1558,8 @@ from  matplotlib.gridspec import GridSpec
                 print(feature + 'KDE failed')
                 failed_features.append(feature)
                 continue
-                
+
+        plt.legend()
         plt.show();
         return failed_features
 

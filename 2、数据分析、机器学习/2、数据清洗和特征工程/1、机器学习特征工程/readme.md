@@ -316,6 +316,7 @@
                     locs, labels = plt.xticks()
                     plt.tick_params(axis='x', which='major', labelsize=6, pad=-6)
                     plt.tick_params(axis='y', which='major', labelsize=6)
+                    plt.legend()
                 except:
                     print(feature + 'KDE failed')
                     failed_features.append(feature)
@@ -364,6 +365,7 @@
                 locs, labels = plt.xticks()
                 plt.tick_params(axis='x', which='major', labelsize=6, pad=-6)
                 plt.tick_params(axis='y', which='major', labelsize=6)
+                plt.legend()
             plt.show();
 
 
