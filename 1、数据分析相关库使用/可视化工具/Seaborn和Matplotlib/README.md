@@ -1565,7 +1565,23 @@ from  matplotlib.gridspec import GridSpec
 
   <div align=center><img width="750" height="350"  src="seaborn_and_Matplotlib/kde.jpg"/></div>
 
-  
+#
+
+### 
+
+
+
+
+
+
+### `一行显示两张指定的图：`
+
+  <div align=center><img src="seaborn_and_Matplotlib/一行两图.jpg"/></div>
+
+
+
+
+
 ## `绘图参考：`
 
 
