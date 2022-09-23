@@ -8,7 +8,7 @@
     <div align=center><img  src="./static/1.png"/></div>
 
 
-## `注意事项：`
+### `注意事项：`
 
 * `1、`路径问题，如果目录中存在中文路径可能存在问题
 
@@ -20,6 +20,14 @@
 
 * 如果运行结果输出为bad dump file format，则表明该输入pcap数据包不完整，可以尝试用wireshark读取该pcap包，并重新导出为Wireshark/tcpdump/**.pcap，重新进行转换。
 
-`参考：`
 
-* `使用CICFlowMeter解析pcap文件: `https://blog.csdn.net/weixin_44700621/article/details/121993521
+### `数据标签的填充：`
+
+
+* https://github.com/ahlashkari/CICFlowMeter/issues/109
+
+
+## `参考：`
+
+* `使用CICFlowMeter解析pcap文件: `https://blog.csdn.net/weixin_44700621/article/details/121993521]
+  
