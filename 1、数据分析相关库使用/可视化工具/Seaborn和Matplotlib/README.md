@@ -1567,10 +1567,21 @@ from  matplotlib.gridspec import GridSpec
 
 #
 
-### 
+### `加载图片，进行可视化：`
+
+    path_to_image = "data/Cartoon.png"
+
+    image = PIL.Image.open(path_to_image)
+
+
+    imarray = np.asarray(image)   
+    plt.figure()
+    plt.imshow(imarray)
+    plt.show()
 
 
 
+  <div align=center><img src="seaborn_and_Matplotlib/可视化.jpg"/></div>
 
 
 
