@@ -106,9 +106,12 @@
 
 ### `GBDT 拟合负梯度：`
 
+
 <div align=center><img  src="./static/gbdt/gbdt的负梯度拟合.jpg"/></div>
 
 `公式介绍：`
+
+* 图中的 $r_{ti}$ 就是损失函数对前一轮强学习器的负梯度。
 
 * I(x∈Rtj) 的意思是如果 x∈Rtj ,则I的取值为 1 ， 否则取值为 0.
 
