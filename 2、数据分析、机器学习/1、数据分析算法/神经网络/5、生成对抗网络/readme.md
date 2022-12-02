@@ -34,6 +34,18 @@
 * **但是 `JS - divergence` 存在缺陷，后面又引进了 `Wasserstein - divergence` 。**
 
 
+
+## `生成对抗网络精读：`
+
+
+
+
+
+
+
+
+
+
 ## `reference：`
 
 
