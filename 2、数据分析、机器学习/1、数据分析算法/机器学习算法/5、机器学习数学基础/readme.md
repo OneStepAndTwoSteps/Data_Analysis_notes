@@ -54,34 +54,8 @@
 
 
 
-### `1.4、矩阵求导：`
-
-* https://www.cnblogs.com/pinard/p/10773942.html
-
-* https://fei-wang.github.io/matrix.html
-
-
-
-* `标量对向量求导`：https://www.cnblogs.com/yanghh/p/13756471.html
-
-
-#### `复合函数标量对向量求导：`
-
-* 1、`复合函数求导`过程（`标量对向量求导`）过程中包含`向量`对`向量`求导，此时需要加转置符号：
-
-    <div align=center><img height="250"  src="./static/矩阵求导1.jpg"/></div>
-
-
-
-* 2、`复合函数求导`过程（`标量对向量求导`）过程中`未包含向量对向量等其他矩阵求导`，那么不需要加转置：
-
-    <div align=center><img height="50"  src="./static/矩阵求导2.jpg"/></div>
-
-
-
-
-
-### `1.5、求偏导：`
+ 
+### `1.4、标量求偏导：`
 
 * 求偏导
 
@@ -121,6 +95,12 @@
 
 
     `积分` 转换 `期望` 的时候，需要将其中的 `某个乘子` 作为概率分布，因此用了这种巧妙转换把 `q(Φ)` 拿出来，然后转换为他的 `期望` 。
+
+
+* `期望和积分的关系：`
+  
+    <div align=center><img src="./static/积分和期望.png"/></div>
+
 
 
 ### `平均值和期望：`
@@ -176,3 +156,36 @@
 
 
 * 格拉姆矩阵（Gram matrix）详细解读：https://www.cnblogs.com/yifanrensheng/p/12862174.html
+
+
+
+## `3.5、矩阵求导：`
+
+* https://www.cnblogs.com/pinard/p/10773942.html
+
+* https://fei-wang.github.io/matrix.html
+
+
+
+* `标量对向量求导`：https://www.cnblogs.com/yanghh/p/13756471.html
+
+
+#### `复合函数标量对向量求导：`
+
+* 1、`复合函数求导`过程（`标量对向量求导`）过程中包含`向量`对`向量`求导，此时需要加转置符号：
+
+    <div align=center><img height="250"  src="./static/矩阵求导1.jpg"/></div>
+
+
+
+* 2、`复合函数求导`过程（`标量对向量求导`）过程中`未包含向量对向量等其他矩阵求导`，那么不需要加转置：
+
+    <div align=center><img height="50"  src="./static/矩阵求导2.jpg"/></div>
+
+
+
+* `3、机器学习中带激活函数的求导：`
+
+
+    <div align=center><img  src="./static/带激活函数求偏导.png"/></div>
+
