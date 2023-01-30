@@ -19,7 +19,9 @@ for names in lists:
     data_lists.append(actor_list[1:])
 data.close()
 
-# print(data_lists)
+print(data_lists)
+
+##  挖掘频繁项集和关联规则 ## 设置最小支持度和最小置信度参数
 itemsets,rules = apriori(data_lists,min_support=0.1,min_confidence=0.8)
 print(itemsets)
 print(rules)
