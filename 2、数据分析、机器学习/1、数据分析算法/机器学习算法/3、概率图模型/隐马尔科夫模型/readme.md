@@ -157,7 +157,7 @@
 
     根据 `模型` 和 `观测序列` 来推 `隐状态序列`。
 
-### 第一个问题：`求观测序列的概率` (通过前向后向算法求解)
+### <font color='red'>__第一个问题：__</font>`求观测序列的概率` (通过前向后向算法求解)
 
 * 给了`参数模型 λ` 和 `观测状态序列 O` ，现在要求得是发生这种情况的可能性 `P(O|λ)` 有多大。 
 
@@ -268,7 +268,7 @@
 
 
 
-### `第二个问题：鲍姆-韦尔奇算法求解 HMM 参数`
+### <font color='red'>__第二个问题：__</font>`鲍姆-韦尔奇算法求解 HMM 参数`
 
 * 借助 ` EM` 算法求解：
 
@@ -276,20 +276,48 @@
 
     `机器学习-白板推导系列(十四)-隐马尔可夫模型HMM（Hidden Markov Model）笔记：`https://zhuanlan.zhihu.com/p/380298879
 
+
+
+* <font color='red'>__EM 算法求 HMM 最优参数 - 详细介绍：__</font>
+
+    `EM 算法可以用于解决包含隐变量的极大似然估计，大致上可以使用如下公式来进行表示：`
+
     <div align=center><img  src="./static/隐马尔科夫模型/鲍姆-韦尔奇算法原理.jpg"/></div>
 
-    `隐马尔科夫模型HMM（三）鲍姆-韦尔奇算法求解HMM参数: `https://www.cnblogs.com/pinard/p/6972299.html#!comments
+    `具体 E步 和 M步 公式推导如下：`
+
+    * 对于m个样本观察数据$x=(x^{(1)},x^{(2)},...x^{(m)})$中，找出样本的模型参数θ, 极大化模型分布的对数似然函数如下：
+
+        $$\theta = arg \max \limits_{\theta}\sum\limits_{i=1}^m logP(x^{(i)};\theta)$$
+
+    * 如果我们得到的观察数据有未观察到的隐含数据 $z=(z^{(1)},z^{(2)},...z^{(m)})$，此时我们的极大化模型分布的对数似然函数如下：
+   
+        $$\theta = arg \max \limits_{\theta}\sum\limits_{i=1}^m logP(x^{(i)};\theta) = arg \max \limits_{\theta}\sum\limits_{i=1}^m log\sum\limits_{z^{(i)}}P(x^{(i)}， z^{(i)};\theta)$$
+
+    * 上面这个式子是没有 办法直接求出 θ 的。因此需要一些特殊的技巧，我们首先对这个式子进行缩放如下：
+
+        <div align=center><img height=150 src="./static/EM算法.jpg"/></div>
+
+    * 其中当 $Q$ 等于 $P( z^{(i)}|x^{(i)};\theta))$ 时有极大下界，__`这一步相当于 E 步`__ ，此时表达式为：
+
+        $$L(\theta, \theta^{j}) = \sum\limits_{i=1}^m\sum\limits_{z^{(i)}}Q_i(z^{(i)})log{P(x^{(i)}， z^{(i)};\theta)}$$
+
+    * __`M步`__ 接下来的目标就是找到一个参数 $θ$ ，来使得 $L$ 极大化:
+
+        $$\theta^{j+1} = arg \max \limits_{\theta}L(\theta, \theta^{j})$$
+
+    * 此时我们就得到了第二个问题中绿图的表达式。这个表达式就是当 `Q` 取 $P( z^{(i)}|x^{(i)};\theta))$ 得到的，相当于 `E` 步的操作。
+
+* `具体的 鲍姆-韦尔奇算法的推导过程：`[隐马尔科夫模型HMM（三）鲍姆-韦尔奇算法求解HMM参数](https://www.cnblogs.com/pinard/p/6972299.html)
+
+### <font color='red'>__第三个问题:__</font> `维特比算法解码隐藏状态序列`
+
+* `解码问题：`知道模型`λ`、`O(观测序列)` 找出使得出现这个观测序列概率最大的 `I(状态序列)`
 
 
+    <div align=center><img  src="./static/隐马尔科夫模型/第三个问题/图解.jpg"/></div>
 
-### `第三个问题: 维特比算法解码隐藏状态序列`
-
-`解码问题：`知道模型`λ`、`O(观测序列)` 找出使得出现这个观测序列概率最大的 `I(状态序列)`
-
-
-<div align=center><img  src="./static/隐马尔科夫模型/第三个问题/图解.jpg"/></div>
-
-维特比算法需要先定义两个局部状态：
+    `维特比算法需要先定义两个局部状态：`
 
 * 第一个局部状态是在 `时刻t` 隐藏状态为 `i` 所有可能的状态转移路径 `i1,i2,...it` 中的概率最大值。记为 `δt(i)`:
 
