@@ -6,7 +6,6 @@
 
     <div align=center><img  src="./static/三角函数集.jpg"/></div>
 
-* `定理：`组成三角级数的函数系 $\{0,1,sinx,cosx,sin2x,cons2x,...,sinnx,cosnx\}$ 在 $[-π,π]$ 之间正交，即其中任意两个不同的函数之积在 $[-π,π]$ 上的积分等于 0 。
 
 
 * `正交性其实可以写成一个积分的形式，他其实相当于在空间中的内积的表示形式：`
@@ -25,6 +24,15 @@
   * `同一个三角函数系数相同：`那么它的积分是不为0的，可以参考图中2步，其中经过计算得到的 $cos2mx$ 又可以看成是 $cos0x*cons2mx$ 所以它的积分结果为0。`(当m=n=0时，积分值应该为2π；当m=n且不等于0时，积分值才为π)`
 
     <div align=center><img  src="./static/三角函数集4.png"/></div>
+
+
+* `定理：`组成三角级数的函数系 $\{0,1,sinx,cosx,sin2x,cons2x,...,sinnx,cosnx\}$ 在 $[-π,π]$ 之间正交，即其中任意两个不同的函数之积在 $[-π,π]$ 上的积分等于 0 。
+  
+    <div align=center><img  src="./static/1.png"/></div>
+
+    <div align=center><img  src="./static/2.png"/></div>
+
+    <div align=center><img  src="./static/3.png"/></div>
 
 
 * [彻底理解为什么三角函数系具有正交性](https://zhuanlan.zhihu.com/p/341796771)
