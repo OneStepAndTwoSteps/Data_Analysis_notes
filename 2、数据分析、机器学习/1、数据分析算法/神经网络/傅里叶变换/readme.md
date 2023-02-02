@@ -6,6 +6,9 @@
 
     <div align=center><img  src="./static/三角函数集.jpg"/></div>
 
+* `定理：`组成三角级数的函数系 $\{0,1,sinx,cosx,sin2x,cons2x,...,sinnx,cosnx\}$ 在 $[-π,π]$ 之间正交，即其中任意两个不同的函数之积在 $[-π,π]$ 上的积分等于 0 。
+
+
 * `正交性其实可以写成一个积分的形式，他其实相当于在空间中的内积的表示形式：`
 
     <div align=center><img  src="./static/三角函数集2.png"/></div>
