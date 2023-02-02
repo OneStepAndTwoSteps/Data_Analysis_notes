@@ -29,6 +29,9 @@
 
 * [彻底理解为什么三角函数系具有正交性](https://zhuanlan.zhihu.com/p/341796771)
 
+
+* [三角函数和三角函数的正交性](https://blog.csdn.net/qingkongyeyue/article/details/58062131)
+
 * [纯干货数学推导_傅里叶级数与傅里叶变换_Part1_三角函数的正交性](https://www.bilibili.com/video/BV1Et411R78v/?spm_id_from=333.337.search-card.all.click&vd_source=caf90f9466fd52eb07bb4be5ca57fb1f)
   
 ### `二、傅里叶级数展开 - 周期为2Pi的函数展开:`
