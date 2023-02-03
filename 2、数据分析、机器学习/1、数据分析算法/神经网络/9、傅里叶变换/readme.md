@@ -27,7 +27,9 @@
 
 
 * `定理：`组成三角级数的函数系 $\{0,1,sinx,cosx,sin2x,cons2x,...,sinnx,cosnx\}$ 在 $[-π,π]$ 之间正交，即其中任意两个不同的函数之积在 $[-π,π]$ 上的积分等于 0 。
-  
+
+    `即任意两个不同频率的正弦波的乘积，在两者的公共周期内的积分等于零。`
+    
     <div align=center><img  src="./static/1.png"/></div>
 
     <div align=center><img  src="./static/2.png"/></div>
