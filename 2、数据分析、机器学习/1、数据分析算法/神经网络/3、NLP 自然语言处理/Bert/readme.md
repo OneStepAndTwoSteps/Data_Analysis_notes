@@ -33,4 +33,33 @@ bert模型就是一个 transformer 的 encoder，它主要的工作就是根据�
 
     但是通常这样的预测，对bert模型的提升效果是比较小的，可能是因为一个句子被拆分成两端话，第二段和第一段之间的关联性比较大，那么后续提出了另外的一种预测手段，就是输入模型中的两个句子可能上下的顺序是颠倒的，这个对于模型来说可能会更难一点，学到的知识也就更多。
 
-### ``
+### `Fine tune：`
+
+* bert 虽然做的是填空题，但是你把它拿过来做 fine tune 之后，却可以用在很多的下游的任务中，如：
+
+    * `input：sentence output：class ：`情感分类
+
+    * `input：sentence output：same as input ：`pos tagging
+        
+        POS（Part-of-Speech，词性）标注是另一种任务，旨在确定给定文本中每个单词的词性。这些词性可能包括名词、动词、形容词等。POS标注是自然语言处理中的一个基本步骤，它可以用于许多任务，如命名实体识别、句法分析等。
+
+    * `input：two sentence output：class ：`NLI 
+
+        NLI（Natural Language Inference，自然语言推理）是一种任务，旨在判断给定两个句子之间的关系，包括是否是蕴含、矛盾或中立关系。NLI任务通常用于评估自然语言处理模型的理解能力。
+
+    * `Extraction-based Question Answering ：`QA
+
+
+* `Fine tune：`比如现在我们想要做一个：input：sentence output：class 的一个情感分析任务，只要我们喂给 bert 相应的数据就可以微调成我们想要的功能。
+
+
+## `semi-supervised：`
+
+* bert在做上游的填空训练的时候是self-supervised，但是用在下游任务的时候，比如情感分类，那么他又是supervised，所以当经过fine tune 的bert 你可以把他理解成是一个 semi-supervised 的模型。
+ 
+
+
+
+
+
+
