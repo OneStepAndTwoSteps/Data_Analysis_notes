@@ -185,7 +185,16 @@
 
     随着DNN和CNN的出现，尤其是深度学习的发展，由于fBank以及logfBank特征之间的相关性可以更好地被神经网络利用，以提高最终语音识别的准确率，降低WER，因此，可以省略掉离散余弦变换这一步骤。
 
+* `MFCC 特征：`
 
+  使用，如下代码可以生成MFCC特征，其中返回的data是一个`[n_mfcc,t_frame]`的数据，行和列分别表示特征和时间维度的信息，对应的x轴和y轴分别为MFCC系数，和时间维度：
+
+      data = librosa.feature.mfcc(data, sr=self.config.sampling_rate,
+                                          n_mfcc=self.config.n_mfcc)
+      ## 将 MFCC 特征的维度增加一维，变为 (n_mfcc, n_frames, 1)，以便后续处理。
+      data = np.expand_dims(data, axis=-1)
+
+    <div align=center><img height=300 src="./static/mfcc.jpg"/></div>
 
 ## `参考：`
 
