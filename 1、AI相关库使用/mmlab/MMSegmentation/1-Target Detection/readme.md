@@ -147,6 +147,7 @@
                 align_corners=False,
                 loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
+        ## 辅助头信息
         auxiliary_head=dict(
                 type='FCNHead',
                 in_channels=1024,
@@ -307,3 +308,20 @@
 
 
 * 8、然后使用 `train.py` 指定相应的配置文件进行运行，就可以开始训练。
+
+
+
+
+## `模型测试：`
+
+
+* 在项目中有一个 image_demo.py 文件可以用于做图片检测，需要接收4个参数，分别是 img、config、checkpoint、outfile。
+
+* 需要注意的是，你可能会遇到 outfile 参数不可识别的错误，此时可以直接在main函数中指定 args.out_file = "result.jpg" ，指定之后，就不需要再运行demo文件的时候传入文件输出结果保存的路径。
+
+    <div align=center><img width=800 src="./static/demo.png"/></div>
+
+* 配置参数，运行 image_demo.py 文件：
+* 
+    <div align=center><img width=800 src="./static/demo2.png"/></div>
+
