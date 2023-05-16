@@ -38,6 +38,7 @@
 
         labelme
 
+
     <div align=center><img  src="./static/labelme.png"/></div>
 
 * 用 labelme 对数据打标注，生成相应的json文件。
