@@ -8,6 +8,20 @@
     <div align=center><img  src="./static/1.png"/></div>
 
 
+### `安装：`
+
+1、下载包：
+
+    git clone https://github.com/datthinh1801/cicflowmeter.git
+    cd cicflowmeter
+    python3 setup.py install
+
+
+2、安装 WinPcap_4_1_3
+
+3、复制 jnetpcap.dll 到 C:\Windows\System32
+
+
 ### `注意事项：`
 
 * `1、`路径问题，如果目录中存在中文路径可能存在 问题
