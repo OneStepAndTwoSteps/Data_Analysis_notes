@@ -35,6 +35,50 @@ float16和float相比恰里，总结下来就是两个原因：内存占用更�
 
 
 
+## bf16 and fp16 compare：
+
+
+https://www.linkedin.com/posts/furkangozukara_what-is-the-difference-between-fp16-and-bf16-activity-7095150263602229248-Ybup/
+
+    Floating-Point Representation:
+
+    FP16 (Half Precision): In FP16, a floating-point number is represented using 16 bits. It consists of 1 sign bit, 5 bits for the exponent, and 10 bits for the fraction (mantissa). This limited precision allows a wide range of numbers to be represented, but it sacrifices precision for very small or large values.
+
+    BF16 (BFloat16): BF16 uses 16 bits as well, but with a different distribution. It has 1 sign bit, 8 bits for the exponent, and 7 bits for the mantissa. This format is designed to retain more precision for small values while still accommodating a broad range of numbers.
+
+    Numerical Range:
+
+    Both FP16 and BF16 can represent a wide range of numbers, including very small and very large values, thanks to their exponent components.
+    Examples:
+
+    Let’s use an example to illustrate the differences between FP16 and BF16:
+
+    Imagine we have a very large neural network with many layers, and we’re training it using gradient descent. During each iteration, the weights of the network are updated using the gradients. Here, we’ll consider a simplified scenario with just one weight parameter and its gradient.
+
+    Weight: 0.001
+    Gradient: 0.00001
+    FP16 (Half Precision):
+
+    Weight in FP16: 0.001 becomes approximately 0.00098 due to precision loss.
+    Gradient in FP16: 0.00001 remains unchanged.
+    When the weight is updated using the gradient, the limited precision of FP16 can lead to significant precision loss in the weight, affecting the overall convergence of the neural network.
+
+    BF16 (BFloat16):
+
+    Weight in BF16: 0.001 remains almost unchanged.
+    Gradient in BF16: 0.00001 remains almost unchanged.
+    In this case, BF16 retains more precision for both the weight and gradient, which can lead to better convergence during training.
+
+    Use Cases:
+
+    FP16 is commonly used in deep learning training and inference due to its ability to accelerate computations by performing more calculations per unit time.
+
+    BF16 is becoming more popular in hardware architectures designed for machine learning tasks. It’s particularly useful when preserving gradient information during training is crucial for convergence.
+
+    In summary, while both FP16 and BF16 offer benefits for certain applications, BF16 is designed to strike a better balance between precision and range, making it well-suited for deep learning tasks where numerical stability and convergence are essential.
+
+
+
 ## 参考
 
 * [Understanding Mixed Precision Training] https://towardsdatascience.com/understanding-mixed-precision-training-4b246679c7c4
